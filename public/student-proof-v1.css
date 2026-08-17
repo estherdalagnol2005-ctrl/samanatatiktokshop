@@ -614,3 +614,11 @@
     font-size: 10px;
   }
 }
+
+
+/* Mobile: keep only the two main testimonials */
+@media (width <= 640px) {
+  .student-proof-row-small {
+    display: none !important;
+  }
+}
