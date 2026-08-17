@@ -622,3 +622,21 @@
     display: none !important;
   }
 }
+
+
+/* Mobile testimonial centering fix */
+@media (width <= 640px) {
+  .student-proof-row-large {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    width: 100% !important;
+  }
+
+  .student-proof-row-large .student-proof-real-card {
+    width: min(100%, 340px) !important;
+    max-width: 340px !important;
+    margin-inline: auto !important;
+    justify-self: center !important;
+  }
+}
