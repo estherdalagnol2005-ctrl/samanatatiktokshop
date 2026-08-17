@@ -17,7 +17,7 @@ gsap.registerPlugin(ScrollTrigger);
 
     heroState.started = true;
     heroState.firstCharacter = chars[0];
-    const headerItems = [...document.querySelectorAll(".site-header > *")];
+    const headerItems = [...document.querySelectorAll(".site-header > *:not(.buy-button)")];
 
     gsap.killTweensOf(chars);
     gsap.set(chars, {

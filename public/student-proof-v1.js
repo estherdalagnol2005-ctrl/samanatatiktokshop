@@ -26,26 +26,27 @@
         </header>
 
         <div class="student-proof-wall" aria-label="Resultados e depoimentos de alunas">
-          <figure class="student-proof-card student-proof-real-card">
-            <img src="/testimonials/sarah-comissoes-marco.webp" alt="Depoimento de Sarah mostrando 87,6 mil reais em GMV e quase 9 mil reais em comissões no mês" loading="lazy">
-            <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Quase R$ 9 mil em comissões no mês.</strong></figcaption>
-          </figure>
-          <figure class="student-proof-card student-proof-real-card">
-            <img src="/testimonials/sarah-pagamento-7714.webp" alt="Depoimento de Sarah mostrando pagamento de 7.714 reais recebido da ByteDance" loading="lazy">
-            <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>R$ 7,7 mil recebidos em um pagamento.</strong></figcaption>
-          </figure>
-          <figure class="student-proof-card student-proof-real-card">
-            <img src="/testimonials/leticia-pix-31634.webp" alt="Depoimento de Letícia mostrando Pix de 31.634 reais recebido do TikTok Shop" loading="lazy">
-            <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>R$ 31,6 mil recebidos do TikTok Shop.</strong></figcaption>
-          </figure>
-          <figure class="student-proof-card student-proof-real-card">
-            <img src="/testimonials/karol-comissoes-2600.webp" alt="Depoimento de Karol mostrando novo recorde de 2.600 reais em comissões" loading="lazy">
-            <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Novo recorde de comissões.</strong></figcaption>
-          </figure>
-          <figure class="student-proof-card student-proof-real-card">
-            <img src="/testimonials/nay-pagamentos-tres-perfis.webp" alt="Depoimento de Nay mostrando pagamentos recebidos em três perfis" loading="lazy">
-            <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Recebendo em três perfis.</strong></figcaption>
-          </figure>
+          <div class="student-proof-row student-proof-row-large">
+            <figure class="student-proof-card student-proof-real-card">
+              <img src="/testimonials/sarah-comissoes-marco.webp" alt="Depoimento de Sarah mostrando 87,6 mil reais em GMV e quase 9 mil reais em comissões no mês" loading="lazy">
+              <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Quase R$ 9 mil em comissões no mês.</strong></figcaption>
+            </figure>
+            <figure class="student-proof-card student-proof-real-card">
+              <img src="/testimonials/nay-pagamentos-tres-perfis.webp" alt="Depoimento de Nay mostrando pagamentos recebidos em três perfis" loading="lazy">
+              <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Recebendo em três perfis.</strong></figcaption>
+            </figure>
+          </div>
+
+          <div class="student-proof-row student-proof-row-small">
+            <figure class="student-proof-card student-proof-real-card">
+              <img src="/testimonials/sarah-pagamento-7714.webp" alt="Depoimento de Sarah mostrando pagamento de 7.714 reais recebido da ByteDance" loading="lazy">
+              <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>R$ 7,7 mil recebidos.</strong></figcaption>
+            </figure>
+            <figure class="student-proof-card student-proof-real-card">
+              <img src="/testimonials/karol-comissoes-2600.webp" alt="Depoimento de Karol mostrando novo recorde de 2.600 reais em comissões" loading="lazy">
+              <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Novo recorde de comissões.</strong></figcaption>
+            </figure>
+          </div>
         </div>
 
         <a class="student-proof-cta" href="#jornada">QUERO SER A PRÓXIMA HISTÓRIA <span aria-hidden="true">↗</span></a>
