@@ -516,3 +516,75 @@
     width: calc(100% - 9px);
   }
 }
+
+
+/* Live testimonial gallery v2 */
+.student-proof-wall {
+  display: block !important;
+  column-count: 3;
+  column-gap: clamp(12px, 1.4vw, 20px);
+}
+
+.student-proof-wall .student-proof-real-card {
+  display: inline-block !important;
+  width: 100%;
+  margin: 0 0 clamp(12px, 1.4vw, 20px);
+  break-inside: avoid;
+  vertical-align: top;
+  background: #fff;
+}
+
+.student-proof-real-card > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #202220;
+}
+
+.student-proof-real-card .student-proof-caption {
+  min-height: 84px;
+  border-top: 1px solid rgb(28 23 26 / 8%);
+  background: #fff;
+}
+
+.student-proof-real-card .student-proof-caption span {
+  margin: 0 0 7px;
+  color: #fa2095;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+@media (width <= 900px) {
+  .student-proof-wall {
+    column-count: 2;
+  }
+}
+
+@media (width <= 640px) {
+  .student-proof-wall {
+    display: flex !important;
+    column-count: unset;
+    gap: 11px;
+    margin-right: -17px;
+    padding-right: 17px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .student-proof-wall::-webkit-scrollbar {
+    display: none;
+  }
+
+  .student-proof-wall .student-proof-real-card {
+    display: block !important;
+    flex: 0 0 min(84vw, 340px);
+    margin: 0 !important;
+    scroll-snap-align: center;
+  }
+
+  .student-proof-real-card .student-proof-caption {
+    min-height: 82px;
+  }
+}

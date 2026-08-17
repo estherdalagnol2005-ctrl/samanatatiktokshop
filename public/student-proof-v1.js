@@ -16,74 +16,39 @@
           <div class="student-proof-copy">
             <span class="student-proof-eyebrow">PROVA SOCIAL · RESULTADOS DAS ALUNAS</span>
             <h2 id="student-proof-title">ELAS TAMBÉM<br><strong>ESTÃO VENDENDO.</strong></h2>
-            <p>Quando o método sai do discurso, o resultado aparece no painel.</p>
+            <p>Prints e relatos de alunas que aplicaram o método e já estão transformando conteúdo em resultado.</p>
           </div>
-          <aside class="student-proof-number" aria-label="Aluna com 150 mil reais em vendas">
-            <span>RESULTADO JÁ ALCANÇADO</span>
-            <strong>+R$ 150 MIL</strong>
-            <small>em vendas por aluna</small>
+          <aside class="student-proof-number" aria-label="Aluna recebeu mais de 31 mil reais em um pagamento">
+            <span>UM DOS RESULTADOS</span>
+            <strong>+R$ 31 MIL</strong>
+            <small>em um único pagamento</small>
           </aside>
         </header>
 
-        <div class="student-proof-wall" aria-label="Espaços preparados para provas e depoimentos de alunas">
-          <article class="student-proof-card student-proof-result">
-            <div class="student-proof-slot student-proof-dashboard">
-              <span class="student-proof-slot-label">PRINT DE RESULTADO</span>
-              <div class="student-proof-dashboard-panel" aria-hidden="true">
-                <i></i><i></i><i></i>
-                <span>VENDAS</span>
-                <strong>R$ 150 mil</strong>
-                <small>resultado de aluna</small>
-                <b></b>
-              </div>
-            </div>
-            <div class="student-proof-caption">
-              <strong>O resultado vai falar primeiro.</strong>
-              <span>Área pronta para receber o print real.</span>
-            </div>
-          </article>
-
-          <article class="student-proof-card student-proof-video">
-            <div class="student-proof-slot student-proof-video-slot">
-              <span class="student-proof-slot-label">DEPOIMENTO EM VÍDEO</span>
-              <div class="student-proof-play" aria-hidden="true"><i></i></div>
-              <img src="/brand/icon-heart.webp" alt="" aria-hidden="true">
-              <p>Relato da aluna</p>
-            </div>
-            <div class="student-proof-caption">
-              <strong>Ela conta. O público acredita.</strong>
-              <span>Formato preparado para vídeo vertical.</span>
-            </div>
-          </article>
-
-          <div class="student-proof-stack">
-            <article class="student-proof-card student-proof-message">
-              <div class="student-proof-slot student-proof-message-slot">
-                <span class="student-proof-slot-label">PRINT DO FEEDBACK</span>
-                <img src="/brand/icon-chat.webp" alt="" aria-hidden="true">
-                <div aria-hidden="true"><i></i><i></i><i></i></div>
-              </div>
-              <div class="student-proof-caption">
-                <strong>Palavras de quem aplicou.</strong>
-              </div>
-            </article>
-
-            <article class="student-proof-card student-proof-photo">
-              <div class="student-proof-slot student-proof-photo-slot">
-                <span class="student-proof-slot-label">FOTO + RESULTADO</span>
-                <div class="student-proof-photo-mark" aria-hidden="true"><i></i></div>
-                <img src="/brand/icon-bolt.webp" alt="" aria-hidden="true">
-              </div>
-              <div class="student-proof-caption">
-                <strong>Rosto, história e conquista.</strong>
-              </div>
-            </article>
-          </div>
+        <div class="student-proof-wall" aria-label="Resultados e depoimentos de alunas">
+          <figure class="student-proof-card student-proof-real-card">
+            <img src="/testimonials/sarah-comissoes-marco.webp" alt="Depoimento de Sarah mostrando 87,6 mil reais em GMV e quase 9 mil reais em comissões no mês" loading="lazy">
+            <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Quase R$ 9 mil em comissões no mês.</strong></figcaption>
+          </figure>
+          <figure class="student-proof-card student-proof-real-card">
+            <img src="/testimonials/sarah-pagamento-7714.webp" alt="Depoimento de Sarah mostrando pagamento de 7.714 reais recebido da ByteDance" loading="lazy">
+            <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>R$ 7,7 mil recebidos em um pagamento.</strong></figcaption>
+          </figure>
+          <figure class="student-proof-card student-proof-real-card">
+            <img src="/testimonials/leticia-pix-31634.webp" alt="Depoimento de Letícia mostrando Pix de 31.634 reais recebido do TikTok Shop" loading="lazy">
+            <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>R$ 31,6 mil recebidos do TikTok Shop.</strong></figcaption>
+          </figure>
+          <figure class="student-proof-card student-proof-real-card">
+            <img src="/testimonials/karol-comissoes-2600.webp" alt="Depoimento de Karol mostrando novo recorde de 2.600 reais em comissões" loading="lazy">
+            <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Novo recorde de comissões.</strong></figcaption>
+          </figure>
+          <figure class="student-proof-card student-proof-real-card">
+            <img src="/testimonials/nay-pagamentos-tres-perfis.webp" alt="Depoimento de Nay mostrando pagamentos recebidos em três perfis" loading="lazy">
+            <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Recebendo em três perfis.</strong></figcaption>
+          </figure>
         </div>
 
-        <a class="student-proof-cta" href="#jornada">
-          QUERO SER A PRÓXIMA HISTÓRIA <span aria-hidden="true">↗</span>
-        </a>
+        <a class="student-proof-cta" href="#jornada">QUERO SER A PRÓXIMA HISTÓRIA <span aria-hidden="true">↗</span></a>
       </div>
     `;
 
