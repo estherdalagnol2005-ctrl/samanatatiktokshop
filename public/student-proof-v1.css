@@ -640,3 +640,34 @@
     justify-self: center !important;
   }
 }
+
+
+/* Definitive mobile testimonial centering */
+@media (width <= 900px) {
+  #depoimentos .student-proof-wall {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  #depoimentos .student-proof-row-large {
+    grid-column: 1 / -1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-self: stretch !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-inline: 0 !important;
+  }
+
+  #depoimentos .student-proof-row-large > .student-proof-real-card {
+    width: min(86vw, 360px) !important;
+    max-width: 360px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    align-self: center !important;
+    justify-self: center !important;
+  }
+}
