@@ -1,0 +1,28 @@
+.dreams-orbit::before,
+.dreams-orbit::after {
+  content: none !important;
+  display: none !important;
+}
+
+.site-header .brand-logo {
+  width: clamp(82px, 6vw, 112px);
+}
+
+.site-header .buy-button {
+  font-size: clamp(13px, 1vw, 16px);
+}
+
+.site-header .buy-button i,
+.hero-method-visual .method-result-badge {
+  display: none !important;
+}
+
+@media (width <= 640px) {
+  .site-header .brand-logo {
+    width: clamp(80px, 24vw, 98px);
+  }
+
+  .site-header .buy-button {
+    font-size: 10px;
+  }
+}

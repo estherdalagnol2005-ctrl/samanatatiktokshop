@@ -1,0 +1,212 @@
+/* A single type hierarchy: Hero leads; every later fold uses the same quieter scale. */
+.hero-intro h1 {
+  font-size: clamp(42px, 4.05vw, 64px) !important;
+  line-height: 0.94 !important;
+}
+
+.student-proof-copy h2,
+.dreams-heading h2,
+.method-copy h2 {
+  font-size: clamp(32px, 3.25vw, 50px) !important;
+  line-height: 0.91 !important;
+  letter-spacing: -0.055em !important;
+}
+
+.student-proof-copy h2 {
+  max-width: 690px;
+}
+
+.student-proof-heading {
+  gap: clamp(24px, 3vw, 44px) !important;
+  margin-bottom: clamp(20px, 2.2vw, 32px) !important;
+}
+
+.student-proof-copy p {
+  margin-top: 14px !important;
+}
+
+.student-proof-number strong {
+  font-size: clamp(38px, 3.6vw, 54px) !important;
+}
+
+.dreams-heading {
+  width: min(100%, 760px) !important;
+  margin-bottom: 0 !important;
+}
+
+.dreams-heading h2 strong {
+  margin-top: 3px !important;
+}
+
+.method-layout-v2 .method-timeline-steps h3 {
+  font-size: clamp(24px, 2.25vw, 34px) !important;
+  line-height: 0.94 !important;
+}
+
+@media (width <= 640px) {
+  .student-proof-section {
+    padding: 8px 8px 38px !important;
+  }
+
+  .student-proof-shell {
+    width: 100% !important;
+    padding: 27px 13px 24px !important;
+    border-radius: 28px !important;
+  }
+
+  .hero-intro h1 {
+    font-size: clamp(32px, 9.8vw, 42px) !important;
+  }
+
+  .student-proof-copy h2,
+  .dreams-heading h2,
+  .method-copy h2 {
+    font-size: clamp(29px, 8.6vw, 36px) !important;
+    line-height: 0.92 !important;
+  }
+
+  .student-proof-heading {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    margin-bottom: 21px !important;
+    padding-right: 0 !important;
+  }
+
+  .student-proof-copy p {
+    margin-top: 12px !important;
+  }
+
+  .student-proof-number strong {
+    font-size: clamp(36px, 10.5vw, 44px) !important;
+  }
+
+  .student-proof-number {
+    padding: 17px 18px !important;
+    border-radius: 20px !important;
+    box-shadow: 5px 5px 0 #fa2095 !important;
+  }
+
+  .student-proof-wall {
+    display: grid !important;
+    grid-template-areas: none !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  .student-proof-result,
+  .student-proof-video {
+    grid-area: auto !important;
+  }
+
+  .student-proof-stack {
+    display: contents !important;
+  }
+
+  .student-proof-card {
+    min-width: 0 !important;
+    width: auto !important;
+    border-radius: 18px !important;
+    scroll-snap-align: none !important;
+  }
+
+  .student-proof-dashboard,
+  .student-proof-video-slot {
+    height: 220px !important;
+  }
+
+  .student-proof-message-slot,
+  .student-proof-photo-slot {
+    height: 174px !important;
+    min-height: 174px !important;
+  }
+
+  .student-proof-slot-label {
+    top: 10px !important;
+    left: 10px !important;
+    padding: 6px 8px !important;
+    font-size: 7px !important;
+  }
+
+  .student-proof-dashboard {
+    padding: 49px 10px 13px !important;
+  }
+
+  .student-proof-dashboard-panel {
+    padding: 15px 13px !important;
+    border-radius: 16px !important;
+  }
+
+  .student-proof-dashboard-panel span {
+    margin-top: 15px !important;
+  }
+
+  .student-proof-dashboard-panel strong {
+    font-size: clamp(22px, 6.4vw, 27px) !important;
+    white-space: nowrap;
+  }
+
+  .student-proof-dashboard-panel b {
+    height: 26px !important;
+    margin-top: 13px !important;
+  }
+
+  .student-proof-play {
+    width: 62px !important;
+  }
+
+  .student-proof-video-slot > p {
+    bottom: 17px !important;
+    font-size: clamp(18px, 5.4vw, 22px) !important;
+  }
+
+  .student-proof-message-slot {
+    padding: 52px 13px 15px !important;
+  }
+
+  .student-proof-message-slot > img {
+    width: 55% !important;
+  }
+
+  .student-proof-photo-mark {
+    width: 52% !important;
+    height: 68% !important;
+  }
+
+  .student-proof-photo-slot > img {
+    width: 38% !important;
+  }
+
+  .student-proof-caption {
+    padding: 12px 12px 14px !important;
+  }
+
+  .student-proof-caption strong {
+    font-size: 11px !important;
+  }
+
+  .student-proof-caption span {
+    margin-top: 4px !important;
+    font-size: 9px !important;
+  }
+
+  .student-proof-cta {
+    width: 100% !important;
+    min-height: 50px !important;
+    margin-top: 21px !important;
+    padding-left: 18px !important;
+    font-size: 9px !important;
+  }
+
+  .dreams-heading {
+    margin-bottom: 0 !important;
+  }
+
+  .method-layout-v2 .method-timeline-steps h3 {
+    font-size: clamp(27px, 8.2vw, 34px) !important;
+    line-height: 0.96 !important;
+  }
+}

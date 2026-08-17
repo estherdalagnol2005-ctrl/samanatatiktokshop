@@ -1,0 +1,58 @@
+/* Motion polish: preserve the display font while giving SplitText real depth. */
+#hero-title {
+  perspective: 900px;
+}
+
+html.gsap-motion:not(.hero-motion-ready) #hero-title {
+  visibility: hidden;
+}
+
+#hero-title .hero-split-word-mask {
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+#hero-title .hero-split-char {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.motion-text-card {
+  transform-origin: center;
+  backface-visibility: hidden;
+  transition:
+    transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.32s ease,
+    filter 0.32s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .motion-text-card:hover {
+    transform: translateY(-6px) rotate(-0.35deg);
+    filter: saturate(1.04);
+  }
+
+  .motion-text-card:nth-child(even):hover {
+    transform: translateY(-6px) rotate(0.35deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.gsap-motion:not(.hero-motion-ready) #hero-title {
+    visibility: visible;
+  }
+
+  #hero-title .hero-split-char {
+    will-change: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .motion-text-card {
+    clip-path: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}

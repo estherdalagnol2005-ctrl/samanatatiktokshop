@@ -1,0 +1,282 @@
+/* Experimental coverflow: one dominant story with one secondary image on each side. */
+.dreams-showcase:has(.dreams-coverflow) {
+  display: block !important;
+  height: clamp(500px, 44vw, 625px) !important;
+  min-height: 0 !important;
+  margin-top: 18px !important;
+  overflow: visible !important;
+}
+
+.dreams-coverflow,
+.dreams-coverflow-viewport,
+.dreams-coverflow-track {
+  width: 100%;
+  height: 100%;
+}
+
+.dreams-coverflow {
+  position: relative;
+  perspective: 1300px;
+}
+
+.dreams-coverflow-viewport {
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+  outline: none;
+}
+
+.dreams-coverflow-viewport:focus-visible {
+  outline: 3px solid #1c171a;
+  outline-offset: 5px;
+  border-radius: 34px;
+}
+
+.dreams-coverflow-track {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.dreams-coverflow-slide {
+  --coverflow-frame: #fa2095;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  width: clamp(285px, 29vw, 390px);
+  height: clamp(440px, 40vw, 555px);
+  margin: 0;
+  padding: 6px;
+  overflow: hidden;
+  border: 0;
+  border-radius: clamp(24px, 2.6vw, 38px);
+  background: var(--coverflow-frame);
+  box-shadow: 0 20px 55px rgb(55 13 39 / 26%);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(-50%, -50%, -360px) scale(0.38);
+  transition:
+    transform 560ms cubic-bezier(0.2, 0.78, 0.24, 1),
+    opacity 360ms ease,
+    filter 560ms ease,
+    box-shadow 560ms ease;
+  will-change: transform, opacity;
+}
+
+.dreams-coverflow-slide:nth-child(4n + 2) {
+  --coverflow-frame: #f0ff27;
+}
+
+.dreams-coverflow-slide:nth-child(4n + 3) {
+  --coverflow-frame: #ffa120;
+}
+
+.dreams-coverflow-slide:nth-child(4n + 4) {
+  --coverflow-frame: #e22275;
+}
+
+.dreams-coverflow-slide[data-slot="active"] {
+  z-index: 30;
+  opacity: 1;
+  pointer-events: auto;
+  filter: saturate(1) brightness(1);
+  transform: translate3d(-50%, -50%, 125px) scale(1.02);
+  box-shadow:
+    0 32px 84px rgb(55 13 39 / 34%),
+    0 0 0 3px rgb(255 255 255 / 90%);
+}
+
+.dreams-coverflow-video {
+  --coverflow-frame: transparent;
+  background: linear-gradient(145deg, #fa2095 0%, #ffa120 52%, #f0ff27 100%);
+}
+
+.dreams-coverflow-slide[data-slot="left"],
+.dreams-coverflow-slide[data-slot="right"] {
+  z-index: 12;
+  opacity: 0.78;
+  pointer-events: auto;
+  filter: saturate(0.78) brightness(0.95);
+}
+
+.dreams-coverflow-slide[data-slot="left"] {
+  transform: translate3d(calc(-50% - clamp(270px, 31vw, 460px)), -50%, -145px)
+    rotateY(16deg) scale(0.6);
+}
+
+.dreams-coverflow-slide[data-slot="right"] {
+  transform: translate3d(calc(-50% + clamp(270px, 31vw, 460px)), -50%, -145px)
+    rotateY(-16deg) scale(0.6);
+}
+
+.dreams-coverflow-slide[data-slot="left"]:hover,
+.dreams-coverflow-slide[data-slot="right"]:hover {
+  opacity: 0.96;
+  filter: saturate(1) brightness(1);
+}
+
+.dreams-coverflow-slide > img,
+.dreams-coverflow-slide > video {
+  width: 100%;
+  height: 100%;
+  border-radius: calc(clamp(24px, 2.6vw, 38px) - 6px);
+  object-fit: cover;
+  background: #fffdfb;
+}
+
+.dreams-coverflow-video video {
+  object-position: center;
+}
+
+.dreams-coverflow-slide figcaption,
+.dreams-coverflow-caption {
+  position: absolute;
+  right: 16px;
+  bottom: 15px;
+  left: 16px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  color: #fff;
+  background: rgb(28 23 26 / 78%);
+  backdrop-filter: blur(8px);
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1.05;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.dreams-coverflow-slide figcaption strong {
+  font-size: 11px;
+}
+
+.dreams-coverflow-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: clamp(52px, 4.8vw, 68px);
+  aspect-ratio: 1;
+  border: 2px solid #1c171a;
+  border-radius: 50%;
+  color: #1c171a;
+  background: #f0ff27;
+  box-shadow: 6px 7px 0 #fa2095;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.dreams-coverflow-arrow span {
+  font-size: clamp(25px, 2.4vw, 34px);
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.dreams-coverflow-arrow:hover,
+.dreams-coverflow-arrow:focus-visible {
+  outline: none;
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 3px 4px 0 #fa2095;
+}
+
+.dreams-coverflow-arrow-prev {
+  left: clamp(12px, 2.5vw, 36px);
+}
+
+.dreams-coverflow-arrow-next {
+  right: clamp(12px, 2.5vw, 36px);
+}
+
+.dreams-coverflow-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (width <= 700px) {
+  .dreams-showcase:has(.dreams-coverflow) {
+    height: clamp(425px, 124vw, 535px) !important;
+    margin-top: 10px !important;
+    margin-inline: calc(clamp(20px, 6vw, 30px) * -1);
+    width: auto !important;
+  }
+
+  .dreams-coverflow {
+    perspective: 900px;
+  }
+
+  .dreams-coverflow-slide {
+    width: clamp(235px, 74vw, 308px);
+    height: clamp(365px, 108vw, 448px);
+    padding: 4px;
+    border-radius: 24px;
+  }
+
+  .dreams-coverflow-slide[data-slot="active"] {
+    transform: translate3d(-50%, -50%, 82px) scale(1.01);
+  }
+
+  .dreams-coverflow-slide[data-slot="left"] {
+    transform: translate3d(calc(-50% - min(57vw, 235px)), -50%, -120px)
+      rotateY(18deg) scale(0.57);
+  }
+
+  .dreams-coverflow-slide[data-slot="right"] {
+    transform: translate3d(calc(-50% + min(57vw, 235px)), -50%, -120px)
+      rotateY(-18deg) scale(0.57);
+  }
+
+  .dreams-coverflow-arrow {
+    top: auto;
+    bottom: 5px;
+    width: 50px;
+    transform: none;
+    box-shadow: 4px 5px 0 #fa2095;
+  }
+
+  .dreams-coverflow-arrow:hover,
+  .dreams-coverflow-arrow:focus-visible {
+    transform: scale(1.06);
+  }
+
+  .dreams-coverflow-arrow-prev {
+    left: calc(50% - 64px);
+  }
+
+  .dreams-coverflow-arrow-next {
+    right: calc(50% - 64px);
+  }
+
+  .dreams-coverflow-slide figcaption,
+  .dreams-coverflow-caption {
+    right: 10px;
+    bottom: 10px;
+    left: 10px;
+    padding: 8px 9px;
+    font-size: 8px;
+  }
+
+  .dreams-coverflow-slide figcaption strong {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dreams-coverflow-slide,
+  .dreams-coverflow-arrow {
+    transition-duration: 1ms !important;
+  }
+}

@@ -1,0 +1,467 @@
+/* Compact the method summary so the three ideas read at a glance. */
+.method-layout-v2 .method-timeline-steps {
+  gap: clamp(8px, 1vw, 14px) !important;
+}
+
+.method-layout-v2 .method-timeline-steps article > div {
+  min-height: clamp(102px, 8.5vw, 126px) !important;
+  padding: clamp(13px, 1.25vw, 18px) !important;
+  border-radius: clamp(15px, 1.4vw, 20px) !important;
+  border-top-width: 3px !important;
+}
+
+.method-layout-v2 .method-timeline-steps small {
+  font-size: 9px !important;
+}
+
+.method-layout-v2 .method-timeline-steps h3 {
+  margin: 4px 0 6px !important;
+  font-size: clamp(20px, 1.8vw, 26px) !important;
+  line-height: 0.96 !important;
+}
+
+.method-layout-v2 .method-timeline-steps p {
+  font-size: clamp(10px, 0.8vw, 12px) !important;
+  line-height: 1.2 !important;
+}
+
+.method-layout-v2 .method-timeline-cta {
+  width: min(100%, 410px) !important;
+  min-height: 46px !important;
+  margin-top: 14px !important;
+}
+
+/* One decisive conversion block after the method. */
+.conversion-section {
+  order: 5;
+  position: relative;
+  width: 100%;
+  padding: clamp(12px, 1vw, 16px) clamp(8px, 0.8vw, 13px)
+    clamp(48px, 5vw, 76px);
+  background: linear-gradient(
+    180deg,
+    #f0ff27 0%,
+    #f0ff27 5%,
+    #ffa120 49%,
+    #e22275 86%,
+    #fa2095 100%
+  );
+  overflow: hidden;
+}
+
+.conversion-shell {
+  isolation: isolate;
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    "copy photo trigger"
+    "action action action";
+  grid-template-columns: minmax(0, 1.02fr) minmax(210px, 0.52fr)
+    minmax(280px, 0.78fr);
+  gap: clamp(18px, 2.4vw, 38px);
+  width: min(100%, 1500px);
+  margin-inline: auto;
+  padding: clamp(38px, 4.8vw, 74px);
+  border: 1px solid rgb(28 23 26 / 10%);
+  border-radius: clamp(34px, 4vw, 62px);
+  color: #1c171a;
+  background:
+    radial-gradient(circle at 12% 14%, rgb(250 32 149 / 13%), transparent 27%),
+    radial-gradient(circle at 92% 88%, rgb(240 255 39 / 28%), transparent 25%),
+    linear-gradient(145deg, #fffdf9 0%, #fff7fb 58%, #fbffe1 100%);
+  box-shadow: 0 34px 96px rgb(73 14 50 / 24%);
+  overflow: hidden;
+}
+
+.conversion-shell::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: clamp(190px, 23vw, 350px);
+  aspect-ratio: 1;
+  border: clamp(34px, 4vw, 62px) solid rgb(240 255 39 / 40%);
+  border-radius: 50%;
+  left: -8%;
+  bottom: -30%;
+}
+
+.conversion-copy {
+  grid-area: copy;
+  position: relative;
+  z-index: 2;
+  align-self: center;
+}
+
+.conversion-photo {
+  grid-area: photo;
+  position: relative;
+  z-index: 2;
+  align-self: stretch;
+  min-height: clamp(390px, 34vw, 500px);
+  margin: 0;
+  padding: 5px;
+  border: 1px solid rgb(28 23 26 / 15%);
+  border-radius: clamp(24px, 2.4vw, 36px);
+  background: linear-gradient(155deg, #fa2095 0%, #ffa120 55%, #f0ff27 100%);
+  box-shadow: 8px 9px 0 #f0ff27;
+  overflow: hidden;
+  transform: rotate(-1.2deg);
+}
+
+.conversion-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(clamp(24px, 2.4vw, 36px) - 5px);
+  object-fit: cover;
+  object-position: center 56%;
+}
+
+.conversion-photo figcaption {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  left: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 13px;
+  border-radius: 999px;
+  color: #fff;
+  background: rgb(28 23 26 / 78%);
+  backdrop-filter: blur(8px);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.conversion-photo figcaption span {
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+}
+
+.conversion-photo figcaption strong {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.conversion-eyebrow,
+.conversion-trigger small {
+  display: block;
+  color: #e22275;
+  font-size: clamp(8px, 0.72vw, 11px);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+}
+
+.conversion-copy h2 {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0 0;
+  color: #1c171a;
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.25vw, 64px);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 0.88;
+}
+
+.conversion-copy h2 strong {
+  color: #fa2095;
+}
+
+.conversion-copy h2 em {
+  margin-top: 6px;
+  color: #d96f00;
+  font-style: normal;
+}
+
+.conversion-copy > p {
+  width: min(100%, 720px);
+  margin: 20px 0 0;
+  color: rgb(28 23 26 / 68%);
+  font-size: clamp(13px, 1vw, 16px);
+  font-weight: 620;
+  line-height: 1.5;
+}
+
+.conversion-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.conversion-chips span {
+  padding: 9px 12px;
+  border: 1px solid rgb(28 23 26 / 12%);
+  border-radius: 999px;
+  color: #1c171a;
+  background: rgb(255 255 255 / 72%);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.03em;
+}
+
+.conversion-trigger {
+  grid-area: trigger;
+  position: relative;
+  z-index: 2;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(28px, 3vw, 44px);
+  border: 1px solid rgb(28 23 26 / 15%);
+  border-radius: clamp(24px, 2.8vw, 40px);
+  color: #1c171a;
+  background: linear-gradient(145deg, #fa2095 0%, #ff6c49 50%, #ffa120 100%);
+  box-shadow: 9px 10px 0 #f0ff27;
+  transform: rotate(1deg);
+}
+
+.conversion-trigger small {
+  color: rgb(28 23 26 / 67%);
+}
+
+.conversion-trigger strong {
+  display: block;
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 46px);
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 0.91;
+}
+
+.conversion-trigger p {
+  margin: 17px 0 0;
+  color: rgb(28 23 26 / 70%);
+  font-size: clamp(12px, 0.95vw, 15px);
+  font-weight: 760;
+  line-height: 1.4;
+}
+
+.conversion-action {
+  grid-area: action;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: clamp(2px, 1vw, 10px);
+}
+
+.conversion-action a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: min(100%, 650px);
+  min-height: 68px;
+  padding: 12px 15px 12px 28px;
+  border: 2px solid #1c171a;
+  border-radius: 999px;
+  color: #1c171a;
+  background: #f0ff27;
+  box-shadow: 8px 9px 0 #fa2095;
+  font-size: clamp(11px, 1vw, 15px);
+  font-weight: 950;
+  letter-spacing: 0.055em;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.conversion-action a span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  color: #fff;
+  background: #fa2095;
+  font-size: 20px;
+}
+
+.conversion-action a:hover,
+.conversion-action a:focus-visible {
+  outline: none;
+  transform: translateY(-3px);
+  box-shadow: 5px 6px 0 #fa2095;
+}
+
+.conversion-action small {
+  color: rgb(28 23 26 / 56%);
+  font-size: 10px;
+  text-align: center;
+}
+
+.conversion-icon {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 24px rgb(0 0 0 / 25%));
+}
+
+.conversion-icon-heart {
+  width: clamp(90px, 9vw, 145px);
+  top: -18px;
+  right: 39%;
+  transform: rotate(12deg);
+}
+
+.conversion-icon-bolt {
+  width: clamp(60px, 6vw, 96px);
+  bottom: 10%;
+  left: 3%;
+  transform: rotate(-10deg);
+}
+
+@media (width <= 1050px) and (width > 700px) {
+  .conversion-shell {
+    grid-template-areas:
+      "copy photo"
+      "trigger trigger"
+      "action action";
+    grid-template-columns: minmax(0, 1fr) minmax(230px, 0.58fr);
+  }
+
+  .conversion-photo {
+    min-height: 390px;
+  }
+
+  .conversion-trigger {
+    min-height: 250px;
+  }
+}
+
+@media (width <= 700px) {
+  .method-layout-v2 .method-timeline-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  .method-layout-v2 .method-timeline-steps article > div {
+    min-height: 104px !important;
+    padding: 10px 8px !important;
+    border-radius: 14px !important;
+  }
+
+  .method-layout-v2 .method-timeline-steps small {
+    font-size: 7px !important;
+  }
+
+  .method-layout-v2 .method-timeline-steps h3 {
+    margin: 4px 0 5px !important;
+    font-size: clamp(16px, 4.7vw, 19px) !important;
+  }
+
+  .method-layout-v2 .method-timeline-steps p {
+    font-size: clamp(8px, 2.4vw, 10px) !important;
+  }
+
+  .method-layout-v2 .method-timeline-cta {
+    grid-column: 1 / -1 !important;
+    min-height: 48px !important;
+    margin-top: 9px !important;
+  }
+
+  .conversion-section {
+    padding: 8px 8px 42px;
+  }
+
+  .conversion-shell {
+    grid-template-areas:
+      "copy"
+      "photo"
+      "trigger"
+      "action";
+    grid-template-columns: 1fr;
+    gap: 23px;
+    padding: 31px 17px 29px;
+    border-radius: 28px;
+  }
+
+  .conversion-copy h2 {
+    margin-top: 12px;
+    font-size: clamp(31px, 9.5vw, 39px);
+    line-height: 0.9;
+  }
+
+  .conversion-copy > p {
+    margin-top: 16px;
+    font-size: 13px;
+  }
+
+  .conversion-chips {
+    gap: 6px;
+    margin-top: 17px;
+  }
+
+  .conversion-chips span {
+    padding: 8px 10px;
+    font-size: 8px;
+  }
+
+  .conversion-photo {
+    width: min(100%, 290px);
+    min-height: 340px;
+    justify-self: center;
+    border-radius: 24px;
+    box-shadow: 6px 7px 0 #f0ff27;
+  }
+
+  .conversion-photo img {
+    border-radius: 19px;
+  }
+
+  .conversion-trigger {
+    padding: 23px 20px;
+    border-radius: 22px;
+    box-shadow: 6px 7px 0 #f0ff27;
+  }
+
+  .conversion-trigger strong {
+    margin-top: 10px;
+    font-size: clamp(27px, 8.4vw, 34px);
+  }
+
+  .conversion-trigger p {
+    margin-top: 13px;
+    font-size: 12px;
+  }
+
+  .conversion-action {
+    margin-top: 2px;
+  }
+
+  .conversion-action a {
+    min-height: 58px;
+    padding: 9px 10px 9px 18px;
+    font-size: 9px;
+  }
+
+  .conversion-action a span {
+    width: 37px;
+    font-size: 17px;
+  }
+
+  .conversion-action small {
+    padding-inline: 8px;
+    font-size: 9px;
+    line-height: 1.35;
+  }
+
+  .conversion-icon-heart {
+    width: 82px;
+    top: -9px;
+    right: -13px;
+  }
+
+  .conversion-icon-bolt {
+    width: 58px;
+    bottom: 18%;
+    left: -12px;
+  }
+}

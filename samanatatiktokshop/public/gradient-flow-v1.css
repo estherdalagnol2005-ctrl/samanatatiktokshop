@@ -1,0 +1,111 @@
+/* A continuous alternating palette: every fold inherits the colour where the last one ends. */
+body {
+  background: #f0ff27 !important;
+}
+
+.hero-stage {
+  order: 0;
+  background: #fa2095 !important;
+}
+
+.site-gradient-marquee {
+  --marquee-gap: clamp(14px, 1.2vw, 20px);
+  order: 1;
+  flex: none;
+  width: 100%;
+  height: calc(clamp(38px, 3.2vw, 50px) + var(--marquee-gap)) !important;
+  margin-top: 0;
+  padding-top: var(--marquee-gap);
+  background: #fa2095 !important;
+  border-top: 0 !important;
+  border-bottom: 1px solid rgb(240 255 39 / 78%) !important;
+  box-sizing: border-box;
+}
+
+.site-gradient-marquee::before {
+  content: "";
+  position: absolute;
+  top: var(--marquee-gap);
+  right: 0;
+  left: 0;
+  z-index: 2;
+  height: 1px;
+  background: rgb(240 255 39 / 78%);
+  pointer-events: none;
+}
+
+.student-proof-section {
+  order: 2 !important;
+  background: linear-gradient(
+    180deg,
+    #fa2095 0%,
+    #fa2095 4%,
+    #e22275 13%,
+    #ffa120 52%,
+    #f0ff27 94%,
+    #f0ff27 100%
+  ) !important;
+}
+
+.dreams-section {
+  order: 3 !important;
+  background: linear-gradient(
+    180deg,
+    #f0ff27 0%,
+    #f0ff27 6%,
+    #ffa120 50%,
+    #e22275 87%,
+    #fa2095 96%,
+    #fa2095 100%
+  ) !important;
+}
+
+.method-section {
+  order: 4 !important;
+  background: linear-gradient(
+    180deg,
+    #fa2095 0%,
+    #fa2095 5%,
+    #e22275 13%,
+    #ffa120 52%,
+    #f0ff27 94%,
+    #f0ff27 100%
+  ) !important;
+}
+
+@media (width <= 640px) {
+  .site-gradient-marquee {
+    --marquee-gap: 9px;
+    height: 45px !important;
+  }
+
+  .student-proof-section {
+    background: linear-gradient(
+      180deg,
+      #fa2095 0%,
+      #e22275 11%,
+      #ffa120 54%,
+      #f0ff27 100%
+    ) !important;
+  }
+
+  .dreams-section {
+    background: linear-gradient(
+      180deg,
+      #f0ff27 0%,
+      #ffa120 50%,
+      #e22275 89%,
+      #fa2095 100%
+    ) !important;
+  }
+
+  .method-section {
+    background: linear-gradient(
+      180deg,
+      #fa2095 0%,
+      #e22275 12%,
+      #ffa120 53%,
+      #f0ff27 100%
+    ) !important;
+  }
+}

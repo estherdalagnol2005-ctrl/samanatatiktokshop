@@ -1,0 +1,136 @@
+:root {
+  --flow-pink: #fa2095;
+  --flow-pink-deep: #e22275;
+  --flow-orange: #ffa120;
+  --flow-lime: #f0ff27;
+}
+
+html,
+body,
+#smooth-wrapper,
+#smooth-content,
+.page-shell {
+  background-color: var(--flow-pink) !important;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+html {
+  color-scheme: light;
+}
+
+/* The flat stops make both sides of every fold boundary exactly the same colour. */
+.student-proof-section {
+  background: linear-gradient(
+    180deg,
+    var(--flow-pink) 0%,
+    var(--flow-pink) 7%,
+    var(--flow-pink-deep) 14%,
+    var(--flow-orange) 50%,
+    var(--flow-lime) 88%,
+    var(--flow-lime) 100%
+  ) !important;
+}
+
+.dreams-section {
+  margin-top: -1px;
+  background: linear-gradient(
+    180deg,
+    var(--flow-lime) 0%,
+    var(--flow-lime) 10%,
+    var(--flow-orange) 49%,
+    var(--flow-pink-deep) 85%,
+    var(--flow-pink) 93%,
+    var(--flow-pink) 100%
+  ) !important;
+}
+
+.method-section {
+  margin-top: -1px;
+  background: linear-gradient(
+    180deg,
+    var(--flow-pink) 0%,
+    var(--flow-pink) 8%,
+    var(--flow-pink-deep) 15%,
+    var(--flow-orange) 50%,
+    var(--flow-lime) 88%,
+    var(--flow-lime) 100%
+  ) !important;
+}
+
+.conversion-section {
+  margin-top: -1px;
+  background: linear-gradient(
+    180deg,
+    var(--flow-lime) 0%,
+    var(--flow-lime) 10%,
+    var(--flow-orange) 48%,
+    var(--flow-pink-deep) 84%,
+    var(--flow-pink) 92%,
+    var(--flow-pink) 100%
+  ) !important;
+}
+
+.site-footer {
+  margin-top: -1px;
+  padding-bottom: calc(clamp(28px, 3vw, 42px) + env(safe-area-inset-bottom));
+  border: 0 !important;
+  background: var(--flow-pink) !important;
+  background-image: none !important;
+  box-shadow: none;
+}
+
+.site-footer::before,
+.site-footer::after {
+  content: none !important;
+  display: none !important;
+}
+
+@media (pointer: coarse), (width <= 800px) {
+  html.native-mobile-scroll,
+  html.native-mobile-scroll body {
+    height: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior-y: auto !important;
+    scroll-behavior: auto !important;
+  }
+
+  html.native-mobile-scroll #smooth-wrapper {
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  html.native-mobile-scroll #smooth-content {
+    width: 100% !important;
+    min-height: 0 !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  .student-proof-section,
+  .dreams-section,
+  .method-section,
+  .conversion-section {
+    background-attachment: scroll !important;
+  }
+
+  .student-proof-shell,
+  .dreams-shell,
+  .method-shell,
+  .conversion-shell {
+    box-shadow:
+      0 0 0 1px rgb(28 23 26 / 5%),
+      0 14px 24px -20px rgb(73 14 50 / 16%) !important;
+  }
+
+  .site-footer {
+    padding-bottom: calc(28px + env(safe-area-inset-bottom));
+  }
+}

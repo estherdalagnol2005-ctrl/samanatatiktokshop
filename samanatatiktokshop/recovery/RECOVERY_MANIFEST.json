@@ -1,0 +1,199 @@
+{
+  "files": [
+    {
+      "path": ".gitignore",
+      "size": 52,
+      "sha256": "f48abbf02cb07aa050325466815fc2ea145fbe560a0f56e0e80a1200648d38c3"
+    },
+    {
+      "path": "AGENTS.md",
+      "size": 905,
+      "sha256": "e7ab56e077a37ed35861555bd1ec705cbc392ff2819bb34a5505b4d4786bf56f"
+    },
+    {
+      "path": "README.md",
+      "size": 754,
+      "sha256": "b30ddf90c7f6523e12c7b197d886335474e94a84dee977f7f3de6e2cedce4ca4"
+    },
+    {
+      "path": "RECOVERY_NOTES.md",
+      "size": 910,
+      "sha256": "2291b16db0afc4e58667fc6c259f310382d2cf2fc71e37ffd49f99d6ce928571"
+    },
+    {
+      "path": "assets/DreamsCarousel-w-hPJ9z4.js",
+      "size": 7916,
+      "sha256": "2d333e747891a91fede9328e3461d5b67cde6886ffbe47237669e13a57c2c95a"
+    },
+    {
+      "path": "assets/MethodTimeline-cRmRAEXq.js",
+      "size": 2641,
+      "sha256": "24fe5a91b885b79fcf626b2599e21424fbe22ca13614d4862a1bee42d042cc51"
+    },
+    {
+      "path": "assets/ScrollTrigger-CcUORopz.js",
+      "size": 42736,
+      "sha256": "ede37f56f09ebd47892b4e51ee853f37668a8079cfb7dcd29694319f4fb73470"
+    },
+    {
+      "path": "assets/SiteMotion-Dq_vSP_C.js",
+      "size": 21382,
+      "sha256": "1869fd474842ac00155dd89b02054e5f800ea343222ff921c31fae36a41315ce"
+    },
+    {
+      "path": "assets/creator-photo.jpg",
+      "size": 230829,
+      "sha256": "fb03e5947471d99750f83322b7e02c85e75e147e8cd55f3bb207a8326003e489"
+    },
+    {
+      "path": "assets/framework-DjPHiq1u.js",
+      "size": 189761,
+      "sha256": "e1c95fc407283714d3fc4e9666d2fac09df84f3b4d479fcabdf8c4e3e53fa985"
+    },
+    {
+      "path": "assets/gsap-BEsEDAKg.js",
+      "size": 69560,
+      "sha256": "5cd79d1419b0a8344ef880a29609d64b29a6c7de4fa7420caec625511998589a"
+    },
+    {
+      "path": "assets/index-CwDQwrVi.js",
+      "size": 81170,
+      "sha256": "35dad367a46f0393924456c1adb700333d5e2207194deaac9d62d4d5a0aba894"
+    },
+    {
+      "path": "assets/index-DlWgdzqg.css",
+      "size": 82563,
+      "sha256": "8a499152da718503ccad261e24a80e704ff1f78289d278dcf9a42c4920d17411"
+    },
+    {
+      "path": "assets/layout-segment-context-CLkB5Wji.js",
+      "size": 288,
+      "sha256": "b6c7dff2ef038cc171887daa0532935c30648aa145edc2d266a6ee0b467cd642"
+    },
+    {
+      "path": "assets/metric-bottom.jpg",
+      "size": 14657,
+      "sha256": "ee34cf58e7870228d291d5e3fca6da1d4ae9daefa4651b240ffdfc569e3b23e5"
+    },
+    {
+      "path": "assets/metric-top.jpg",
+      "size": 14339,
+      "sha256": "0f363be5dffdfb6a0da0fd5212460089ac88d7718136d863f26eff103b55b9ca"
+    },
+    {
+      "path": "assets/result-8k-day.jpg",
+      "size": 55808,
+      "sha256": "cb4abbbfd87976843033e4e9a4b972a2a645c29ce1643205d85c5da9b0732856"
+    },
+    {
+      "path": "assets/result-macaquinhos.webp",
+      "size": 104148,
+      "sha256": "5849391836422659c75da6d01378f21466dbcbf02532ba0be7744b15541616ce"
+    },
+    {
+      "path": "assets/result-march-150k.jpg",
+      "size": 158362,
+      "sha256": "5174b05c4f82aeabd6dceff7f719a8c96265ab217e3951f270fc10a7c9d75bfd"
+    },
+    {
+      "path": "assets/result-record-day.jpg",
+      "size": 186682,
+      "sha256": "d99b9687bb6345de37bbd46512cf057ac14df22231192664ebd7f70f0abea16b"
+    },
+    {
+      "path": "assets/rolldown-runtime-S-ySWqyJ.js",
+      "size": 694,
+      "sha256": "5db5ba82eef00d1dee7e86e663098c9427d01183a88d357437daff295aec3e75"
+    },
+    {
+      "path": "assets/samanta-disney.webp",
+      "size": 66016,
+      "sha256": "011006add39c8873e6fa55d3ce87b1842d663e7d057abeb3326c0759f2357c55"
+    },
+    {
+      "path": "assets/samanta-eiffel-night.webp",
+      "size": 48674,
+      "sha256": "23b6f0425741e604701967802b09c595dc5aec75f177f2fb5c8310b39644bb7c"
+    },
+    {
+      "path": "assets/samanta-eiffel-room.webp",
+      "size": 112740,
+      "sha256": "b8bdbf62dc7721ff98c7c68c1dbb22426402a297e25c8d08770dd5cde676c746"
+    },
+    {
+      "path": "assets/samanta-louvre.webp",
+      "size": 166750,
+      "sha256": "dad0b2798823e9ee0a200c7d6ef81ed9238b5aaa736d4faebcd22a98a38fc655"
+    },
+    {
+      "path": "assets/samanta-paris-video.mp4",
+      "size": 3124355,
+      "sha256": "35c6fd07a34f88ecf6432d993f3de4d6dd2c4d757423b9ead12c7aee9b185d87"
+    },
+    {
+      "path": "brand/icon-bag.webp",
+      "size": 41106,
+      "sha256": "d2c34009eba359ad2912148d7eeb76906e8dc16dc14d1d5e6be766dd84fec03f"
+    },
+    {
+      "path": "brand/icon-bolt.webp",
+      "size": 26556,
+      "sha256": "4faafe8fc130c9e6016b6918f22bb1421fea9b2f0889d5181fee81b111e05c65"
+    },
+    {
+      "path": "brand/icon-cart.webp",
+      "size": 75156,
+      "sha256": "205212a485b88a89ff05b87020754e6c8ac1ec90dbe5b50a1e3693e953ab13af"
+    },
+    {
+      "path": "brand/icon-chat.webp",
+      "size": 37054,
+      "sha256": "f7674239376686a9a9824d96784534ea105e37cb4319af4822d5707c2f63b003"
+    },
+    {
+      "path": "brand/icon-coins.webp",
+      "size": 46294,
+      "sha256": "a6abcd28f45f06e0137b89758c14ee31d428e197b35d729b1d5a83441c6b1713"
+    },
+    {
+      "path": "brand/icon-heart.webp",
+      "size": 31876,
+      "sha256": "7e15d970e5e243fa8639724ff99493df28d9b45c64a46027bb88df3f76902bd9"
+    },
+    {
+      "path": "brand/icon-s.webp",
+      "size": 39174,
+      "sha256": "d9a34656d05a6a4ec7ce32c64c3eb5b4ed95dcde62974d130643fb61d5c5be56"
+    },
+    {
+      "path": "brand/sunlix-logo-night.svg",
+      "size": 4293,
+      "sha256": "9141a45420d32eb2dee8be0439de15007edcebd0858cfbb386fa0c8524132648"
+    },
+    {
+      "path": "docs/SAMANTA_PROJECT_HANDOFF.md",
+      "size": 8180,
+      "sha256": "97fbd4814e45a253485f12c1f23334fea6ce985e7bea6b36d0b75645e58636e7"
+    },
+    {
+      "path": "favicon.svg",
+      "size": 712,
+      "sha256": "e6d2e59b7b5bbb0342e0fb496dfc262decbfe4426bbb7b047aec8d467d1dc6f7"
+    },
+    {
+      "path": "index.html",
+      "size": 28396,
+      "sha256": "aabf3280c49b875d2012527cd2489a9bda0c185240d2e3700261f722986260e6"
+    },
+    {
+      "path": "package.json",
+      "size": 188,
+      "sha256": "a9198b3801e240dc2bed90f74ede6b4540467ae28042a22b606f7914264a359a"
+    },
+    {
+      "path": "server.mjs",
+      "size": 1335,
+      "sha256": "38a161b5d889d4d98ffb6f86bbaa2fa73af9eb8b785f382d82b1586aaa1556ef"
+    }
+  ]
+}

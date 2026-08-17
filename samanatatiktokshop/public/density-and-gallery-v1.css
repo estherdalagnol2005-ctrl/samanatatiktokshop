@@ -1,0 +1,392 @@
+/* Bring the identity artwork one layer forward without covering content. */
+.dreams-brand-icon,
+.method-brand-icon {
+  z-index: 4 !important;
+  opacity: 0.72 !important;
+  filter:
+    saturate(1.48)
+    contrast(1.08)
+    brightness(1.02)
+    drop-shadow(0 18px 28px rgb(108 21 70 / 28%)) !important;
+}
+
+.dreams-heading,
+.dreams-showcase,
+.dreams-body,
+.method-timeline-copy,
+.method-timeline {
+  position: relative;
+  z-index: 5;
+}
+
+.dreams-brand-icon-heart {
+  width: clamp(118px, 14vw, 230px) !important;
+  top: 2% !important;
+  right: 1% !important;
+}
+
+.dreams-brand-icon-chat {
+  width: clamp(104px, 11.5vw, 184px) !important;
+  bottom: 4% !important;
+  left: 1% !important;
+}
+
+.method-brand-icon-cart {
+  width: clamp(128px, 14vw, 224px) !important;
+  top: 1.5% !important;
+  right: 1% !important;
+}
+
+@media (width <= 640px) {
+  .dreams-brand-icon,
+  .method-brand-icon {
+    z-index: 4 !important;
+    opacity: 0.58 !important;
+    filter:
+      saturate(1.42)
+      contrast(1.08)
+      drop-shadow(0 12px 20px rgb(108 21 70 / 24%)) !important;
+  }
+
+  .dreams-brand-icon-heart {
+    width: 116px !important;
+    top: 3% !important;
+    right: -18px !important;
+  }
+
+  .dreams-brand-icon-chat {
+    width: 98px !important;
+    bottom: 3% !important;
+    left: -17px !important;
+  }
+
+  .method-brand-icon-cart {
+    width: 112px !important;
+    top: 1.5% !important;
+    right: -16px !important;
+  }
+}
+
+/* Keep the central video clean and framed with the official Sunlix palette. */
+.dreams-video-emblem,
+.dreams-live {
+  display: none !important;
+}
+
+/* One main identity panel, framed by the Sunlix yellow like the hero. */
+.dreams-section {
+  background: linear-gradient(
+    180deg,
+    #fa2095 0%,
+    #fa2095 4%,
+    #e22275 10%,
+    #ffa120 48%,
+    #f0ff27 94%,
+    #f0ff27 100%
+  ) !important;
+}
+
+.dreams-marquee {
+  background: #fa2095 !important;
+  border-color: rgb(28 23 26 / 18%) !important;
+}
+
+.dreams-marquee span {
+  color: #fff !important;
+}
+
+.dreams-marquee b {
+  color: #f0ff27 !important;
+  text-shadow: 0 1px 10px rgb(28 23 26 / 18%);
+}
+
+.dreams-showcase {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.dreams-shell {
+  grid-template-areas:
+    "heading"
+    "showcase"
+    "body" !important;
+  row-gap: 0 !important;
+}
+
+.dreams-heading {
+  margin-bottom: clamp(14px, 1.2vw, 18px);
+}
+
+/* Keep this fold visual and concise: gallery, proof numbers and one final CTA. */
+.dreams-showcase-cta,
+.dreams-body > p,
+.dreams-cta-note,
+.dreams-orbit-guide {
+  display: none !important;
+}
+
+.dreams-feature-video {
+  border: 0 !important;
+  padding: 6px;
+  background: linear-gradient(
+    145deg,
+    #fa2095 0%,
+    #ffa120 52%,
+    #f0ff27 100%
+  ) !important;
+  box-shadow:
+    0 24px 60px rgb(68 22 50 / 28%),
+    0 0 0 2px rgb(255 255 255 / 92%) !important;
+}
+
+.dreams-feature-video video {
+  border-radius: clamp(19px, 2vw, 31px);
+}
+
+/* Give every rotating image its own brand-colour frame. */
+.dreams-orbit-card {
+  --orbit-card-color: #fa2095;
+
+  border-color: var(--orbit-card-color) !important;
+  background: var(--orbit-card-color) !important;
+  box-shadow:
+    0 18px 44px rgb(68 22 50 / 25%),
+    0 0 0 2px #fff !important;
+}
+
+.dreams-orbit-card:nth-child(1) {
+  --orbit-card-color: #fa2095;
+}
+
+.dreams-orbit-card:nth-child(2) {
+  --orbit-card-color: #f0ff27;
+}
+
+.dreams-orbit-card:nth-child(3) {
+  --orbit-card-color: #ffa120;
+}
+
+.dreams-orbit-card:nth-child(4) {
+  --orbit-card-color: #e22275;
+}
+
+.dreams-orbit-card:nth-child(5) {
+  --orbit-card-color: #e22275;
+}
+
+.dreams-orbit-card:nth-child(6) {
+  --orbit-card-color: #fa2095;
+}
+
+.dreams-orbit-card:nth-child(7) {
+  --orbit-card-color: #f0ff27;
+}
+
+.dreams-orbit-card:nth-child(8) {
+  --orbit-card-color: #ffa120;
+}
+
+.dreams-orbit-result img {
+  background: color-mix(in srgb, var(--orbit-card-color) 16%, #fff) !important;
+}
+
+/* Desktop density: keep each fold visually connected inside one viewport. */
+@media (width >= 901px) {
+  .dreams-section {
+    padding-bottom: clamp(42px, 3.8vw, 58px);
+  }
+
+  .dreams-shell {
+    row-gap: 0;
+    margin-top: clamp(14px, 1.4vw, 21px);
+    padding: clamp(30px, 2.8vw, 42px) clamp(34px, 4vw, 60px)
+      clamp(32px, 3vw, 45px);
+  }
+
+  .dreams-heading {
+    width: min(100%, 900px);
+  }
+
+  .dreams-heading h2 {
+    font-size: clamp(32px, 2.7vw, 44px);
+    line-height: 0.9;
+  }
+
+  .dreams-eyebrow {
+    margin-bottom: 13px;
+  }
+
+  .dreams-heading h2 strong {
+    margin-top: 4px;
+  }
+
+  .dreams-showcase {
+    height: clamp(430px, 34vw, 500px);
+    min-height: 0;
+    border-radius: clamp(28px, 2.8vw, 40px);
+  }
+
+  .dreams-orbit-stage {
+    transform: translateY(-34px);
+  }
+
+  .dreams-feature-video {
+    width: min(24.5%, 260px);
+    height: 84%;
+    top: 8%;
+  }
+
+  .dreams-orbit-card {
+    width: clamp(92px, 9.4vw, 132px);
+    border-width: 5px;
+  }
+
+  .dreams-orbit-guide {
+    bottom: 12px;
+    min-width: 250px;
+    padding: 9px 15px;
+  }
+
+  .dreams-showcase-cta {
+    margin-top: 2px;
+  }
+
+  .dreams-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: min(100%, 1040px);
+    margin-inline: auto;
+  }
+
+  .dreams-results {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .dreams-results div {
+    padding: 12px 10px;
+  }
+
+  .dreams-cta-wrap {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .dreams-cta {
+    flex: 0 0 auto;
+    min-height: 48px;
+    margin-top: 0;
+  }
+
+  .dreams-cta-note {
+    margin-top: 0;
+  }
+
+  .method-section {
+    padding-bottom: clamp(42px, 3.8vw, 58px);
+  }
+
+  .method-timeline-shell {
+    margin-top: clamp(14px, 1.4vw, 21px);
+    padding: clamp(32px, 3vw, 45px) clamp(34px, 4vw, 60px)
+      clamp(34px, 3.2vw, 48px);
+  }
+
+  .method-timeline-copy {
+    width: min(100%, 900px);
+    margin-bottom: clamp(22px, 2.1vw, 32px);
+  }
+
+  .method-copy h2 {
+    font-size: clamp(34px, 3.2vw, 50px);
+    line-height: 0.9;
+  }
+
+  .method-copy h2 em {
+    margin-top: 7px;
+    font-size: 0.54em;
+  }
+
+  .method-copy > p {
+    width: min(100%, 680px);
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .method-proof-grid {
+    width: min(100%, 620px);
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .method-proof-card {
+    padding: 12px 17px;
+    border-radius: 20px;
+  }
+
+  .method-proof-card strong {
+    font-size: clamp(27px, 2.1vw, 34px);
+  }
+
+  .method-proof-card span {
+    margin-top: 7px;
+    font-size: 12px;
+  }
+
+  .method-timeline {
+    grid-template-columns: minmax(250px, 0.72fr) minmax(390px, 1.28fr);
+    gap: clamp(34px, 3.8vw, 56px);
+  }
+
+  .method-timeline-media {
+    top: clamp(64px, 8vh, 82px);
+  }
+
+  .method-timeline-photo {
+    width: min(100%, 390px);
+    max-height: 50vh;
+  }
+
+  .method-timeline-steps article {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: clamp(16px, 1.7vw, 24px);
+    min-height: clamp(150px, 17vh, 172px);
+  }
+
+  .method-timeline-steps article > div {
+    border-radius: clamp(19px, 1.8vw, 25px);
+    padding: clamp(17px, 1.6vw, 22px);
+  }
+
+  .method-timeline-steps h3 {
+    margin: 7px 0 8px;
+    font-size: clamp(23px, 2vw, 32px);
+    line-height: 0.96;
+  }
+
+  .method-timeline-steps p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .method-timeline-rail {
+    top: 56px;
+    bottom: 78px;
+    left: 19px;
+  }
+
+  .method-timeline-cta {
+    width: min(100% - 60px, 470px);
+    min-height: 50px;
+    margin: 12px 0 0 56px;
+  }
+}
