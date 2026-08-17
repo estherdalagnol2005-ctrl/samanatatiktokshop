@@ -17,6 +17,24 @@
   display: none !important;
 }
 
+@media (width <= 700px) {
+  .dreams-coverflow-viewport {
+    overflow: visible !important;
+  }
+
+  .dreams-coverflow-track {
+    overflow: hidden !important;
+  }
+
+  .dreams-coverflow-arrow {
+    bottom: -32px !important;
+  }
+
+  .dreams-showcase:has(.dreams-coverflow) {
+    margin-bottom: 40px !important;
+  }
+}
+
 @media (width <= 640px) {
   .site-header .brand-logo {
     width: clamp(80px, 24vw, 98px);
