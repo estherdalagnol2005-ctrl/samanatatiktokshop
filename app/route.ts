@@ -1,6 +1,12 @@
-import snapshotHtml from "../recovery/index.html?raw";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
 export const dynamic = "force-static";
+
+const snapshotHtml = readFileSync(
+  join(process.cwd(), "recovery", "index.html"),
+  "utf8",
+);
 
 const optimizedHtml = snapshotHtml
   .replaceAll(
