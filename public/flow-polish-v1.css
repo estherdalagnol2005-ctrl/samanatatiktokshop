@@ -134,3 +134,19 @@ html {
     padding-bottom: calc(28px + env(safe-area-inset-bottom));
   }
 }
+
+/* Keep Nagoku exclusive to the hero title; section headings use the body typeface. */
+.page-shell > section:not(.hero-stage) h2,
+.page-shell > section:not(.hero-stage) h3 {
+  font-family: var(--font-body) !important;
+}
+
+/* The hero purchase button must be available from the first rendered frame. */
+.site-header .buy-button {
+  animation: none !important;
+  animation-delay: 0s !important;
+  transition-delay: 0s !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
