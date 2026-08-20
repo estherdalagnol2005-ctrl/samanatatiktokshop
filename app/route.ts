@@ -30,7 +30,7 @@ const optimizedHtml = snapshotHtml
   )
   .replace(
     "</body>",
-    '<script src="/third-fold-partners-v1.js" defer></script><script src="/student-proof-v1.js?v=5" defer></script><script src="/gallery-coverflow-v1.js" defer></script><script src="/community-section-v1.js?v=2" defer></script><script src="/conversion-cta-v1.js?v=2" defer></script><script src="/footer-v1.js?v=2" defer></script><script src="/motion-effects-v1.js?v=9" type="module"></script><script src="/mobile-scroll-tuning-v1.js?v=1" type="module"></script></body>',
+    '<script src="/third-fold-partners-v1.js" defer></script><script src="/student-proof-v1.js?v=5" defer></script><script src="/gallery-coverflow-v1.js" defer></script><script src="/community-section-v1.js?v=2" defer></script><script src="/conversion-cta-v1.js?v=2" defer></script><script src="/footer-v1.js?v=2" defer></script><script src="/checkout-links-v1.js?v=1" defer></script><script src="/motion-effects-v1.js?v=9" type="module"></script><script src="/mobile-scroll-tuning-v1.js?v=1" type="module"></script></body>',
   );
 
 export function GET() {
