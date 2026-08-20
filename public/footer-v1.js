@@ -24,7 +24,7 @@
           <a href="#jornada">Método</a>
         </nav>
 
-        <a class="site-footer-cta" href="#inscricao">
+        <a class="site-footer-cta" href="https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O">
           QUERO ENTRAR PARA A MENTORIA <span aria-hidden="true">↗</span>
         </a>
 
