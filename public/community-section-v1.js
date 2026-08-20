@@ -80,27 +80,15 @@
     return true;
   };
 
-  const initialize = () => {
-    buildCommunitySection();
-
-    const root = document.querySelector(".page-shell") || document.body;
-    const observer = new MutationObserver(() => {
-      buildCommunitySection();
-    });
-
-    observer.observe(root, { childList: true, subtree: true });
-
-    window.setTimeout(() => {
-      buildCommunitySection();
-      observer.disconnect();
-    }, 3000);
+  const scheduleBuild = () => {
+    window.setTimeout(buildCommunitySection, 1150);
   };
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initialize, { once: true });
+  if (document.readyState === "complete") {
+    scheduleBuild();
   } else {
-    initialize();
+    window.addEventListener("load", scheduleBuild, { once: true });
   }
 
-  window.addEventListener("pageshow", buildCommunitySection);
+  window.addEventListener("pageshow", scheduleBuild);
 })();
