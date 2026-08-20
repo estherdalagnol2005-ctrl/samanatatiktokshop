@@ -1,0 +1,551 @@
+.seio-root,
+.seio-root * {
+  box-sizing: border-box;
+}
+
+.seio-root {
+  --seio-pink: #fa2095;
+  --seio-lime: #f0ff27;
+  --seio-orange: #ffa120;
+  --seio-ink: #1c171a;
+  --seio-cream: #fffaf6;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  font-family: var(--font-body, Arial, Helvetica, sans-serif);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.seio-root[hidden] {
+  display: none;
+}
+
+.seio-root.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.seio-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 23, 26, 0.62);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.seio-dialog {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(380px, 1.12fr);
+  width: min(880px, 100%);
+  max-height: min(720px, calc(100dvh - 48px));
+  overflow: hidden;
+  color: var(--seio-ink);
+  background: var(--seio-cream);
+  border: 2px solid var(--seio-ink);
+  border-radius: 34px;
+  box-shadow: 0 18px 0 rgba(28, 23, 26, 0.22), 0 36px 90px rgba(28, 23, 26, 0.36);
+  transform: translateY(14px) scale(0.985);
+  transition: transform 190ms cubic-bezier(.2, .8, .2, 1);
+}
+
+.seio-root.is-open .seio-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.seio-close {
+  position: absolute;
+  z-index: 4;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  color: var(--seio-ink);
+  background: #fff;
+  border: 2px solid var(--seio-ink);
+  border-radius: 50%;
+  box-shadow: 3px 3px 0 var(--seio-ink);
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.seio-close:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--seio-ink);
+}
+
+.seio-close:focus-visible,
+.seio-submit:focus-visible,
+.seio-field input:focus-visible {
+  outline: 3px solid var(--seio-orange);
+  outline-offset: 3px;
+}
+
+.seio-close svg {
+  width: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2.4;
+}
+
+.seio-offer-panel {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 570px;
+  padding: 54px 42px 46px;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(circle at 88% 12%, var(--seio-lime) 0 13%, transparent 13.4%),
+    linear-gradient(145deg, #e91182 0%, var(--seio-pink) 56%, #ff4cab 100%);
+  border-right: 2px solid var(--seio-ink);
+}
+
+.seio-offer-panel::before,
+.seio-offer-panel::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+}
+
+.seio-offer-panel::before {
+  width: 230px;
+  height: 230px;
+  right: -104px;
+  bottom: -70px;
+}
+
+.seio-offer-panel::after {
+  width: 130px;
+  height: 130px;
+  right: -54px;
+  bottom: -20px;
+}
+
+.seio-kicker,
+.seio-mobile-kicker {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .17em;
+}
+
+.seio-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.seio-kicker span {
+  display: block;
+  width: 30px;
+  height: 5px;
+  background: var(--seio-lime);
+  border-radius: 999px;
+}
+
+.seio-discount {
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+  margin: 34px 0 4px;
+  color: var(--seio-lime);
+  line-height: .8;
+  text-shadow: 3px 3px 0 rgba(28, 23, 26, .22);
+}
+
+.seio-discount strong {
+  font-size: clamp(66px, 7vw, 94px);
+  font-weight: 950;
+  letter-spacing: -.075em;
+}
+
+.seio-discount span {
+  padding-bottom: 8px;
+  font-size: 23px;
+  font-weight: 950;
+  letter-spacing: -.03em;
+}
+
+.seio-offer-panel h2 {
+  margin: 23px 0 12px;
+  font-family: var(--font-body, Arial, Helvetica, sans-serif);
+  font-size: clamp(38px, 4.2vw, 57px);
+  font-weight: 900;
+  line-height: .97;
+  letter-spacing: -.055em;
+}
+
+.seio-offer-panel > p:not(.seio-kicker) {
+  max-width: 300px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 620;
+  line-height: 1.5;
+}
+
+.seio-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 28px;
+}
+
+.seio-benefits span {
+  padding: 7px 10px;
+  color: var(--seio-ink);
+  background: #fff;
+  border: 1.5px solid var(--seio-ink);
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 820;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.seio-form-panel {
+  max-height: min(720px, calc(100dvh - 48px));
+  padding: 58px 52px 42px;
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 100% 0, rgba(240, 255, 39, .24), transparent 31%),
+    var(--seio-cream);
+}
+
+.seio-mobile-kicker {
+  display: none;
+  color: var(--seio-pink);
+}
+
+.seio-form-copy h3,
+.seio-success h3 {
+  margin: 0;
+  font-family: var(--font-body, Arial, Helvetica, sans-serif);
+  font-size: clamp(30px, 3.1vw, 42px);
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: -.045em;
+}
+
+.seio-form-copy h3 em {
+  color: var(--seio-pink);
+  font-style: normal;
+}
+
+.seio-form-copy > p:last-child {
+  max-width: 410px;
+  margin: 13px 0 24px;
+  color: #655b61;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.seio-form {
+  display: grid;
+  gap: 12px;
+}
+
+.seio-field {
+  display: grid;
+  gap: 6px;
+}
+
+.seio-field span {
+  padding-left: 3px;
+  color: #4f464b;
+  font-size: 11px;
+  font-weight: 820;
+  text-transform: uppercase;
+  letter-spacing: .075em;
+}
+
+.seio-field input {
+  width: 100%;
+  height: 49px;
+  padding: 0 15px;
+  color: var(--seio-ink);
+  background: #fff;
+  border: 1.6px solid #d4c9ce;
+  border-radius: 13px;
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.seio-field input:focus {
+  border-color: var(--seio-pink);
+  box-shadow: 0 0 0 3px rgba(250, 32, 149, .1);
+}
+
+.seio-field input::placeholder {
+  color: #a59aa0;
+}
+
+.seio-honeypot {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+.seio-status {
+  min-height: 0;
+  margin: -2px 2px 0;
+  color: #8a4444;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.seio-status:empty {
+  display: none;
+}
+
+.seio-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 53px;
+  margin-top: 3px;
+  padding: 12px 18px;
+  color: var(--seio-ink);
+  background: var(--seio-lime);
+  border: 2px solid var(--seio-ink);
+  border-radius: 999px;
+  box-shadow: 5px 5px 0 var(--seio-pink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: .055em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+}
+
+.seio-submit:hover:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 var(--seio-pink);
+  filter: saturate(1.08);
+}
+
+.seio-submit:disabled {
+  cursor: wait;
+  opacity: .75;
+}
+
+.seio-submit b {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.seio-submit.is-loading b {
+  animation: seio-pulse 900ms ease-in-out infinite alternate;
+}
+
+.seio-privacy {
+  margin: 1px 0 0;
+  color: #81767c;
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.seio-success {
+  padding-top: 38px;
+  text-align: center;
+}
+
+.seio-success-seal {
+  display: grid;
+  place-items: center;
+  width: 112px;
+  height: 112px;
+  margin: 0 auto 24px;
+  color: var(--seio-ink);
+  background: var(--seio-lime);
+  border: 2px solid var(--seio-ink);
+  border-radius: 50%;
+  box-shadow: 7px 7px 0 var(--seio-pink);
+  font-size: 22px;
+  font-weight: 950;
+  transform: rotate(-5deg);
+}
+
+.seio-success-message {
+  max-width: 390px;
+  margin: 15px auto 22px;
+  color: #655b61;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.seio-coupon {
+  display: block;
+  margin: 0 0 17px;
+  padding: 14px;
+  color: var(--seio-pink);
+  background: #fff;
+  border: 2px dashed var(--seio-pink);
+  border-radius: 14px;
+  font-size: 23px;
+  letter-spacing: .11em;
+}
+
+.seio-success-link {
+  margin-top: 6px;
+}
+
+.seio-pending-note {
+  display: block;
+  margin-top: 14px;
+  color: #81767c;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+@keyframes seio-pulse {
+  to { transform: translateX(5px); }
+}
+
+@media (max-width: 768px) {
+  .seio-root {
+    align-items: end;
+    padding: 12px;
+  }
+
+  .seio-dialog {
+    display: block;
+    width: 100%;
+    max-height: calc(100dvh - 24px);
+    border-radius: 28px;
+    box-shadow: 0 12px 0 rgba(28, 23, 26, .2), 0 24px 60px rgba(28, 23, 26, .34);
+  }
+
+  .seio-close {
+    top: 12px;
+    right: 12px;
+    width: 39px;
+    height: 39px;
+  }
+
+  .seio-offer-panel {
+    display: block;
+    min-height: 0;
+    padding: 23px 64px 22px 24px;
+    border-right: 0;
+    border-bottom: 2px solid var(--seio-ink);
+  }
+
+  .seio-kicker,
+  .seio-offer-panel h2,
+  .seio-offer-panel > p:not(.seio-kicker),
+  .seio-benefits {
+    display: none;
+  }
+
+  .seio-discount {
+    margin: 0;
+  }
+
+  .seio-discount strong {
+    font-size: 50px;
+  }
+
+  .seio-discount span {
+    padding-bottom: 4px;
+    font-size: 18px;
+  }
+
+  .seio-form-panel {
+    max-height: calc(100dvh - 124px);
+    padding: 26px 22px 24px;
+  }
+
+  .seio-mobile-kicker {
+    display: block;
+    margin-bottom: 9px;
+  }
+
+  .seio-form-copy h3,
+  .seio-success h3 {
+    padding-right: 2px;
+    font-size: clamp(29px, 8.5vw, 36px);
+  }
+
+  .seio-form-copy > p:last-child {
+    margin: 10px 0 18px;
+  }
+
+  .seio-form {
+    gap: 10px;
+  }
+
+  .seio-field input {
+    height: 47px;
+    font-size: 16px;
+  }
+
+  .seio-submit {
+    min-height: 51px;
+    font-size: 11px;
+  }
+
+  .seio-success {
+    padding-top: 2px;
+  }
+
+  .seio-success-seal {
+    width: 88px;
+    height: 88px;
+    margin-bottom: 18px;
+    font-size: 18px;
+  }
+}
+
+@media (max-height: 690px) and (min-width: 769px) {
+  .seio-offer-panel {
+    min-height: 0;
+    padding-top: 38px;
+    padding-bottom: 36px;
+  }
+
+  .seio-form-panel {
+    padding-top: 42px;
+    padding-bottom: 34px;
+  }
+
+  .seio-discount {
+    margin-top: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seio-root,
+  .seio-dialog,
+  .seio-close,
+  .seio-submit {
+    transition: none !important;
+  }
+
+  .seio-submit.is-loading b {
+    animation: none;
+  }
+}
