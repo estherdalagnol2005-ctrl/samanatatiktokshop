@@ -47,7 +47,7 @@
         applyCheckoutUrl();
         observer.disconnect();
       }, 5000);
-    }, 1200);
+    }, 3200);
   };
 
   if (document.readyState === "complete") {
