@@ -6,19 +6,15 @@
   margin-top: -1px;
   padding: clamp(12px, 1vw, 16px) clamp(8px, 0.8vw, 13px)
     clamp(52px, 5.4vw, 82px);
-  background:
-    radial-gradient(circle at 7% 23%, rgb(240 255 39 / 26%), transparent 20%),
-    radial-gradient(circle at 94% 76%, rgb(240 255 39 / 20%), transparent 22%),
-    linear-gradient(
-      180deg,
-      var(--flow-lime, #f0ff27) 0%,
-      var(--flow-lime, #f0ff27) 7%,
-      var(--flow-orange, #ffa120) 30%,
-      var(--flow-pink, #fa2095) 50%,
-      var(--flow-orange, #ffa120) 70%,
-      var(--flow-lime, #f0ff27) 93%,
-      var(--flow-lime, #f0ff27) 100%
-    );
+  background: linear-gradient(
+    180deg,
+    var(--flow-lime) 0%,
+    var(--flow-lime) 8%,
+    var(--flow-orange) 46%,
+    var(--flow-pink-deep) 78%,
+    var(--flow-pink) 94%,
+    var(--flow-pink) 100%
+  );
   overflow: hidden;
 }
 
@@ -49,10 +45,7 @@
   border: 1px solid rgb(28 23 26 / 10%);
   border-radius: clamp(34px, 4vw, 62px);
   color: var(--ink, #1c171a);
-  background:
-    radial-gradient(circle at 88% 10%, rgb(240 255 39 / 24%), transparent 24%),
-    radial-gradient(circle at 10% 92%, rgb(250 32 149 / 10%), transparent 27%),
-    linear-gradient(145deg, #fffdf9 0%, #fff7fb 58%, #fbffe2 100%);
+  background: rgb(255 255 255 / 10%);
   box-shadow: 0 34px 96px rgb(73 14 50 / 24%);
   overflow: hidden;
 }
