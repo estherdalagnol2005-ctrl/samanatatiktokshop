@@ -11,11 +11,13 @@
     radial-gradient(circle at 94% 76%, rgb(240 255 39 / 20%), transparent 22%),
     linear-gradient(
       180deg,
-      var(--flow-pink, #fa2095) 0%,
-      var(--flow-pink-deep, #e22275) 18%,
-      var(--flow-orange, #ffa120) 50%,
-      var(--flow-pink-deep, #e22275) 82%,
-      var(--flow-pink, #fa2095) 100%
+      var(--flow-lime, #f0ff27) 0%,
+      var(--flow-lime, #f0ff27) 7%,
+      var(--flow-orange, #ffa120) 30%,
+      var(--flow-pink, #fa2095) 50%,
+      var(--flow-orange, #ffa120) 70%,
+      var(--flow-lime, #f0ff27) 93%,
+      var(--flow-lime, #f0ff27) 100%
     );
   overflow: hidden;
 }
