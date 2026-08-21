@@ -1,0 +1,9 @@
+node_modules/
+.next/
+.wrangler/
+.dev.vars
+.env.local
+.pnpm-install*.log
+.preview-install*.log
+pnpm-workspace.yaml
+tsconfig.tsbuildinfo
