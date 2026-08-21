@@ -1,14 +1,10 @@
 import { getExitOfferConfig } from "../../exit-offer-config";
 import {
-  ensureExitOfferSchema,
-  getDatabase,
+  getExitOfferStore,
   hashValue,
   honeypotHasValue,
-  isRateLimited,
-  isLocalPreview,
   parseCookie,
-  recordRateLimitAttempt,
-  recordLocalPreviewLead,
+  recordAttemptAndLead,
   requestIp,
   sameOrigin,
   sanitizeLead,
@@ -16,6 +12,7 @@ import {
 } from "../../exit-offer-security";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 const MAX_PAYLOAD_BYTES = 8_192;
 
 export async function POST(request: Request) {
@@ -38,31 +35,28 @@ export async function POST(request: Request) {
   const session = await verifySignedSession(parseCookie(request, "exit_offer_session"));
   if (!session) return response("Atualize a página e tente novamente.", 403);
 
-  const database = await getDatabase();
-  if (!database && !isLocalPreview()) return response("Oferta indisponível. Tente novamente mais tarde.", 503);
+  const store = getExitOfferStore();
+  if (!store) return response("Oferta indisponível. Tente novamente mais tarde.", 503);
 
   try {
-    if (database) await ensureExitOfferSchema(database);
     const now = Date.now();
     const ipHash = await hashValue(`ip:${requestIp(request)}`);
     const emailHash = await hashValue(`email:${lead.email}`);
     const phoneHash = await hashValue(`phone:${lead.phone}`);
     const sessionHash = await hashValue(`session:${session.nonce}:${session.issuedAt}`);
     const dedupeKey = await hashValue(`lead:${lead.email}:${lead.phone}`);
-    const rateKeys = [ipHash, emailHash, phoneHash, sessionHash, await hashValue(`combined:${ipHash}:${emailHash}:${phoneHash}:${sessionHash}:${session.issuedAt}`)];
-
-    if (await isRateLimited(database, rateKeys, now)) {
+    const attempt = await recordAttemptAndLead(store, {
+      ipHash,
+      emailHash,
+      phoneHash,
+      sessionHash,
+      dedupeKey,
+      lead,
+      now,
+    });
+    if (attempt.limited) {
       return response("Muitas tentativas. Aguarde alguns minutos e tente novamente.", 429);
     }
-
-    await recordRateLimitAttempt(database, rateKeys, now);
-    if (database) await database.prepare(`
-      INSERT INTO exit_offer_leads (dedupe_key, name, email, phone, ip_hash, session_hash, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-      ON CONFLICT(dedupe_key) DO UPDATE SET
-        name = excluded.name, updated_at = excluded.updated_at, ip_hash = excluded.ip_hash, session_hash = excluded.session_hash
-    `).bind(dedupeKey, lead.name, lead.email, lead.phone, ipHash, sessionHash, now, now).run();
-    else recordLocalPreviewLead(dedupeKey, lead, now);
 
     const config = getExitOfferConfig();
     return Response.json({

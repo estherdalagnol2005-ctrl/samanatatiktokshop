@@ -1,6 +1,7 @@
 import { createSignedSession, sameOrigin } from "../../../exit-offer-security";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   if (!sameOrigin(request)) return Response.json({ error: "Solicitação inválida." }, { status: 403 });

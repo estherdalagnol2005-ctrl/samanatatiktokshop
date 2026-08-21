@@ -1,54 +1,80 @@
 import { getExitOfferConfig } from "./exit-offer-config";
 
-type D1DatabaseLike = {
-  exec(query: string): Promise<unknown>;
-  prepare(query: string): {
-    run(): Promise<unknown>;
-    bind(...values: unknown[]): {
-      all<T = Record<string, unknown>>(): Promise<{ results?: T[] }>;
-      run(): Promise<unknown>;
-    };
-  };
-};
-
 const encoder = new TextEncoder();
-let schemaPromise: Promise<void> | undefined;
-const localRateLimitAttempts = new Map<string, number[]>();
-const localPreviewLeads = new Map<string, { name: string; email: string; phone: string; createdAt: number }>();
+const RATE_LIMITS = [
+  { maximum: 12, windowMs: 60 * 60 * 1000 }, // IP
+  { maximum: 4, windowMs: 60 * 60 * 1000 }, // e-mail
+  { maximum: 4, windowMs: 60 * 60 * 1000 }, // WhatsApp
+  { maximum: 5, windowMs: 60 * 60 * 1000 }, // sessão
+  { maximum: 3, windowMs: 60 * 60 * 1000 }, // combinação
+] as const;
+
+const ATOMIC_RECORD_ATTEMPT = `
+local now = tonumber(ARGV[1])
+local attemptId = ARGV[2]
+local encryptedLead = ARGV[3]
+local leadTtlSeconds = tonumber(ARGV[4])
+
+for index = 1, 5 do
+  local argumentOffset = 5 + ((index - 1) * 2)
+  local windowMs = tonumber(ARGV[argumentOffset])
+  local maximum = tonumber(ARGV[argumentOffset + 1])
+  redis.call("ZREMRANGEBYSCORE", KEYS[index], "-inf", now - windowMs)
+  if redis.call("ZCARD", KEYS[index]) >= maximum then
+    return { 0, index }
+  end
+end
+
+for index = 1, 5 do
+  local argumentOffset = 5 + ((index - 1) * 2)
+  local windowMs = tonumber(ARGV[argumentOffset])
+  redis.call("ZADD", KEYS[index], now, attemptId)
+  redis.call("PEXPIRE", KEYS[index], windowMs)
+end
+
+redis.call("SET", KEYS[6], encryptedLead, "EX", leadTtlSeconds)
+return { 1, 0 }
+`;
 
 export type SanitizedLead = { name: string; email: string; phone: string };
 export type ExitOfferSession = { issuedAt: number; nonce: string };
 
-export async function getDatabase(): Promise<D1DatabaseLike | null> {
-  try {
-    const moduleName = ["cloudflare", "workers"].join(":");
-    const runtime = await import(/* webpackIgnore: true */ moduleName) as unknown as { env?: { EXIT_OFFER_DB?: D1DatabaseLike } };
-    return runtime.env?.EXIT_OFFER_DB ?? null;
-  } catch {
-    return null;
-  }
-}
+type UpstashResponse<T> = { result?: T; error?: string };
+type UpstashStore = { command<T>(command: unknown[]): Promise<T> };
 
-export async function ensureExitOfferSchema(database: D1DatabaseLike): Promise<void> {
-  schemaPromise ??= Promise.all([
-    database.prepare(`CREATE TABLE IF NOT EXISTS exit_offer_rate_limits (
-      key_hash TEXT NOT NULL,
-      created_at INTEGER NOT NULL
-    )`).run(),
-    database.prepare(`CREATE INDEX IF NOT EXISTS exit_offer_rate_limits_lookup
-      ON exit_offer_rate_limits (key_hash, created_at)`).run(),
-    database.prepare(`CREATE TABLE IF NOT EXISTS exit_offer_leads (
-      dedupe_key TEXT PRIMARY KEY,
-      name TEXT NOT NULL,
-      email TEXT NOT NULL,
-      phone TEXT NOT NULL,
-      ip_hash TEXT NOT NULL,
-      session_hash TEXT NOT NULL,
-      created_at INTEGER NOT NULL,
-      updated_at INTEGER NOT NULL
-    )`).run(),
-  ]).then(() => undefined);
-  return schemaPromise;
+export class ExitOfferStorageUnavailable extends Error {}
+
+/**
+ * The Upstash REST API is a server-side Vercel-compatible Redis connection.
+ * No credentials are ever sent to the browser.
+ */
+export function getExitOfferStore(): UpstashStore | null {
+  const config = getExitOfferConfig();
+  if (!config.upstashRedisRestUrl || !config.upstashRedisRestToken) return null;
+
+  return {
+    async command<T>(command: unknown[]): Promise<T> {
+      let response: Response;
+      try {
+        response = await fetch(config.upstashRedisRestUrl!, {
+          method: "POST",
+          cache: "no-store",
+          headers: {
+            Authorization: `Bearer ${config.upstashRedisRestToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(command),
+        });
+      } catch {
+        throw new ExitOfferStorageUnavailable();
+      }
+
+      if (!response.ok) throw new ExitOfferStorageUnavailable();
+      const payload = await response.json() as UpstashResponse<T>;
+      if (payload.error) throw new ExitOfferStorageUnavailable();
+      return payload.result as T;
+    },
+  };
 }
 
 export function sanitizeLead(value: unknown): SanitizedLead | null {
@@ -66,7 +92,7 @@ export function honeypotHasValue(value: unknown): boolean {
 
 export function sanitizeText(value: unknown, minimumLength: number, maximumLength: number): string | null {
   if (typeof value !== "string") return null;
-  const normalized = value.replace(/[\u0000-\u001F\u007F]/g, "").replace(/\s+/g, " ").trim();
+  const normalized = value.normalize("NFKC").replace(/[\u0000-\u001F\u007F]/g, "").replace(/\s+/g, " ").trim();
   return normalized.length >= minimumLength && normalized.length <= maximumLength ? normalized : null;
 }
 
@@ -84,13 +110,14 @@ function sanitizeWhatsApp(value: unknown): string | null {
 }
 
 export function requestIp(request: Request): string {
-  const cloudflareIp = request.headers.get("cf-connecting-ip");
-  const forwardedIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  return cloudflareIp || forwardedIp || "unknown";
+  return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
+    || request.headers.get("x-real-ip")?.trim()
+    || "unknown";
 }
 
 export async function hashValue(value: string): Promise<string> {
-  const secret = getExitOfferConfig().rateLimitSecret ?? getExitOfferConfig().hmacSecret;
+  const config = getExitOfferConfig();
+  const secret = config.rateLimitSecret ?? config.hmacSecret;
   if (!secret) throw new Error("Exit offer security is not configured.");
   return digest(`${secret}:${value}`);
 }
@@ -122,38 +149,43 @@ export async function verifySignedSession(value: string | undefined): Promise<Ex
   }
 }
 
-export async function isRateLimited(database: D1DatabaseLike | null, keys: string[], now: number): Promise<boolean> {
-  const windowStart = now - 60 * 60 * 1000;
-  const limits = [12, 4, 4, 5, 3];
-  if (!database) {
-    return keys.some((key, index) => (localRateLimitAttempts.get(key) ?? []).filter((timestamp) => timestamp >= windowStart).length >= limits[index]);
-  }
-  for (let index = 0; index < keys.length; index += 1) {
-    const result = await database.prepare(
-      "SELECT COUNT(*) AS count FROM exit_offer_rate_limits WHERE key_hash = ? AND created_at >= ?",
-    ).bind(keys[index], windowStart).all<{ count: number }>();
-    if ((result.results?.[0]?.count ?? 0) >= limits[index]) return true;
-  }
-  return false;
-}
+export async function recordAttemptAndLead(
+  store: UpstashStore,
+  input: { ipHash: string; emailHash: string; phoneHash: string; sessionHash: string; dedupeKey: string; lead: SanitizedLead; now: number },
+): Promise<{ limited: boolean }> {
+  const config = getExitOfferConfig();
+  const encryptionSecret = config.leadEncryptionSecret ?? config.hmacSecret;
+  if (!encryptionSecret) throw new ExitOfferStorageUnavailable();
 
-export async function recordRateLimitAttempt(database: D1DatabaseLike | null, keys: string[], now: number): Promise<void> {
-  if (!database) {
-    const windowStart = now - 60 * 60 * 1000;
-    keys.forEach((key) => localRateLimitAttempts.set(key, [...(localRateLimitAttempts.get(key) ?? []).filter((timestamp) => timestamp >= windowStart), now]));
-    return;
-  }
-  await Promise.all(keys.map((key) => database.prepare(
-    "INSERT INTO exit_offer_rate_limits (key_hash, created_at) VALUES (?, ?)",
-  ).bind(key, now).run()));
-}
-
-export function isLocalPreview(): boolean {
-  return process.env.NODE_ENV === "development";
-}
-
-export function recordLocalPreviewLead(dedupeKey: string, lead: SanitizedLead, now: number): void {
-  localPreviewLeads.set(dedupeKey, { ...lead, createdAt: localPreviewLeads.get(dedupeKey)?.createdAt ?? now });
+  const encryptedLead = await encryptLead({
+    name: input.lead.name,
+    email: input.lead.email,
+    phone: input.lead.phone,
+    ipHash: input.ipHash,
+    emailHash: input.emailHash,
+    phoneHash: input.phoneHash,
+    sessionHash: input.sessionHash,
+    createdAt: input.now,
+    updatedAt: input.now,
+  }, encryptionSecret, input.dedupeKey);
+  const combinedHash = await hashValue(`combined:${input.ipHash}:${input.emailHash}:${input.phoneHash}:${input.sessionHash}`);
+  const result = await store.command<unknown[]>([
+    "EVAL",
+    ATOMIC_RECORD_ATTEMPT,
+    6,
+    rateKey(input.ipHash),
+    rateKey(input.emailHash),
+    rateKey(input.phoneHash),
+    rateKey(input.sessionHash),
+    rateKey(combinedHash),
+    leadKey(input.dedupeKey),
+    input.now,
+    crypto.randomUUID(),
+    encryptedLead,
+    config.leadRetentionDays * 24 * 60 * 60,
+    ...RATE_LIMITS.flatMap((limit) => [limit.windowMs, limit.maximum]),
+  ]);
+  return { limited: Number(result?.[0]) !== 1 };
 }
 
 export function parseCookie(request: Request, name: string): string | undefined {
@@ -172,6 +204,26 @@ export function sameOrigin(request: Request): boolean {
   } catch {
     return false;
   }
+}
+
+function rateKey(hash: string): string {
+  return `exit-offer:rate:v1:${hash}`;
+}
+
+function leadKey(dedupeHash: string): string {
+  return `exit-offer:lead:v1:${dedupeHash}`;
+}
+
+async function encryptLead(value: Record<string, unknown>, secret: string, associatedData: string): Promise<string> {
+  const material = await crypto.subtle.digest("SHA-256", encoder.encode(secret));
+  const key = await crypto.subtle.importKey("raw", material, { name: "AES-GCM" }, false, ["encrypt"]);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encrypted = await crypto.subtle.encrypt(
+    { name: "AES-GCM", iv, additionalData: encoder.encode(associatedData) },
+    key,
+    encoder.encode(JSON.stringify(value)),
+  );
+  return `${toBase64Url(iv)}.${toBase64Url(new Uint8Array(encrypted))}`;
 }
 
 async function digest(value: string): Promise<string> {
