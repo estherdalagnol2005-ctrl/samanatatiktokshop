@@ -135,6 +135,34 @@ html {
   }
 }
 
+/* Fold backgrounds: each section begins on the exact colour that ended the one above. */
+.hero-stage {
+  background: var(--flow-pink) !important;
+  background-image: none !important;
+}
+
+.student-proof-section,
+.method-section,
+.dreams-section {
+  background: linear-gradient(
+    180deg,
+    var(--flow-pink) 0%,
+    var(--flow-orange) 50%,
+    var(--flow-lime) 100%
+  ) !important;
+}
+
+.community-section,
+.conversion-section,
+.site-footer {
+  background: linear-gradient(
+    180deg,
+    var(--flow-lime) 0%,
+    var(--flow-orange) 50%,
+    var(--flow-pink) 100%
+  ) !important;
+}
+
 /* Keep Nagoku exclusive to the hero title; section headings use the body typeface. */
 .page-shell > section:not(.hero-stage) h2,
 .page-shell > section:not(.hero-stage) h3 {
