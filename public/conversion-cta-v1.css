@@ -228,9 +228,9 @@
 .conversion-trigger strong {
   display: block;
   margin-top: 14px;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: clamp(28px, 3vw, 46px);
-  font-weight: 900;
+  font-weight: 820;
   letter-spacing: -0.055em;
   line-height: 0.91;
 }

@@ -135,15 +135,29 @@ html {
   }
 }
 
-/* Fold backgrounds: each section begins on the exact colour that ended the one above. */
+/* Fold backgrounds: follow the visual order of the sections without colour jumps. */
 .hero-stage {
   background: var(--flow-pink) !important;
   background-image: none !important;
 }
 
+/* The emotional fold sits between Resultados and the sales-method fold. */
+.method-section {
+  order: 5 !important;
+}
+
+.conversion-section {
+  order: 6 !important;
+}
+
+.site-footer {
+  order: 7 !important;
+}
+
 .student-proof-section,
+.dreams-section,
 .method-section,
-.dreams-section {
+.site-footer {
   background: linear-gradient(
     180deg,
     var(--flow-pink) 0%,
@@ -153,8 +167,8 @@ html {
 }
 
 .community-section,
-.conversion-section,
-.site-footer {
+.home-story-section,
+.conversion-section {
   background: linear-gradient(
     180deg,
     var(--flow-lime) 0%,

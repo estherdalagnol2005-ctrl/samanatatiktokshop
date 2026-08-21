@@ -12,6 +12,8 @@
     ".site-footer-cta",
     ".dreams-showcase-cta",
     ".dreams-cta",
+    ".home-story-cta",
+    ".method-sales-cta",
   ].join(",");
 
   const applyCheckoutUrl = () => {
