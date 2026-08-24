@@ -4,8 +4,6 @@
     { href: "#depoimentos", label: "Depoimentos" },
     { href: "#resultados", label: "Conquistas" },
     { href: "#minha-historia", label: "Minha história" },
-    { href: "#comunidade", label: "Comunidade" },
-    { href: "#inscricao", label: "Inscrição" },
   ];
 
   const buildNavigation = () => {
@@ -26,6 +24,9 @@
         return link;
       }),
     );
+    desktopNav.style.gridTemplateColumns = `repeat(${sectionLinks.length}, minmax(0, 1fr))`;
+    desktopNav.style.width = "min(100%, 640px)";
+    desktopNav.style.gap = "0";
 
     if (buyButton) buyButton.href = "#inscricao";
 
