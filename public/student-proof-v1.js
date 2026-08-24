@@ -18,11 +18,6 @@
             <h2 id="student-proof-title">ESSE É O MOTIVO QUE ME FAZ CONTINUAR<br><strong>AJUDANDO MULHERES COMO VOCÊ.</strong></h2>
             <p>Resultados reais de mulheres que pararam de tentar sozinhas e começaram a aplicar o método com direção.</p>
           </div>
-          <aside class="student-proof-number" aria-label="Aluna recebeu mais de 31 mil reais em um pagamento">
-            <span>UM DOS RESULTADOS</span>
-            <strong>+R$ 31 MIL</strong>
-            <small>em um único pagamento</small>
-          </aside>
         </header>
 
         <div class="student-proof-carousel-shell">
@@ -100,6 +95,12 @@
             <button type="button" aria-label="Ver depoimento 10"></button>
           </div>
         </div>
+
+        <aside class="student-proof-number" aria-label="Aluna recebeu mais de 31 mil reais em um pagamento">
+          <span>UM DOS RESULTADOS</span>
+          <strong>+R$ 31 MIL</strong>
+          <small>em um único pagamento</small>
+        </aside>
 
         <a class="student-proof-cta" href="https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O">QUERO SER A PRÓXIMA HISTÓRIA <span aria-hidden="true">↗</span></a>
       </div>
