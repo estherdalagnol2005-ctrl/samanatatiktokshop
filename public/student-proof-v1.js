@@ -30,17 +30,17 @@
 
           <div class="student-proof-carousel" aria-label="Carrossel com doze resultados reais de alunas" tabindex="0">
             <div class="student-proof-track">
-              <figure class="student-proof-card student-proof-real-card is-active">
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain is-active">
                 <img src="/testimonials/sarah-comissoes-marco.webp" alt="Depoimento de Sarah mostrando 87,6 mil reais em GMV e quase 9 mil reais em comissões no mês" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Quase R$ 9 mil em comissões no mês.</strong></figcaption>
               </figure>
 
-              <figure class="student-proof-card student-proof-real-card">
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
                 <img src="/testimonials/leticia-pix-31634.webp" alt="Depoimento de Leticia mostrando um Pix de 31.634 reais recebido do TikTok Shop" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>PAGAMENTO REAL</span><strong>R$ 31.634 recebidos de uma vez.</strong></figcaption>
               </figure>
 
-              <figure class="student-proof-card student-proof-real-card">
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
                 <img src="/testimonials/nay-pagamentos-tres-perfis.webp" alt="Depoimento de Nay mostrando pagamentos recebidos em três perfis" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Três perfis gerando pagamentos.</strong></figcaption>
               </figure>
@@ -55,12 +55,12 @@
                 <figcaption class="student-proof-caption"><span>NOVO RECORDE</span><strong>R$ 2,6 mil em comissões.</strong></figcaption>
               </figure>
 
-              <figure class="student-proof-card student-proof-real-card">
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
                 <img src="/testimonials/2026-08/jhenifer-recorde-dia.webp" alt="Depoimento de Jhenifer celebrando seu recorde diário depois de um mês e duas semanas de conteúdo" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>PRIMEIRO RECORDE</span><strong>Um novo resultado em poucas semanas.</strong></figcaption>
               </figure>
 
-              <figure class="student-proof-card student-proof-real-card">
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
                 <img src="/testimonials/2026-08/michelle-gratidao.webp" alt="Depoimento de Michelle mostrando uma transferência de 2.524 reais recebida da ByteDance" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>DINHEIRO NA CONTA</span><strong>R$ 2.524 recebidos.</strong></figcaption>
               </figure>
@@ -70,7 +70,7 @@
                 <figcaption class="student-proof-caption"><span>EVOLUÇÃO ACOMPANHADA</span><strong>Mais um produto validado e pronto para escalar.</strong></figcaption>
               </figure>
 
-              <figure class="student-proof-card student-proof-real-card">
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
                 <img src="/testimonials/2026-08/michelle-viver-tiktok.webp" alt="Depoimento de Michelle sobre seu plano de sair do trabalho e viver do TikTok" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>NOVA POSSIBILIDADE</span><strong>A caminho de viver do TikTok.</strong></figcaption>
               </figure>
@@ -80,12 +80,12 @@
                 <figcaption class="student-proof-caption"><span>PAGAMENTO REAL</span><strong>R$ 20.681 recebidos de uma vez.</strong></figcaption>
               </figure>
 
-              <figure class="student-proof-card student-proof-real-card">
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
                 <img src="/testimonials/2026-08/karol-pix-9401.webp" alt="Depoimento de Karol mostrando um Pix de 9.401 reais recebido da ByteDance" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>ESFORÇO RECOMPENSADO</span><strong>R$ 9.401 recebidos.</strong></figcaption>
               </figure>
 
-              <figure class="student-proof-card student-proof-real-card">
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
                 <img src="/testimonials/2026-08/elisangela-fechamento.webp" alt="Depoimento de Elisângela mostrando 6.500 reais em comissões no mês" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>FECHAMENTO DO MÊS</span><strong>R$ 6,5 mil em comissões.</strong></figcaption>
               </figure>

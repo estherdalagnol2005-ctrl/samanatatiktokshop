@@ -585,6 +585,11 @@
   background: transparent;
 }
 
+.student-proof-track .student-proof-real-card.student-proof-fit-contain > img {
+  object-fit: contain;
+  background: #555856;
+}
+
 .student-proof-track .student-proof-real-card .student-proof-caption {
   min-height: 74px;
   padding: clamp(13px, 1.2vw, 18px);
