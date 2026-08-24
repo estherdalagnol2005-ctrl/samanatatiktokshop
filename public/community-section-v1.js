@@ -154,10 +154,6 @@
           <h2 id="community-title">Sua jornada <strong>não precisa ser solitária.</strong></h2>
           <p>Eu sei que você tenta resolver tudo sozinha. Mas você não precisa continuar assim. A Sunlix existe por um propósito: transformar alunas em uma família.</p>
 
-          <a class="community-cta" href="${checkoutUrl}" target="_blank" rel="noopener noreferrer">
-            QUERO FAZER PARTE DESSA COMUNIDADE
-            <span aria-hidden="true">↗</span>
-          </a>
         </div>
 
         <div class="community-visual">
@@ -179,6 +175,11 @@
               <span class="community-blur-status" aria-live="polite"></span>
             </div>
           </div>
+
+          <a class="community-cta" href="${checkoutUrl}" target="_blank" rel="noopener noreferrer">
+            QUERO FAZER PARTE DESSA COMUNIDADE
+            <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
     `;
