@@ -9,6 +9,14 @@
       alt: "Samanta caminhando em Paris com a Torre Eiffel ao fundo",
     },
     {
+      type: "video",
+      src: "/assets/dreams-2026/momento-em-paris.webm",
+      poster: "/assets/dreams-2026/momento-em-paris-poster.jpg",
+      label: "Momentos em Paris",
+      caption: "Uma conquista para guardar para sempre.",
+      alt: "Samanta abrindo um presente em um café de Paris",
+    },
+    {
       type: "image",
       src: "/assets/result-record-day.jpg",
       label: "R$ 9,4 mil em um dia",
