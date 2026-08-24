@@ -30,245 +30,105 @@
     },
   ];
 
-  const buildMagneticCarousel = (section) => {
-    const carousel = section.querySelector(".community-magnetic");
-    const track = section.querySelector(".community-magnetic-track");
-    const backdrop = section.querySelector(".community-magnetic-backdrop");
-    const cards = Array.from(
-      section.querySelectorAll("[data-community-magnetic-index]"),
-    );
+  const buildBlurCarousel = (section) => {
+    const carousel = section.querySelector(".community-blur-carousel");
+    const frame = section.querySelector(".community-blur-frame");
+    const slides = Array.from(section.querySelectorAll(".community-blur-slide"));
+    const previous = section.querySelector('[data-community-blur-direction="-1"]');
+    const next = section.querySelector('[data-community-blur-direction="1"]');
+    const status = section.querySelector(".community-blur-status");
 
-    if (!carousel || !track || !backdrop || !cards.length) return;
+    if (!carousel || !frame || !slides.length || !previous || !next) return;
 
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const finePointer = window.matchMedia(
-      "(hover: hover) and (pointer: fine)",
-    ).matches;
-    let openIndex = null;
-    let targetFactors = cards.map(() => 0);
-    let currentFactors = cards.map(() => 0);
-    let animationFrame = 0;
-    let pointerStartX = null;
-    let ignoreClickUntil = 0;
+    let index = 0;
+    let swipeStartY = null;
+    let swipeStartX = null;
 
-    const getMetrics = () => {
-      const width = track.clientWidth;
-      const height = track.clientHeight;
-      const mobile = width <= 520;
-      const gap = mobile ? 6 : Math.min(14, width * 0.018);
-      const collapsedWidth = mobile
-        ? Math.min(44, (width - gap * (cards.length - 1)) / cards.length)
-        : Math.min(92, (width - gap * (cards.length - 1)) / cards.length);
-      const hoverWidth = mobile
-        ? collapsedWidth
-        : Math.min(196, collapsedWidth * 2.2);
-      const collapsedHeight = Math.min(
-        mobile ? 335 : 430,
-        height * (mobile ? 0.7 : 0.74),
-      );
-      const hoverHeight = mobile
-        ? collapsedHeight
-        : Math.min(collapsedHeight + 58, height * 0.84);
-      const openWidth = Math.min(
-        mobile ? 310 : 520,
-        width * (mobile ? 0.79 : 0.67),
-      );
-      const openHeight = Math.min(
-        mobile ? 410 : 535,
-        height * (mobile ? 0.86 : 0.88),
-      );
-
-      return {
-        width,
-        height,
-        mobile,
-        gap,
-        collapsedWidth,
-        hoverWidth,
-        collapsedHeight,
-        hoverHeight,
-        openWidth,
-        openHeight,
-      };
-    };
-
-    const applySizes = () => {
-      const metrics = getMetrics();
-      track.style.gap = `${metrics.gap}px`;
-
-      cards.forEach((card, index) => {
-        let width;
-        let height;
-
-        if (openIndex !== null) {
-          if (index === openIndex) {
-            width = metrics.openWidth;
-            height = metrics.openHeight;
-          } else {
-            width = Math.max(
-              metrics.mobile ? 10 : 34,
-              (metrics.width -
-                metrics.openWidth -
-                metrics.gap * (cards.length - 1)) /
-                (cards.length - 1),
-            );
-            height = metrics.collapsedHeight;
-          }
-        } else {
-          const factor = currentFactors[index] || 0;
-          width =
-            metrics.collapsedWidth +
-            (metrics.hoverWidth - metrics.collapsedWidth) * factor;
-          height =
-            metrics.collapsedHeight +
-            (metrics.hoverHeight - metrics.collapsedHeight) * factor;
-        }
-
-        card.style.width = `${Math.max(1, width).toFixed(2)}px`;
-        card.style.height = `${Math.max(1, height).toFixed(2)}px`;
+    const update = () => {
+      slides.forEach((slide, slideIndex) => {
+        const active = slideIndex === index;
+        slide.classList.toggle("is-active", active);
+        slide.setAttribute("aria-hidden", String(!active));
       });
+      if (status) status.textContent = `Imagem ${index + 1} de ${slides.length}`;
     };
 
-    const animateTowardTargets = () => {
-      let moving = false;
-      currentFactors = currentFactors.map((current, index) => {
-        const target = targetFactors[index] || 0;
-        const distance = target - current;
-        if (Math.abs(distance) <= 0.002) return target;
-        moving = true;
-        return current + distance * (reducedMotion ? 1 : 0.22);
+    const go = (direction) => {
+      index = (index + direction + slides.length) % slides.length;
+      update();
+    };
+
+    const setHover = (direction) => {
+      frame.classList.toggle("is-hovering-previous", direction === -1);
+      frame.classList.toggle("is-hovering-next", direction === 1);
+    };
+
+    const setPressed = (direction) => {
+      frame.classList.toggle("is-pressing-previous", direction === -1);
+      frame.classList.toggle("is-pressing-next", direction === 1);
+    };
+
+    const clearPressed = () => setPressed(0);
+
+    [previous, next].forEach((button) => {
+      const direction = Number(button.dataset.communityBlurDirection);
+
+      button.addEventListener("pointerenter", () => setHover(direction));
+      button.addEventListener("pointerleave", () => {
+        setHover(0);
+        clearPressed();
       });
-      applySizes();
-      animationFrame = moving
-        ? window.requestAnimationFrame(animateTowardTargets)
-        : 0;
-    };
-
-    const startAnimation = () => {
-      if (!animationFrame) {
-        animationFrame = window.requestAnimationFrame(animateTowardTargets);
-      }
-    };
-
-    const resetMagnification = () => {
-      targetFactors = cards.map(() => 0);
-      startAnimation();
-    };
-
-    const closeCard = () => {
-      openIndex = null;
-      carousel.classList.remove("has-open-card");
-      backdrop.hidden = true;
-      cards.forEach((card) => {
-        card.classList.remove("is-open", "is-blurred");
-        card.setAttribute("aria-expanded", "false");
-      });
-      resetMagnification();
-    };
-
-    const openCard = (index) => {
-      openIndex = (index + cards.length) % cards.length;
-      currentFactors = cards.map(() => 0);
-      targetFactors = cards.map(() => 0);
-      carousel.classList.add("has-open-card");
-      backdrop.hidden = false;
-      cards.forEach((card, cardIndex) => {
-        const isOpen = cardIndex === openIndex;
-        card.classList.toggle("is-open", isOpen);
-        card.classList.toggle("is-blurred", !isOpen);
-        card.setAttribute("aria-expanded", String(isOpen));
-      });
-      applySizes();
-    };
-
-    const setTargetsFromPointer = (clientX) => {
-      if (!finePointer || openIndex !== null) return;
-      const metrics = getMetrics();
-      const rect = track.getBoundingClientRect();
-      const pointerX = clientX - rect.left;
-      const totalBase =
-        cards.length * metrics.collapsedWidth +
-        (cards.length - 1) * metrics.gap;
-      const startX = (metrics.width - totalBase) / 2;
-      const influence = Math.max(170, metrics.collapsedWidth * 2.35);
-
-      targetFactors = cards.map((_, index) => {
-        const center =
-          startX +
-          index * (metrics.collapsedWidth + metrics.gap) +
-          metrics.collapsedWidth / 2;
-        const normalized = Math.max(
-          0,
-          1 - Math.abs(pointerX - center) / influence,
-        );
-        return normalized * normalized * (3 - 2 * normalized);
-      });
-      startAnimation();
-    };
-
-    track.addEventListener("pointermove", (event) => {
-      setTargetsFromPointer(event.clientX);
-    });
-    track.addEventListener("pointerleave", () => {
-      if (openIndex === null) resetMagnification();
-      pointerStartX = null;
-    });
-
-    cards.forEach((card, index) => {
-      card.addEventListener("click", (event) => {
+      button.addEventListener("pointerdown", (event) => {
         event.stopPropagation();
-        if (Date.now() < ignoreClickUntil) return;
-        if (openIndex === index) closeCard();
-        else openCard(index);
+        button.setPointerCapture?.(event.pointerId);
+        setHover(direction);
+        setPressed(direction);
       });
-
-      card.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowLeft") {
-          event.preventDefault();
-          openCard((openIndex ?? index) - 1);
-        }
-        if (event.key === "ArrowRight") {
-          event.preventDefault();
-          openCard((openIndex ?? index) + 1);
-        }
-        if (event.key === "Escape") {
-          event.preventDefault();
-          closeCard();
-        }
+      button.addEventListener("pointerup", (event) => {
+        event.stopPropagation();
+        button.releasePointerCapture?.(event.pointerId);
+        clearPressed();
       });
+      button.addEventListener("pointercancel", clearPressed);
+      button.addEventListener("click", () => go(direction));
     });
-
-    backdrop.addEventListener("click", closeCard);
 
     carousel.addEventListener("pointerdown", (event) => {
-      pointerStartX = event.clientX;
+      if (event.target.closest(".community-blur-arrow")) return;
+      swipeStartY = event.clientY;
+      swipeStartX = event.clientX;
     });
+
     carousel.addEventListener("pointerup", (event) => {
-      if (pointerStartX === null) return;
-      const distance = event.clientX - pointerStartX;
-      pointerStartX = null;
-      if (Math.abs(distance) < 44) return;
-      ignoreClickUntil = Date.now() + 320;
-      const direction = distance < 0 ? 1 : -1;
-      openCard((openIndex ?? 0) + direction);
+      if (swipeStartY === null || swipeStartX === null) return;
+      const distanceY = event.clientY - swipeStartY;
+      const distanceX = event.clientX - swipeStartX;
+      swipeStartY = null;
+      swipeStartX = null;
+      if (Math.abs(distanceY) < 48 || Math.abs(distanceY) < Math.abs(distanceX)) {
+        return;
+      }
+      go(distanceY < 0 ? 1 : -1);
     });
+
     carousel.addEventListener("pointercancel", () => {
-      pointerStartX = null;
+      swipeStartY = null;
+      swipeStartX = null;
+      clearPressed();
     });
 
-    window.addEventListener("resize", applySizes, { passive: true });
-    window.addEventListener(
-      "pagehide",
-      () => {
-        if (animationFrame) window.cancelAnimationFrame(animationFrame);
-      },
-      { once: true },
-    );
+    carousel.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        go(-1);
+      }
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        go(1);
+      }
+    });
 
-    applySizes();
-    if (window.matchMedia("(width <= 640px)").matches) openCard(2);
+    update();
   };
 
   const buildCommunitySection = () => {
@@ -282,14 +142,14 @@
     section.id = "comunidade";
     section.setAttribute("aria-labelledby", "community-title");
 
-    const magneticCards = carouselItems
+    const slides = carouselItems
       .map(
         (item, index) => `
-          <button class="community-magnetic-card community-magnetic-card--${item.type}" type="button"
-            data-community-magnetic-index="${index}" aria-label="Abrir imagem ${index + 1} da comunidade"
-            aria-expanded="false" style="--community-magnetic-image: url('${item.src}')">
-            <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" draggable="false">
-          </button>`,
+          <figure class="community-blur-slide community-blur-slide--${item.type}"
+            aria-hidden="${index !== 0}" style="--community-blur-image: url('${item.src}')">
+            <img src="${item.src}" alt="${item.alt}" loading="${index === 0 ? "eager" : "lazy"}"
+              decoding="async" draggable="false">
+          </figure>`,
       )
       .join("");
 
@@ -313,16 +173,30 @@
             <span>Troca diária, apoio real e mulheres que crescem juntas.</span>
           </p>
 
-          <div class="community-magnetic" aria-label="Carrossel magnético com momentos e resultados da comunidade">
-            <button class="community-magnetic-backdrop" type="button" aria-label="Fechar imagem ampliada" hidden></button>
-            <div class="community-magnetic-track">${magneticCards}</div>
+          <div class="community-blur-carousel" tabindex="0" role="group"
+            aria-roledescription="carrossel" aria-label="Momentos e resultados da comunidade">
+            <div class="community-blur-frame">
+              <div class="community-blur-slides">${slides}</div>
+              <div class="community-blur-edge community-blur-edge--previous" aria-hidden="true"></div>
+              <div class="community-blur-edge community-blur-edge--next" aria-hidden="true"></div>
+
+              <button class="community-blur-arrow community-blur-arrow--previous" type="button"
+                data-community-blur-direction="-1" aria-label="Ver imagem anterior">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 15 12 9 18 15"></polyline></svg>
+              </button>
+              <button class="community-blur-arrow community-blur-arrow--next" type="button"
+                data-community-blur-direction="1" aria-label="Ver próxima imagem">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <span class="community-blur-status" aria-live="polite"></span>
+            </div>
           </div>
         </div>
       </div>
     `;
 
     methodSection.insertAdjacentElement("beforebegin", section);
-    buildMagneticCarousel(section);
+    buildBlurCarousel(section);
     return true;
   };
 
