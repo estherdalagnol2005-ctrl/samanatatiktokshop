@@ -128,6 +128,13 @@
 
     cards.forEach((card, index) => {
       card.dataset.proofIndex = String(index);
+      const image = card.querySelector("img");
+      if (card.classList.contains("student-proof-fit-contain") && image) {
+        card.style.setProperty(
+          "--student-proof-image",
+          `url("${image.getAttribute("src")}")`,
+        );
+      }
     });
 
     if (track && cards.length > 1) {
