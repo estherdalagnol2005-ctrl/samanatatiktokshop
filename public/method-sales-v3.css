@@ -90,7 +90,7 @@
   --method-timeline-axis: 50%;
   position: relative;
   width: min(100%, 1160px);
-  margin: clamp(26px, 3vw, 44px) auto clamp(52px, 7vw, 100px);
+  margin: clamp(26px, 3vw, 44px) auto clamp(18px, 2vw, 30px);
 }
 
 .method-sales-timeline::before,
@@ -297,7 +297,7 @@
 
   .method-sales-timeline {
     width: 100%;
-    margin: clamp(28px, 8vw, 38px) 0 clamp(44px, 12vw, 58px);
+    margin: clamp(28px, 8vw, 38px) 0 clamp(18px, 5vw, 24px);
     padding-left: clamp(2px, 1vw, 8px);
   }
 

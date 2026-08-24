@@ -3,9 +3,10 @@
     "https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O";
 
   const steps = [
-    { title: "Já tentou vender e travou em um número", text: "Você já provou que consegue vender, mas ainda não sabe o que ajustar para avançar." },
     { title: "Está começando do zero", text: "Você quer direção desde o primeiro produto, sem perder tempo tentando descobrir tudo sozinha." },
-    { title: "Já vende e quer aprender a escalar", text: "Você tem resultado, mas precisa de estratégia para repetir, crescer e transformar vendas em uma operação." },
+    { title: "Já comprou outros cursos e não conseguiu vender", text: "Você estudou, tentou aplicar, mas ainda não encontrou um processo que transforme conhecimento em resultado." },
+    { title: "Já tentou de tudo, mas travou em um resultado", text: "Você consegue vender, porém não sabe o que ajustar para ultrapassar o número em que parou." },
+    { title: "Vende, porém quer aprender a escalar produtos e faturar mais", text: "Você quer repetir o que funciona, crescer com estratégia e transformar vendas em uma operação." },
   ];
 
   const setActiveStep = (section, activeIndex, progress) => {
@@ -78,7 +79,7 @@
         <div class="method-sales-intro">
           <span class="method-sales-eyebrow">SE VOCÊ SE IDENTIFICA...</span>
           <h2 id="method-sales-title">Como saber se a <strong>SUNLIX É PARA MIM?</strong></h2>
-          <p>Não importa em qual fase você está. Existe um próximo passo claro para começar, destravar ou escalar.</p>
+          <p><strong>Se você:</strong></p>
         </div>
 
         <div class="method-sales-timeline" data-method-timeline>
