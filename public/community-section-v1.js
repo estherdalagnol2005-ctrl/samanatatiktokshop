@@ -153,7 +153,7 @@
         <div class="community-copy">
           <span class="community-eyebrow">Uma comunidade real, ativa e próxima</span>
           <h2 id="community-title">Sua jornada <strong>não precisa ser solitária.</strong></h2>
-          <p>Se você é mãe e sente que o tempo nunca sobra, trabalha em CLT e chega cansada, tem medo de começar do zero, não sabe o que postar ou já tentou sozinha e travou, você não precisa continuar sem direção.</p>
+          <p>Eu sei que você já precisou aguentar muita coisa sozinha e tentou dar conta de tudo. Mas você não precisa continuar assim. A Sunlix existe por um propósito: transformar alunas em uma família, onde ninguém fica para trás e todas caminham juntas. Estaremos com você em cada passo que der.</p>
 
           <a class="community-cta" href="${checkoutUrl}" target="_blank" rel="noopener noreferrer">
             QUERO FAZER PARTE DESSA COMUNIDADE
@@ -164,8 +164,8 @@
 
         <div class="community-visual">
           <p class="community-gallery-message">
-            <strong>Você não precisa dar conta de tudo sozinha.</strong>
-            <span>Direção, apoio e mulheres que entendem exatamente o momento que você está vivendo.</span>
+            <strong>Aqui, alunas viram família.</strong>
+            <span>Ninguém abandona ninguém: celebramos cada conquista e seguimos juntas em cada passo.</span>
           </p>
 
           <div class="community-blur-carousel" tabindex="0" role="group"
