@@ -70,9 +70,9 @@
   max-width: 630px;
   margin: clamp(18px, 2vw, 26px) auto 0;
   color: rgb(28 23 26 / 68%);
-  font-size: clamp(13px, 1vw, 16px);
-  font-weight: 620;
-  line-height: 1.55;
+  font-size: clamp(20px, 1.65vw, 27px);
+  font-weight: 820;
+  line-height: 1.25;
 }
 
 .method-sales-timeline {
@@ -176,7 +176,7 @@
   margin: 0;
   color: var(--ink, #1c171a);
   font-family: var(--font-body, Arial, sans-serif);
-  font-size: clamp(24px, 2.25vw, 37px);
+  font-size: clamp(21px, 1.9vw, 31px);
   font-weight: 820;
   letter-spacing: -.05em;
   line-height: .98;
@@ -185,7 +185,7 @@
 .method-sales-step p {
   margin: 11px 0 0;
   color: rgb(28 23 26 / 68%);
-  font-size: clamp(12px, .98vw, 15px);
+  font-size: clamp(11px, .88vw, 14px);
   font-weight: 610;
   line-height: 1.5;
 }
@@ -225,8 +225,8 @@
 .method-sales-closing > p {
   margin: 0;
   color: rgb(28 23 26 / 76%);
-  font-size: clamp(16px, 1.45vw, 23px);
-  font-weight: 730;
+  font-size: clamp(25px, 2.35vw, 36px);
+  font-weight: 900;
   letter-spacing: -.025em;
   line-height: 1.28;
 }
@@ -282,7 +282,10 @@
 
   .method-sales-intro { text-align: left; }
   .method-sales-intro h2 { font-size: clamp(32px, 10.1vw, 42px); }
-  .method-sales-intro > p { margin-left: 0; }
+  .method-sales-intro > p {
+    margin-left: 0;
+    font-size: clamp(20px, 6vw, 25px);
+  }
 
   .method-sales-timeline {
     width: 100%;
@@ -295,14 +298,14 @@
     translate: -50% 0;
   }
 
-  .method-sales-steps { gap: clamp(22px, 6vw, 32px); }
+  .method-sales-steps { gap: clamp(16px, 4.5vw, 22px); }
 
   .method-sales-step {
     grid-template-columns: clamp(34px, 10vw, 42px) minmax(0, 1fr);
-    min-height: clamp(135px, 40vw, 170px);
+    min-height: clamp(112px, 32vw, 138px);
   }
 
-  .method-sales-step:first-child { min-height: clamp(120px, 37vw, 145px); }
+  .method-sales-step:first-child { min-height: clamp(104px, 29vw, 126px); }
 
   .method-sales-marker {
     grid-column: 1;
@@ -319,10 +322,11 @@
     text-align: left;
   }
 
-  .method-sales-step h3 { font-size: clamp(25px, 7.4vw, 32px); }
-  .method-sales-step p { font-size: clamp(12px, 3.45vw, 14px); }
+  .method-sales-step h3 { font-size: clamp(20px, 5.8vw, 25px); }
+  .method-sales-step p { font-size: clamp(11px, 3.1vw, 13px); }
 
   .method-sales-closing { text-align: left; }
+  .method-sales-closing > p { font-size: clamp(26px, 7.6vw, 32px); }
   .method-sales-cta { width: 100%; box-shadow: 6px 6px 0 var(--tt-pink, #fa2095); font-size: clamp(8px, 2.65vw, 10px); }
 }
 
