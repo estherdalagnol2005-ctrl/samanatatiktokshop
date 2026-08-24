@@ -17,6 +17,26 @@
   display: none !important;
 }
 
+.hero-method-visual .metric-card {
+  width: clamp(132px, 37%, 238px);
+  object-fit: contain;
+  background: #fff;
+  border-radius: clamp(10px, 1vw, 16px);
+  box-shadow:
+    0 18px 42px rgb(43 12 30 / 22%),
+    5px 5px 0 rgb(240 255 39 / 78%);
+}
+
+.hero-method-visual .metric-card-top {
+  top: 1%;
+  left: -2%;
+}
+
+.hero-method-visual .metric-card-bottom {
+  right: -1%;
+  bottom: 0;
+}
+
 @media (width <= 700px) {
   .dreams-coverflow-arrow {
     bottom: 10px !important;
@@ -30,5 +50,21 @@
 
   .site-header .buy-button {
     font-size: 10px;
+  }
+
+  .hero-method-visual .metric-card {
+    width: clamp(118px, 37%, 142px);
+    border-radius: 10px;
+    box-shadow:
+      0 12px 28px rgb(43 12 30 / 20%),
+      3px 3px 0 rgb(240 255 39 / 78%);
+  }
+
+  .hero-method-visual .metric-card-top {
+    left: 0;
+  }
+
+  .hero-method-visual .metric-card-bottom {
+    right: 0;
   }
 }
