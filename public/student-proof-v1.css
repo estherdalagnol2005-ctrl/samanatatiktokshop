@@ -524,6 +524,8 @@
   grid-template-columns: 48px minmax(0, 1fr) 48px;
   align-items: center;
   gap: clamp(8px, 1.2vw, 18px);
+  width: min(100%, 1120px);
+  margin-inline: auto;
   position: relative;
 }
 
@@ -554,9 +556,9 @@
 .student-proof-track .student-proof-real-card {
   display: grid !important;
   grid-template-rows: minmax(0, 1fr) auto;
-  flex: 0 0 clamp(410px, 52vw, 700px);
-  width: clamp(410px, 52vw, 700px);
-  height: clamp(430px, 46vw, 610px);
+  flex: 0 0 clamp(330px, 30vw, 430px);
+  width: clamp(330px, 30vw, 430px);
+  height: clamp(350px, 30vw, 420px);
   margin: 0 !important;
   background: #181a18;
   scroll-snap-align: center;
@@ -583,8 +585,8 @@
 }
 
 .student-proof-track .student-proof-real-card .student-proof-caption {
-  min-height: 86px;
-  padding: clamp(16px, 1.6vw, 23px);
+  min-height: 74px;
+  padding: clamp(13px, 1.2vw, 18px);
   border-top: 1px solid rgb(28 23 26 / 8%);
   background: #fff;
 }
