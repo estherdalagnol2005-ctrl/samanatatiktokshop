@@ -22,20 +22,6 @@
   overflow: hidden;
 }
 
-.community-section::before {
-  content: "JUNTAS";
-  position: absolute;
-  right: -0.08em;
-  bottom: -0.2em;
-  color: rgb(255 255 255 / 10%);
-  font-family: var(--font-body);
-  font-size: clamp(100px, 18vw, 300px);
-  font-weight: 950;
-  letter-spacing: -0.08em;
-  line-height: 0.72;
-  pointer-events: none;
-}
-
 .community-shell {
   isolation: isolate;
   position: relative;
@@ -512,76 +498,3 @@
     grid-column: 1 / 3;
     grid-row: 3;
   }
-
-  .community-card figcaption {
-    right: 8px;
-    bottom: 8px;
-    left: 8px;
-    gap: 1px;
-    padding: 8px 10px;
-    border-radius: 13px;
-  }
-
-  .community-card figcaption strong {
-    font-size: 8px;
-  }
-
-  .community-card figcaption span {
-    font-size: 6.5px;
-  }
-
-  .community-card--proof-one figcaption,
-  .community-card--proof-two figcaption,
-  .community-card--proof-three figcaption {
-    padding: 7px 8px;
-  }
-
-  .community-card--proof-one figcaption span,
-  .community-card--proof-two figcaption span,
-  .community-card--proof-three figcaption span {
-    display: none;
-  }
-
-  .community-gallery-badge {
-    top: 58%;
-    left: 50%;
-    width: min(76%, 250px);
-    padding: 10px 13px;
-    box-shadow: 4px 4px 0 var(--tt-cyan, #f0ff27);
-    transform: translate(-50%, -50%);
-  }
-
-  .community-gallery-badge strong {
-    font-size: 8px;
-  }
-
-  .community-gallery-badge span {
-    font-size: 6px;
-  }
-}
-
-@media (width <= 380px) {
-  .community-shell {
-    padding-inline: 13px;
-  }
-
-  .community-copy h2 {
-    font-size: clamp(31px, 10.4vw, 37px);
-  }
-
-  .community-gallery {
-    grid-template-rows: 205px 142px 166px;
-  }
-
-  .community-cta {
-    font-size: 7.8px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .community-card,
-  .community-cta,
-  .community-cta span {
-    transition: none !important;
-  }
-}
