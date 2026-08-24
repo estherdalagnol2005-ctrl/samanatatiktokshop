@@ -153,7 +153,7 @@
         <div class="community-copy">
           <span class="community-eyebrow">Uma comunidade real, ativa e próxima</span>
           <h2 id="community-title">Sua jornada <strong>não precisa ser solitária.</strong></h2>
-          <p>Eu sei que você tenta resolver tudo sozinha e dar conta de tudo. Mas você não precisa continuar assim. A Sunlix existe por um propósito: transformar alunas em uma família, onde ninguém fica para trás e todas caminham juntas. Estaremos com você em cada passo que der.</p>
+          <p>Eu sei que você tenta resolver tudo sozinha. Mas você não precisa continuar assim. A Sunlix existe por um propósito: transformar alunas em uma família, onde ninguém fica para trás e todas caminham juntas. Estaremos com você em cada passo que der.</p>
 
           <a class="community-cta" href="${checkoutUrl}" target="_blank" rel="noopener noreferrer">
             QUERO FAZER PARTE DESSA COMUNIDADE
