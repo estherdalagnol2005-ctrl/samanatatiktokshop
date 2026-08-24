@@ -16,7 +16,7 @@
           <div class="student-proof-copy">
             <span class="student-proof-eyebrow">PROVA SOCIAL · RESULTADOS DAS ALUNAS</span>
             <h2 id="student-proof-title">ESSE É O MOTIVO QUE ME FAZ CONTINUAR<br><strong>AJUDANDO MULHERES COMO VOCÊ.</strong></h2>
-            <p>Resultados reais de mulheres que pararam de tentar sozinhas e começaram a aplicar o método com direção.</p>
+            <p>Se você é mãe e sente que não tem tempo, trabalha como CLT ou está começando do zero, estes resultados mostram que é possível avançar quando existe método, direção e apoio.</p>
           </div>
         </header>
 
