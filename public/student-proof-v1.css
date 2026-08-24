@@ -518,156 +518,217 @@
 }
 
 
-/* Four-card testimonial layout v3 */
-.student-proof-wall {
-  display: grid !important;
-  grid-template-columns: 1fr;
-  gap: clamp(14px, 1.6vw, 22px);
-  column-count: unset;
-}
-
-.student-proof-row {
+/* Centered, swipeable testimonial carousel */
+.student-proof-carousel-shell {
   display: grid;
-  align-items: start;
-  gap: clamp(12px, 1.4vw, 20px);
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: clamp(8px, 1.2vw, 18px);
+  position: relative;
 }
 
-.student-proof-row-large {
-  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
-}
-
-.student-proof-row-small {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  width: min(84%, 1040px);
-  margin-inline: auto;
-}
-
-.student-proof-wall .student-proof-real-card {
-  display: block !important;
+.student-proof-carousel {
   width: 100%;
-  margin: 0 !important;
-  background: #fff;
+  padding-block: 18px 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
-.student-proof-real-card > img {
+.student-proof-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.student-proof-track {
+  display: flex;
+  align-items: stretch;
+  width: max-content;
+  gap: clamp(14px, 1.6vw, 24px);
+  padding-inline: var(--student-proof-gutter, 14%);
+}
+
+.student-proof-track .student-proof-real-card {
+  display: grid !important;
+  grid-template-rows: minmax(0, 1fr) auto;
+  flex: 0 0 clamp(410px, 52vw, 700px);
+  width: clamp(410px, 52vw, 700px);
+  height: clamp(430px, 46vw, 610px);
+  margin: 0 !important;
+  background: #181a18;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  opacity: 0.58;
+  transform: scale(0.92);
+  transition: opacity 320ms ease, transform 420ms cubic-bezier(.2, .75, .2, 1), box-shadow 320ms ease;
+}
+
+.student-proof-track .student-proof-real-card.is-active {
+  opacity: 1;
+  z-index: 2;
+  box-shadow: 0 28px 70px rgb(70 23 50 / 25%);
+  transform: scale(1);
+}
+
+.student-proof-track .student-proof-real-card > img {
   display: block;
   width: 100%;
-  height: auto;
-  background: #202220;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  background: #181a18;
 }
 
-.student-proof-real-card .student-proof-caption {
-  min-height: 82px;
+.student-proof-track .student-proof-real-card .student-proof-caption {
+  min-height: 86px;
+  padding: clamp(16px, 1.6vw, 23px);
   border-top: 1px solid rgb(28 23 26 / 8%);
   background: #fff;
 }
 
-.student-proof-real-card .student-proof-caption span {
+.student-proof-track .student-proof-real-card .student-proof-caption span {
   margin: 0 0 7px;
   color: #fa2095;
+  font-size: clamp(8px, 0.66vw, 10px);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.student-proof-track .student-proof-real-card .student-proof-caption strong {
+  font-size: clamp(14px, 1.18vw, 18px);
+  line-height: 1.18;
+}
+
+.student-proof-arrow {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid rgb(28 23 26 / 12%);
+  border-radius: 50%;
+  color: #1c171a;
+  background: #f0ff27;
+  box-shadow: 5px 6px 0 #fa2095;
+  font-size: 20px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.student-proof-arrow:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.student-proof-arrow:disabled {
+  opacity: 0.28;
+  cursor: default;
+}
+
+.student-proof-carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.student-proof-carousel-nav > span {
+  color: rgb(28 23 26 / 48%);
   font-size: 9px;
   font-weight: 900;
   letter-spacing: 0.14em;
 }
 
-@media (width <= 640px) {
-  .student-proof-wall {
-    display: grid !important;
-    gap: 12px;
-    margin-right: 0;
-    padding-right: 9px;
-    overflow: visible;
-    scroll-snap-type: none;
-  }
-
-  .student-proof-row-large {
-    grid-template-columns: 1fr;
-  }
-
-  .student-proof-row-small {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: 100%;
-    gap: 8px;
-  }
-
-  .student-proof-wall .student-proof-real-card {
-    display: block !important;
-    min-width: 0;
-    flex: none;
-    scroll-snap-align: none;
-  }
-
-  .student-proof-real-card .student-proof-caption {
-    min-height: 70px;
-    padding: 12px;
-  }
-
-  .student-proof-row-small .student-proof-caption {
-    min-height: 62px;
-  }
-
-  .student-proof-row-small .student-proof-caption span {
-    font-size: 7px;
-  }
-
-  .student-proof-row-small .student-proof-caption strong {
-    font-size: 10px;
-  }
+.student-proof-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
 }
 
-
-/* Mobile: keep only the two main testimonials */
-@media (width <= 640px) {
-  .student-proof-row-small {
-    display: none !important;
-  }
+.student-proof-dots button {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(28 23 26 / 20%);
+  cursor: pointer;
+  transition: width 220ms ease, background 220ms ease;
 }
 
-
-/* Mobile testimonial centering fix */
-@media (width <= 640px) {
-  .student-proof-row-large {
-    display: flex !important;
-    flex-direction: column;
-    align-items: center;
-    width: 100% !important;
-  }
-
-  .student-proof-row-large .student-proof-real-card {
-    width: min(100%, 340px) !important;
-    max-width: 340px !important;
-    margin-inline: auto !important;
-    justify-self: center !important;
-  }
+.student-proof-dots button.is-active {
+  width: 24px;
+  background: #fa2095;
 }
 
-
-/* Definitive mobile testimonial centering */
 @media (width <= 900px) {
-  #depoimentos .student-proof-wall {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    width: 100% !important;
-    max-width: none !important;
+  .student-proof-carousel-shell {
+    display: block;
   }
 
-  #depoimentos .student-proof-row-large {
-    grid-column: 1 / -1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-self: stretch !important;
-    width: 100% !important;
-    max-width: none !important;
-    margin-inline: 0 !important;
+  .student-proof-carousel {
+    width: calc(100% + 26px);
+    margin-inline: -13px;
+    padding-block: 13px 20px;
   }
 
-  #depoimentos .student-proof-row-large > .student-proof-real-card {
-    width: min(86vw, 360px) !important;
-    max-width: 360px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    align-self: center !important;
-    justify-self: center !important;
+  .student-proof-track {
+    gap: 11px;
+  }
+
+  .student-proof-track .student-proof-real-card {
+    flex-basis: min(82vw, 350px);
+    width: min(82vw, 350px) !important;
+    height: min(118vw, 480px);
+    min-width: 0 !important;
+    border-radius: 22px !important;
+    transform: scale(0.94);
+  }
+
+  .student-proof-track .student-proof-real-card.is-active {
+    transform: scale(1);
+  }
+
+  .student-proof-track .student-proof-real-card .student-proof-caption {
+    min-height: 74px !important;
+    padding: 13px 14px !important;
+  }
+
+  .student-proof-track .student-proof-real-card .student-proof-caption span {
+    margin: 0 0 5px !important;
+    font-size: 7px !important;
+  }
+
+  .student-proof-track .student-proof-real-card .student-proof-caption strong {
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+  }
+
+  .student-proof-arrow {
+    z-index: 5;
+    width: 38px;
+    box-shadow: 3px 4px 0 #fa2095;
+    position: absolute;
+    top: 48%;
+  }
+
+  .student-proof-arrow--prev {
+    left: -3px;
+  }
+
+  .student-proof-arrow--next {
+    right: -3px;
+  }
+
+  .student-proof-carousel-nav {
+    margin-top: 0;
+  }
+
+  .student-proof-carousel-nav > span {
+    display: none;
   }
 }
