@@ -27,38 +27,29 @@
           <small class="community-note">Conhecimento abre o caminho. Uma comunidade faz você continuar nele.</small>
         </div>
 
-        <div class="community-gallery" aria-label="Momentos e resultados reais da comunidade">
-          <figure class="community-card community-card--lead">
-            <img src="/assets/samanta-luana.webp" alt="Samanta e Luana juntas em um encontro da comunidade" loading="lazy" decoding="async">
-            <figcaption>
-              <strong>Networking</strong>
-              <span>Conexões reais que abrem novos caminhos.</span>
-            </figcaption>
-          </figure>
+        <div class="community-visual">
+          <p class="community-gallery-message">
+            <strong>Uma rede que vibra por cada conquista.</strong>
+            <span>Troca diária, apoio real e mulheres que crescem juntas.</span>
+          </p>
 
-          <figure class="community-card community-card--proof-one">
-            <img src="/testimonials/2026-08/itamires-motivacao.webp" alt="Itámires conta como as pessoas da comunidade ajudam, motivam e inspiram" loading="lazy" decoding="async">
-            <figcaption>
-              <strong>Troca de experiências</strong>
-              <span>Pessoas que ajudam, motivam e inspiram umas às outras.</span>
-            </figcaption>
-          </figure>
+          <div class="community-gallery" aria-label="Momentos, conversas e resultados compartilhados pela comunidade">
+            <figure class="community-card community-card--lead">
+              <img src="/assets/samanta-luana.webp" alt="Samanta e Luana juntas em um encontro da comunidade" loading="lazy" decoding="async">
+            </figure>
 
-          <figure class="community-card community-card--proof-two">
-            <img src="/testimonials/2026-08/bruna-comunidade.webp" alt="Bruna celebra o orgulho de fazer parte da comunidade" loading="lazy" decoding="async">
-            <figcaption>
-              <strong>Pertencimento</strong>
-              <span>Uma comunidade que celebra cada avanço.</span>
-            </figcaption>
-          </figure>
+            <figure class="community-card community-card--proof-one">
+              <img src="/testimonials/2026-08/itamires-motivacao.webp" alt="Itámires conta como as mulheres da comunidade ajudam, motivam e inspiram" loading="lazy" decoding="async">
+            </figure>
 
-          <figure class="community-card community-card--proof-three">
-            <img src="/testimonials/2026-08/jana-networking.webp" alt="Jana explica como o networking ajuda a manter a motivação e testar novas estratégias" loading="lazy" decoding="async">
-            <figcaption>
-              <strong>Crescimento em conjunto</strong>
-              <span>Networking para manter o foco, testar e não desistir.</span>
-            </figcaption>
-          </figure>
+            <figure class="community-card community-card--proof-two">
+              <img src="/testimonials/2026-08/bruna-comunidade.webp" alt="Bruna celebra o orgulho de fazer parte da comunidade" loading="lazy" decoding="async">
+            </figure>
+
+            <figure class="community-card community-card--proof-three">
+              <img src="/testimonials/2026-08/jana-networking.webp" alt="Jana explica como o networking ajuda o grupo a manter a motivação e testar novas estratégias" loading="lazy" decoding="async">
+            </figure>
+          </div>
         </div>
       </div>
     `;
