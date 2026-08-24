@@ -15,8 +15,8 @@
         <header class="student-proof-heading">
           <div class="student-proof-copy">
             <span class="student-proof-eyebrow">PROVA SOCIAL · RESULTADOS DAS ALUNAS</span>
-            <h2 id="student-proof-title">ELAS TAMBÉM<br><strong>ESTÃO VENDENDO.</strong></h2>
-            <p>Prints e relatos de alunas que aplicaram o método e já estão transformando conteúdo em resultado.</p>
+            <h2 id="student-proof-title">EU GARANTO:<br><strong>SEU ESFORÇO COM DIRECIONAMENTO VAI MUDAR SUA VIDA.</strong></h2>
+            <p>Resultados reais de mulheres que pararam de tentar sozinhas e começaram a aplicar o método com direção.</p>
           </div>
           <aside class="student-proof-number" aria-label="Aluna recebeu mais de 31 mil reais em um pagamento">
             <span>UM DOS RESULTADOS</span>

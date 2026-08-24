@@ -3,10 +3,9 @@
     "https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O";
 
   const steps = [
-    { title: "Escolher o que tem potencial", text: "Analisar demanda, demonstração e os motivos que fazem esse produto despertar desejo." },
-    { title: "Criar para prender atenção", text: "Criar ganchos, demonstrações e argumentos que prendem atenção e mostram o valor do produto." },
-    { title: "Conduzir até a decisão", text: "Transformar interesse em compra com oferta clara, comunicação objetiva e o CTA certo." },
-    { title: "Ler, ajustar e repetir", text: "Analisar resultados, ajustar o processo e repetir o que funciona." },
+    { title: "Já tentou vender e travou em um número", text: "Você já provou que consegue vender, mas ainda não sabe o que ajustar para avançar." },
+    { title: "Está começando do zero", text: "Você quer direção desde o primeiro produto, sem perder tempo tentando descobrir tudo sozinha." },
+    { title: "Já vende e quer aprender a escalar", text: "Você tem resultado, mas precisa de estratégia para repetir, crescer e transformar vendas em uma operação." },
   ];
 
   const setActiveStep = (section, activeIndex, progress) => {
@@ -77,13 +76,13 @@
     section.innerHTML = `
       <div class="method-sales-shell">
         <div class="method-sales-intro">
-          <span class="method-sales-eyebrow">O MÉTODO POR TRÁS DAS VENDAS</span>
-          <h2 id="method-sales-title">O método que <strong>ESCALOU MINHAS</strong> vendas.</h2>
-          <p>Da escolha do produto à leitura dos resultados, cada etapa tem uma função: chamar atenção, gerar desejo, conduzir a compra e repetir o que funciona.</p>
+          <span class="method-sales-eyebrow">SE VOCÊ SE IDENTIFICA...</span>
+          <h2 id="method-sales-title">Como saber se a <strong>SUNLIX É PARA MIM?</strong></h2>
+          <p>Não importa em qual fase você está. Existe um próximo passo claro para começar, destravar ou escalar.</p>
         </div>
 
         <div class="method-sales-timeline" data-method-timeline>
-          <ol class="method-sales-steps" aria-label="As quatro etapas do método de vendas">
+          <ol class="method-sales-steps" aria-label="Para quem a Sunlix é indicada">
             ${steps.map((step, index) => `
               <li class="method-sales-step method-sales-step--${index % 2 === 0 ? "right" : "left"}${index === 0 ? " is-active" : ""}" data-step="${index}"${index === 0 ? ' aria-current="step"' : ""}>
                 <span class="method-sales-marker" aria-hidden="true"><i></i></span>
@@ -96,8 +95,8 @@
         </div>
 
         <div class="method-sales-closing">
-          <p>Você não precisa continuar postando no escuro. Precisa de um processo que mostre o que fazer, o que medir e o que repetir.</p>
-          <a class="method-sales-cta" href="${checkoutUrl}">QUERO CONHECER O MÉTODO <span aria-hidden="true">↗</span></a>
+          <p><strong>A Sunlix é para você.</strong></p>
+          <a class="method-sales-cta" href="${checkoutUrl}">QUERO FAZER PARTE DA SUNLIX <span aria-hidden="true">↗</span></a>
         </div>
       </div>`;
     setupMethodProgress(section);

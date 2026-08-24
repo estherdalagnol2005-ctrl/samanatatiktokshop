@@ -153,7 +153,7 @@
         <div class="community-copy">
           <span class="community-eyebrow">Uma comunidade real, ativa e próxima</span>
           <h2 id="community-title">Sua jornada <strong>não precisa ser solitária.</strong></h2>
-          <p>Você não entra apenas para aprender. Entra em um ambiente com outras mulheres que vivem os mesmos desafios, compartilham o que funciona e crescem junto com você.</p>
+          <p>Se você é mãe e sente que o tempo nunca sobra, trabalha em CLT e chega cansada, tem medo de começar do zero, não sabe o que postar ou já tentou sozinha e travou, você não precisa continuar sem direção.</p>
 
           <a class="community-cta" href="${checkoutUrl}" target="_blank" rel="noopener noreferrer">
             QUERO FAZER PARTE DESSA COMUNIDADE
@@ -164,8 +164,8 @@
 
         <div class="community-visual">
           <p class="community-gallery-message">
-            <strong>Uma rede que vibra por cada conquista.</strong>
-            <span>Troca diária, apoio real e mulheres que crescem juntas.</span>
+            <strong>Você não precisa dar conta de tudo sozinha.</strong>
+            <span>Direção, apoio e mulheres que entendem exatamente o momento que você está vivendo.</span>
           </p>
 
           <div class="community-blur-carousel" tabindex="0" role="group"
