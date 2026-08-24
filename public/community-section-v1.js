@@ -20,14 +20,6 @@
           <h2 id="community-title">Sua jornada <strong>não precisa ser solitária.</strong></h2>
           <p>Você não entra apenas para aprender. Entra em um ambiente com outras mulheres que vivem os mesmos desafios, compartilham o que funciona e crescem junto com você.</p>
 
-          <div class="community-topics" aria-label="O que você encontra na comunidade">
-            <span>Networking</span><i aria-hidden="true">•</i>
-            <span>Troca de experiências</span><i aria-hidden="true">•</i>
-            <span>Suporte</span><i aria-hidden="true">•</i>
-            <span>Conexões</span><i aria-hidden="true">•</i>
-            <span>Crescimento em conjunto</span>
-          </div>
-
           <a class="community-cta" href="${checkoutUrl}" target="_blank" rel="noopener noreferrer">
             QUERO FAZER PARTE DESSA COMUNIDADE
             <span aria-hidden="true">↗</span>
@@ -35,28 +27,28 @@
           <small class="community-note">Conhecimento abre o caminho. Uma comunidade faz você continuar nele.</small>
         </div>
 
-        <div class="community-gallery" aria-label="Momentos e resultados reais da Comunidade Sangue">
+        <div class="community-gallery" aria-label="Momentos e resultados reais da comunidade">
           <figure class="community-card community-card--lead">
-            <img src="/assets/samanta-luana.webp" alt="Samanta e Luana, líderes da Comunidade Sangue" loading="lazy" decoding="async">
+            <img src="/assets/samanta-luana.webp" alt="Samanta e Luana juntas em um encontro da comunidade" loading="lazy" decoding="async">
             <figcaption>
-              <strong>Juntas desde o começo</strong>
-              <span>Duas sócias e uma comunidade inteira crescendo.</span>
+              <strong>Networking</strong>
+              <span>Conexões reais que abrem novos caminhos.</span>
             </figcaption>
           </figure>
 
           <figure class="community-card community-card--proof-one">
             <img src="/testimonials/karol-comissoes-2600.webp" alt="Resultado compartilhado por uma participante da comunidade" loading="lazy" decoding="async">
             <figcaption>
-              <strong>Vitórias compartilhadas</strong>
-              <span>Cada avanço inspira o próximo.</span>
+              <strong>Troca de experiências</strong>
+              <span>Aprendizados reais entre mulheres que estão fazendo acontecer.</span>
             </figcaption>
           </figure>
 
           <figure class="community-card community-card--proof-two">
             <img src="/testimonials/leticia-pix-31634.webp" alt="Conquista compartilhada por uma aluna da comunidade" loading="lazy" decoding="async">
             <figcaption>
-              <strong>Troca que movimenta</strong>
-              <span>Experiências reais, sem caminhar sozinha.</span>
+              <strong>Suporte e conexões</strong>
+              <span>Orientação e incentivo para não caminhar sozinha.</span>
             </figcaption>
           </figure>
 
@@ -64,14 +56,9 @@
             <img src="/testimonials/nay-pagamentos-tres-perfis.webp" alt="Resultados de diferentes perfis compartilhados na comunidade" loading="lazy" decoding="async">
             <figcaption>
               <strong>Crescimento em conjunto</strong>
-              <span>Mulheres construindo e evoluindo lado a lado.</span>
+              <span>Mulheres evoluindo e celebrando cada avanço lado a lado.</span>
             </figcaption>
           </figure>
-
-          <div class="community-gallery-badge" aria-hidden="true">
-            <strong>COMUNIDADE SANGUE</strong>
-            <span>troca • suporte • conexão</span>
-          </div>
         </div>
       </div>
     `;
