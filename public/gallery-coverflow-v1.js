@@ -102,6 +102,7 @@
       caption: "Networking que abre novas portas.",
       alt: "Samanta com outras criadoras no Creator Summit",
       position: "center",
+      fit: "contain",
     },
     {
       type: "image",
@@ -163,6 +164,14 @@
         image.decoding = "async";
         image.draggable = false;
         if (item.position) image.style.objectPosition = item.position;
+        if (item.fit === "contain") {
+          slide.classList.add("dreams-coverflow-contained");
+          const backdrop = document.createElement("span");
+          backdrop.className = "dreams-coverflow-backdrop";
+          backdrop.setAttribute("aria-hidden", "true");
+          backdrop.style.backgroundImage = `url("${item.src}")`;
+          slide.append(backdrop);
+        }
         slide.append(image);
       }
 

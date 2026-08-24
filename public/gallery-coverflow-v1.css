@@ -92,6 +92,21 @@
   background: linear-gradient(145deg, #fa2095 0%, #ffa120 52%, #f0ff27 100%);
 }
 
+.dreams-coverflow-contained {
+  background: var(--coverflow-frame);
+}
+
+.dreams-coverflow-backdrop {
+  position: absolute;
+  inset: 6px;
+  border-radius: calc(clamp(24px, 2.6vw, 38px) - 6px);
+  background-position: center;
+  background-size: cover;
+  filter: blur(18px) brightness(0.72) saturate(0.9);
+  opacity: 0.82;
+  transform: scale(1.14);
+}
+
 .dreams-coverflow-slide[data-slot="left"],
 .dreams-coverflow-slide[data-slot="right"] {
   z-index: 12;
@@ -127,6 +142,13 @@
 
 .dreams-coverflow-video video {
   object-position: center;
+}
+
+.dreams-coverflow-contained > img {
+  position: relative;
+  z-index: 1;
+  object-fit: contain;
+  background: transparent;
 }
 
 .dreams-coverflow-slide figcaption,
