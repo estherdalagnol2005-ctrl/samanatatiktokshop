@@ -78,12 +78,35 @@
     hero.insertAdjacentElement("afterend", section);
 
     const carousel = section.querySelector(".student-proof-carousel");
+    const track = section.querySelector(".student-proof-track");
     const cards = [...section.querySelectorAll(".student-proof-real-card")];
     const dots = [...section.querySelectorAll(".student-proof-dots button")];
     const previousButton = section.querySelector(".student-proof-arrow--prev");
     const nextButton = section.querySelector(".student-proof-arrow--next");
+
+    cards.forEach((card, index) => {
+      card.dataset.proofIndex = String(index);
+    });
+
+    if (track && cards.length > 1) {
+      const lastClone = cards.at(-1).cloneNode(true);
+      const firstClone = cards[0].cloneNode(true);
+
+      [lastClone, firstClone].forEach((clone) => {
+        clone.classList.remove("is-active");
+        clone.classList.add("student-proof-clone");
+        clone.setAttribute("aria-hidden", "true");
+        clone.querySelector("img")?.setAttribute("alt", "");
+      });
+
+      track.prepend(lastClone);
+      track.append(firstClone);
+    }
+
+    const slides = [...section.querySelectorAll(".student-proof-track .student-proof-card")];
     let activeIndex = 0;
     let scrollFrame = 0;
+    let settleTimer = 0;
 
     const setGutter = () => {
       const card = cards[0];
@@ -94,8 +117,11 @@
 
     const updateState = (index) => {
       activeIndex = Math.max(0, Math.min(cards.length - 1, index));
-      cards.forEach((card, cardIndex) => {
-        card.classList.toggle("is-active", cardIndex === activeIndex);
+      slides.forEach((slide) => {
+        slide.classList.toggle(
+          "is-active",
+          Number(slide.dataset.proofIndex) === activeIndex,
+        );
       });
       dots.forEach((dot, dotIndex) => {
         const isActive = dotIndex === activeIndex;
@@ -103,16 +129,29 @@
         if (isActive) dot.setAttribute("aria-current", "true");
         else dot.removeAttribute("aria-current");
       });
-      previousButton.disabled = activeIndex === 0;
-      nextButton.disabled = activeIndex === cards.length - 1;
+      previousButton.disabled = false;
+      nextButton.disabled = false;
     };
 
-    const goTo = (index, behavior = "smooth") => {
-      const targetIndex = Math.max(0, Math.min(cards.length - 1, index));
-      const target = cards[targetIndex];
+    const centerOn = (target, behavior = "smooth") => {
       if (!carousel || !target) return;
       const left = target.offsetLeft - (carousel.clientWidth - target.clientWidth) / 2;
       carousel.scrollTo({ left, behavior });
+    };
+
+    const goTo = (index, behavior = "smooth") => {
+      let targetIndex = index;
+      let target = cards[index];
+
+      if (index < 0) {
+        targetIndex = cards.length - 1;
+        target = slides[0];
+      } else if (index >= cards.length) {
+        targetIndex = 0;
+        target = slides.at(-1);
+      }
+
+      centerOn(target, behavior);
       updateState(targetIndex);
     };
 
@@ -122,15 +161,24 @@
         const center = carousel.scrollLeft + carousel.clientWidth / 2;
         let closestIndex = 0;
         let closestDistance = Number.POSITIVE_INFINITY;
-        cards.forEach((card, index) => {
-          const cardCenter = card.offsetLeft + card.clientWidth / 2;
+        slides.forEach((slide, index) => {
+          const cardCenter = slide.offsetLeft + slide.clientWidth / 2;
           const distance = Math.abs(center - cardCenter);
           if (distance < closestDistance) {
             closestDistance = distance;
             closestIndex = index;
           }
         });
-        updateState(closestIndex);
+
+        updateState(Number(slides[closestIndex].dataset.proofIndex));
+        window.clearTimeout(settleTimer);
+        settleTimer = window.setTimeout(() => {
+          if (closestIndex === 0) {
+            centerOn(cards.at(-1), "auto");
+          } else if (closestIndex === slides.length - 1) {
+            centerOn(cards[0], "auto");
+          }
+        }, 140);
       });
     };
 
