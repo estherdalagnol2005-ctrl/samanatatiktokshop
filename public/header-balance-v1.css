@@ -37,15 +37,21 @@
   font-size: clamp(10px, 0.76vw, 12px);
   white-space: nowrap;
   display: grid;
+  perspective: 600px;
+  transform-style: preserve-3d;
 }
 
 .site-header .desktop-nav a {
   padding-bottom: 4px;
+  transform: translateZ(0) scale(1);
+  transform-origin: center;
+  will-change: transform;
 }
 
 .site-header .desktop-nav a:hover,
 .site-header .desktop-nav a:focus-visible {
   color: inherit;
+  transform: translateZ(24px) scale(1.04);
 }
 
 .site-header .buy-button {
