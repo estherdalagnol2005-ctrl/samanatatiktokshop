@@ -34,6 +34,17 @@ body {
   pointer-events: none;
 }
 
+/*
+ * Each duplicated marquee block must be at least as wide as the viewport.
+ * Otherwise wide screens can reveal the empty end of the track before the
+ * second copy reaches it, creating a visible pause in the text loop.
+ */
+.dreams-marquee-group,
+.method-marquee-group {
+  min-width: 100vw;
+  justify-content: space-around;
+}
+
 .student-proof-section {
   order: 2 !important;
   background: linear-gradient(
