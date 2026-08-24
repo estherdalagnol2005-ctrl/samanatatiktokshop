@@ -43,7 +43,7 @@ const optimizedHtml = snapshotHtml
   )
   .replaceAll(
     "O TikTok Shop já reúne atenção, desejo e checkout no mesmo lugar. Na mentoria, você aprende a escolher produtos com demanda, criar o motivo do clique e repetir o que funciona até transformar conteúdo em faturamento.",
-    "Eu já fiz R$ 150 mil em 30 dias com o TikTok Shop. Agora, te ensino o passo a passo para você construir seus próprios resultados e mudar de vida.",
+    "Eu já fiz R$ 150 mil em 30 dias com o TikTok Shop. Hoje, te ensino o caminho para você construir seus próprios resultados e mudar de vida.",
   )
   .replaceAll("O VÍDEO QUE VENDE", "O método que")
   .replaceAll("COMEÇA ANTES", "ESCALOU MINHAS")
