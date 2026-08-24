@@ -25,18 +25,7 @@
 }
 
 .method-sales-shell::before {
-  content: "MÉTODO";
-  position: absolute;
-  z-index: -1;
-  right: -.06em;
-  bottom: -.13em;
-  color: rgb(250 32 149 / 7%);
-  font-family: var(--font-body, Arial, sans-serif);
-  font-size: clamp(86px, 15vw, 242px);
-  font-weight: 900;
-  letter-spacing: -.08em;
-  line-height: .72;
-  pointer-events: none;
+  content: none;
 }
 
 .method-sales-intro {
