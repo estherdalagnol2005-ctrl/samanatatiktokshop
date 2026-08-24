@@ -85,3 +85,45 @@
 .hero-actions .hero-text-link {
   display: none !important;
 }
+
+
+.scroll-cue {
+  gap: 0;
+}
+
+.scroll-cue i {
+  display: none !important;
+}
+
+.scroll-cue span {
+  position: relative;
+  padding-bottom: 13px;
+}
+
+.scroll-cue span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: clamp(92px, 8vw, 140px);
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #fa2095, #ffa120);
+  transform: translateX(-50%);
+  animation: scroll-cue-line-float 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-cue-line-float {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue span::after {
+    animation: none;
+  }
+}
