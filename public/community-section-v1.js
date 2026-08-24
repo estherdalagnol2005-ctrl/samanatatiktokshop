@@ -37,26 +37,26 @@
           </figure>
 
           <figure class="community-card community-card--proof-one">
-            <img src="/testimonials/karol-comissoes-2600.webp" alt="Resultado compartilhado por uma participante da comunidade" loading="lazy" decoding="async">
+            <img src="/testimonials/2026-08/itamires-motivacao.webp" alt="Itámires conta como as pessoas da comunidade ajudam, motivam e inspiram" loading="lazy" decoding="async">
             <figcaption>
               <strong>Troca de experiências</strong>
-              <span>Aprendizados reais entre mulheres que estão fazendo acontecer.</span>
+              <span>Pessoas que ajudam, motivam e inspiram umas às outras.</span>
             </figcaption>
           </figure>
 
           <figure class="community-card community-card--proof-two">
-            <img src="/testimonials/leticia-pix-31634.webp" alt="Conquista compartilhada por uma aluna da comunidade" loading="lazy" decoding="async">
+            <img src="/testimonials/2026-08/bruna-comunidade.webp" alt="Bruna celebra o orgulho de fazer parte da comunidade" loading="lazy" decoding="async">
             <figcaption>
-              <strong>Suporte e conexões</strong>
-              <span>Orientação e incentivo para não caminhar sozinha.</span>
+              <strong>Pertencimento</strong>
+              <span>Uma comunidade que celebra cada avanço.</span>
             </figcaption>
           </figure>
 
           <figure class="community-card community-card--proof-three">
-            <img src="/testimonials/nay-pagamentos-tres-perfis.webp" alt="Resultados de diferentes perfis compartilhados na comunidade" loading="lazy" decoding="async">
+            <img src="/testimonials/2026-08/jana-networking.webp" alt="Jana explica como o networking ajuda a manter a motivação e testar novas estratégias" loading="lazy" decoding="async">
             <figcaption>
               <strong>Crescimento em conjunto</strong>
-              <span>Mulheres evoluindo e celebrando cada avanço lado a lado.</span>
+              <span>Networking para manter o foco, testar e não desistir.</span>
             </figcaption>
           </figure>
         </div>

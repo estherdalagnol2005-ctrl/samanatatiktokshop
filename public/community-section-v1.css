@@ -440,7 +440,7 @@
 
   .community-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: 222px 154px;
+    grid-template-rows: 222px 154px 178px;
     gap: 9px;
     height: auto;
   }
@@ -467,7 +467,8 @@
   }
 
   .community-card--proof-three {
-    display: none;
+    grid-column: 1 / 3;
+    grid-row: 3;
   }
 
   .community-card figcaption {
@@ -488,12 +489,14 @@
   }
 
   .community-card--proof-one figcaption,
-  .community-card--proof-two figcaption {
+  .community-card--proof-two figcaption,
+  .community-card--proof-three figcaption {
     padding: 7px 8px;
   }
 
   .community-card--proof-one figcaption span,
-  .community-card--proof-two figcaption span {
+  .community-card--proof-two figcaption span,
+  .community-card--proof-three figcaption span {
     display: none;
   }
 
@@ -525,7 +528,7 @@
   }
 
   .community-gallery {
-    grid-template-rows: 205px 142px;
+    grid-template-rows: 205px 142px 166px;
   }
 
   .community-cta {

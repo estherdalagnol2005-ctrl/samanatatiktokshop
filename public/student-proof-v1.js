@@ -28,7 +28,7 @@
         <div class="student-proof-carousel-shell">
           <button class="student-proof-arrow student-proof-arrow--prev" type="button" aria-label="Ver depoimento anterior">←</button>
 
-          <div class="student-proof-carousel" aria-label="Carrossel com cinco resultados reais de alunas" tabindex="0">
+          <div class="student-proof-carousel" aria-label="Carrossel com doze resultados reais de alunas" tabindex="0">
             <div class="student-proof-track">
               <figure class="student-proof-card student-proof-real-card is-active">
                 <img src="/testimonials/sarah-comissoes-marco.webp" alt="Depoimento de Sarah mostrando 87,6 mil reais em GMV e quase 9 mil reais em comissões no mês" loading="lazy" decoding="async">
@@ -54,6 +54,41 @@
                 <img src="/testimonials/karol-comissoes-2600.webp" alt="Depoimento de Karol mostrando novo recorde de 2.600 reais em comissões" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>NOVO RECORDE</span><strong>R$ 2,6 mil em comissões.</strong></figcaption>
               </figure>
+
+              <figure class="student-proof-card student-proof-real-card">
+                <img src="/testimonials/2026-08/jhenifer-recorde-dia.webp" alt="Depoimento de Jhenifer celebrando seu recorde diário depois de um mês e duas semanas de conteúdo" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>PRIMEIRO RECORDE</span><strong>Um novo resultado em poucas semanas.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card">
+                <img src="/testimonials/2026-08/michelle-gratidao.webp" alt="Depoimento de Michelle mostrando uma transferência de 2.524 reais recebida da ByteDance" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>DINHEIRO NA CONTA</span><strong>R$ 2.524 recebidos.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card">
+                <img src="/testimonials/2026-08/itamires-ajuda.webp" alt="Depoimento de Itámires mostrando evolução nas vendas com ajuda e acompanhamento" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>EVOLUÇÃO ACOMPANHADA</span><strong>Mais um produto validado e pronto para escalar.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card">
+                <img src="/testimonials/2026-08/michelle-viver-tiktok.webp" alt="Depoimento de Michelle sobre seu plano de sair do trabalho e viver do TikTok" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>NOVA POSSIBILIDADE</span><strong>A caminho de viver do TikTok.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card">
+                <img src="/testimonials/2026-08/leticia-pix-20681.webp" alt="Depoimento de Letícia mostrando um Pix de 20.681 reais recebido do TikTok Shop" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>PAGAMENTO REAL</span><strong>R$ 20.681 recebidos de uma vez.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card">
+                <img src="/testimonials/2026-08/karol-pix-9401.webp" alt="Depoimento de Karol mostrando um Pix de 9.401 reais recebido da ByteDance" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>ESFORÇO RECOMPENSADO</span><strong>R$ 9.401 recebidos.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card">
+                <img src="/testimonials/2026-08/elisangela-fechamento.webp" alt="Depoimento de Elisângela mostrando 6.500 reais em comissões no mês" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>FECHAMENTO DO MÊS</span><strong>R$ 6,5 mil em comissões.</strong></figcaption>
+              </figure>
             </div>
           </div>
 
@@ -68,6 +103,13 @@
             <button type="button" aria-label="Ver depoimento 3"></button>
             <button type="button" aria-label="Ver depoimento 4"></button>
             <button type="button" aria-label="Ver depoimento 5"></button>
+            <button type="button" aria-label="Ver depoimento 6"></button>
+            <button type="button" aria-label="Ver depoimento 7"></button>
+            <button type="button" aria-label="Ver depoimento 8"></button>
+            <button type="button" aria-label="Ver depoimento 9"></button>
+            <button type="button" aria-label="Ver depoimento 10"></button>
+            <button type="button" aria-label="Ver depoimento 11"></button>
+            <button type="button" aria-label="Ver depoimento 12"></button>
           </div>
         </div>
 
