@@ -25,27 +25,49 @@
           </aside>
         </header>
 
-        <div class="student-proof-wall" aria-label="Resultados e depoimentos de alunas">
-          <div class="student-proof-row student-proof-row-large">
-            <figure class="student-proof-card student-proof-real-card">
-              <img src="/testimonials/sarah-comissoes-marco.webp" alt="Depoimento de Sarah mostrando 87,6 mil reais em GMV e quase 9 mil reais em comissões no mês" loading="lazy">
-              <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Quase R$ 9 mil em comissões no mês.</strong></figcaption>
-            </figure>
-            <figure class="student-proof-card student-proof-real-card">
-              <img src="/testimonials/nay-pagamentos-tres-perfis.webp" alt="Depoimento de Nay mostrando pagamentos recebidos em três perfis" loading="lazy">
-              <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Recebendo em três perfis.</strong></figcaption>
-            </figure>
+        <div class="student-proof-carousel-shell">
+          <button class="student-proof-arrow student-proof-arrow--prev" type="button" aria-label="Ver depoimento anterior">←</button>
+
+          <div class="student-proof-carousel" aria-label="Carrossel com cinco resultados reais de alunas" tabindex="0">
+            <div class="student-proof-track">
+              <figure class="student-proof-card student-proof-real-card is-active">
+                <img src="/testimonials/sarah-comissoes-marco.webp" alt="Depoimento de Sarah mostrando 87,6 mil reais em GMV e quase 9 mil reais em comissões no mês" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Quase R$ 9 mil em comissões no mês.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card">
+                <img src="/testimonials/leticia-pix-31634.webp" alt="Depoimento de Leticia mostrando um Pix de 31.634 reais recebido do TikTok Shop" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>PAGAMENTO REAL</span><strong>R$ 31.634 recebidos de uma vez.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card">
+                <img src="/testimonials/nay-pagamentos-tres-perfis.webp" alt="Depoimento de Nay mostrando pagamentos recebidos em três perfis" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Três perfis gerando pagamentos.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card">
+                <img src="/testimonials/sarah-pagamento-7714.webp" alt="Depoimento de Sarah mostrando pagamento de 7.714 reais recebido da ByteDance" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>DINHEIRO NA CONTA</span><strong>R$ 7.714 recebidos.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card">
+                <img src="/testimonials/karol-comissoes-2600.webp" alt="Depoimento de Karol mostrando novo recorde de 2.600 reais em comissões" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>NOVO RECORDE</span><strong>R$ 2,6 mil em comissões.</strong></figcaption>
+              </figure>
+            </div>
           </div>
 
-          <div class="student-proof-row student-proof-row-small">
-            <figure class="student-proof-card student-proof-real-card">
-              <img src="/testimonials/sarah-pagamento-7714.webp" alt="Depoimento de Sarah mostrando pagamento de 7.714 reais recebido da ByteDance" loading="lazy">
-              <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>R$ 7,7 mil recebidos.</strong></figcaption>
-            </figure>
-            <figure class="student-proof-card student-proof-real-card">
-              <img src="/testimonials/karol-comissoes-2600.webp" alt="Depoimento de Karol mostrando novo recorde de 2.600 reais em comissões" loading="lazy">
-              <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Novo recorde de comissões.</strong></figcaption>
-            </figure>
+          <button class="student-proof-arrow student-proof-arrow--next" type="button" aria-label="Ver próximo depoimento">→</button>
+        </div>
+
+        <div class="student-proof-carousel-nav">
+          <span>ARRASTE PARA VER MAIS</span>
+          <div class="student-proof-dots" aria-label="Escolher depoimento">
+            <button class="is-active" type="button" aria-label="Ver depoimento 1" aria-current="true"></button>
+            <button type="button" aria-label="Ver depoimento 2"></button>
+            <button type="button" aria-label="Ver depoimento 3"></button>
+            <button type="button" aria-label="Ver depoimento 4"></button>
+            <button type="button" aria-label="Ver depoimento 5"></button>
           </div>
         </div>
 
@@ -54,6 +76,79 @@
     `;
 
     hero.insertAdjacentElement("afterend", section);
+
+    const carousel = section.querySelector(".student-proof-carousel");
+    const cards = [...section.querySelectorAll(".student-proof-real-card")];
+    const dots = [...section.querySelectorAll(".student-proof-dots button")];
+    const previousButton = section.querySelector(".student-proof-arrow--prev");
+    const nextButton = section.querySelector(".student-proof-arrow--next");
+    let activeIndex = 0;
+    let scrollFrame = 0;
+
+    const setGutter = () => {
+      const card = cards[0];
+      if (!carousel || !card) return;
+      const gutter = Math.max(12, (carousel.clientWidth - card.clientWidth) / 2);
+      carousel.style.setProperty("--student-proof-gutter", `${gutter}px`);
+    };
+
+    const updateState = (index) => {
+      activeIndex = Math.max(0, Math.min(cards.length - 1, index));
+      cards.forEach((card, cardIndex) => {
+        card.classList.toggle("is-active", cardIndex === activeIndex);
+      });
+      dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === activeIndex;
+        dot.classList.toggle("is-active", isActive);
+        if (isActive) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+      previousButton.disabled = activeIndex === 0;
+      nextButton.disabled = activeIndex === cards.length - 1;
+    };
+
+    const goTo = (index, behavior = "smooth") => {
+      const targetIndex = Math.max(0, Math.min(cards.length - 1, index));
+      const target = cards[targetIndex];
+      if (!carousel || !target) return;
+      const left = target.offsetLeft - (carousel.clientWidth - target.clientWidth) / 2;
+      carousel.scrollTo({ left, behavior });
+      updateState(targetIndex);
+    };
+
+    const updateFromScroll = () => {
+      window.cancelAnimationFrame(scrollFrame);
+      scrollFrame = window.requestAnimationFrame(() => {
+        const center = carousel.scrollLeft + carousel.clientWidth / 2;
+        let closestIndex = 0;
+        let closestDistance = Number.POSITIVE_INFINITY;
+        cards.forEach((card, index) => {
+          const cardCenter = card.offsetLeft + card.clientWidth / 2;
+          const distance = Math.abs(center - cardCenter);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+        updateState(closestIndex);
+      });
+    };
+
+    previousButton.addEventListener("click", () => goTo(activeIndex - 1));
+    nextButton.addEventListener("click", () => goTo(activeIndex + 1));
+    dots.forEach((dot, index) => dot.addEventListener("click", () => goTo(index)));
+    carousel.addEventListener("scroll", updateFromScroll, { passive: true });
+    carousel.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") goTo(activeIndex - 1);
+      if (event.key === "ArrowRight") goTo(activeIndex + 1);
+    });
+    window.addEventListener("resize", () => {
+      setGutter();
+      goTo(activeIndex, "auto");
+    }, { passive: true });
+
+    setGutter();
+    goTo(0, "auto");
 
     const transition = document.querySelector(
       ".dreams-section > .dreams-marquee",
