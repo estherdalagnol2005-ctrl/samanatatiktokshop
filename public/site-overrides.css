@@ -80,3 +80,8 @@
     right: 0;
   }
 }
+
+
+.hero-actions .hero-text-link {
+  display: none !important;
+}
