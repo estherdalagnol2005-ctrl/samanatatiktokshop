@@ -119,6 +119,10 @@
   margin-bottom: clamp(14px, 1.2vw, 18px);
 }
 
+.dreams-heading .dreams-eyebrow {
+  display: none !important;
+}
+
 /* Keep this fold visual and concise: gallery, proof numbers and one final CTA. */
 .dreams-showcase-cta,
 .dreams-body > p,
