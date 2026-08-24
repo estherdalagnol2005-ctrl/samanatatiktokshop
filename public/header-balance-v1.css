@@ -43,6 +43,11 @@
   padding-bottom: 4px;
 }
 
+.site-header .desktop-nav a:hover,
+.site-header .desktop-nav a:focus-visible {
+  color: inherit;
+}
+
 .site-header .buy-button {
   justify-self: end;
   width: clamp(152px, 11.6vw, 178px);
