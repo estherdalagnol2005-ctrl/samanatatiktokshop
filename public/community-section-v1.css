@@ -177,6 +177,10 @@
   min-width: 0;
 }
 
+.community-visual > .community-cta {
+  margin-inline: auto;
+}
+
 .community-gallery-message {
   display: flex;
   position: relative;
