@@ -2,7 +2,7 @@
   const checkoutUrl =
     "https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O";
 
-  const orbitItems = [
+  const carouselItems = [
     {
       src: "/assets/dreams-2026/creator-summit.webp",
       alt: "Samanta reunida com outras criadoras no Creator Summit",
@@ -30,165 +30,245 @@
     },
   ];
 
-  const buildOrbit = (section) => {
-    const stage = section.querySelector(".community-orbit");
-    const focus = section.querySelector(".community-orbit-focus");
-    const focusImage = section.querySelector(".community-orbit-focus img");
+  const buildMagneticCarousel = (section) => {
+    const carousel = section.querySelector(".community-magnetic");
+    const track = section.querySelector(".community-magnetic-track");
+    const backdrop = section.querySelector(".community-magnetic-backdrop");
     const cards = Array.from(
-      section.querySelectorAll("[data-community-orbit-index]"),
+      section.querySelectorAll("[data-community-magnetic-index]"),
     );
-    const dots = Array.from(
-      section.querySelectorAll("[data-community-orbit-dot]"),
-    );
-    const previous = section.querySelector(".community-orbit-arrow--prev");
-    const next = section.querySelector(".community-orbit-arrow--next");
 
-    if (!stage || !focus || !focusImage || !cards.length) return;
+    if (!carousel || !track || !backdrop || !cards.length) return;
 
     const reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    let activeIndex = 0;
-    let phase = -Math.PI / 2;
-    let lastFrame = 0;
-    let frame = 0;
-    let paused = false;
+    const finePointer = window.matchMedia(
+      "(hover: hover) and (pointer: fine)",
+    ).matches;
+    let openIndex = null;
+    let targetFactors = cards.map(() => 0);
+    let currentFactors = cards.map(() => 0);
+    let animationFrame = 0;
     let pointerStartX = null;
     let ignoreClickUntil = 0;
 
-    const setActive = (nextIndex) => {
-      activeIndex =
-        (nextIndex + orbitItems.length) % orbitItems.length;
-      const item = orbitItems[activeIndex];
-
-      focus.style.setProperty(
-        "--community-focus-image",
-        `url("${item.src}")`,
+    const getMetrics = () => {
+      const width = track.clientWidth;
+      const height = track.clientHeight;
+      const mobile = width <= 520;
+      const gap = mobile ? 6 : Math.min(14, width * 0.018);
+      const collapsedWidth = mobile
+        ? Math.min(44, (width - gap * (cards.length - 1)) / cards.length)
+        : Math.min(92, (width - gap * (cards.length - 1)) / cards.length);
+      const hoverWidth = mobile
+        ? collapsedWidth
+        : Math.min(196, collapsedWidth * 2.2);
+      const collapsedHeight = Math.min(
+        mobile ? 335 : 430,
+        height * (mobile ? 0.7 : 0.74),
       );
-      focusImage.src = item.src;
-      focusImage.alt = item.alt;
-      focusImage.className =
-        item.type === "photo" ? "is-photo" : "is-proof";
+      const hoverHeight = mobile
+        ? collapsedHeight
+        : Math.min(collapsedHeight + 58, height * 0.84);
+      const openWidth = Math.min(
+        mobile ? 310 : 520,
+        width * (mobile ? 0.79 : 0.67),
+      );
+      const openHeight = Math.min(
+        mobile ? 410 : 535,
+        height * (mobile ? 0.86 : 0.88),
+      );
+
+      return {
+        width,
+        height,
+        mobile,
+        gap,
+        collapsedWidth,
+        hoverWidth,
+        collapsedHeight,
+        hoverHeight,
+        openWidth,
+        openHeight,
+      };
+    };
+
+    const applySizes = () => {
+      const metrics = getMetrics();
+      track.style.gap = `${metrics.gap}px`;
 
       cards.forEach((card, index) => {
-        const isActive = index === activeIndex;
-        card.classList.toggle("is-active", isActive);
-        card.setAttribute("aria-pressed", String(isActive));
-      });
+        let width;
+        let height;
 
-      dots.forEach((dot, index) => {
-        const isActive = index === activeIndex;
-        dot.classList.toggle("is-active", isActive);
-        dot.setAttribute("aria-current", isActive ? "true" : "false");
+        if (openIndex !== null) {
+          if (index === openIndex) {
+            width = metrics.openWidth;
+            height = metrics.openHeight;
+          } else {
+            width = Math.max(
+              metrics.mobile ? 10 : 34,
+              (metrics.width -
+                metrics.openWidth -
+                metrics.gap * (cards.length - 1)) /
+                (cards.length - 1),
+            );
+            height = metrics.collapsedHeight;
+          }
+        } else {
+          const factor = currentFactors[index] || 0;
+          width =
+            metrics.collapsedWidth +
+            (metrics.hoverWidth - metrics.collapsedWidth) * factor;
+          height =
+            metrics.collapsedHeight +
+            (metrics.hoverHeight - metrics.collapsedHeight) * factor;
+        }
+
+        card.style.width = `${Math.max(1, width).toFixed(2)}px`;
+        card.style.height = `${Math.max(1, height).toFixed(2)}px`;
       });
     };
 
-    const positionCards = (time = 0) => {
-      const width = stage.clientWidth;
-      const height = stage.clientHeight;
-      if (!width || !height) {
-        frame = window.requestAnimationFrame(positionCards);
-        return;
-      }
-
-      if (!paused && !reducedMotion && lastFrame) {
-        phase += Math.min(time - lastFrame, 48) * 0.000075;
-      }
-      lastFrame = time;
-
-      const radiusX = width * (width <= 520 ? 0.41 : 0.42);
-      const radiusY = height * (width <= 520 ? 0.405 : 0.415);
-
-      cards.forEach((card, index) => {
-        const angle = phase + (index / cards.length) * Math.PI * 2;
-        const x = Math.cos(angle) * radiusX;
-        const y = Math.sin(angle) * radiusY;
-        const depth = (Math.sin(angle) + 1) / 2;
-        const scale = 0.78 + depth * 0.2;
-
-        card.style.transform =
-          `translate3d(calc(-50% + ${x.toFixed(2)}px), ` +
-          `calc(-50% + ${y.toFixed(2)}px), 0) scale(${scale.toFixed(3)})`;
-        card.style.opacity = String(0.58 + depth * 0.4);
-        card.style.zIndex = String(5 + Math.round(depth * 7));
+    const animateTowardTargets = () => {
+      let moving = false;
+      currentFactors = currentFactors.map((current, index) => {
+        const target = targetFactors[index] || 0;
+        const distance = target - current;
+        if (Math.abs(distance) <= 0.002) return target;
+        moving = true;
+        return current + distance * (reducedMotion ? 1 : 0.22);
       });
-
-      if (!reducedMotion) frame = window.requestAnimationFrame(positionCards);
+      applySizes();
+      animationFrame = moving
+        ? window.requestAnimationFrame(animateTowardTargets)
+        : 0;
     };
+
+    const startAnimation = () => {
+      if (!animationFrame) {
+        animationFrame = window.requestAnimationFrame(animateTowardTargets);
+      }
+    };
+
+    const resetMagnification = () => {
+      targetFactors = cards.map(() => 0);
+      startAnimation();
+    };
+
+    const closeCard = () => {
+      openIndex = null;
+      carousel.classList.remove("has-open-card");
+      backdrop.hidden = true;
+      cards.forEach((card) => {
+        card.classList.remove("is-open", "is-blurred");
+        card.setAttribute("aria-expanded", "false");
+      });
+      resetMagnification();
+    };
+
+    const openCard = (index) => {
+      openIndex = (index + cards.length) % cards.length;
+      currentFactors = cards.map(() => 0);
+      targetFactors = cards.map(() => 0);
+      carousel.classList.add("has-open-card");
+      backdrop.hidden = false;
+      cards.forEach((card, cardIndex) => {
+        const isOpen = cardIndex === openIndex;
+        card.classList.toggle("is-open", isOpen);
+        card.classList.toggle("is-blurred", !isOpen);
+        card.setAttribute("aria-expanded", String(isOpen));
+      });
+      applySizes();
+    };
+
+    const setTargetsFromPointer = (clientX) => {
+      if (!finePointer || openIndex !== null) return;
+      const metrics = getMetrics();
+      const rect = track.getBoundingClientRect();
+      const pointerX = clientX - rect.left;
+      const totalBase =
+        cards.length * metrics.collapsedWidth +
+        (cards.length - 1) * metrics.gap;
+      const startX = (metrics.width - totalBase) / 2;
+      const influence = Math.max(170, metrics.collapsedWidth * 2.35);
+
+      targetFactors = cards.map((_, index) => {
+        const center =
+          startX +
+          index * (metrics.collapsedWidth + metrics.gap) +
+          metrics.collapsedWidth / 2;
+        const normalized = Math.max(
+          0,
+          1 - Math.abs(pointerX - center) / influence,
+        );
+        return normalized * normalized * (3 - 2 * normalized);
+      });
+      startAnimation();
+    };
+
+    track.addEventListener("pointermove", (event) => {
+      setTargetsFromPointer(event.clientX);
+    });
+    track.addEventListener("pointerleave", () => {
+      if (openIndex === null) resetMagnification();
+      pointerStartX = null;
+    });
 
     cards.forEach((card, index) => {
-      card.addEventListener("click", () => {
+      card.addEventListener("click", (event) => {
+        event.stopPropagation();
         if (Date.now() < ignoreClickUntil) return;
-        setActive(index);
+        if (openIndex === index) closeCard();
+        else openCard(index);
+      });
+
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          openCard((openIndex ?? index) - 1);
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          openCard((openIndex ?? index) + 1);
+        }
+        if (event.key === "Escape") {
+          event.preventDefault();
+          closeCard();
+        }
       });
     });
 
-    dots.forEach((dot, index) => {
-      dot.addEventListener("click", () => setActive(index));
-    });
+    backdrop.addEventListener("click", closeCard);
 
-    previous?.addEventListener("click", () => setActive(activeIndex - 1));
-    next?.addEventListener("click", () => setActive(activeIndex + 1));
-
-    stage.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        setActive(activeIndex - 1);
-      }
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        setActive(activeIndex + 1);
-      }
-    });
-
-    stage.addEventListener("pointerdown", (event) => {
+    carousel.addEventListener("pointerdown", (event) => {
       pointerStartX = event.clientX;
     });
-
-    stage.addEventListener("pointerup", (event) => {
+    carousel.addEventListener("pointerup", (event) => {
       if (pointerStartX === null) return;
       const distance = event.clientX - pointerStartX;
       pointerStartX = null;
-      if (Math.abs(distance) < 42) return;
+      if (Math.abs(distance) < 44) return;
       ignoreClickUntil = Date.now() + 320;
-      setActive(activeIndex + (distance < 0 ? 1 : -1));
+      const direction = distance < 0 ? 1 : -1;
+      openCard((openIndex ?? 0) + direction);
     });
-
-    stage.addEventListener("pointercancel", () => {
+    carousel.addEventListener("pointercancel", () => {
       pointerStartX = null;
     });
 
-    stage.addEventListener("pointerenter", () => {
-      paused = true;
-    });
-    stage.addEventListener("pointerleave", () => {
-      paused = false;
-      pointerStartX = null;
-    });
-    stage.addEventListener("focusin", () => {
-      paused = true;
-    });
-    stage.addEventListener("focusout", () => {
-      paused = false;
-    });
-
-    const autoAdvance = reducedMotion
-      ? 0
-      : window.setInterval(() => {
-          if (!paused && !document.hidden) setActive(activeIndex + 1);
-        }, 5600);
-
-    setActive(0);
-    positionCards();
-
+    window.addEventListener("resize", applySizes, { passive: true });
     window.addEventListener(
       "pagehide",
       () => {
-        if (frame) window.cancelAnimationFrame(frame);
-        if (autoAdvance) window.clearInterval(autoAdvance);
+        if (animationFrame) window.cancelAnimationFrame(animationFrame);
       },
       { once: true },
     );
+
+    applySizes();
+    if (window.matchMedia("(width <= 640px)").matches) openCard(2);
   };
 
   const buildCommunitySection = () => {
@@ -202,22 +282,14 @@
     section.id = "comunidade";
     section.setAttribute("aria-labelledby", "community-title");
 
-    const orbitCards = orbitItems
+    const magneticCards = carouselItems
       .map(
         (item, index) => `
-          <button class="community-orbit-card community-orbit-card--${item.type}" type="button"
-            data-community-orbit-index="${index}" aria-label="Exibir imagem ${index + 1} da comunidade"
-            aria-pressed="${index === 0 ? "true" : "false"}">
-            <img src="${item.src}" alt="" aria-hidden="true" loading="lazy" decoding="async" draggable="false">
+          <button class="community-magnetic-card community-magnetic-card--${item.type}" type="button"
+            data-community-magnetic-index="${index}" aria-label="Abrir imagem ${index + 1} da comunidade"
+            aria-expanded="false" style="--community-magnetic-image: url('${item.src}')">
+            <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" draggable="false">
           </button>`,
-      )
-      .join("");
-
-    const orbitDots = orbitItems
-      .map(
-        (_, index) => `
-          <button type="button" data-community-orbit-dot="${index}"
-            aria-label="Ir para imagem ${index + 1}" aria-current="${index === 0 ? "true" : "false"}"></button>`,
       )
       .join("");
 
@@ -241,22 +313,16 @@
             <span>Troca diária, apoio real e mulheres que crescem juntas.</span>
           </p>
 
-          <div class="community-orbit" tabindex="0" aria-label="Galeria em órbita com momentos e resultados da comunidade">
-            <div class="community-orbit-ring" aria-hidden="true"></div>
-            <div class="community-orbit-focus" aria-live="polite">
-              <img src="${orbitItems[0].src}" alt="${orbitItems[0].alt}" loading="lazy" decoding="async">
-            </div>
-            ${orbitCards}
-            <button class="community-orbit-arrow community-orbit-arrow--prev" type="button" aria-label="Ver imagem anterior">←</button>
-            <button class="community-orbit-arrow community-orbit-arrow--next" type="button" aria-label="Ver próxima imagem">→</button>
-            <div class="community-orbit-dots">${orbitDots}</div>
+          <div class="community-magnetic" aria-label="Carrossel magnético com momentos e resultados da comunidade">
+            <button class="community-magnetic-backdrop" type="button" aria-label="Fechar imagem ampliada" hidden></button>
+            <div class="community-magnetic-track">${magneticCards}</div>
           </div>
         </div>
       </div>
     `;
 
     methodSection.insertAdjacentElement("beforebegin", section);
-    buildOrbit(section);
+    buildMagneticCarousel(section);
     return true;
   };
 
