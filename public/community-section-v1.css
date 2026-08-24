@@ -208,7 +208,7 @@
   place-items: center;
   position: relative;
   width: 100%;
-  min-height: clamp(520px, 44vw, 640px);
+  min-height: clamp(450px, 37vw, 540px);
   perspective: 1100px;
   outline: none;
   touch-action: pan-x;
@@ -218,8 +218,9 @@
 
 .community-blur-frame {
   position: relative;
-  width: min(100%, 610px);
-  height: clamp(520px, 42vw, 610px);
+  width: min(100%, 520px);
+  height: auto;
+  aspect-ratio: 1.08;
   border: 5px solid #fff;
   border-radius: clamp(24px, 2.6vw, 40px);
   background: #0c0c0c;
@@ -410,12 +411,11 @@
   }
 
   .community-blur-carousel {
-    min-height: clamp(540px, 78vw, 650px);
+    min-height: clamp(450px, 62vw, 530px);
   }
 
   .community-blur-frame {
-    width: min(100%, 620px);
-    height: clamp(540px, 76vw, 620px);
+    width: min(100%, 520px);
   }
 }
 
@@ -478,12 +478,13 @@
   }
 
   .community-blur-carousel {
-    min-height: clamp(445px, 126vw, 520px);
+    min-height: clamp(335px, 102vw, 410px);
   }
 
   .community-blur-frame {
-    width: 100%;
-    height: clamp(445px, 124vw, 510px);
+    width: min(100%, 380px);
+    height: auto;
+    aspect-ratio: 1.06;
     border-width: 4px;
     border-radius: 27px;
     clip-path: inset(0 round 27px);
@@ -525,11 +526,7 @@
   }
 
   .community-blur-carousel {
-    min-height: 430px;
-  }
-
-  .community-blur-frame {
-    height: 430px;
+    min-height: 330px;
   }
 }
 

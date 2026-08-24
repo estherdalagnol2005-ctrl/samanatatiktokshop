@@ -4,18 +4,13 @@
 
   const carouselItems = [
     {
-      src: "/assets/dreams-2026/creator-summit.webp",
-      alt: "Samanta reunida com outras criadoras no Creator Summit",
-      type: "photo",
-    },
-    {
-      src: "/assets/samanta-luana.webp",
-      alt: "Samanta e Luana juntas em um encontro da comunidade",
-      type: "photo",
-    },
-    {
       src: "/testimonials/2026-08/itamires-motivacao.webp",
       alt: "Itámires conta como as mulheres da comunidade ajudam, motivam e inspiram",
+      type: "proof",
+    },
+    {
+      src: "/testimonials/2026-08/itamires-ajuda.webp",
+      alt: "Itámires celebra o apoio recebido para validar produtos e aprender a escalar",
       type: "proof",
     },
     {
@@ -24,8 +19,8 @@
       type: "proof",
     },
     {
-      src: "/testimonials/2026-08/jana-networking.webp",
-      alt: "Jana explica como o networking ajuda o grupo a manter a motivação e testar novas estratégias",
+      src: "/testimonials/2026-08/leticia-pix-20681.webp",
+      alt: "Letícia compartilha um resultado real conquistado com o TikTok Shop",
       type: "proof",
     },
   ];
