@@ -18,7 +18,6 @@
         <div class="conversion-copy">
           <span class="conversion-eyebrow">✦ A DECISÃO QUE MUDA O PRÓXIMO RESULTADO</span>
           <h2 id="conversion-title">TE ENSINO A ESCALAR VENDAS<br><strong>COM MÉTODO</strong><em>E ESTRATÉGIA.</em></h2>
-          <p>Enquanto você procrastina, outras mulheres estão realizando seus sonhos com o TikTok Shop. Você pode ser a próxima.</p>
           <div class="conversion-chips" aria-label="O que a mentoria organiza">
             <span>Produto com demanda</span>
             <span>Conteúdo com intenção</span>
@@ -32,9 +31,9 @@
         </figure>
 
         <aside class="conversion-trigger">
-          <small>A SUA PRÓXIMA FASE COMEÇA AGORA</small>
-          <strong>VOCÊ PODE SER A PRÓXIMA A ESCALAR COM DIREÇÃO.</strong>
-          <p>Resultado não vem de postar mais no escuro. Vem de aplicar um processo com método e estratégia.</p>
+          <small>ENQUANTO VOCÊ PROCRASTINA...</small>
+          <strong>OUTRAS MULHERES ESTÃO REALIZANDO SEUS SONHOS COM O TIKTOK SHOP.</strong>
+          <p>Você pode ser a próxima.</p>
         </aside>
 
         <div class="conversion-action">
