@@ -41,6 +41,10 @@ const optimizedHtml = snapshotHtml
     "uma operação de vendas.",
     "pelas top creators e mentoradas da Sunlix.",
   )
+  .replaceAll(
+    "O TikTok Shop já reúne atenção, desejo e checkout no mesmo lugar. Na mentoria, você aprende a escolher produtos com demanda, criar o motivo do clique e repetir o que funciona até transformar conteúdo em faturamento.",
+    "Eu já fiz mais de R$ 150 mil com o TikTok Shop. Agora, te ensino o passo a passo para você construir seus próprios resultados e mudar de vida.",
+  )
   .replaceAll("O VÍDEO QUE VENDE", "O método que")
   .replaceAll("COMEÇA ANTES", "ESCALOU MINHAS")
   .replaceAll("de você apertar gravar.", "vendas.")
@@ -54,7 +58,7 @@ const optimizedHtml = snapshotHtml
   )
   .replace(
     "</head>",
-    '<meta name="theme-color" content="#fa2095"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/><link rel="preload" href="/assets/samanta-hero-portrait.webp" as="image"/><link rel="stylesheet" href="/site-overrides.css?v=3"/><link rel="stylesheet" href="/density-and-gallery-v1.css"/><link rel="stylesheet" href="/student-proof-v1.css?v=14"/><link rel="stylesheet" href="/gradient-flow-v1.css"/><link rel="stylesheet" href="/gallery-coverflow-v1.css?v=5"/><link rel="stylesheet" href="/title-hierarchy-v1.css"/><link rel="stylesheet" href="/conversion-cta-v1.css"/><link rel="stylesheet" href="/footer-v1.css"/><link rel="stylesheet" href="/header-balance-v1.css?v=3"/><link rel="stylesheet" href="/site-navigation-v1.css?v=2"/><link rel="stylesheet" href="/motion-effects-v1.css?v=8"/><link rel="stylesheet" href="/community-section-v1.css?v=9"/><link rel="stylesheet" href="/method-sales-v3.css?v=9"/><link rel="stylesheet" href="/flow-polish-v1.css?v=2"/><link rel="stylesheet" href="/exit-offer.css"/></head>',
+    '<meta name="theme-color" content="#fa2095"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/><link rel="preload" href="/assets/samanta-hero-portrait.webp" as="image"/><link rel="stylesheet" href="/site-overrides.css?v=4"/><link rel="stylesheet" href="/density-and-gallery-v1.css"/><link rel="stylesheet" href="/student-proof-v1.css?v=14"/><link rel="stylesheet" href="/gradient-flow-v1.css"/><link rel="stylesheet" href="/gallery-coverflow-v1.css?v=5"/><link rel="stylesheet" href="/title-hierarchy-v1.css"/><link rel="stylesheet" href="/conversion-cta-v1.css"/><link rel="stylesheet" href="/footer-v1.css"/><link rel="stylesheet" href="/header-balance-v1.css?v=3"/><link rel="stylesheet" href="/site-navigation-v1.css?v=2"/><link rel="stylesheet" href="/motion-effects-v1.css?v=8"/><link rel="stylesheet" href="/community-section-v1.css?v=9"/><link rel="stylesheet" href="/method-sales-v3.css?v=9"/><link rel="stylesheet" href="/flow-polish-v1.css?v=2"/><link rel="stylesheet" href="/exit-offer.css"/></head>',
   )
   .replace(
     "</body>",

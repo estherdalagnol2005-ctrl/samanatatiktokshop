@@ -13,7 +13,8 @@
 }
 
 .site-header .buy-button i,
-.hero-method-visual .method-result-badge {
+.hero-method-visual .method-result-badge,
+.hero-result-proof {
   display: none !important;
 }
 
