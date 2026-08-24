@@ -23,6 +23,12 @@
   display: none !important;
 }
 
+.hero-subcopy {
+  width: min(100%, 580px);
+  font-size: clamp(15px, 1.12vw, 19px);
+  font-weight: 650;
+}
+
 .hero-method-visual .metric-card {
   width: clamp(132px, 37%, 238px);
   object-fit: contain;
