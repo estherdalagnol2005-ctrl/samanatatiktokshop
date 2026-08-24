@@ -45,10 +45,7 @@
 }
 
 .student-proof-heading {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(290px, 0.8fr);
-  align-items: end;
-  gap: clamp(28px, 4vw, 64px);
+  display: block;
   margin-bottom: clamp(28px, 3vw, 46px);
 }
 
@@ -85,12 +82,14 @@
 }
 
 .student-proof-number {
-  padding: clamp(22px, 2.6vw, 36px);
+  width: min(100%, 520px);
+  margin: clamp(20px, 2.4vw, 34px) auto 0;
+  padding: clamp(17px, 1.8vw, 24px) clamp(20px, 2.2vw, 30px);
   border: 1px solid rgb(28 23 26 / 12%);
-  border-radius: clamp(24px, 2.8vw, 38px);
+  border-radius: clamp(20px, 2vw, 28px);
   background: #f0ff27;
-  box-shadow: 9px 9px 0 #fa2095;
-  transform: rotate(1.2deg);
+  box-shadow: 6px 6px 0 #fa2095;
+  transform: rotate(0.6deg);
 }
 
 .student-proof-number span {
@@ -103,7 +102,7 @@
   margin-top: 10px;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: clamp(42px, 4.3vw, 66px);
+  font-size: clamp(32px, 3.1vw, 46px);
   font-weight: 900;
   letter-spacing: -0.065em;
   line-height: 0.88;
@@ -412,7 +411,7 @@
 
 @media (width <= 900px) {
   .student-proof-heading {
-    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.72fr);
+    display: block;
   }
 
   .student-proof-wall {
@@ -439,8 +438,7 @@
   }
 
   .student-proof-heading {
-    grid-template-columns: 1fr;
-    gap: 24px;
+    display: block;
     padding-right: 9px;
   }
 
@@ -454,13 +452,15 @@
   }
 
   .student-proof-number {
-    padding: 22px;
-    border-radius: 23px;
-    box-shadow: 6px 6px 0 #fa2095;
+    width: calc(100% - 9px);
+    margin-top: 20px;
+    padding: 17px 19px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 0 #fa2095;
   }
 
   .student-proof-number strong {
-    font-size: clamp(41px, 12.5vw, 54px);
+    font-size: clamp(31px, 9.5vw, 42px);
   }
 
   .student-proof-wall {
