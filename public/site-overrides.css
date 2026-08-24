@@ -17,6 +17,11 @@
   display: none !important;
 }
 
+.hero-method-visual .sunlix-float-bolt,
+.hero-method-visual .sunlix-float-coins {
+  display: none !important;
+}
+
 .hero-method-visual .metric-card {
   width: clamp(132px, 37%, 238px);
   object-fit: contain;
