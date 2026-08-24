@@ -277,24 +277,24 @@
   }
 
   .dreams-coverflow-arrow {
-    top: auto;
-    bottom: 5px;
-    width: 50px;
-    transform: none;
+    top: 50%;
+    bottom: auto;
+    width: 46px;
+    transform: translateY(-50%);
     box-shadow: 4px 5px 0 #fa2095;
   }
 
   .dreams-coverflow-arrow:hover,
   .dreams-coverflow-arrow:focus-visible {
-    transform: scale(1.06);
+    transform: translateY(-50%) scale(1.06);
   }
 
   .dreams-coverflow-arrow-prev {
-    left: calc(50% - 64px);
+    left: 10px;
   }
 
   .dreams-coverflow-arrow-next {
-    right: calc(50% - 64px);
+    right: 10px;
   }
 
   .dreams-coverflow-slide figcaption,
