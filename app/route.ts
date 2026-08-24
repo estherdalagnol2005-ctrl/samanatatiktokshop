@@ -66,7 +66,7 @@ const optimizedHtml = snapshotHtml
   )
   .replace(
     "</body>",
-    '<script src="/student-proof-v1.js?v=16" defer></script><script src="/gallery-coverflow-v1.js?v=4" defer></script><script src="/method-sales-v3.js?v=8" defer></script><script src="/community-section-v1.js?v=11" defer></script><script src="/conversion-cta-v1.js?v=4" defer></script><script src="/footer-v1.js?v=2" defer></script><script src="/checkout-links-v1.js?v=4" defer></script><script src="/site-navigation-v1.js?v=3" defer></script><script src="/hero-photo-v1.js?v=1" defer></script><script src="/motion-effects-v1.js?v=9" type="module"></script><script src="/mobile-scroll-tuning-v1.js?v=1" type="module"></script><script src="/exit-offer.js" defer></script></body>',
+    '<script src="/student-proof-v1.js?v=17" defer></script><script src="/gallery-coverflow-v1.js?v=4" defer></script><script src="/method-sales-v3.js?v=8" defer></script><script src="/community-section-v1.js?v=11" defer></script><script src="/conversion-cta-v1.js?v=4" defer></script><script src="/footer-v1.js?v=2" defer></script><script src="/checkout-links-v1.js?v=4" defer></script><script src="/site-navigation-v1.js?v=3" defer></script><script src="/hero-photo-v1.js?v=1" defer></script><script src="/motion-effects-v1.js?v=9" type="module"></script><script src="/mobile-scroll-tuning-v1.js?v=1" type="module"></script><script src="/exit-offer.js" defer></script></body>',
   );
 
 export function GET() {
