@@ -157,6 +157,21 @@
   font-size: 11px;
 }
 
+.dreams-coverflow-caption strong {
+  max-width: 28ch;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 720;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.dreams-coverflow-slide[data-slot="left"] .dreams-coverflow-caption strong,
+.dreams-coverflow-slide[data-slot="right"] .dreams-coverflow-caption strong {
+  display: none;
+}
+
 .dreams-coverflow-arrow {
   position: absolute;
   top: 50%;
@@ -270,6 +285,10 @@
   }
 
   .dreams-coverflow-slide figcaption strong {
+    font-size: 9px;
+  }
+
+  .dreams-coverflow-caption strong {
     font-size: 9px;
   }
 }

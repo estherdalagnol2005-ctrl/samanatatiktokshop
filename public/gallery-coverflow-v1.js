@@ -1,30 +1,122 @@
 (() => {
+  const media = [
+    {
+      type: "video",
+      src: "/assets/dreams-2026/paris-torre-eiffel.webm",
+      poster: "/assets/dreams-2026/paris-torre-eiffel-poster.jpg",
+      label: "Paris, França",
+      caption: "A liberdade que virou memória.",
+      alt: "Samanta caminhando em Paris com a Torre Eiffel ao fundo",
+    },
+    {
+      type: "image",
+      src: "/assets/result-record-day.jpg",
+      label: "R$ 9,4 mil em um dia",
+      caption: "Um brinde ao dia de recorde.",
+      alt: "Samanta tomando vinho no dia em que faturou R$ 9,4 mil",
+    },
+    {
+      type: "image",
+      src: "/assets/samanta-eiffel-room.webp",
+      label: "Uma nova vista",
+      caption: "A Torre Eiffel da janela do quarto.",
+      alt: "Samanta no quarto diante da Torre Eiffel",
+    },
+    {
+      type: "image",
+      src: "/assets/dreams-2026/pix-na-rotina.webp",
+      label: "Pix na rotina",
+      caption: "Resultados que acompanham o dia.",
+      alt: "Samanta na academia com comprovantes de pagamentos do TikTok Shop",
+    },
+    {
+      type: "image",
+      src: "/assets/dreams-2026/42-mil-em-sete-dias.webp",
+      label: "R$ 42 mil em 7 dias",
+      caption: "Consistência que aparece nos números.",
+      alt: "Samanta com painéis de R$ 42 mil em sete dias",
+    },
+    {
+      type: "image",
+      src: "/assets/dreams-2026/resultados-com-liberdade.webp",
+      label: "Resultados com liberdade",
+      caption: "Trabalhar sem abrir mão de viver.",
+      alt: "Samanta diante do mar ao pôr do sol com painéis de resultados",
+    },
+    {
+      type: "image",
+      src: "/assets/dreams-2026/quartas-de-pix.webp",
+      label: "Quartas de Pix",
+      caption: "Uma operação que continua vendendo.",
+      alt: "Samanta no quarto com comprovantes de pagamentos recebidos",
+    },
+    {
+      type: "image",
+      src: "/assets/dreams-2026/familia-torre-eiffel.webp",
+      label: "Torre Eiffel em família",
+      caption: "Conquistas ficam melhores quando são compartilhadas.",
+      alt: "Samanta com sua família diante da Torre Eiffel à noite",
+      position: "center 42%",
+    },
+    {
+      type: "video",
+      src: "/assets/dreams-2026/conquista-em-familia.webm",
+      poster: "/assets/dreams-2026/conquista-em-familia-poster.jpg",
+      label: "Conquista em família",
+      caption: "Realizar sonhos de quem sempre esteve por perto.",
+      alt: "Momento de uma conquista de Samanta com sua família",
+    },
+    {
+      type: "image",
+      src: "/assets/dreams-2026/20-mil-em-sete-dias.webp",
+      label: "R$ 20 mil em 7 dias",
+      caption: "Estratégia, repetição e crescimento.",
+      alt: "Samanta com painéis de R$ 20 mil em sete dias",
+    },
+    {
+      type: "image",
+      src: "/assets/dreams-2026/celebrar-conquistas.webp",
+      label: "Liberdade para celebrar",
+      caption: "Trabalhar também para viver bons momentos.",
+      alt: "Conta de uma celebração conquistada com o trabalho",
+    },
+    {
+      type: "image",
+      src: "/assets/dreams-2026/7-mil-em-um-dia.webp",
+      label: "+R$ 7 mil em um dia",
+      caption: "Resultado que cabe na rotina.",
+      alt: "Samanta na academia com painéis de mais de R$ 7 mil em um dia",
+    },
+    {
+      type: "image",
+      src: "/assets/dreams-2026/creator-summit.webp",
+      label: "Creator Summit",
+      caption: "Networking que abre novas portas.",
+      alt: "Samanta com outras criadoras no Creator Summit",
+      position: "center",
+    },
+    {
+      type: "image",
+      src: "/assets/dreams-2026/evento-criadores.webp",
+      label: "Novas experiências",
+      caption: "O digital levando a lugares antes distantes.",
+      alt: "Samanta sorrindo em um evento de criadores",
+      position: "center 32%",
+    },
+  ];
+
   const initializeCoverflow = () => {
-    if (document.querySelector(".dreams-coverflow")) {
-      return true;
-    }
+    if (document.querySelector(".dreams-coverflow")) return true;
 
     const showcase = document.querySelector(".dreams-showcase");
-    const originalVideo = showcase?.querySelector(".dreams-feature-video");
-    const originalCards = [
-      ...(showcase?.querySelectorAll(".dreams-orbit-card") ?? []),
-    ];
-
-    if (!showcase || !originalVideo || originalCards.length === 0) {
-      return false;
-    }
-
-    const video = originalVideo.querySelector("video");
-    if (!video) {
-      return false;
-    }
+    if (!showcase) return false;
 
     const coverflow = document.createElement("div");
     coverflow.className = "dreams-coverflow";
     coverflow.setAttribute("aria-roledescription", "carrossel");
     coverflow.setAttribute(
       "aria-label",
-      "Vídeo, resultados e conquistas de Samanta",
+      "Vídeos, resultados e conquistas de Samanta",
     );
 
     const viewport = document.createElement("div");
@@ -34,47 +126,44 @@
     const track = document.createElement("div");
     track.className = "dreams-coverflow-track";
 
-    const videoSlide = document.createElement("figure");
-    videoSlide.className = "dreams-coverflow-slide dreams-coverflow-video";
-    videoSlide.dataset.label = "Paris, França";
-    videoSlide.setAttribute("aria-label", "Paris, França — vídeo em destaque");
-    video.removeAttribute("style");
-    videoSlide.append(video);
-
-    const videoCaption = document.createElement("figcaption");
-    videoCaption.innerHTML =
-      "<span>Paris, França</span><strong>Liberdade em movimento.</strong>";
-    videoSlide.append(videoCaption);
-
-    const slides = [videoSlide];
-
-    originalCards.forEach((card) => {
+    const slides = media.map((item, index) => {
       const slide = document.createElement("button");
-      const label = card.querySelector("span")?.textContent?.trim() || "Conquista";
-      const image = card.querySelector("img")?.cloneNode(true);
-
       slide.type = "button";
-      slide.className = "dreams-coverflow-slide dreams-coverflow-image";
-      slide.dataset.label = label;
-      slide.setAttribute("aria-label", `Destacar ${label}`);
+      slide.className = `dreams-coverflow-slide dreams-coverflow-${item.type}`;
+      slide.dataset.index = String(index);
+      slide.dataset.label = item.label;
+      slide.setAttribute(
+        "aria-label",
+        `${item.label}. ${item.caption} Item ${index + 1} de ${media.length}.`,
+      );
 
-      if (image) {
-        image.removeAttribute("aria-hidden");
-        image.alt = label;
+      if (item.type === "video") {
+        const video = document.createElement("video");
+        video.src = item.src;
+        video.poster = item.poster;
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.preload = index === 0 ? "metadata" : "none";
+        video.setAttribute("aria-label", item.alt);
+        slide.append(video);
+      } else {
+        const image = document.createElement("img");
+        image.src = item.src;
+        image.alt = item.alt;
+        image.loading = index < 4 ? "eager" : "lazy";
+        image.decoding = "async";
         image.draggable = false;
+        if (item.position) image.style.objectPosition = item.position;
         slide.append(image);
       }
 
       const caption = document.createElement("span");
       caption.className = "dreams-coverflow-caption";
-      caption.textContent = label;
+      caption.innerHTML = `<span>${item.label}</span><strong>${item.caption}</strong>`;
       slide.append(caption);
-      slides.push(slide);
-    });
-
-    slides.forEach((slide, index) => {
-      slide.dataset.index = String(index);
       track.append(slide);
+      return slide;
     });
 
     const previous = document.createElement("button");
@@ -103,7 +192,6 @@
     const normalizeOffset = (index) => {
       let offset = index - activeIndex;
       const halfway = slides.length / 2;
-
       if (offset > halfway) offset -= slides.length;
       if (offset < -halfway) offset += slides.length;
       return offset;
@@ -126,21 +214,20 @@
         slide.tabIndex = slot === "hidden" ? -1 : 0;
       });
 
+      document
+        .querySelectorAll(".dreams-coverflow video")
+        .forEach((video) => video.pause());
+
       const activeSlide = slides[activeIndex];
       const activeVideo = activeSlide.querySelector("video");
-      video.pause();
-      if (activeVideo) {
-        activeVideo.play().catch(() => {});
-      }
+      if (activeVideo) activeVideo.play().catch(() => {});
 
-      status.textContent = `${activeSlide.dataset.label}. Item ${activeIndex + 1} de ${slides.length}.`;
-      coverflow.dataset.activeType =
-        activeSlide === videoSlide ? "video" : "image";
+      status.textContent = `${media[activeIndex].label}. Item ${activeIndex + 1} de ${slides.length}.`;
+      coverflow.dataset.activeType = media[activeIndex].type;
     };
 
     const move = (direction) => {
-      activeIndex =
-        (activeIndex + direction + slides.length) % slides.length;
+      activeIndex = (activeIndex + direction + slides.length) % slides.length;
       render();
     };
 
@@ -168,7 +255,7 @@
     });
 
     viewport.addEventListener("pointerdown", (event) => {
-      if (event.target.closest("button")) return;
+      if (event.target.closest(".dreams-coverflow-arrow")) return;
       pointerStartX = event.clientX;
       viewport.setPointerCapture?.(event.pointerId);
     });
@@ -177,35 +264,43 @@
       if (pointerStartX === null) return;
       const distance = event.clientX - pointerStartX;
       pointerStartX = null;
-
-      if (Math.abs(distance) > 42) {
-        move(distance > 0 ? -1 : 1);
-      }
+      if (Math.abs(distance) > 42) move(distance > 0 ? -1 : 1);
     });
 
     viewport.addEventListener("pointercancel", () => {
       pointerStartX = null;
     });
 
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        document
+          .querySelectorAll(".dreams-coverflow video")
+          .forEach((video) => video.pause());
+      } else {
+        const activeVideo = slides[activeIndex]?.querySelector("video");
+        if (activeVideo) activeVideo.play().catch(() => {});
+      }
+    });
+
     render();
     return true;
   };
 
-  const ensureCoverflow = () => initializeCoverflow();
-  const observer = new MutationObserver(ensureCoverflow);
-
+  const observer = new MutationObserver(initializeCoverflow);
   observer.observe(document.documentElement, { childList: true, subtree: true });
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", ensureCoverflow, { once: true });
+    document.addEventListener("DOMContentLoaded", initializeCoverflow, {
+      once: true,
+    });
   } else {
-    ensureCoverflow();
+    initializeCoverflow();
   }
 
   window.addEventListener("load", () => {
-    ensureCoverflow();
-    window.setTimeout(ensureCoverflow, 120);
-    window.setTimeout(ensureCoverflow, 650);
+    initializeCoverflow();
+    window.setTimeout(initializeCoverflow, 120);
+    window.setTimeout(initializeCoverflow, 650);
     window.setTimeout(() => observer.disconnect(), 5000);
   });
 })();
