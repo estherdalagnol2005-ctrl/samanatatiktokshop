@@ -9,8 +9,8 @@
       type: "proof",
     },
     {
-      src: "/testimonials/2026-08/itamires-ajuda.webp",
-      alt: "Itámires celebra o apoio recebido para validar produtos e aprender a escalar",
+      src: "/testimonials/2026-08/jhenifer-recorde-dia.webp",
+      alt: "Jhenifer celebra um novo recorde depois de poucas semanas criando conteúdo",
       type: "proof",
     },
     {
