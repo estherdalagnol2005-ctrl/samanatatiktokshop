@@ -15,7 +15,7 @@
         <header class="student-proof-heading">
           <div class="student-proof-copy">
             <h2 id="student-proof-title">ESSE É O MOTIVO QUE ME FAZ CONTINUAR<br><strong>AJUDANDO MULHERES COMO VOCÊ.</strong></h2>
-            <p>Depoimentos reais, de mulheres reais. Se você é mãe e não tem tempo, trabalha como CLT e chega cansada ou já tentou sozinha e travou, eu quero que você saiba: a sua realidade pode mudar. Hoje, minha missão é te mostrar esse caminho para que você viva tudo o que merece. Você merece ser feliz, ter liberdade, tranquilidade, tempo para quem ama e orgulho da vida que está construindo.</p>
+            <p>Depoimentos reais, de mulheres reais. Se você é mãe e não tem tempo, trabalha como CLT e chega cansada ou já tentou sozinha e travou, eu quero que você saiba: a sua realidade pode mudar. Hoje, minha missão é te mostrar esse caminho para que você construa uma vida com mais liberdade, tranquilidade, tempo para quem ama e orgulho da própria história.</p>
           </div>
         </header>
 
