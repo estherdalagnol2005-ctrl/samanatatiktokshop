@@ -3,7 +3,6 @@
     { href: "#jornada", label: "Método" },
     { href: "#depoimentos", label: "Depoimentos" },
     { href: "#resultados", label: "Conquistas" },
-    { href: "#minha-historia", label: "Minha história" },
   ];
 
   const buildNavigation = () => {
