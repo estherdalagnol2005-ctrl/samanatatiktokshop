@@ -13,16 +13,31 @@
       )
       .join("");
 
+  const createToggle = () => {
+    const button = document.createElement("button");
+    button.className = "mobile-menu-toggle";
+    button.type = "button";
+    button.setAttribute("aria-label", "Abrir menu");
+    button.setAttribute("aria-controls", "mobile-site-menu");
+    button.setAttribute("aria-expanded", "false");
+    button.innerHTML = '<span aria-hidden="true"><i></i><i></i><i></i></span>';
+    return button;
+  };
+
   const buildNavigation = () => {
     const header = document.querySelector(".site-header");
     const desktopNav = header?.querySelector(".desktop-nav");
     const buyButton = header?.querySelector(".buy-button");
-    const toggle = header?.querySelector(".mobile-menu-toggle");
 
-    if (!header || !desktopNav || !toggle || header.dataset.fullNavigationReady === "true") {
-      return Boolean(header && toggle);
+    if (!header || !desktopNav) return false;
+
+    let toggle = header.querySelector(".mobile-menu-toggle");
+    if (!toggle) {
+      toggle = createToggle();
+      header.append(toggle);
     }
 
+    if (header.dataset.fullNavigationReady === "true") return true;
     header.dataset.fullNavigationReady = "true";
 
     desktopNav.replaceChildren(
@@ -75,6 +90,19 @@
         <p class="mobile-menu-signature">Conteúdo com direção. Venda com intenção.</p>
       </aside>`;
     document.body.append(layer);
+
+    const keepNavigationMounted = () => {
+      const currentHeader = document.querySelector(".site-header");
+      if (currentHeader && !toggle.isConnected) currentHeader.append(toggle);
+      if (document.body && !layer.isConnected) document.body.append(layer);
+    };
+
+    const mountObserver = new MutationObserver(keepNavigationMounted);
+    mountObserver.observe(document.documentElement, { childList: true, subtree: true });
+    window.setTimeout(() => {
+      keepNavigationMounted();
+      mountObserver.disconnect();
+    }, 8000);
 
     const closeButton = layer.querySelector(".mobile-menu-close");
     const backdrop = layer.querySelector(".mobile-menu-backdrop");
