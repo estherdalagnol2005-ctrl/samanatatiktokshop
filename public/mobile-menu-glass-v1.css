@@ -64,13 +64,19 @@
     z-index: 1;
   }
 
-  /* Navigation sits intentionally above the screen midpoint, leaving more breathing room below. */
+  /* Keep the links positioned against the full panel, not the inner content box. */
+  .mobile-menu-content {
+    position: static !important;
+    z-index: 1;
+  }
+
+  /* Approved balance: links span roughly 35–65% of the viewport. */
   .mobile-menu-links {
     position: absolute !important;
-    top: 43svh !important;
+    top: 50svh !important;
     left: 50% !important;
     width: min(calc(100% - 52px), 420px) !important;
-    height: clamp(286px, 34svh, 350px);
+    height: clamp(278px, 30svh, 330px);
     transform: translate(-50%, -50%) !important;
     display: flex !important;
     flex-direction: column;
@@ -112,9 +118,9 @@
 
 @media (width <= 420px) {
   .mobile-menu-links {
-    top: 42.5svh !important;
+    top: 50svh !important;
     width: min(calc(100% - 40px), 360px) !important;
-    height: clamp(274px, 33svh, 324px);
+    height: clamp(258px, 29svh, 306px);
   }
 
   .mobile-menu-links a:not(.mobile-menu-cta) .mobile-menu-falling-text {
