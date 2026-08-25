@@ -118,6 +118,20 @@
   text-transform: uppercase;
 }
 
+.site-footer-bottom a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-footer-bottom a:hover,
+.site-footer-bottom a:focus-visible {
+  color: #1c171a;
+  outline: none;
+  text-decoration: underline;
+  text-decoration-color: #f0ff27;
+  text-underline-offset: 4px;
+}
+
 @media (width <= 900px) {
   .site-footer-shell {
     grid-template-areas:
