@@ -12,6 +12,12 @@
   font-size: clamp(13px, 1vw, 16px);
 }
 
+@media (width >= 1180px) {
+  .hero-stage .site-header .buy-button {
+    display: inline-flex !important;
+  }
+}
+
 .site-header .buy-button i,
 .hero-method-visual .method-result-badge,
 .hero-result-proof {
@@ -97,7 +103,7 @@
 
 .scroll-cue span {
   position: relative;
-  padding-bottom: 13px;
+  padding-bottom: clamp(48px, 4vw, 64px);
 }
 
 .scroll-cue span::after {
@@ -105,10 +111,10 @@
   position: absolute;
   left: 50%;
   bottom: 0;
-  width: clamp(92px, 8vw, 140px);
-  height: 2px;
+  width: 2px;
+  height: clamp(36px, 3.4vw, 52px);
   border-radius: 999px;
-  background: linear-gradient(90deg, #fa2095, #ffa120);
+  background: linear-gradient(180deg, #fa2095, #ffa120);
   transform: translateX(-50%);
   animation: scroll-cue-line-float 1.8s ease-in-out infinite;
 }
