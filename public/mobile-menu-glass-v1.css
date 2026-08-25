@@ -64,13 +64,13 @@
     z-index: 1;
   }
 
-  /* Keep the navigation copy inside a deliberate central band. */
+  /* Navigation sits intentionally above the screen midpoint, leaving more breathing room below. */
   .mobile-menu-links {
     position: absolute !important;
-    top: 47.5svh !important;
+    top: 43svh !important;
     left: 50% !important;
     width: min(calc(100% - 52px), 420px) !important;
-    height: clamp(320px, 39svh, 420px);
+    height: clamp(286px, 34svh, 350px);
     transform: translate(-50%, -50%) !important;
     display: flex !important;
     flex-direction: column;
@@ -81,10 +81,17 @@
 
   .mobile-menu-links a:not(.mobile-menu-cta) {
     flex: 0 0 auto;
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-content: center !important;
+    text-align: center !important;
   }
 
   .mobile-menu-links a:not(.mobile-menu-cta) .mobile-menu-falling-text {
+    display: inline-block;
+    margin-inline: auto;
     font-size: clamp(23px, 6.25vw, 27px);
+    text-align: center !important;
   }
 
   .mobile-menu-close {
@@ -105,9 +112,9 @@
 
 @media (width <= 420px) {
   .mobile-menu-links {
-    top: 47svh !important;
+    top: 42.5svh !important;
     width: min(calc(100% - 40px), 360px) !important;
-    height: clamp(300px, 38svh, 360px);
+    height: clamp(274px, 33svh, 324px);
   }
 
   .mobile-menu-links a:not(.mobile-menu-cta) .mobile-menu-falling-text {
