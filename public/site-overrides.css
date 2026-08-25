@@ -103,7 +103,7 @@
 
 .scroll-cue span {
   position: relative;
-  padding-bottom: clamp(58px, 5vw, 76px);
+  padding-bottom: clamp(46px, 4vw, 60px);
 }
 
 .scroll-cue span::after {
