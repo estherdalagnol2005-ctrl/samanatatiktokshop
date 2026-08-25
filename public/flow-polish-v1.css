@@ -217,3 +217,97 @@ html {
   visibility: visible !important;
   pointer-events: auto !important;
 }
+
+/* Final continuity pass: every visible fold starts on the exact tone where the previous fold ends. */
+.site-gradient-marquee {
+  background: var(--flow-pink) !important;
+}
+
+.student-proof-section {
+  margin-top: -1px;
+  background: linear-gradient(
+    180deg,
+    var(--flow-pink) 0%,
+    var(--flow-pink) 10%,
+    var(--flow-pink-deep) 18%,
+    var(--flow-orange) 50%,
+    var(--flow-lime) 90%,
+    var(--flow-lime) 100%
+  ) !important;
+}
+
+.community-section {
+  margin-top: -1px;
+  background: linear-gradient(
+    180deg,
+    var(--flow-lime) 0%,
+    var(--flow-lime) 12%,
+    var(--flow-orange) 50%,
+    var(--flow-pink) 88%,
+    var(--flow-pink) 100%
+  ) !important;
+}
+
+.dreams-section {
+  margin-top: -1px;
+  background: linear-gradient(
+    180deg,
+    var(--flow-pink) 0%,
+    var(--flow-pink) 12%,
+    var(--flow-orange) 50%,
+    var(--flow-lime) 88%,
+    var(--flow-lime) 100%
+  ) !important;
+}
+
+.method-section {
+  margin-top: -1px;
+  background: linear-gradient(
+    180deg,
+    var(--flow-lime) 0%,
+    var(--flow-lime) 14%,
+    var(--flow-orange) 34%,
+    var(--flow-pink) 50%,
+    var(--flow-orange) 68%,
+    var(--flow-lime) 86%,
+    var(--flow-lime) 100%
+  ) !important;
+}
+
+.conversion-section {
+  margin-top: -1px;
+  background: linear-gradient(
+    180deg,
+    var(--flow-lime) 0%,
+    var(--flow-lime) 12%,
+    var(--flow-orange) 50%,
+    var(--flow-pink) 88%,
+    var(--flow-pink) 100%
+  ) !important;
+}
+
+.site-footer {
+  margin-top: -1px;
+  background: linear-gradient(
+    180deg,
+    var(--flow-pink) 0%,
+    var(--flow-pink) 14%,
+    var(--flow-orange) 58%,
+    var(--flow-lime) 100%
+  ) !important;
+}
+
+/* Large soft shadows were tinting the shared colour between folds on phones.
+   Keep depth inside the cards without darkening the section seam itself. */
+@media (pointer: coarse), (width <= 800px) {
+  .student-proof-shell,
+  .community-shell,
+  .dreams-shell,
+  .method-shell,
+  .method-sales-shell,
+  .conversion-shell {
+    box-shadow:
+      0 0 0 1px rgb(28 23 26 / 5%),
+      0 8px 18px -16px rgb(73 14 50 / 13%) !important;
+  }
+}
