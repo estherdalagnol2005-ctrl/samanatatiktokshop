@@ -183,10 +183,10 @@ html {
   background: linear-gradient(
     180deg,
     var(--flow-lime) 0%,
-    var(--flow-orange) 5%,
-    var(--flow-pink) 11%,
-    var(--flow-pink) 18%,
-    var(--flow-orange) 55%,
+    var(--flow-lime) 14%,
+    var(--flow-orange) 34%,
+    var(--flow-pink) 50%,
+    var(--flow-orange) 72%,
     var(--flow-lime) 100%
   ) !important;
 }
