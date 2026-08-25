@@ -1,8 +1,13 @@
-/* Mobile menu toggle: visible immediately, with no entrance animation. */
+/* Mobile menu toggle: always visible immediately, with no animation. */
 @media (width < 1180px) {
   .mobile-menu-toggle {
-    animation: none !important;
+    display: grid !important;
+    visibility: visible !important;
     opacity: 1 !important;
+    pointer-events: auto !important;
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
     translate: 0 !important;
     scale: 1 !important;
     will-change: auto !important;
