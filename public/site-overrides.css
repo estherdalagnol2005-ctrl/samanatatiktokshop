@@ -103,7 +103,7 @@
 
 .scroll-cue span {
   position: relative;
-  padding-bottom: clamp(48px, 4vw, 64px);
+  padding-bottom: clamp(58px, 5vw, 76px);
 }
 
 .scroll-cue span::after {
@@ -111,10 +111,10 @@
   position: absolute;
   left: 50%;
   bottom: 0;
-  width: 2px;
-  height: clamp(36px, 3.4vw, 52px);
+  width: 1px;
+  height: clamp(32px, 3vw, 44px);
   border-radius: 999px;
-  background: linear-gradient(180deg, #fa2095, #ffa120);
+  background: linear-gradient(180deg, rgb(250 32 149 / 58%), rgb(255 161 32 / 42%));
   transform: translateX(-50%);
   animation: scroll-cue-line-float 1.8s ease-in-out infinite;
 }
