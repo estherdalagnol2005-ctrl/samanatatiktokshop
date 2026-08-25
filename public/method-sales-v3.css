@@ -229,6 +229,7 @@
   font-weight: 900;
   letter-spacing: -.025em;
   line-height: 1.28;
+  text-align: center;
 }
 
 .method-sales-cta {
@@ -325,8 +326,8 @@
   .method-sales-step h3 { font-size: clamp(20px, 5.8vw, 25px); }
   .method-sales-step p { font-size: clamp(11px, 3.1vw, 13px); }
 
-  .method-sales-closing { text-align: left; }
-  .method-sales-closing > p { font-size: clamp(26px, 7.6vw, 32px); }
+  .method-sales-closing { text-align: center; }
+  .method-sales-closing > p { font-size: clamp(26px, 7.6vw, 32px); text-align: center; }
   .method-sales-cta { width: 100%; box-shadow: 6px 6px 0 var(--tt-pink, #fa2095); font-size: clamp(8px, 2.65vw, 10px); }
 }
 
