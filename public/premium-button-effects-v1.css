@@ -73,6 +73,7 @@
   box-shadow: none !important;
   line-height: inherit;
   text-transform: none !important;
+  transform: none !important;
   transition:
     color 340ms cubic-bezier(.44, 0, .56, 1),
     transform 340ms cubic-bezier(.44, 0, .56, 1);
@@ -84,12 +85,25 @@
   flex: 0 0 auto;
   overflow: visible !important;
   border-radius: 999px !important;
+  transform: none !important;
   transform-origin: center;
   transition:
     transform 420ms cubic-bezier(.2, .82, .24, 1),
     box-shadow 460ms cubic-bezier(.44, 0, .56, 1),
     background-color 260ms ease,
     color 260ms ease !important;
+}
+
+.sunlix-fx-button:hover > .sunlix-fx-label,
+.sunlix-fx-button:focus-visible > .sunlix-fx-label,
+.sunlix-fx-button:active > .sunlix-fx-label {
+  transform: none !important;
+}
+
+.sunlix-fx-button:hover > .sunlix-fx-arrow,
+.sunlix-fx-button:focus-visible > .sunlix-fx-arrow,
+.sunlix-fx-button:active > .sunlix-fx-arrow {
+  transform: none !important;
 }
 
 .sunlix-fx-button:hover > .sunlix-fx-orbit,
@@ -101,13 +115,13 @@
   .sunlix-fx-button:hover > .sunlix-fx-arrow,
   .sunlix-fx-button:focus-visible > .sunlix-fx-arrow {
     box-shadow: 0 0 0 520px var(--sunlix-fx-reveal) !important;
-    transform: rotate(45deg) scale(1.06);
+    transform: scale(1.06) !important;
   }
 
   .sunlix-fx-button:hover > .sunlix-fx-label,
   .sunlix-fx-button:focus-visible > .sunlix-fx-label {
     color: var(--sunlix-fx-hover-ink) !important;
-    transform: translateX(-3px);
+    transform: translateX(-3px) !important;
   }
 }
 
