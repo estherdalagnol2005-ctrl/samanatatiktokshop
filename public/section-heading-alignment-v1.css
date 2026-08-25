@@ -1,0 +1,72 @@
+/* Centraliza somente títulos e subtítulos das dobras internas. */
+.student-proof-heading,
+.student-proof-copy,
+.dreams-heading,
+.method-sales-intro,
+.community-copy,
+.home-story-heading {
+  width: 100%;
+  text-align: center !important;
+}
+
+.student-proof-copy h2,
+.student-proof-copy h2 *,
+.dreams-heading h2,
+.dreams-heading h2 *,
+.method-sales-intro h2,
+.method-sales-intro h2 *,
+.community-copy h2,
+.community-copy h2 *,
+.home-story-heading h2,
+.home-story-heading h2 * {
+  text-align: center !important;
+  text-transform: none !important;
+}
+
+.student-proof-copy p,
+.method-sales-intro > p,
+.community-copy > p,
+.home-story-heading > p {
+  margin-right: auto !important;
+  margin-left: auto !important;
+  text-align: center !important;
+  text-transform: none !important;
+}
+
+.student-proof-copy h2 {
+  width: min(100%, 690px) !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+@media (min-width: 641px) {
+  .student-proof-number {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .student-proof-number {
+    width: min(100%, 260px) !important;
+    margin-top: 14px !important;
+    padding: 11px 15px !important;
+    border-radius: 15px !important;
+    box-shadow: 4px 4px 0 #fa2095 !important;
+  }
+
+  .student-proof-number span {
+    font-size: 7px !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  .student-proof-number strong {
+    margin-top: 5px !important;
+    font-size: clamp(22px, 7vw, 27px) !important;
+    line-height: 0.95 !important;
+  }
+
+  .student-proof-number small {
+    margin-top: 5px !important;
+    font-size: 9px !important;
+  }
+}

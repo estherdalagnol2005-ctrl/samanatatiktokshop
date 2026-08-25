@@ -14,33 +14,27 @@
       <div class="student-proof-shell">
         <header class="student-proof-heading">
           <div class="student-proof-copy">
-            <span class="student-proof-eyebrow">PROVA SOCIAL · RESULTADOS DAS ALUNAS</span>
-            <h2 id="student-proof-title">ELAS TAMBÉM<br><strong>ESTÃO VENDENDO.</strong></h2>
-            <p>Prints e relatos de alunas que aplicaram o método e já estão transformando conteúdo em resultado.</p>
+            <h2 id="student-proof-title">Esse é o motivo que me faz continuar<br><strong>ajudando mulheres como você.</strong></h2>
+            <p>Depoimentos reais, de mulheres reais. Se você é mãe e não tem tempo, trabalha como CLT e chega cansada ou já tentou sozinha e travou, eu quero que você saiba: a sua realidade pode mudar. Hoje, minha missão é te mostrar esse caminho para que você construa uma vida com mais liberdade, tranquilidade, tempo para quem ama e orgulho da própria história.</p>
           </div>
-          <aside class="student-proof-number" aria-label="Aluna recebeu mais de 31 mil reais em um pagamento">
-            <span>UM DOS RESULTADOS</span>
-            <strong>+R$ 31 MIL</strong>
-            <small>em um único pagamento</small>
-          </aside>
         </header>
 
         <div class="student-proof-carousel-shell">
           <button class="student-proof-arrow student-proof-arrow--prev" type="button" aria-label="Ver depoimento anterior">←</button>
 
-          <div class="student-proof-carousel" aria-label="Carrossel com cinco resultados reais de alunas" tabindex="0">
+          <div class="student-proof-carousel" aria-label="Carrossel com dez resultados reais de alunas" tabindex="0">
             <div class="student-proof-track">
-              <figure class="student-proof-card student-proof-real-card is-active">
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain is-active">
                 <img src="/testimonials/sarah-comissoes-marco.webp" alt="Depoimento de Sarah mostrando 87,6 mil reais em GMV e quase 9 mil reais em comissões no mês" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Quase R$ 9 mil em comissões no mês.</strong></figcaption>
               </figure>
 
-              <figure class="student-proof-card student-proof-real-card">
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
                 <img src="/testimonials/leticia-pix-31634.webp" alt="Depoimento de Leticia mostrando um Pix de 31.634 reais recebido do TikTok Shop" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>PAGAMENTO REAL</span><strong>R$ 31.634 recebidos de uma vez.</strong></figcaption>
               </figure>
 
-              <figure class="student-proof-card student-proof-real-card">
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
                 <img src="/testimonials/nay-pagamentos-tres-perfis.webp" alt="Depoimento de Nay mostrando pagamentos recebidos em três perfis" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>RESULTADO DE ALUNA</span><strong>Três perfis gerando pagamentos.</strong></figcaption>
               </figure>
@@ -53,6 +47,31 @@
               <figure class="student-proof-card student-proof-real-card">
                 <img src="/testimonials/karol-comissoes-2600.webp" alt="Depoimento de Karol mostrando novo recorde de 2.600 reais em comissões" loading="lazy" decoding="async">
                 <figcaption class="student-proof-caption"><span>NOVO RECORDE</span><strong>R$ 2,6 mil em comissões.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
+                <img src="/testimonials/2026-08/michelle-gratidao.webp" alt="Depoimento de Michelle mostrando uma transferência de 2.524 reais recebida da ByteDance" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>DINHEIRO NA CONTA</span><strong>R$ 2.524 recebidos.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card">
+                <img src="/testimonials/2026-08/itamires-ajuda.webp" alt="Depoimento de Itámires mostrando evolução nas vendas com ajuda e acompanhamento" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>EVOLUÇÃO ACOMPANHADA</span><strong>Mais um produto validado e pronto para escalar.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
+                <img src="/testimonials/2026-08/michelle-viver-tiktok.webp" alt="Depoimento de Michelle sobre seu plano de sair do trabalho e viver do TikTok" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>NOVA POSSIBILIDADE</span><strong>A caminho de viver do TikTok.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
+                <img src="/testimonials/2026-08/karol-pix-9401.webp" alt="Depoimento de Karol mostrando um Pix de 9.401 reais recebido da ByteDance" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>ESFORÇO RECOMPENSADO</span><strong>R$ 9.401 recebidos.</strong></figcaption>
+              </figure>
+
+              <figure class="student-proof-card student-proof-real-card student-proof-fit-contain">
+                <img src="/testimonials/2026-08/elisangela-fechamento.webp" alt="Depoimento de Elisângela mostrando 6.500 reais em comissões no mês" loading="lazy" decoding="async">
+                <figcaption class="student-proof-caption"><span>FECHAMENTO DO MÊS</span><strong>R$ 6,5 mil em comissões.</strong></figcaption>
               </figure>
             </div>
           </div>
@@ -68,8 +87,19 @@
             <button type="button" aria-label="Ver depoimento 3"></button>
             <button type="button" aria-label="Ver depoimento 4"></button>
             <button type="button" aria-label="Ver depoimento 5"></button>
+            <button type="button" aria-label="Ver depoimento 6"></button>
+            <button type="button" aria-label="Ver depoimento 7"></button>
+            <button type="button" aria-label="Ver depoimento 8"></button>
+            <button type="button" aria-label="Ver depoimento 9"></button>
+            <button type="button" aria-label="Ver depoimento 10"></button>
           </div>
         </div>
+
+        <aside class="student-proof-number" aria-label="Aluna recebeu mais de 31 mil reais em um pagamento">
+          <span>UM DOS RESULTADOS</span>
+          <strong>+R$ 31 MIL</strong>
+          <small>em um único pagamento</small>
+        </aside>
 
         <a class="student-proof-cta" href="https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O">QUERO SER A PRÓXIMA HISTÓRIA <span aria-hidden="true">↗</span></a>
       </div>
@@ -86,6 +116,13 @@
 
     cards.forEach((card, index) => {
       card.dataset.proofIndex = String(index);
+      const image = card.querySelector("img");
+      if (card.classList.contains("student-proof-fit-contain") && image) {
+        card.style.setProperty(
+          "--student-proof-image",
+          `url("${image.getAttribute("src")}")`,
+        );
+      }
     });
 
     if (track && cards.length > 1) {

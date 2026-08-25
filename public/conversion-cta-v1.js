@@ -17,13 +17,7 @@
 
         <div class="conversion-copy">
           <span class="conversion-eyebrow">✦ A DECISÃO QUE MUDA O PRÓXIMO RESULTADO</span>
-          <h2 id="conversion-title">PARE DE POSTAR<br><strong>NO ESCURO.</strong><em>VENDA COM DIREÇÃO.</em></h2>
-          <p>Na mentoria, Samanta e Luana mostram como escolher produtos com demanda, criar conteúdo com intenção e repetir o que realmente gera venda no TikTok Shop.</p>
-          <div class="conversion-chips" aria-label="O que a mentoria organiza">
-            <span>Produto com demanda</span>
-            <span>Conteúdo com intenção</span>
-            <span>Leitura para repetir</span>
-          </div>
+          <h2 id="conversion-title">TE ENSINO A ESCALAR VENDAS<br><strong>COM MÉTODO</strong><em>E ESTRATÉGIA.</em></h2>
         </div>
 
         <figure class="conversion-photo">
@@ -32,9 +26,9 @@
         </figure>
 
         <aside class="conversion-trigger">
-          <small>ENQUANTO VOCÊ ADIA...</small>
-          <strong>OUTRAS CRIADORAS TESTAM, APRENDEM E OCUPAM ESPAÇO.</strong>
-          <p>Você não precisa de mais tentativa. Precisa de um processo que mostre o que fazer — e por quê.</p>
+          <small>ENQUANTO VOCÊ PROCRASTINA...</small>
+          <strong>OUTRAS MULHERES ESTÃO REALIZANDO SEUS SONHOS COM O TIKTOK SHOP.</strong>
+          <p>Você pode ser a próxima.</p>
         </aside>
 
         <div class="conversion-action">

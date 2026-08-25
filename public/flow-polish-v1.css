@@ -177,6 +177,20 @@ html {
   ) !important;
 }
 
+/* Bridge the lime ending of the gallery into the pink method fold, then keep
+   the existing pink-to-lime flow so the following section still connects. */
+.method-section {
+  background: linear-gradient(
+    180deg,
+    var(--flow-lime) 0%,
+    var(--flow-lime) 14%,
+    var(--flow-orange) 34%,
+    var(--flow-pink) 50%,
+    var(--flow-orange) 72%,
+    var(--flow-lime) 100%
+  ) !important;
+}
+
 /* Keep Nagoku exclusive to the hero title; section headings use the body typeface. */
 .page-shell > section:not(.hero-stage) h2,
 .page-shell > section:not(.hero-stage) h3 {
