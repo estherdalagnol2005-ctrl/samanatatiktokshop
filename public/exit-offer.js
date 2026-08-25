@@ -2,7 +2,7 @@
   const SUPPRESSION_KEY = "samanta-exit-offer-until";
   const SESSION_KEY = "samanta-exit-offer-seen";
   const DEFAULT_SUPPRESSION_DAYS = 7;
-  const MOBILE_DWELL_MS = 45_000;
+  const MOBILE_DWELL_MS = 40_000;
   const DESKTOP_DWELL_MS = 4_000;
   const startedAt = Date.now();
   const mobileDevice = window.matchMedia("(pointer: coarse)").matches;
