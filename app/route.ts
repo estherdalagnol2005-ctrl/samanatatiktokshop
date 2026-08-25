@@ -49,6 +49,10 @@ const optimizedHtml = snapshotHtml
     '<a class="hero-text-link" href="#jornada">O que faz um vídeo vender? ↓</a>',
     "",
   )
+  .replace(
+    '<a class="scroll-cue" href="#resultados"',
+    '<a class="scroll-cue" href="#depoimentos"',
+  )
   .replaceAll("O VÍDEO QUE VENDE", "O método que")
   .replaceAll("COMEÇA ANTES", "escalou minhas")
   .replaceAll("de você apertar gravar.", "vendas.")
