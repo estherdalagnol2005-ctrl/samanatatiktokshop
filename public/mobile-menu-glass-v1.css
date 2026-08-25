@@ -1,32 +1,53 @@
-/* Frosted-glass refinement for the fullscreen mobile menu only. */
+/* Visible frosted-glass refinement for the fullscreen mobile menu only. */
 @media (width < 1180px) {
   .mobile-menu-layer,
   .mobile-menu-layer.is-open {
-    background: rgba(255, 255, 255, 0.72) !important;
-    -webkit-backdrop-filter: blur(22px) saturate(125%);
-    backdrop-filter: blur(22px) saturate(125%);
+    background: rgba(248, 248, 250, 0.22) !important;
+    -webkit-backdrop-filter: blur(34px) saturate(112%);
+    backdrop-filter: blur(34px) saturate(112%);
   }
 
   .mobile-menu-backdrop {
-    background: rgba(255, 255, 255, 0.62) !important;
+    background:
+      radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.96) 0 11%, rgba(255, 255, 255, 0.36) 30%, transparent 49%),
+      radial-gradient(circle at 86% 72%, rgba(218, 219, 225, 0.22) 0 13%, rgba(235, 235, 239, 0.12) 30%, transparent 52%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(243, 243, 246, 0.3)) !important;
     opacity: 1 !important;
-    -webkit-backdrop-filter: blur(18px) saturate(120%);
-    backdrop-filter: blur(18px) saturate(120%);
+    -webkit-backdrop-filter: blur(28px) saturate(108%);
+    backdrop-filter: blur(28px) saturate(108%);
   }
 
   .mobile-menu-panel {
     background:
-      linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.66)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.78) !important;
+      linear-gradient(145deg, rgba(255, 255, 255, 0.56) 0%, rgba(255, 255, 255, 0.34) 46%, rgba(242, 242, 246, 0.28) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.92),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.44) !important;
-    -webkit-backdrop-filter: blur(26px) saturate(128%);
-    backdrop-filter: blur(26px) saturate(128%);
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -1px 0 rgba(205, 206, 213, 0.2),
+      0 24px 70px rgba(24, 20, 23, 0.07) !important;
+    -webkit-backdrop-filter: blur(38px) saturate(118%);
+    backdrop-filter: blur(38px) saturate(118%);
+  }
+
+  .mobile-menu-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(118deg, transparent 0 23%, rgba(255, 255, 255, 0.52) 34%, rgba(255, 255, 255, 0.12) 44%, transparent 55%),
+      radial-gradient(ellipse at 50% -8%, rgba(255, 255, 255, 0.72), transparent 43%);
+    opacity: 0.7;
+  }
+
+  .mobile-menu-panel > * {
+    position: relative;
+    z-index: 1;
   }
 
   .mobile-menu-links {
-    gap: clamp(34px, 7.2vw, 44px);
+    gap: clamp(38px, 8vw, 48px);
   }
 
   .mobile-menu-links a:not(.mobile-menu-cta) .mobile-menu-falling-text {
@@ -34,19 +55,19 @@
   }
 
   .mobile-menu-close {
-    background: rgba(250, 32, 149, 0.92);
-    border-color: rgba(255, 255, 255, 0.72);
+    background: rgba(250, 32, 149, 0.9);
+    border-color: rgba(255, 255, 255, 0.88);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.28),
-      0 8px 24px rgba(250, 32, 149, 0.12);
-    -webkit-backdrop-filter: blur(14px);
-    backdrop-filter: blur(14px);
+      inset 0 1px 0 rgba(255, 255, 255, 0.34),
+      0 8px 24px rgba(250, 32, 149, 0.13);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
   }
 }
 
 @media (width <= 420px) {
   .mobile-menu-links {
-    gap: 34px;
+    gap: 38px;
   }
 
   .mobile-menu-links a:not(.mobile-menu-cta) .mobile-menu-falling-text {
