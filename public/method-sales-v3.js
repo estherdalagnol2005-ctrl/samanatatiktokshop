@@ -78,7 +78,7 @@
       <div class="method-sales-shell">
         <div class="method-sales-intro">
           <span class="method-sales-eyebrow">SE VOCÊ SE IDENTIFICA...</span>
-          <h2 id="method-sales-title">Como saber se a <strong>SUNLIX É PARA MIM?</strong></h2>
+          <h2 id="method-sales-title">Como saber se a <strong>Sunlix é para mim?</strong></h2>
           <p><strong>Se você:</strong></p>
         </div>
 
