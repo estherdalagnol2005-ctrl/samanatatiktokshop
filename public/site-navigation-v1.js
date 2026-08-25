@@ -56,14 +56,16 @@
         <nav class="mobile-menu-links" aria-label="Navegação no celular">
           ${[{ href: "#top", label: "Início" }, ...sectionLinks]
             .map(
-              ({ href, label }, index) => `
-                <a href="${href}"${href === "#inscricao" ? ' class="mobile-menu-cta"' : ""}>
-                  <small>${String(index + 1).padStart(2, "0")}</small>
+              ({ href, label }) => `
+                <a href="${href}">
                   <span>${label}</span>
-                  <i aria-hidden="true">→</i>
                 </a>`,
             )
             .join("")}
+          <a class="mobile-menu-cta" href="#inscricao">
+            <span>QUERO FAZER PARTE DA SUNLIX</span>
+            <b aria-hidden="true">↗</b>
+          </a>
         </nav>
         <p>Conteúdo com direção. Venda com intenção.</p>
       </aside>`;
