@@ -24,7 +24,7 @@ gsap.registerPlugin(ScrollTrigger);
           document.querySelector(".site-header .desktop-nav"),
           document.querySelector(".site-header .buy-button"),
         ].filter(Boolean)
-      : [...document.querySelectorAll(".site-header > *:not(.buy-button)")];
+      : [document.querySelector(".site-header .brand")].filter(Boolean);
 
     gsap.killTweensOf(chars);
     gsap.set(chars, {
