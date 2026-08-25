@@ -9,7 +9,7 @@
     Array.from(label)
       .map(
         (char, index) =>
-          `<span class="mobile-menu-char" aria-hidden="true" style="--char-index:${index}">${char === " " ? "&nbsp;" : char}</span>`,
+          `<span class="mobile-menu-char" aria-hidden="true" style="--char-delay:${(index * 0.032).toFixed(3)}s">${char === " " ? "&nbsp;" : char}</span>`,
       )
       .join("");
 
@@ -68,7 +68,7 @@
             ${[{ href: "#top", label: "Início" }, ...sectionLinks]
               .map(
                 ({ href, label }, linkIndex) => `
-                  <a href="${href}" aria-label="${label}" style="--link-index:${linkIndex}">
+                  <a href="${href}" aria-label="${label}" style="--link-delay:${(linkIndex * 0.075).toFixed(3)}s">
                     <span class="mobile-menu-falling-text" aria-hidden="true">${fallingLabelMarkup(label)}</span>
                   </a>`,
               )
