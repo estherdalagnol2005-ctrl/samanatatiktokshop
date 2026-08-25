@@ -5,6 +5,14 @@
     { href: "#resultados", label: "Conquistas" },
   ];
 
+  const fallingLabelMarkup = (label) =>
+    Array.from(label)
+      .map(
+        (char, index) =>
+          `<span class="mobile-menu-char" aria-hidden="true" style="--char-index:${index}">${char === " " ? "&nbsp;" : char}</span>`,
+      )
+      .join("");
+
   const buildNavigation = () => {
     const header = document.querySelector(".site-header");
     const desktopNav = header?.querySelector(".desktop-nav");
@@ -59,9 +67,9 @@
           <nav class="mobile-menu-links" aria-label="Navegação no celular">
             ${[{ href: "#top", label: "Início" }, ...sectionLinks]
               .map(
-                ({ href, label }) => `
-                  <a href="${href}">
-                    <span>${label}</span>
+                ({ href, label }, linkIndex) => `
+                  <a href="${href}" aria-label="${label}" style="--link-index:${linkIndex}">
+                    <span class="mobile-menu-falling-text" aria-hidden="true">${fallingLabelMarkup(label)}</span>
                   </a>`,
               )
               .join("")}
