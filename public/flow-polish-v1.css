@@ -206,3 +206,90 @@ html {
   visibility: visible !important;
   pointer-events: auto !important;
 }
+
+/* Keep the intermediate folds editorially centered without touching the hero,
+   conversion CTA, or footer. */
+.student-proof-copy,
+.student-proof-caption,
+.community-copy,
+.community-gallery-message,
+.home-story-heading,
+.dreams-heading,
+.dreams-body,
+.method-sales-intro,
+.method-sales-step-content,
+.method-sales-closing {
+  text-align: center !important;
+}
+
+.student-proof-copy,
+.community-copy,
+.home-story-heading,
+.dreams-heading,
+.dreams-body {
+  margin-inline: auto;
+}
+
+.student-proof-copy p,
+.community-copy > p,
+.home-story-heading > p,
+.dreams-body > p {
+  margin-inline: auto;
+}
+
+/* Text comes first; the carousel follows below it at every breakpoint. */
+.community-shell {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.community-copy,
+.community-gallery-message {
+  width: min(100%, 720px) !important;
+}
+
+.community-copy h2,
+.community-copy > p,
+.community-copy > .community-cta,
+.community-copy > .community-note,
+.community-gallery-message {
+  margin-inline: auto !important;
+}
+
+/* The home-story heading and its supporting copy stay in one vertical stack. */
+.home-story-heading {
+  grid-template-columns: minmax(0, 1fr) !important;
+  justify-items: center;
+}
+
+.home-story-heading > p {
+  max-width: 620px;
+}
+
+/* Each step of the method reads as a centered vertical group on all screens. */
+.method-sales-timeline {
+  padding-left: 0 !important;
+}
+
+.method-sales-step {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 1.5vw, 20px);
+}
+
+.method-sales-step-content,
+.method-sales-step--right .method-sales-step-content,
+.method-sales-step--left .method-sales-step-content {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  justify-self: auto !important;
+  width: min(100%, 640px) !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+.method-sales-marker {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  order: 2;
+}
