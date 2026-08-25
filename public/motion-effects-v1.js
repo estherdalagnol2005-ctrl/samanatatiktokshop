@@ -17,7 +17,14 @@ gsap.registerPlugin(ScrollTrigger);
 
     heroState.started = true;
     heroState.firstCharacter = chars[0];
-    const headerItems = [...document.querySelectorAll(".site-header > *:not(.buy-button)")];
+    const isDesktop = window.matchMedia("(min-width: 1180px)").matches;
+    const headerItems = isDesktop
+      ? [
+          document.querySelector(".site-header .brand"),
+          document.querySelector(".site-header .desktop-nav"),
+          document.querySelector(".site-header .buy-button"),
+        ].filter(Boolean)
+      : [...document.querySelectorAll(".site-header > *:not(.buy-button)")];
 
     gsap.killTweensOf(chars);
     gsap.set(chars, {
@@ -35,19 +42,20 @@ gsap.registerPlugin(ScrollTrigger);
       rotateX: 0,
       rotateZ: 0,
       autoAlpha: 1,
-      duration: 0.58,
-      stagger: { each: 0.018, from: "start" },
+      duration: 0.78,
+      stagger: { each: 0.024, from: "start" },
       ease: "power4.out",
-      delay: 0.03,
+      delay: 0.05,
       clearProps: "transform,opacity,visibility",
     });
 
     if (headerItems.length) {
       gsap.from(headerItems, {
-        y: -18,
+        y: -14,
         autoAlpha: 0,
-        duration: 0.72,
-        stagger: 0.09,
+        duration: isDesktop ? 0.52 : 0.62,
+        stagger: isDesktop ? 0.045 : 0.07,
+        delay: isDesktop ? 0.02 : 0,
         ease: "power3.out",
         clearProps: "transform,opacity,visibility",
       });
@@ -249,7 +257,7 @@ gsap.registerPlugin(ScrollTrigger);
   const initialize = () => {
     const scheduleHeroAnimation = () => {
       window.clearTimeout(heroState.timer);
-      heroState.timer = window.setTimeout(animateHeroCharacters, 70);
+      heroState.timer = window.setTimeout(animateHeroCharacters, 90);
     };
 
     const observer = new MutationObserver(() => {
@@ -259,7 +267,7 @@ gsap.registerPlugin(ScrollTrigger);
     observer.observe(document.documentElement, { childList: true, subtree: true });
 
     const fontReady = document.fonts?.ready || Promise.resolve();
-    const fastStart = new Promise((resolve) => window.setTimeout(resolve, 120));
+    const fastStart = new Promise((resolve) => window.setTimeout(resolve, 140));
     Promise.race([fontReady, fastStart]).then(scheduleHeroAnimation);
 
     let attempts = 0;
