@@ -1,0 +1,34 @@
+/* Centraliza somente títulos e subtítulos das dobras internas. */
+.student-proof-heading,
+.student-proof-copy,
+.dreams-heading,
+.method-sales-intro,
+.community-copy,
+.home-story-heading {
+  width: 100%;
+  text-align: center !important;
+}
+
+.student-proof-copy h2,
+.student-proof-copy h2 *,
+.dreams-heading h2,
+.dreams-heading h2 *,
+.method-sales-intro h2,
+.method-sales-intro h2 *,
+.community-copy h2,
+.community-copy h2 *,
+.home-story-heading h2,
+.home-story-heading h2 * {
+  text-align: center !important;
+  text-transform: none !important;
+}
+
+.student-proof-copy p,
+.method-sales-intro > p,
+.community-copy > p,
+.home-story-heading > p {
+  margin-right: auto !important;
+  margin-left: auto !important;
+  text-align: center !important;
+  text-transform: none !important;
+}
