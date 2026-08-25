@@ -1,0 +1,179 @@
+/* Premium fullscreen refinement for the mobile/tablet menu only. */
+@media (width < 1180px) {
+  .mobile-menu-panel {
+    padding:
+      max(34px, calc(env(safe-area-inset-top) + 22px))
+      clamp(28px, 8vw, 56px)
+      max(28px, calc(env(safe-area-inset-bottom) + 18px));
+    background:
+      radial-gradient(circle at 92% 8%, rgba(247, 255, 111, 0.34), transparent 34%),
+      radial-gradient(circle at 8% 94%, rgba(250, 32, 149, 0.07), transparent 38%),
+      linear-gradient(155deg, #fffdfa 0%, #fff 56%, #fff8fb 100%);
+  }
+
+  .mobile-menu-topbar {
+    min-height: 52px;
+    align-items: center;
+  }
+
+  .mobile-menu-brand img {
+    width: clamp(96px, 24vw, 114px);
+  }
+
+  .mobile-menu-close {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+    border-color: rgba(23, 19, 21, 0.22);
+    background: rgba(255, 255, 255, 0.58);
+    backdrop-filter: blur(14px);
+  }
+
+  .mobile-menu-close i,
+  .mobile-menu-close i::after {
+    width: 16px;
+    height: 1.25px;
+  }
+
+  .mobile-menu-kicker {
+    display: none !important;
+  }
+
+  .mobile-menu-content {
+    width: min(100%, 430px);
+    margin: auto;
+    transform: translateY(-1.5vh);
+  }
+
+  .mobile-menu-links {
+    width: 100%;
+    gap: clamp(24px, 5.4vw, 36px);
+  }
+
+  .mobile-menu-links a:not(.mobile-menu-cta) {
+    width: auto;
+    min-width: min(76vw, 300px);
+    padding: 0 clamp(18px, 4vw, 26px);
+    border: 0 !important;
+    color: #171315;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .mobile-menu-links a:not(.mobile-menu-cta) span {
+    position: relative;
+    padding-bottom: 10px;
+    font-size: clamp(29px, 7.6vw, 38px);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .mobile-menu-links a:not(.mobile-menu-cta) span::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 28px;
+    height: 1px;
+    border-radius: 999px;
+    background: var(--hot-pink, #fa2095);
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.45);
+    transform-origin: center;
+    transition: opacity 160ms ease, transform 180ms ease;
+  }
+
+  .mobile-menu-links a:not(.mobile-menu-cta):hover,
+  .mobile-menu-links a:not(.mobile-menu-cta):focus-visible,
+  .mobile-menu-links a:not(.mobile-menu-cta):active {
+    color: #171315;
+  }
+
+  .mobile-menu-links a:not(.mobile-menu-cta):hover span::after,
+  .mobile-menu-links a:not(.mobile-menu-cta):focus-visible span::after,
+  .mobile-menu-links a:not(.mobile-menu-cta):active span::after {
+    opacity: 0.82;
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  .mobile-menu-links a:not(.mobile-menu-cta):focus-visible {
+    outline: none;
+  }
+
+  .mobile-menu-cta {
+    width: min(82%, 320px);
+    min-height: 56px;
+    margin-top: clamp(38px, 8vw, 52px);
+    padding: 8px 9px 8px clamp(18px, 4.6vw, 24px);
+    border: 1px solid rgba(23, 19, 21, 0.15);
+    border-radius: 999px;
+    color: #171315;
+    background: #f7ff6f;
+    box-shadow: 0 10px 28px rgba(38, 12, 28, 0.08);
+    gap: 12px;
+  }
+
+  .mobile-menu-cta span {
+    color: #171315;
+    font-size: clamp(9px, 2.45vw, 11px);
+    font-weight: 850;
+    line-height: 1.15;
+    letter-spacing: 0.035em;
+  }
+
+  .mobile-menu-cta b {
+    flex-basis: 32px;
+    width: 32px;
+    background: var(--hot-pink, #fa2095);
+  }
+
+  .mobile-menu-cta b::before {
+    width: 10px;
+    height: 10px;
+    border-top-width: 1.5px;
+    border-right-width: 1.5px;
+  }
+
+  .mobile-menu-cta b::after {
+    width: 12px;
+    height: 1.5px;
+  }
+
+  .mobile-menu-signature {
+    margin-top: clamp(22px, 5vw, 30px);
+    color: rgba(23, 19, 21, 0.58);
+    font-size: clamp(8.5px, 2vw, 10px);
+    font-weight: 650;
+    line-height: 1.35;
+    letter-spacing: 0.13em;
+  }
+}
+
+@media (width <= 420px) {
+  .mobile-menu-panel {
+    padding-inline: 24px;
+  }
+
+  .mobile-menu-content {
+    transform: translateY(-1vh);
+  }
+
+  .mobile-menu-links {
+    gap: 24px;
+  }
+
+  .mobile-menu-links a:not(.mobile-menu-cta) span {
+    font-size: clamp(28px, 8vw, 33px);
+  }
+
+  .mobile-menu-cta {
+    width: min(88%, 310px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (width < 1180px) {
+  .mobile-menu-links a:not(.mobile-menu-cta) span::after {
+    transition-duration: 0.01ms !important;
+  }
+}
