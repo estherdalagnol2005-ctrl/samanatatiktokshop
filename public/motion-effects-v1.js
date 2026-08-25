@@ -35,10 +35,10 @@ gsap.registerPlugin(ScrollTrigger);
       rotateX: 0,
       rotateZ: 0,
       autoAlpha: 1,
-      duration: 1.05,
-      stagger: { each: 0.033, from: "start" },
+      duration: 0.58,
+      stagger: { each: 0.018, from: "start" },
       ease: "power4.out",
-      delay: 0.12,
+      delay: 0.03,
       clearProps: "transform,opacity,visibility",
     });
 
@@ -249,7 +249,7 @@ gsap.registerPlugin(ScrollTrigger);
   const initialize = () => {
     const scheduleHeroAnimation = () => {
       window.clearTimeout(heroState.timer);
-      heroState.timer = window.setTimeout(animateHeroCharacters, 320);
+      heroState.timer = window.setTimeout(animateHeroCharacters, 70);
     };
 
     const observer = new MutationObserver(() => {
@@ -258,16 +258,9 @@ gsap.registerPlugin(ScrollTrigger);
 
     observer.observe(document.documentElement, { childList: true, subtree: true });
 
-    const pageLoaded =
-      document.readyState === "complete"
-        ? Promise.resolve()
-        : new Promise((resolve) =>
-            window.addEventListener("load", resolve, { once: true }),
-          );
-
-    Promise.all([document.fonts?.ready || Promise.resolve(), pageLoaded]).then(
-      scheduleHeroAnimation,
-    );
+    const fontReady = document.fonts?.ready || Promise.resolve();
+    const fastStart = new Promise((resolve) => window.setTimeout(resolve, 120));
+    Promise.race([fontReady, fastStart]).then(scheduleHeroAnimation);
 
     let attempts = 0;
     const retry = window.setInterval(() => {
