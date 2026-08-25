@@ -72,7 +72,7 @@
   .mobile-menu-links a:not(.mobile-menu-cta) .mobile-menu-falling-text {
     position: relative;
     display: inline-block;
-    padding-bottom: 10px;
+    padding-bottom: 0;
     font-size: clamp(22px, 6vw, 26px);
     font-weight: 760;
     line-height: 1;
@@ -82,19 +82,22 @@
   }
 
   .mobile-menu-links a:not(.mobile-menu-cta) .mobile-menu-falling-text::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
+    content: none !important;
+    display: none !important;
+  }
+
+  .mobile-menu-rule {
+    display: block !important;
     width: 72%;
     min-width: 36px;
     max-width: 108px;
     height: 1px;
+    margin: 9px auto 0;
+    border: 0 !important;
     border-radius: 999px;
-    background: rgba(23, 19, 21, 0.18);
+    background: rgba(23, 19, 21, 0.24);
     opacity: 1;
-    transform: translateX(-50%);
-    transform-origin: center;
+    pointer-events: none;
     transition: background-color 160ms ease, opacity 160ms ease;
   }
 
@@ -128,10 +131,10 @@
     color: var(--hot-pink, #fa2095);
   }
 
-  .mobile-menu-links a:not(.mobile-menu-cta):hover .mobile-menu-falling-text::after,
-  .mobile-menu-links a:not(.mobile-menu-cta):focus-visible .mobile-menu-falling-text::after,
-  .mobile-menu-links a:not(.mobile-menu-cta):active .mobile-menu-falling-text::after {
-    background: rgba(250, 32, 149, 0.38);
+  .mobile-menu-links a:not(.mobile-menu-cta):hover .mobile-menu-rule,
+  .mobile-menu-links a:not(.mobile-menu-cta):focus-visible .mobile-menu-rule,
+  .mobile-menu-links a:not(.mobile-menu-cta):active .mobile-menu-rule {
+    background: rgba(250, 32, 149, 0.42);
   }
 
   .mobile-menu-links a:not(.mobile-menu-cta):focus-visible {
@@ -231,7 +234,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) and (width < 1180px) {
-  .mobile-menu-links a:not(.mobile-menu-cta) .mobile-menu-falling-text::after {
+  .mobile-menu-rule {
     transition-duration: 0.01ms !important;
   }
 
