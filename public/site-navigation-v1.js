@@ -17,12 +17,14 @@
     const header = document.querySelector(".site-header");
     const desktopNav = header?.querySelector(".desktop-nav");
     const buyButton = header?.querySelector(".buy-button");
+    const toggle = header?.querySelector(".mobile-menu-toggle");
 
-    if (!header || !desktopNav || header.dataset.fullNavigationReady === "true") {
-      return Boolean(header);
+    if (!header || !desktopNav || !toggle || header.dataset.fullNavigationReady === "true") {
+      return Boolean(header && toggle);
     }
 
     header.dataset.fullNavigationReady = "true";
+
     desktopNav.replaceChildren(
       ...sectionLinks.map(({ href, label }) => {
         const link = document.createElement("a");
@@ -36,15 +38,6 @@
     desktopNav.style.gap = "0";
 
     if (buyButton) buyButton.href = "#inscricao";
-
-    const toggle = document.createElement("button");
-    toggle.className = "mobile-menu-toggle";
-    toggle.type = "button";
-    toggle.setAttribute("aria-label", "Abrir menu");
-    toggle.setAttribute("aria-controls", "mobile-site-menu");
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.innerHTML = '<span aria-hidden="true"><i></i><i></i><i></i></span>';
-    header.append(toggle);
 
     const layer = document.createElement("div");
     layer.className = "mobile-menu-layer";
@@ -105,6 +98,7 @@
       toggle.setAttribute("aria-label", "Fechar menu");
       document.body.classList.add("is-mobile-menu-open");
       setMenuThemeColor(true);
+
       window.requestAnimationFrame(() => {
         layer.classList.add("is-open");
         closeButton?.focus({ preventScroll: true });
@@ -132,6 +126,7 @@
       if (layer.classList.contains("is-open")) closeMenu();
       else openMenu();
     });
+
     closeButton?.addEventListener("click", () => closeMenu());
     backdrop?.addEventListener("click", () => closeMenu());
     menuLinks.forEach((link) => {
