@@ -23,6 +23,14 @@
   text-transform: none !important;
 }
 
+.hero-subcopy,
+.student-proof-copy p,
+.method-sales-intro > p,
+.community-copy > p,
+.home-story-heading > p {
+  color: rgba(23, 19, 21, 0.84) !important;
+}
+
 .student-proof-copy p,
 .method-sales-intro > p,
 .community-copy > p,
