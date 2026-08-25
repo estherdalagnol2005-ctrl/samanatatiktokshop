@@ -24,16 +24,23 @@
     flex-basis: 44px;
     width: 44px;
     height: 44px;
-    border-color: rgba(23, 19, 21, 0.18);
-    background: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 6px 18px rgba(35, 15, 27, 0.04);
-    backdrop-filter: blur(14px);
+    border-color: rgba(250, 32, 149, 0.12);
+    background: var(--hot-pink, #fa2095);
+    box-shadow: 0 8px 22px rgba(250, 32, 149, 0.14);
+    backdrop-filter: none;
+    transition: transform 160ms ease, box-shadow 180ms ease;
+  }
+
+  .mobile-menu-close:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 12px rgba(250, 32, 149, 0.12);
   }
 
   .mobile-menu-close i,
   .mobile-menu-close i::after {
     width: 16px;
     height: 1.2px;
+    background: #fff;
   }
 
   .mobile-menu-kicker {
@@ -56,7 +63,7 @@
     min-width: min(76vw, 300px);
     padding: 0 clamp(18px, 4vw, 26px);
     border: 0 !important;
-    color: #171315;
+    color: var(--hot-pink, #fa2095);
     justify-content: center;
     text-align: center;
     overflow: visible;
@@ -79,14 +86,14 @@
     position: absolute;
     left: 50%;
     bottom: 0;
-    width: 26px;
+    width: 18px;
     height: 1px;
     border-radius: 999px;
     background: var(--hot-pink, #fa2095);
-    opacity: 0;
-    transform: translateX(-50%) scaleX(0.45);
+    opacity: 0.42;
+    transform: translateX(-50%) scaleX(1);
     transform-origin: center;
-    transition: opacity 160ms ease, transform 180ms ease;
+    transition: opacity 160ms ease, width 180ms ease;
   }
 
   .mobile-menu-char {
@@ -116,14 +123,14 @@
   .mobile-menu-links a:not(.mobile-menu-cta):hover,
   .mobile-menu-links a:not(.mobile-menu-cta):focus-visible,
   .mobile-menu-links a:not(.mobile-menu-cta):active {
-    color: #171315;
+    color: var(--hot-pink, #fa2095);
   }
 
   .mobile-menu-links a:not(.mobile-menu-cta):hover .mobile-menu-falling-text::after,
   .mobile-menu-links a:not(.mobile-menu-cta):focus-visible .mobile-menu-falling-text::after,
   .mobile-menu-links a:not(.mobile-menu-cta):active .mobile-menu-falling-text::after {
-    opacity: 0.8;
-    transform: translateX(-50%) scaleX(1);
+    width: 26px;
+    opacity: 0.88;
   }
 
   .mobile-menu-links a:not(.mobile-menu-cta):focus-visible {
