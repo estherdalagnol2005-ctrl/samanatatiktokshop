@@ -77,7 +77,7 @@
               .map(
                 ({ href, label }, linkIndex) => `
                   <a href="${href}" aria-label="${label}" style="--link-delay:${(linkIndex * 0.075).toFixed(3)}s">
-                    <span class="mobile-menu-falling-text" aria-hidden="true">${fallingLabelMarkup(label)}</span>
+                    <span class="mobile-menu-falling-text" aria-hidden="true">${fallingLabelMarkup(label)}<span class="mobile-menu-rule"></span></span>
                   </a>`,
               )
               .join("")}
