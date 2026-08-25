@@ -46,34 +46,40 @@
     layer.innerHTML = `
       <button class="mobile-menu-backdrop" type="button" aria-label="Fechar menu"></button>
       <aside class="mobile-menu-panel" aria-label="Menu do site">
-        <header class="mobile-menu-heading">
-          <div>
-            <small>NAVEGUE PELO SITE</small>
-            <strong>Escolha uma seção</strong>
-          </div>
-          <button class="mobile-menu-close" type="button" aria-label="Fechar menu">×</button>
+        <header class="mobile-menu-topbar">
+          <a class="mobile-menu-brand" href="#top" aria-label="Sunlix, início">
+            <img src="/brand/sunlix-logo-night.svg" alt="Sunlix" />
+          </a>
+          <button class="mobile-menu-close" type="button" aria-label="Fechar menu">
+            <i aria-hidden="true"></i>
+          </button>
         </header>
-        <nav class="mobile-menu-links" aria-label="Navegação no celular">
-          ${[{ href: "#top", label: "Início" }, ...sectionLinks]
-            .map(
-              ({ href, label }) => `
-                <a href="${href}">
-                  <span>${label}</span>
-                </a>`,
-            )
-            .join("")}
+        <div class="mobile-menu-content">
+          <span class="mobile-menu-kicker">NAVEGAÇÃO</span>
+          <nav class="mobile-menu-links" aria-label="Navegação no celular">
+            ${[{ href: "#top", label: "Início" }, ...sectionLinks]
+              .map(
+                ({ href, label }) => `
+                  <a href="${href}">
+                    <span>${label}</span>
+                  </a>`,
+              )
+              .join("")}
+          </nav>
           <a class="mobile-menu-cta" href="#inscricao">
             <span>QUERO FAZER PARTE DA SUNLIX</span>
-            <b aria-hidden="true">↗</b>
+            <b aria-hidden="true"></b>
           </a>
-        </nav>
-        <p>Conteúdo com direção. Venda com intenção.</p>
+        </div>
+        <p class="mobile-menu-signature">Conteúdo com direção. Venda com intenção.</p>
       </aside>`;
     document.body.append(layer);
 
     const closeButton = layer.querySelector(".mobile-menu-close");
     const backdrop = layer.querySelector(".mobile-menu-backdrop");
-    const menuLinks = [...layer.querySelectorAll(".mobile-menu-links a")];
+    const menuLinks = [
+      ...layer.querySelectorAll(".mobile-menu-links a, .mobile-menu-cta, .mobile-menu-brand"),
+    ];
     let restoreFocus = null;
 
     const openMenu = () => {
