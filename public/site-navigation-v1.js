@@ -88,7 +88,14 @@
     const menuLinks = [
       ...layer.querySelectorAll(".mobile-menu-links a, .mobile-menu-cta, .mobile-menu-brand"),
     ];
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    const closedThemeColor = themeColorMeta?.getAttribute("content") || "#fa2095";
     let restoreFocus = null;
+
+    const setMenuThemeColor = (isOpen) => {
+      if (!themeColorMeta) return;
+      themeColorMeta.setAttribute("content", isOpen ? "#ffffff" : closedThemeColor);
+    };
 
     const openMenu = () => {
       restoreFocus = document.activeElement;
@@ -97,6 +104,7 @@
       toggle.setAttribute("aria-expanded", "true");
       toggle.setAttribute("aria-label", "Fechar menu");
       document.body.classList.add("is-mobile-menu-open");
+      setMenuThemeColor(true);
       window.requestAnimationFrame(() => {
         layer.classList.add("is-open");
         closeButton?.focus({ preventScroll: true });
@@ -109,6 +117,7 @@
       toggle.setAttribute("aria-expanded", "false");
       toggle.setAttribute("aria-label", "Abrir menu");
       document.body.classList.remove("is-mobile-menu-open");
+      setMenuThemeColor(false);
 
       window.setTimeout(() => {
         if (!layer.classList.contains("is-open")) layer.inert = true;
