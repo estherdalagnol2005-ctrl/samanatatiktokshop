@@ -1,0 +1,93 @@
+/* Final CTA copy treatment: normal casing, one line, fit inside each button. */
+:where(
+  .buy-button,
+  .hero-primary-cta,
+  .method-timeline-cta,
+  .student-proof-cta,
+  .dreams-showcase-cta,
+  .dreams-cta,
+  .home-story-cta,
+  .community-cta,
+  .method-sales-cta,
+  .conversion-action > a,
+  .mobile-menu-cta,
+  .exit-offer__submit,
+  .exit-offer__continue
+) {
+  text-transform: none !important;
+  white-space: nowrap !important;
+  flex-wrap: nowrap !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1 !important;
+}
+
+:where(
+  .buy-button,
+  .hero-primary-cta,
+  .method-timeline-cta,
+  .student-proof-cta,
+  .dreams-showcase-cta,
+  .dreams-cta,
+  .home-story-cta,
+  .community-cta,
+  .method-sales-cta,
+  .conversion-action > a,
+  .mobile-menu-cta,
+  .exit-offer__submit,
+  .exit-offer__continue
+) > :where(span, .sunlix-fx-label) {
+  text-transform: none !important;
+  white-space: nowrap !important;
+  letter-spacing: inherit !important;
+  line-height: inherit !important;
+}
+
+@media (width <= 640px) {
+  :where(
+    .hero-primary-cta,
+    .method-timeline-cta,
+    .student-proof-cta,
+    .dreams-showcase-cta,
+    .dreams-cta,
+    .home-story-cta,
+    .community-cta,
+    .method-sales-cta,
+    .conversion-action > a,
+    .mobile-menu-cta
+  ) {
+    font-size: clamp(10px, 2.75vw, 12.5px) !important;
+  }
+
+  :where(
+    .hero-primary-cta,
+    .method-timeline-cta,
+    .student-proof-cta,
+    .dreams-showcase-cta,
+    .dreams-cta,
+    .home-story-cta,
+    .community-cta,
+    .method-sales-cta,
+    .conversion-action > a,
+    .mobile-menu-cta
+  ) > :where(span, .sunlix-fx-label) {
+    font-size: inherit !important;
+  }
+}
+
+@media (width <= 380px) {
+  :where(
+    .hero-primary-cta,
+    .method-timeline-cta,
+    .student-proof-cta,
+    .dreams-showcase-cta,
+    .dreams-cta,
+    .home-story-cta,
+    .community-cta,
+    .method-sales-cta,
+    .conversion-action > a,
+    .mobile-menu-cta
+  ) {
+    font-size: 9.8px !important;
+    letter-spacing: -0.015em !important;
+  }
+}
