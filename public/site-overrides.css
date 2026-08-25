@@ -35,6 +35,11 @@
   font-weight: 650;
 }
 
+/* Keep Samanta's hero portrait fixed while the surrounding decorative elements float. */
+.hero-method-visual .method-photo-frame {
+  animation: none !important;
+}
+
 .hero-method-visual .metric-card {
   width: clamp(132px, 37%, 238px);
   object-fit: contain;
