@@ -72,6 +72,7 @@
   background: transparent !important;
   box-shadow: none !important;
   line-height: inherit;
+  text-transform: none !important;
   transition:
     color 340ms cubic-bezier(.44, 0, .56, 1),
     transform 340ms cubic-bezier(.44, 0, .56, 1);
