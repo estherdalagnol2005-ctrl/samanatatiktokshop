@@ -367,16 +367,16 @@
 
 @media (width < 1180px) {
   .site-header {
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
   .site-header .brand {
-    display: none;
+    display: flex;
   }
 
   .mobile-menu-toggle {
-    grid-column: 1;
-    justify-self: start;
+    grid-column: 2;
+    justify-self: end;
   }
 
   .mobile-menu-layer {
