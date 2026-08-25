@@ -30,7 +30,7 @@
 
         <div class="site-footer-bottom">
           <span>© 2026 Samanta Vidal. Todos os direitos reservados.</span>
-          <span>Samanta + Luana · Comunidade Sangue</span>
+          <a href="https://linkanext.vercel.app/" target="_blank" rel="noopener noreferrer">Desenvolvido pela Linka Digital</a>
         </div>
       </div>
     `;
