@@ -206,13 +206,3 @@ html {
   visibility: visible !important;
   pointer-events: auto !important;
 }
-
-/* Section titles only: keep every fold heading centered while leaving the Hero intact. */
-.page-shell > section:not(.hero-stage) h2 {
-  text-align: center !important;
-}
-
-/* Preserve the intended sentence case for the emotional-fold title. */
-.home-story-heading h2 {
-  text-transform: none !important;
-}
