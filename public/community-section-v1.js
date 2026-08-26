@@ -6,124 +6,90 @@
     {
       src: "/testimonials/2026-08/itamires-motivacao.webp",
       alt: "Itámires conta como as mulheres da comunidade ajudam, motivam e inspiram",
-      type: "proof",
     },
     {
       src: "/testimonials/2026-08/jhenifer-recorde-dia.webp",
       alt: "Jhenifer celebra um novo recorde depois de poucas semanas criando conteúdo",
-      type: "proof",
     },
     {
       src: "/testimonials/2026-08/bruna-comunidade.webp",
       alt: "Bruna celebra o orgulho de fazer parte da comunidade",
-      type: "proof",
     },
     {
       src: "/testimonials/2026-08/leticia-pix-20681.webp",
       alt: "Letícia compartilha um resultado real conquistado com o TikTok Shop",
-      type: "proof",
     },
   ];
 
-  const buildBlurCarousel = (section) => {
-    const carousel = section.querySelector(".community-blur-carousel");
-    const frame = section.querySelector(".community-blur-frame");
-    const slides = Array.from(section.querySelectorAll(".community-blur-slide"));
-    const previous = section.querySelector('[data-community-blur-direction="-1"]');
-    const next = section.querySelector('[data-community-blur-direction="1"]');
-    const status = section.querySelector(".community-blur-status");
+  const setupCarousel = (section) => {
+    const viewport = section.querySelector(".community-uniform-carousel");
+    const cards = [...section.querySelectorAll(".community-uniform-card")];
+    const dots = [...section.querySelectorAll(".community-uniform-dot")];
+    const previous = section.querySelector('[data-community-direction="-1"]');
+    const next = section.querySelector('[data-community-direction="1"]');
+    if (!viewport || !cards.length || !previous || !next) return;
 
-    if (!carousel || !frame || !slides.length || !previous || !next) return;
+    let activeIndex = 0;
+    let scrollFrame = 0;
 
-    let index = 0;
-    let swipeStartY = null;
-    let swipeStartX = null;
-
-    const update = () => {
-      slides.forEach((slide, slideIndex) => {
-        const active = slideIndex === index;
-        slide.classList.toggle("is-active", active);
-        slide.setAttribute("aria-hidden", String(!active));
+    const updateState = (index) => {
+      activeIndex = Math.max(0, Math.min(cards.length - 1, index));
+      cards.forEach((card, cardIndex) => {
+        const active = cardIndex === activeIndex;
+        card.classList.toggle("is-active", active);
+        card.toggleAttribute("aria-current", active);
       });
-      if (status) status.textContent = `Imagem ${index + 1} de ${slides.length}`;
+      dots.forEach((dot, dotIndex) => {
+        const active = dotIndex === activeIndex;
+        dot.classList.toggle("is-active", active);
+        if (active) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
     };
 
-    const go = (direction) => {
-      index = (index + direction + slides.length) % slides.length;
-      update();
+    const centerCard = (index, behavior = "smooth") => {
+      const normalized = (index + cards.length) % cards.length;
+      const card = cards[normalized];
+      const left = card.offsetLeft - (viewport.clientWidth - card.clientWidth) / 2;
+      viewport.scrollTo({ left, behavior });
+      updateState(normalized);
     };
 
-    const setHover = (direction) => {
-      frame.classList.toggle("is-hovering-previous", direction === -1);
-      frame.classList.toggle("is-hovering-next", direction === 1);
+    const updateFromScroll = () => {
+      window.cancelAnimationFrame(scrollFrame);
+      scrollFrame = window.requestAnimationFrame(() => {
+        const viewportCenter = viewport.scrollLeft + viewport.clientWidth / 2;
+        let closest = 0;
+        let distance = Number.POSITIVE_INFINITY;
+        cards.forEach((card, index) => {
+          const center = card.offsetLeft + card.clientWidth / 2;
+          const currentDistance = Math.abs(center - viewportCenter);
+          if (currentDistance < distance) {
+            distance = currentDistance;
+            closest = index;
+          }
+        });
+        updateState(closest);
+      });
     };
 
-    const setPressed = (direction) => {
-      frame.classList.toggle("is-pressing-previous", direction === -1);
-      frame.classList.toggle("is-pressing-next", direction === 1);
-    };
-
-    const clearPressed = () => setPressed(0);
-
-    [previous, next].forEach((button) => {
-      const direction = Number(button.dataset.communityBlurDirection);
-
-      button.addEventListener("pointerenter", () => setHover(direction));
-      button.addEventListener("pointerleave", () => {
-        setHover(0);
-        clearPressed();
-      });
-      button.addEventListener("pointerdown", (event) => {
-        event.stopPropagation();
-        button.setPointerCapture?.(event.pointerId);
-        setHover(direction);
-        setPressed(direction);
-      });
-      button.addEventListener("pointerup", (event) => {
-        event.stopPropagation();
-        button.releasePointerCapture?.(event.pointerId);
-        clearPressed();
-      });
-      button.addEventListener("pointercancel", clearPressed);
-      button.addEventListener("click", () => go(direction));
-    });
-
-    carousel.addEventListener("pointerdown", (event) => {
-      if (event.target.closest(".community-blur-arrow")) return;
-      swipeStartY = event.clientY;
-      swipeStartX = event.clientX;
-    });
-
-    carousel.addEventListener("pointerup", (event) => {
-      if (swipeStartY === null || swipeStartX === null) return;
-      const distanceY = event.clientY - swipeStartY;
-      const distanceX = event.clientX - swipeStartX;
-      swipeStartY = null;
-      swipeStartX = null;
-      if (Math.abs(distanceY) < 48 || Math.abs(distanceY) < Math.abs(distanceX)) {
-        return;
-      }
-      go(distanceY < 0 ? 1 : -1);
-    });
-
-    carousel.addEventListener("pointercancel", () => {
-      swipeStartY = null;
-      swipeStartX = null;
-      clearPressed();
-    });
-
-    carousel.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowUp") {
+    previous.addEventListener("click", () => centerCard(activeIndex - 1));
+    next.addEventListener("click", () => centerCard(activeIndex + 1));
+    dots.forEach((dot, index) => dot.addEventListener("click", () => centerCard(index)));
+    viewport.addEventListener("scroll", updateFromScroll, { passive: true });
+    viewport.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
         event.preventDefault();
-        go(-1);
+        centerCard(activeIndex - 1);
       }
-      if (event.key === "ArrowDown") {
+      if (event.key === "ArrowRight") {
         event.preventDefault();
-        go(1);
+        centerCard(activeIndex + 1);
       }
     });
+    window.addEventListener("resize", () => centerCard(activeIndex, "auto"), { passive: true });
 
-    update();
+    centerCard(0, "auto");
   };
 
   const buildCommunitySection = () => {
@@ -133,71 +99,61 @@
     if (!methodSection) return false;
 
     const section = document.createElement("section");
-    section.className = "community-section";
+    section.className = "community-section community-uniform-section";
     section.id = "comunidade";
     section.setAttribute("aria-labelledby", "community-title");
 
-    const slides = carouselItems
+    const cards = carouselItems
       .map(
         (item, index) => `
-          <figure class="community-blur-slide community-blur-slide--${item.type}"
-            aria-hidden="${index !== 0}" style="--community-blur-image: url('${item.src}')">
-            <img src="${item.src}" alt="${item.alt}" loading="${index === 0 ? "eager" : "lazy"}"
-              decoding="async" draggable="false">
+          <figure class="community-uniform-card${index === 0 ? " is-active" : ""}"${index === 0 ? ' aria-current="true"' : ""}>
+            <img src="${item.src}" alt="${item.alt}" loading="${index === 0 ? "eager" : "lazy"}" decoding="async" draggable="false">
           </figure>`,
       )
       .join("");
 
+    const dots = carouselItems
+      .map(
+        (_, index) => `<button class="community-uniform-dot${index === 0 ? " is-active" : ""}" type="button" aria-label="Ver imagem ${index + 1}"${index === 0 ? ' aria-current="true"' : ""}></button>`,
+      )
+      .join("");
+
     section.innerHTML = `
-      <div class="community-shell">
-        <div class="community-copy">
+      <div class="community-shell community-uniform-shell">
+        <header class="community-copy community-uniform-copy">
           <h2 id="community-title">Sua jornada <strong>não precisa ser solitária.</strong></h2>
           <p>Eu sei que você tenta resolver tudo sozinha. Mas você não precisa continuar assim. A Sunlix existe por um propósito: transformar alunas em uma família.</p>
+        </header>
 
-        </div>
-
-        <div class="community-visual">
-          <div class="community-blur-carousel" tabindex="0" role="group"
-            aria-roledescription="carrossel" aria-label="Momentos e resultados da comunidade">
-            <div class="community-blur-frame">
-              <div class="community-blur-slides">${slides}</div>
-              <div class="community-blur-edge community-blur-edge--previous" aria-hidden="true"></div>
-              <div class="community-blur-edge community-blur-edge--next" aria-hidden="true"></div>
-
-              <button class="community-blur-arrow community-blur-arrow--previous" type="button"
-                data-community-blur-direction="-1" aria-label="Ver imagem anterior">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 15 12 9 18 15"></polyline></svg>
-              </button>
-              <button class="community-blur-arrow community-blur-arrow--next" type="button"
-                data-community-blur-direction="1" aria-label="Ver próxima imagem">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-              <span class="community-blur-status" aria-live="polite"></span>
-            </div>
+        <div class="community-uniform-stage">
+          <button class="community-uniform-arrow community-uniform-arrow--prev" type="button" data-community-direction="-1" aria-label="Ver imagem anterior">←</button>
+          <div class="community-uniform-carousel" tabindex="0" role="group" aria-roledescription="carrossel" aria-label="Momentos e resultados da comunidade">
+            <div class="community-uniform-track">${cards}</div>
           </div>
-
-          <a class="community-cta" href="${checkoutUrl}" target="_blank" rel="noopener noreferrer">
-            QUERO FAZER PARTE DESSA COMUNIDADE
-            <span aria-hidden="true">↗</span>
-          </a>
+          <button class="community-uniform-arrow community-uniform-arrow--next" type="button" data-community-direction="1" aria-label="Ver próxima imagem">→</button>
         </div>
+
+        <div class="community-uniform-nav">
+          <span>ARRASTE PARA VER MAIS</span>
+          <div class="community-uniform-dots">${dots}</div>
+        </div>
+
+        <a class="community-cta community-uniform-cta" href="${checkoutUrl}" target="_blank" rel="noopener noreferrer">
+          QUERO FAZER PARTE DESSA COMUNIDADE
+          <span aria-hidden="true">↗</span>
+        </a>
       </div>
     `;
 
     methodSection.insertAdjacentElement("beforebegin", section);
-    buildBlurCarousel(section);
+    setupCarousel(section);
     return true;
   };
 
-  const scheduleBuild = () => {
-    window.setTimeout(buildCommunitySection, 1150);
-  };
+  const scheduleBuild = () => window.setTimeout(buildCommunitySection, 1150);
 
-  if (document.readyState === "complete") {
-    scheduleBuild();
-  } else {
-    window.addEventListener("load", scheduleBuild, { once: true });
-  }
+  if (document.readyState === "complete") scheduleBuild();
+  else window.addEventListener("load", scheduleBuild, { once: true });
 
   window.addEventListener("pageshow", scheduleBuild);
 })();
