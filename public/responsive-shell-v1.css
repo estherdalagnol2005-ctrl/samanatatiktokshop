@@ -1,0 +1,139 @@
+/* One fluid shell system for every viewport.
+   All primary fold cards share the same gutter, width cap and centering. */
+:root {
+  --site-edge: clamp(8px, 0.7vw, 14px);
+  --site-shell-max: 1920px;
+  --site-shell-radius: clamp(30px, 3.6vw, 58px);
+}
+
+html,
+body,
+#smooth-wrapper,
+#smooth-content,
+.page-shell {
+  width: 100%;
+  max-width: 100%;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+.page-shell > section,
+.site-footer {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: none !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Keep the same outer edge on every fold, regardless of the section's own CSS. */
+.hero-stage,
+.student-proof-section,
+.dreams-section,
+.community-section,
+.home-story-section,
+.method-section,
+.conversion-section,
+.site-footer {
+  padding-right: var(--site-edge) !important;
+  padding-left: var(--site-edge) !important;
+}
+
+/* Every visible rounded shell follows one width system. */
+.hero-clipped,
+.student-proof-shell,
+.dreams-shell,
+.community-shell,
+.home-story-shell,
+.method-shell,
+.method-sales-shell,
+.conversion-shell,
+.site-footer-shell {
+  box-sizing: border-box;
+  width: min(100%, var(--site-shell-max)) !important;
+  max-width: var(--site-shell-max) !important;
+  min-width: 0;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.hero-clipped,
+.student-proof-shell,
+.dreams-shell,
+.community-shell,
+.home-story-shell,
+.method-shell,
+.method-sales-shell,
+.conversion-shell {
+  border-radius: var(--site-shell-radius) !important;
+}
+
+/* Prevent grid/flex children from forcing a shell wider than the viewport. */
+.hero-content,
+.student-proof-wall,
+.dreams-showcase,
+.community-shell > *,
+.method-sales-shell > *,
+.conversion-shell > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Desktop scales continuously instead of jumping between fixed layouts. */
+@media (width >= 1180px) {
+  .hero-clipped {
+    --hero-pad-x: clamp(52px, 6.2vw, 140px);
+  }
+}
+
+/* Tablet / compact desktop keeps the exact same shell alignment. */
+@media (width < 1180px) {
+  :root {
+    --site-edge: clamp(8px, 1.15vw, 12px);
+    --site-shell-radius: clamp(28px, 4.4vw, 46px);
+  }
+}
+
+/* Phones: remove old one-sided gutters/radii and keep both borders equal. */
+@media (width <= 640px) {
+  :root {
+    --site-edge: clamp(7px, 2.2vw, 9px);
+    --site-shell-radius: clamp(27px, 8vw, 34px);
+  }
+
+  .hero-stage,
+  .student-proof-section,
+  .dreams-section,
+  .community-section,
+  .home-story-section,
+  .method-section,
+  .conversion-section,
+  .site-footer {
+    padding-right: var(--site-edge) !important;
+    padding-left: var(--site-edge) !important;
+  }
+
+  .student-proof-shell,
+  .dreams-shell,
+  .community-shell,
+  .home-story-shell,
+  .method-shell,
+  .method-sales-shell,
+  .conversion-shell {
+    border-top-right-radius: var(--site-shell-radius) !important;
+    border-bottom-right-radius: var(--site-shell-radius) !important;
+    border-bottom-left-radius: var(--site-shell-radius) !important;
+    border-top-left-radius: var(--site-shell-radius) !important;
+  }
+}
+
+/* Very narrow devices still retain a real, symmetric page edge. */
+@media (width <= 360px) {
+  :root {
+    --site-edge: 6px;
+    --site-shell-radius: 26px;
+  }
+}
