@@ -55,7 +55,7 @@
 
 .community-uniform-track {
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   gap: clamp(14px, 1.5vw, 22px);
   width: max-content;
   min-width: 100%;
@@ -66,14 +66,13 @@
   position: relative;
   flex: 0 0 clamp(220px, 24vw, 330px);
   width: clamp(220px, 24vw, 330px);
-  aspect-ratio: 9 / 16;
   margin: 0;
   padding: 0;
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
-  overflow: hidden;
+  overflow: visible;
   scroll-snap-align: center;
   scroll-snap-stop: always;
   transition: transform 220ms ease, opacity 220ms ease;
@@ -82,12 +81,12 @@
 .community-uniform-card img {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   margin: 0;
   padding: 0;
   border: 0;
   border-radius: 0;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   background: transparent !important;
   user-select: none;
