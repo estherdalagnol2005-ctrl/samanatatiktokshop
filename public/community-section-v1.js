@@ -4,20 +4,20 @@
 
   const carouselItems = [
     {
-      src: "/testimonials/2026-08/itamires-motivacao.webp",
-      alt: "Itámires conta como as mulheres da comunidade ajudam, motivam e inspiram",
+      src: "/assets/dreams-2026/celebrar-conquistas.webp",
+      alt: "Momento de celebração e conquistas compartilhadas pela comunidade",
     },
     {
-      src: "/testimonials/2026-08/jhenifer-recorde-dia.webp",
-      alt: "Jhenifer celebra um novo recorde depois de poucas semanas criando conteúdo",
+      src: "/assets/dreams-2026/pix-na-rotina.webp",
+      alt: "Conquistas financeiras compartilhadas na rotina da comunidade",
     },
     {
-      src: "/testimonials/2026-08/bruna-comunidade.webp",
-      alt: "Bruna celebra o orgulho de fazer parte da comunidade",
+      src: "/assets/dreams-2026/quartas-de-pix.webp",
+      alt: "Resultados financeiros celebrados pelas mulheres da comunidade",
     },
     {
-      src: "/testimonials/2026-08/leticia-pix-20681.webp",
-      alt: "Letícia compartilha um resultado real conquistado com o TikTok Shop",
+      src: "/assets/dreams-2026/resultados-com-liberdade.webp",
+      alt: "Resultados e liberdade conquistados por mulheres da comunidade",
     },
   ];
 
