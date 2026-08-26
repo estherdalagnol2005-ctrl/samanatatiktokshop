@@ -15,10 +15,6 @@
       src: "/testimonials/2026-08/bruna-comunidade.webp",
       alt: "Bruna celebra o orgulho de fazer parte da comunidade",
     },
-    {
-      src: "/testimonials/sarah-comissoes-marco.webp",
-      alt: "Sarah compartilha um resultado real conquistado com o TikTok Shop",
-    },
   ];
 
   const setupCarousel = (section) => {
