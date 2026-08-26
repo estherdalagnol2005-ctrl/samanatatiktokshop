@@ -68,29 +68,34 @@
   width: clamp(220px, 24vw, 330px);
   aspect-ratio: 9 / 16;
   margin: 0;
-  border: 1px solid rgb(28 23 26 / 10%);
-  border-radius: clamp(20px, 2vw, 30px);
-  background: #fff;
-  box-shadow: 0 16px 38px rgb(65 18 47 / 10%);
+  padding: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
   overflow: hidden;
   scroll-snap-align: center;
   scroll-snap-stop: always;
-  transition: transform 220ms ease, box-shadow 220ms ease, opacity 220ms ease;
+  transition: transform 220ms ease, opacity 220ms ease;
 }
 
 .community-uniform-card img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  object-fit: cover;
   object-position: center;
-  background: #fff;
+  background: transparent !important;
   user-select: none;
   pointer-events: none;
 }
 
 .community-uniform-card.is-active {
-  box-shadow: 0 22px 48px rgb(65 18 47 / 16%);
+  box-shadow: none !important;
   transform: translateY(-4px);
 }
 
@@ -232,7 +237,6 @@
     flex-basis: 78vw;
     width: 78vw;
     max-width: 310px;
-    border-radius: 22px;
   }
 
   .community-uniform-arrow {
