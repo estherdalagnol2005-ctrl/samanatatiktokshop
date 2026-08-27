@@ -20,17 +20,15 @@
 
 .student-proof-video-only-row {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
-  gap: clamp(16px, 2vw, 28px);
-  width: 100%;
+  gap: clamp(18px, 2.4vw, 34px);
+  width: min(100%, 1120px);
   margin-inline: auto;
 }
 
 .student-proof-video-only-card {
-  flex: 0 0 min(34vw, 390px);
-  width: min(34vw, 390px);
   margin: 0;
   border: 0;
   border-radius: clamp(24px, 2.4vw, 34px);
@@ -39,12 +37,23 @@
   overflow: hidden;
 }
 
-.student-proof-video-only-card video {
+.student-proof-video-only-card--portrait {
+  flex: 0 0 min(30vw, 330px);
+  width: min(30vw, 330px);
+  aspect-ratio: 9 / 16;
+}
+
+.student-proof-video-only-card--landscape {
+  flex: 0 0 min(55vw, 650px);
+  width: min(55vw, 650px);
+  aspect-ratio: 16 / 9;
+}
+
+.student-proof-video-only-card iframe {
   display: block;
   width: 100%;
-  aspect-ratio: 9 / 16;
-  height: auto;
-  object-fit: contain;
+  height: 100%;
+  border: 0;
   background: #111;
 }
 
@@ -55,6 +64,7 @@
 
   .student-proof-video-only-row {
     justify-content: flex-start;
+    align-items: center;
     gap: 12px;
     width: calc(100% + 17px);
     margin-right: -17px;
@@ -70,10 +80,18 @@
   }
 
   .student-proof-video-only-card {
-    flex-basis: min(78vw, 320px);
-    width: min(78vw, 320px);
     border-radius: 24px;
     scroll-snap-align: center;
     scroll-snap-stop: always;
+  }
+
+  .student-proof-video-only-card--portrait {
+    flex-basis: min(78vw, 320px);
+    width: min(78vw, 320px);
+  }
+
+  .student-proof-video-only-card--landscape {
+    flex-basis: min(90vw, 520px);
+    width: min(90vw, 520px);
   }
 }
