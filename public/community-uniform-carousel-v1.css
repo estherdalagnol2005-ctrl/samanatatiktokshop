@@ -93,18 +93,6 @@
   pointer-events: none;
 }
 
-/* Karol: hide the extra editorial caption that was captured below the WhatsApp testimonial. */
-.community-uniform-card:last-child {
-  height: clamp(181px, 19.8vw, 272px);
-  overflow: hidden;
-}
-
-.community-uniform-card:last-child img {
-  width: 100%;
-  max-width: none;
-  height: auto;
-}
-
 .community-uniform-card.is-active {
   box-shadow: none !important;
   transform: translateY(-4px);
@@ -211,10 +199,6 @@
     flex-basis: clamp(210px, 38vw, 300px);
     width: clamp(210px, 38vw, 300px);
   }
-
-  .community-uniform-card:last-child {
-    height: clamp(173px, 31.3vw, 247px);
-  }
 }
 
 @media (width <= 640px) {
@@ -252,10 +236,6 @@
     flex-basis: 78vw;
     width: 78vw;
     max-width: 310px;
-  }
-
-  .community-uniform-card:last-child {
-    height: min(64.3vw, 255px);
   }
 
   .community-uniform-arrow {
