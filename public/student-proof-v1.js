@@ -21,24 +21,24 @@
         </header>
 
         <div class="student-proof-video-only-row" aria-label="Depoimentos em vídeo de alunas">
-          <figure class="student-proof-video-only-card">
-            <video
-              src="/testimonials/video-depoimento-1-preview.mp4"
-              aria-label="Primeiro depoimento em vídeo"
-              controls
-              playsinline
-              preload="metadata"
-            ></video>
+          <figure class="student-proof-video-only-card student-proof-video-only-card--portrait">
+            <iframe
+              src="https://drive.google.com/file/d/1iUCIhcmILabjx84IYgPwSrIVasrqiYub/preview"
+              title="Primeiro depoimento em vídeo"
+              allow="autoplay; fullscreen"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
           </figure>
 
-          <figure class="student-proof-video-only-card">
-            <video
-              src="/testimonials/video-depoimento-2-preview.mp4"
-              aria-label="Segundo depoimento em vídeo"
-              controls
-              playsinline
-              preload="metadata"
-            ></video>
+          <figure class="student-proof-video-only-card student-proof-video-only-card--landscape">
+            <iframe
+              src="https://drive.google.com/file/d/1wWRFYcWHIwq87E_BbbU53fHg6DYEK5dp/preview"
+              title="Segundo depoimento em vídeo"
+              allow="autoplay; fullscreen"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
           </figure>
         </div>
 
