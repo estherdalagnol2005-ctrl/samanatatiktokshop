@@ -18,14 +18,21 @@
   max-width: 790px;
 }
 
-.student-proof-video-only-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
-  gap: clamp(18px, 2.4vw, 34px);
-  width: min(100%, 1120px);
+.student-proof-video-stage {
+  position: relative;
+  width: min(100%, 1080px);
   margin-inline: auto;
+  padding-inline: clamp(68px, 7vw, 92px);
+  box-sizing: border-box;
+}
+
+.student-proof-video-only-row {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: clamp(520px, 61vw, 700px);
+  perspective: 1200px;
+  transform-style: preserve-3d;
 }
 
 .student-proof-video-only-card {
@@ -37,17 +44,34 @@
   background: linear-gradient(145deg, #fa2095 0%, #ffa120 52%, #f0ff27 100%);
   box-shadow: 0 22px 54px rgb(70 23 50 / 18%);
   overflow: hidden;
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: perspective(1200px) translateZ(-80px) scale(0.92);
+  transform-origin: center;
+  transition: opacity 320ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 420ms ease, visibility 0s linear 420ms;
+  will-change: transform, opacity;
+}
+
+.student-proof-video-only-card.is-active {
+  z-index: 2;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: perspective(1200px) translateZ(36px) scale(1.045);
+  box-shadow: 0 30px 76px rgb(70 23 50 / 25%);
+  transition-delay: 0s;
 }
 
 .student-proof-video-only-card--portrait {
-  flex: 0 0 min(30vw, 330px);
-  width: min(30vw, 330px);
+  width: min(34vw, 380px);
   aspect-ratio: 9 / 16;
 }
 
 .student-proof-video-only-card--landscape {
-  flex: 0 0 min(55vw, 650px);
-  width: min(55vw, 650px);
+  width: min(64vw, 760px);
   aspect-ratio: 16 / 9;
 }
 
@@ -61,7 +85,46 @@
 }
 
 .student-proof-video-nav {
-  display: none;
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.student-proof-video-arrow {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 2px solid #1c171a;
+  border-radius: 50%;
+  color: #1c171a;
+  background: #f0ff27;
+  box-shadow: 5px 6px 0 #fa2095;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.student-proof-video-arrow span {
+  font-size: 31px;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.student-proof-video-arrow:hover,
+.student-proof-video-arrow:focus-visible {
+  outline: none;
+  background: #fff65d;
+  transform: scale(1.08);
+  box-shadow: 3px 4px 0 #fa2095;
 }
 
 .student-proof-video-status {
@@ -79,85 +142,47 @@
     padding-right: 9px;
   }
 
-  .student-proof-video-only-row {
-    justify-content: flex-start;
-    align-items: center;
-    gap: 12px;
-    width: calc(100% + 17px);
-    margin-right: -17px;
-    padding: 2px 17px 12px 0;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+  .student-proof-video-stage {
+    padding-inline: 0;
   }
 
-  .student-proof-video-only-row::-webkit-scrollbar {
-    display: none;
+  .student-proof-video-only-row {
+    height: min(126vw, 590px);
   }
 
   .student-proof-video-nav {
-    display: flex;
-    align-items: center;
+    position: static;
     justify-content: center;
     gap: 18px;
     margin-top: 14px;
+    transform: none;
   }
 
   .student-proof-video-arrow {
-    display: grid;
-    place-items: center;
     width: 48px;
-    aspect-ratio: 1;
-    padding: 0;
-    border: 2px solid #1c171a;
-    border-radius: 50%;
-    color: #1c171a;
-    background: #f0ff27;
     box-shadow: 4px 5px 0 #fa2095;
-    cursor: pointer;
-    transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
   }
 
   .student-proof-video-arrow span {
     font-size: 28px;
-    line-height: 1;
-    transform: translateY(-1px);
-  }
-
-  .student-proof-video-arrow:hover,
-  .student-proof-video-arrow:focus-visible {
-    outline: none;
-    transform: scale(1.06);
-    box-shadow: 2px 3px 0 #fa2095;
-  }
-
-  .student-proof-video-arrow:disabled {
-    opacity: 0.36;
-    cursor: default;
-    transform: none;
-    box-shadow: 2px 3px 0 rgb(250 32 149 / 45%);
   }
 
   .student-proof-video-only-card {
     --student-proof-video-radius: 24px;
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
   }
 
   .student-proof-video-only-card--portrait {
-    flex-basis: min(78vw, 320px);
     width: min(78vw, 320px);
   }
 
   .student-proof-video-only-card--landscape {
-    flex-basis: min(90vw, 520px);
     width: min(90vw, 520px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .student-proof-video-arrow {
+  .student-proof-video-arrow,
+  .student-proof-video-only-card {
     transition-duration: 1ms !important;
   }
 }

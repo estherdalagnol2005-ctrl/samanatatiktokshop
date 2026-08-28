@@ -18,60 +18,31 @@
 
     section.dataset.videoNavigationReady = "true";
     let activeIndex = 0;
-    let scrollFrame = 0;
 
     const updateNavigation = () => {
-      previousButton.disabled = activeIndex === 0;
-      nextButton.disabled = activeIndex === cards.length - 1;
+      cards.forEach((card, index) => {
+        const isActive = index === activeIndex;
+        const frame = card.querySelector("iframe");
+
+        card.classList.toggle("is-active", isActive);
+        card.setAttribute("aria-hidden", String(!isActive));
+
+        if (frame) {
+          frame.tabIndex = isActive ? 0 : -1;
+        }
+      });
+
+      section.dataset.activeVideo = String(activeIndex);
       status.textContent = `Vídeo ${activeIndex + 1} de ${cards.length}`;
     };
 
     const goToVideo = (index) => {
-      activeIndex = Math.max(0, Math.min(cards.length - 1, index));
-
-      const card = cards[activeIndex];
-      const rowRect = row.getBoundingClientRect();
-      const cardRect = card.getBoundingClientRect();
-      const target =
-        row.scrollLeft +
-        cardRect.left -
-        rowRect.left -
-        (row.clientWidth - card.clientWidth) / 2;
-
-      row.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
+      activeIndex = (index + cards.length) % cards.length;
       updateNavigation();
     };
 
     previousButton.addEventListener("click", () => goToVideo(activeIndex - 1));
     nextButton.addEventListener("click", () => goToVideo(activeIndex + 1));
-
-    row.addEventListener(
-      "scroll",
-      () => {
-        window.cancelAnimationFrame(scrollFrame);
-        scrollFrame = window.requestAnimationFrame(() => {
-          const rowCenter = row.getBoundingClientRect().left + row.clientWidth / 2;
-          let closestIndex = 0;
-          let closestDistance = Number.POSITIVE_INFINITY;
-
-          cards.forEach((card, index) => {
-            const rect = card.getBoundingClientRect();
-            const distance = Math.abs(rect.left + rect.width / 2 - rowCenter);
-
-            if (distance < closestDistance) {
-              closestDistance = distance;
-              closestIndex = index;
-            }
-          });
-
-          if (closestIndex !== activeIndex) {
-            activeIndex = closestIndex;
-            updateNavigation();
-          }
-        });
-      },
-      { passive: true },
-    );
 
     updateNavigation();
   };
@@ -101,36 +72,38 @@
           </div>
         </header>
 
-        <div class="student-proof-video-only-row" aria-label="Depoimentos em vídeo de alunas">
-          <figure class="student-proof-video-only-card student-proof-video-only-card--portrait">
-            <iframe
-              src="https://drive.google.com/file/d/1KsVedupuF5JxMWARSQ2Q1Vg3C-DgTNpJ/preview"
-              title="Primeiro depoimento em vídeo"
-              allow="autoplay; fullscreen"
-              allowfullscreen
-              loading="lazy"
-            ></iframe>
-          </figure>
+        <div class="student-proof-video-stage">
+          <div class="student-proof-video-only-row" aria-label="Depoimentos em vídeo de alunas">
+            <figure class="student-proof-video-only-card student-proof-video-only-card--portrait">
+              <iframe
+                src="https://drive.google.com/file/d/1KsVedupuF5JxMWARSQ2Q1Vg3C-DgTNpJ/preview"
+                title="Primeiro depoimento em vídeo"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </figure>
 
-          <figure class="student-proof-video-only-card student-proof-video-only-card--landscape">
-            <iframe
-              src="https://drive.google.com/file/d/1wO_B1Yy0ult16Mk0ic-61ClPTkS56kI8/preview"
-              title="Segundo depoimento em vídeo"
-              allow="autoplay; fullscreen"
-              allowfullscreen
-              loading="lazy"
-            ></iframe>
-          </figure>
-        </div>
+            <figure class="student-proof-video-only-card student-proof-video-only-card--landscape">
+              <iframe
+                src="https://drive.google.com/file/d/1wO_B1Yy0ult16Mk0ic-61ClPTkS56kI8/preview"
+                title="Segundo depoimento em vídeo"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                loading="lazy"
+              ></iframe>
+            </figure>
+          </div>
 
-        <div class="student-proof-video-nav" aria-label="Navegação dos depoimentos em vídeo">
-          <button class="student-proof-video-arrow student-proof-video-arrow--previous" type="button" aria-label="Ver vídeo anterior">
-            <span aria-hidden="true">←</span>
-          </button>
-          <p class="student-proof-video-status" aria-live="polite">Vídeo 1 de 2</p>
-          <button class="student-proof-video-arrow student-proof-video-arrow--next" type="button" aria-label="Ver próximo vídeo">
-            <span aria-hidden="true">→</span>
-          </button>
+          <div class="student-proof-video-nav" aria-label="Navegação dos depoimentos em vídeo">
+            <button class="student-proof-video-arrow student-proof-video-arrow--previous" type="button" aria-label="Ver vídeo anterior">
+              <span aria-hidden="true">←</span>
+            </button>
+            <p class="student-proof-video-status" aria-live="polite">Vídeo 1 de 2</p>
+            <button class="student-proof-video-arrow student-proof-video-arrow--next" type="button" aria-label="Ver próximo vídeo">
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
         </div>
 
         <a class="student-proof-cta" href="https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O">QUERO SER A PRÓXIMA HISTÓRIA <span aria-hidden="true">↗</span></a>
