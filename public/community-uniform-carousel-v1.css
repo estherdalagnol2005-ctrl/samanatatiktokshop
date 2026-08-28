@@ -77,15 +77,13 @@
   box-shadow: none !important;
   overflow: hidden;
   opacity: 0;
-  filter: blur(2px) saturate(0.76);
   transform: translate3d(-50%, -50%, -60px) scale(0.82);
   transform-origin: center;
   transform-style: preserve-3d;
   pointer-events: none;
-  will-change: transform, filter, opacity;
+  will-change: transform, opacity;
   transition:
     transform 360ms cubic-bezier(0.2, 0.75, 0.2, 1),
-    filter 300ms ease,
     opacity 300ms ease,
     box-shadow 360ms ease;
 }
@@ -101,13 +99,18 @@
   object-fit: contain;
   object-position: center;
   background: #0b0b0b !important;
+  filter: none;
   user-select: none;
   pointer-events: none;
+  transition: filter 300ms ease;
 }
 
 .community-uniform-card.is-near {
   z-index: 2;
   opacity: 0.58;
+}
+
+.community-uniform-card.is-near img {
   filter: blur(1.6px) saturate(0.86);
 }
 
@@ -122,13 +125,16 @@
 .community-uniform-card.is-active {
   z-index: 4;
   opacity: 1;
-  filter: none;
   pointer-events: auto;
   will-change: transform, opacity;
   box-shadow:
     0 30px 60px rgb(60 12 43 / 24%),
     0 9px 22px rgb(60 12 43 / 14%) !important;
-  transform: translate3d(-50%, calc(-50% - 5px), 0) scale(1.06);
+  transform: translate3d(-50%, calc(-50% - 5px), 0) scale(1);
+}
+
+.community-uniform-card.is-active img {
+  filter: none !important;
 }
 
 .community-uniform-arrow {
@@ -266,6 +272,9 @@
 
   .community-uniform-card.is-near {
     opacity: 0.48;
+  }
+
+  .community-uniform-card.is-near img {
     filter: blur(1.25px) saturate(0.86);
   }
 
@@ -278,7 +287,8 @@
   }
 
   .community-uniform-card.is-active {
-    transform: translate3d(-50%, calc(-50% - 3px), 0) scale(1.015);
+    opacity: 1;
+    transform: translate3d(-50%, calc(-50% - 3px), 0) scale(1);
   }
 
   .community-uniform-arrow {
