@@ -29,10 +29,12 @@
 }
 
 .student-proof-video-only-card {
+  --student-proof-video-radius: clamp(24px, 2.4vw, 34px);
   margin: 0;
+  padding: 6px;
   border: 0;
-  border-radius: clamp(24px, 2.4vw, 34px);
-  background: #111;
+  border-radius: var(--student-proof-video-radius);
+  background: linear-gradient(145deg, #fa2095 0%, #ffa120 52%, #f0ff27 100%);
   box-shadow: 0 22px 54px rgb(70 23 50 / 18%);
   overflow: hidden;
 }
@@ -54,6 +56,7 @@
   width: 100%;
   height: 100%;
   border: 0;
+  border-radius: calc(var(--student-proof-video-radius) - 6px);
   background: #111;
 }
 
@@ -80,7 +83,7 @@
   }
 
   .student-proof-video-only-card {
-    border-radius: 24px;
+    --student-proof-video-radius: 24px;
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }
