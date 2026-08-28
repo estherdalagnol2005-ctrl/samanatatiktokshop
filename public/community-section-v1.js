@@ -35,16 +35,29 @@
     if (!viewport || !cards.length || !previous || !next) return;
 
     let activeIndex = initialIndex;
-    let scrollFrame = 0;
+    let gestureStart = null;
 
     const updateState = (index) => {
-      activeIndex = Math.max(0, Math.min(cards.length - 1, index));
+      activeIndex = (index + cards.length) % cards.length;
+      const previousIndex = (activeIndex - 1 + cards.length) % cards.length;
+      const nextIndex = (activeIndex + 1) % cards.length;
+
       cards.forEach((card, cardIndex) => {
         const active = cardIndex === activeIndex;
-        const distance = Math.abs(cardIndex - activeIndex);
+        const previousCard = cardIndex === previousIndex;
+        const nextCard = cardIndex === nextIndex;
+        const near = previousCard || nextCard;
+
+        card.dataset.slot = active
+          ? "active"
+          : previousCard
+            ? "previous"
+            : nextCard
+              ? "next"
+              : "hidden";
         card.classList.toggle("is-active", active);
-        card.classList.toggle("is-near", distance === 1);
-        card.classList.toggle("is-distant", distance > 1);
+        card.classList.toggle("is-near", near);
+        card.classList.toggle("is-distant", !active && !near);
         card.toggleAttribute("aria-current", active);
       });
       dots.forEach((dot, dotIndex) => {
@@ -55,49 +68,43 @@
       });
     };
 
-    const centerCard = (index, behavior = "smooth") => {
-      const normalized = (index + cards.length) % cards.length;
-      const card = cards[normalized];
-      const left = card.offsetLeft - (viewport.clientWidth - card.clientWidth) / 2;
-      viewport.scrollTo({ left, behavior });
-      updateState(normalized);
-    };
-
-    const updateFromScroll = () => {
-      window.cancelAnimationFrame(scrollFrame);
-      scrollFrame = window.requestAnimationFrame(() => {
-        const viewportCenter = viewport.scrollLeft + viewport.clientWidth / 2;
-        let closest = 0;
-        let distance = Number.POSITIVE_INFINITY;
-        cards.forEach((card, index) => {
-          const center = card.offsetLeft + card.clientWidth / 2;
-          const currentDistance = Math.abs(center - viewportCenter);
-          if (currentDistance < distance) {
-            distance = currentDistance;
-            closest = index;
-          }
-        });
-        updateState(closest);
-      });
-    };
-
-    previous.addEventListener("click", () => centerCard(activeIndex - 1));
-    next.addEventListener("click", () => centerCard(activeIndex + 1));
-    dots.forEach((dot, index) => dot.addEventListener("click", () => centerCard(index)));
-    viewport.addEventListener("scroll", updateFromScroll, { passive: true });
+    previous.addEventListener("click", () => updateState(activeIndex - 1));
+    next.addEventListener("click", () => updateState(activeIndex + 1));
+    dots.forEach((dot, index) => dot.addEventListener("click", () => updateState(index)));
     viewport.addEventListener("keydown", (event) => {
       if (event.key === "ArrowLeft") {
         event.preventDefault();
-        centerCard(activeIndex - 1);
+        updateState(activeIndex - 1);
       }
       if (event.key === "ArrowRight") {
         event.preventDefault();
-        centerCard(activeIndex + 1);
+        updateState(activeIndex + 1);
       }
     });
-    window.addEventListener("resize", () => centerCard(activeIndex, "auto"), { passive: true });
 
-    centerCard(initialIndex, "auto");
+    viewport.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      gestureStart = { x: event.clientX, y: event.clientY };
+      viewport.classList.add("is-dragging");
+    });
+
+    viewport.addEventListener("pointerup", (event) => {
+      if (!gestureStart) return;
+      const deltaX = event.clientX - gestureStart.x;
+      const deltaY = event.clientY - gestureStart.y;
+      gestureStart = null;
+      viewport.classList.remove("is-dragging");
+
+      if (Math.abs(deltaX) < 42 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+      updateState(activeIndex + (deltaX < 0 ? 1 : -1));
+    });
+
+    viewport.addEventListener("pointercancel", () => {
+      gestureStart = null;
+      viewport.classList.remove("is-dragging");
+    });
+
+    updateState(initialIndex);
   };
 
   const buildCommunitySection = () => {

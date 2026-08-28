@@ -33,44 +33,40 @@
 
 .community-uniform-stage {
   --community-card-width: clamp(264px, 23vw, 336px);
+  --community-side-offset: clamp(250px, 29vw, 430px);
   position: relative;
   width: 100%;
+  height: clamp(340px, 30vw, 430px);
   margin-top: clamp(30px, 3.6vw, 54px);
   perspective: 1200px;
 }
 
 .community-uniform-carousel {
+  position: relative;
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  overscroll-behavior-inline: contain;
-  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  overflow: hidden;
   outline: none;
   perspective: 1200px;
+  touch-action: pan-y;
+  cursor: grab;
 }
 
-.community-uniform-carousel::-webkit-scrollbar {
-  display: none;
+.community-uniform-carousel.is-dragging {
+  cursor: grabbing;
 }
 
 .community-uniform-track {
-  display: flex;
-  align-items: center;
-  gap: clamp(24px, 3.4vw, 54px);
-  width: max-content;
-  min-width: 100%;
-  padding-block: clamp(42px, 4.5vw, 68px) clamp(36px, 4vw, 58px);
-  padding-inline: max(54px, calc(50% - (var(--community-card-width) / 2)));
+  position: absolute;
+  inset: 0;
   transform-style: preserve-3d;
 }
 
 .community-uniform-card {
-  position: relative;
-  z-index: 1;
-  flex: 0 0 var(--community-card-width);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
   width: var(--community-card-width);
   aspect-ratio: 1.08 / 1;
   margin: 0;
@@ -80,19 +76,18 @@
   background: #0b0b0b !important;
   box-shadow: none !important;
   overflow: hidden;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
-  opacity: 0.46;
-  filter: blur(3px) saturate(0.7);
-  transform: translate3d(0, 0, -90px) scale(0.88);
+  opacity: 0;
+  filter: blur(2px) saturate(0.76);
+  transform: translate3d(-50%, -50%, -60px) scale(0.82);
   transform-origin: center;
   transform-style: preserve-3d;
+  pointer-events: none;
   will-change: transform, filter, opacity;
   transition:
-    transform 460ms cubic-bezier(0.2, 0.75, 0.2, 1),
-    filter 380ms ease,
-    opacity 380ms ease,
-    box-shadow 460ms ease;
+    transform 360ms cubic-bezier(0.2, 0.75, 0.2, 1),
+    filter 300ms ease,
+    opacity 300ms ease,
+    box-shadow 360ms ease;
 }
 
 .community-uniform-card img {
@@ -112,20 +107,28 @@
 
 .community-uniform-card.is-near {
   z-index: 2;
-  opacity: 0.7;
+  opacity: 0.58;
   filter: blur(1.6px) saturate(0.86);
-  transform: translate3d(0, 0, -38px) scale(0.95);
+}
+
+.community-uniform-card[data-slot="previous"] {
+  transform: translate3d(calc(-50% - var(--community-side-offset)), -50%, -30px) scale(0.84);
+}
+
+.community-uniform-card[data-slot="next"] {
+  transform: translate3d(calc(-50% + var(--community-side-offset)), -50%, -30px) scale(0.84);
 }
 
 .community-uniform-card.is-active {
   z-index: 4;
   opacity: 1;
   filter: none;
+  pointer-events: auto;
   will-change: transform, opacity;
   box-shadow:
     0 30px 60px rgb(60 12 43 / 24%),
     0 9px 22px rgb(60 12 43 / 14%) !important;
-  transform: translate3d(0, -5px, 92px) scale(1.075);
+  transform: translate3d(-50%, calc(-50% - 5px), 0) scale(1.06);
 }
 
 .community-uniform-arrow {
@@ -219,14 +222,12 @@
 @media (width <= 900px) {
   .community-uniform-stage {
     --community-card-width: clamp(232px, 38vw, 300px);
+    --community-side-offset: clamp(210px, 38vw, 330px);
+    height: clamp(310px, 50vw, 400px);
   }
 
   .community-uniform-shell {
     padding-inline: clamp(14px, 3.5vw, 28px) !important;
-  }
-
-  .community-uniform-track {
-    padding-inline: max(42px, calc(50% - (var(--community-card-width) / 2)));
   }
 }
 
@@ -254,33 +255,43 @@
 
   .community-uniform-stage {
     --community-card-width: min(78vw, 310px);
+    --community-side-offset: 72vw;
+    height: clamp(300px, 93vw, 360px);
     margin-top: 28px;
   }
 
-  .community-uniform-track {
-    gap: 18px;
-    padding-block: 30px 26px;
-    padding-inline: calc(50% - (var(--community-card-width) / 2));
-  }
-
   .community-uniform-card {
-    opacity: 0.5;
-    filter: blur(2px) saturate(0.76);
-    transform: translate3d(0, 0, -55px) scale(0.91);
+    transform: translate3d(-50%, -50%, -45px) scale(0.78);
   }
 
   .community-uniform-card.is-near {
-    opacity: 0.66;
+    opacity: 0.48;
     filter: blur(1.25px) saturate(0.86);
-    transform: translate3d(0, 0, -25px) scale(0.95);
+  }
+
+  .community-uniform-card[data-slot="previous"] {
+    transform: translate3d(calc(-50% - var(--community-side-offset)), -50%, -20px) scale(0.78);
+  }
+
+  .community-uniform-card[data-slot="next"] {
+    transform: translate3d(calc(-50% + var(--community-side-offset)), -50%, -20px) scale(0.78);
   }
 
   .community-uniform-card.is-active {
-    transform: translate3d(0, -3px, 54px) scale(1.045);
+    transform: translate3d(-50%, calc(-50% - 3px), 0) scale(1.015);
   }
 
   .community-uniform-arrow {
-    display: none;
+    display: grid;
+    width: 42px;
+  }
+
+  .community-uniform-arrow--prev {
+    left: 8px;
+  }
+
+  .community-uniform-arrow--next {
+    right: 8px;
   }
 
   .community-uniform-nav {
@@ -300,10 +311,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .community-uniform-carousel {
-    scroll-behavior: auto;
-  }
-
   .community-uniform-card,
   .community-uniform-arrow,
   .community-uniform-dot {
