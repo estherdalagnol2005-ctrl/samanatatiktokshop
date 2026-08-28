@@ -1,6 +1,7 @@
 (() => {
   const checkoutUrl =
     "https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O";
+  const initialIndex = 2;
 
   const carouselItems = [
     {
@@ -10,6 +11,10 @@
     {
       src: "/testimonials/2026-08/itamires-ajuda.webp",
       alt: "Itámires compartilha como a ajuda da comunidade fez diferença na jornada",
+    },
+    {
+      src: "/testimonials/2026-08/leticia-pix-20681.webp",
+      alt: "Letícia compartilha um Pix de mais de vinte mil reais recebido do TikTok Shop",
     },
     {
       src: "/testimonials/2026-08/bruna-comunidade.webp",
@@ -29,7 +34,7 @@
     const next = section.querySelector('[data-community-direction="1"]');
     if (!viewport || !cards.length || !previous || !next) return;
 
-    let activeIndex = 0;
+    let activeIndex = initialIndex;
     let scrollFrame = 0;
 
     const updateState = (index) => {
@@ -92,7 +97,7 @@
     });
     window.addEventListener("resize", () => centerCard(activeIndex, "auto"), { passive: true });
 
-    centerCard(0, "auto");
+    centerCard(initialIndex, "auto");
   };
 
   const buildCommunitySection = () => {
@@ -109,15 +114,15 @@
     const cards = carouselItems
       .map(
         (item, index) => `
-          <figure class="community-uniform-card${index === 0 ? " is-active" : ""}"${index === 0 ? ' aria-current="true"' : ""}>
-            <img src="${item.src}" alt="${item.alt}" loading="${index === 0 ? "eager" : "lazy"}" decoding="async" draggable="false">
+          <figure class="community-uniform-card${index === initialIndex ? " is-active" : ""}"${index === initialIndex ? ' aria-current="true"' : ""}>
+            <img src="${item.src}" alt="${item.alt}" loading="${index === initialIndex ? "eager" : "lazy"}" decoding="async" draggable="false">
           </figure>`,
       )
       .join("");
 
     const dots = carouselItems
       .map(
-        (_, index) => `<button class="community-uniform-dot${index === 0 ? " is-active" : ""}" type="button" aria-label="Ver imagem ${index + 1}"${index === 0 ? ' aria-current="true"' : ""}></button>`,
+        (_, index) => `<button class="community-uniform-dot${index === initialIndex ? " is-active" : ""}" type="button" aria-label="Ver imagem ${index + 1}"${index === initialIndex ? ' aria-current="true"' : ""}></button>`,
       )
       .join("");
 
