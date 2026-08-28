@@ -120,7 +120,8 @@
 .community-uniform-card.is-active {
   z-index: 4;
   opacity: 1;
-  filter: blur(0) saturate(1);
+  filter: none;
+  will-change: transform, opacity;
   box-shadow:
     0 30px 60px rgb(60 12 43 / 24%),
     0 9px 22px rgb(60 12 43 / 14%) !important;

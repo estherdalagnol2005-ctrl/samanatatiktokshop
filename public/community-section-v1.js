@@ -13,7 +13,7 @@
       alt: "Itámires compartilha como a ajuda da comunidade fez diferença na jornada",
     },
     {
-      src: "/testimonials/2026-08/leticia-pix-20681.webp",
+      src: "/testimonials/2026-08/leticia-pix-20681-original.jpg",
       alt: "Letícia compartilha um Pix de mais de vinte mil reais recebido do TikTok Shop",
     },
     {
