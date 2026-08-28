@@ -32,9 +32,11 @@
 }
 
 .community-uniform-stage {
+  --community-card-width: clamp(264px, 23vw, 336px);
   position: relative;
   width: 100%;
   margin-top: clamp(30px, 3.6vw, 54px);
+  perspective: 1200px;
 }
 
 .community-uniform-carousel {
@@ -47,6 +49,7 @@
   overscroll-behavior-inline: contain;
   -webkit-overflow-scrolling: touch;
   outline: none;
+  perspective: 1200px;
 }
 
 .community-uniform-carousel::-webkit-scrollbar {
@@ -55,47 +58,73 @@
 
 .community-uniform-track {
   display: flex;
-  align-items: flex-start;
-  gap: clamp(14px, 1.5vw, 22px);
+  align-items: center;
+  gap: clamp(24px, 3.4vw, 54px);
   width: max-content;
   min-width: 100%;
-  padding: 5px clamp(54px, 5vw, 76px) 14px;
+  padding-block: clamp(42px, 4.5vw, 68px) clamp(36px, 4vw, 58px);
+  padding-inline: max(54px, calc(50% - (var(--community-card-width) / 2)));
+  transform-style: preserve-3d;
 }
 
 .community-uniform-card {
   position: relative;
-  flex: 0 0 clamp(220px, 24vw, 330px);
-  width: clamp(220px, 24vw, 330px);
+  z-index: 1;
+  flex: 0 0 var(--community-card-width);
+  width: var(--community-card-width);
+  aspect-ratio: 1.08 / 1;
   margin: 0;
   padding: 0;
   border: 0 !important;
   border-radius: 0 !important;
-  background: transparent !important;
+  background: #0b0b0b !important;
   box-shadow: none !important;
-  overflow: visible;
+  overflow: hidden;
   scroll-snap-align: center;
   scroll-snap-stop: always;
-  transition: transform 220ms ease, opacity 220ms ease;
+  opacity: 0.46;
+  filter: blur(3px) saturate(0.7);
+  transform: translate3d(0, 0, -90px) scale(0.88);
+  transform-origin: center;
+  transform-style: preserve-3d;
+  will-change: transform, filter, opacity;
+  transition:
+    transform 460ms cubic-bezier(0.2, 0.75, 0.2, 1),
+    filter 380ms ease,
+    opacity 380ms ease,
+    box-shadow 460ms ease;
 }
 
 .community-uniform-card img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
   margin: 0;
   padding: 0;
   border: 0;
   border-radius: 0;
   object-fit: contain;
   object-position: center;
-  background: transparent !important;
+  background: #0b0b0b !important;
   user-select: none;
   pointer-events: none;
 }
 
+.community-uniform-card.is-near {
+  z-index: 2;
+  opacity: 0.7;
+  filter: blur(1.6px) saturate(0.86);
+  transform: translate3d(0, 0, -38px) scale(0.95);
+}
+
 .community-uniform-card.is-active {
-  box-shadow: none !important;
-  transform: translateY(-4px);
+  z-index: 4;
+  opacity: 1;
+  filter: blur(0) saturate(1);
+  box-shadow:
+    0 30px 60px rgb(60 12 43 / 24%),
+    0 9px 22px rgb(60 12 43 / 14%) !important;
+  transform: translate3d(0, -5px, 92px) scale(1.075);
 }
 
 .community-uniform-arrow {
@@ -187,17 +216,16 @@
 }
 
 @media (width <= 900px) {
+  .community-uniform-stage {
+    --community-card-width: clamp(232px, 38vw, 300px);
+  }
+
   .community-uniform-shell {
     padding-inline: clamp(14px, 3.5vw, 28px) !important;
   }
 
   .community-uniform-track {
-    padding-inline: clamp(42px, 8vw, 64px);
-  }
-
-  .community-uniform-card {
-    flex-basis: clamp(210px, 38vw, 300px);
-    width: clamp(210px, 38vw, 300px);
+    padding-inline: max(42px, calc(50% - (var(--community-card-width) / 2)));
   }
 }
 
@@ -224,18 +252,30 @@
   }
 
   .community-uniform-stage {
+    --community-card-width: min(78vw, 310px);
     margin-top: 28px;
   }
 
   .community-uniform-track {
-    gap: 12px;
-    padding: 4px 11vw 12px;
+    gap: 18px;
+    padding-block: 30px 26px;
+    padding-inline: calc(50% - (var(--community-card-width) / 2));
   }
 
   .community-uniform-card {
-    flex-basis: 78vw;
-    width: 78vw;
-    max-width: 310px;
+    opacity: 0.5;
+    filter: blur(2px) saturate(0.76);
+    transform: translate3d(0, 0, -55px) scale(0.91);
+  }
+
+  .community-uniform-card.is-near {
+    opacity: 0.66;
+    filter: blur(1.25px) saturate(0.86);
+    transform: translate3d(0, 0, -25px) scale(0.95);
+  }
+
+  .community-uniform-card.is-active {
+    transform: translate3d(0, -3px, 54px) scale(1.045);
   }
 
   .community-uniform-arrow {
@@ -266,6 +306,6 @@
   .community-uniform-card,
   .community-uniform-arrow,
   .community-uniform-dot {
-    transition: none !important;
+    transition-duration: 1ms !important;
   }
 }

@@ -36,7 +36,10 @@
       activeIndex = Math.max(0, Math.min(cards.length - 1, index));
       cards.forEach((card, cardIndex) => {
         const active = cardIndex === activeIndex;
+        const distance = Math.abs(cardIndex - activeIndex);
         card.classList.toggle("is-active", active);
+        card.classList.toggle("is-near", distance === 1);
+        card.classList.toggle("is-distant", distance > 1);
         card.toggleAttribute("aria-current", active);
       });
       dots.forEach((dot, dotIndex) => {
