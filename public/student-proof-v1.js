@@ -1,6 +1,87 @@
 (() => {
+  const setupVideoNavigation = (section) => {
+    if (section.dataset.videoNavigationReady === "true") return;
+
+    const row = section.querySelector(".student-proof-video-only-row");
+    const cards = Array.from(
+      section.querySelectorAll(".student-proof-video-only-card"),
+    );
+    const previousButton = section.querySelector(
+      ".student-proof-video-arrow--previous",
+    );
+    const nextButton = section.querySelector(".student-proof-video-arrow--next");
+    const status = section.querySelector(".student-proof-video-status");
+
+    if (!row || cards.length < 2 || !previousButton || !nextButton || !status) {
+      return;
+    }
+
+    section.dataset.videoNavigationReady = "true";
+    let activeIndex = 0;
+    let scrollFrame = 0;
+
+    const updateNavigation = () => {
+      previousButton.disabled = activeIndex === 0;
+      nextButton.disabled = activeIndex === cards.length - 1;
+      status.textContent = `Vídeo ${activeIndex + 1} de ${cards.length}`;
+    };
+
+    const goToVideo = (index) => {
+      activeIndex = Math.max(0, Math.min(cards.length - 1, index));
+
+      const card = cards[activeIndex];
+      const rowRect = row.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      const target =
+        row.scrollLeft +
+        cardRect.left -
+        rowRect.left -
+        (row.clientWidth - card.clientWidth) / 2;
+
+      row.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
+      updateNavigation();
+    };
+
+    previousButton.addEventListener("click", () => goToVideo(activeIndex - 1));
+    nextButton.addEventListener("click", () => goToVideo(activeIndex + 1));
+
+    row.addEventListener(
+      "scroll",
+      () => {
+        window.cancelAnimationFrame(scrollFrame);
+        scrollFrame = window.requestAnimationFrame(() => {
+          const rowCenter = row.getBoundingClientRect().left + row.clientWidth / 2;
+          let closestIndex = 0;
+          let closestDistance = Number.POSITIVE_INFINITY;
+
+          cards.forEach((card, index) => {
+            const rect = card.getBoundingClientRect();
+            const distance = Math.abs(rect.left + rect.width / 2 - rowCenter);
+
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestIndex = index;
+            }
+          });
+
+          if (closestIndex !== activeIndex) {
+            activeIndex = closestIndex;
+            updateNavigation();
+          }
+        });
+      },
+      { passive: true },
+    );
+
+    updateNavigation();
+  };
+
   const buildStudentProof = () => {
-    if (document.querySelector("#depoimentos")) return;
+    const existingSection = document.querySelector("#depoimentos");
+    if (existingSection) {
+      setupVideoNavigation(existingSection);
+      return;
+    }
 
     const hero = document.querySelector(".hero-stage");
     if (!hero) return;
@@ -42,11 +123,22 @@
           </figure>
         </div>
 
+        <div class="student-proof-video-nav" aria-label="Navegação dos depoimentos em vídeo">
+          <button class="student-proof-video-arrow student-proof-video-arrow--previous" type="button" aria-label="Ver vídeo anterior">
+            <span aria-hidden="true">←</span>
+          </button>
+          <p class="student-proof-video-status" aria-live="polite">Vídeo 1 de 2</p>
+          <button class="student-proof-video-arrow student-proof-video-arrow--next" type="button" aria-label="Ver próximo vídeo">
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
         <a class="student-proof-cta" href="https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O">QUERO SER A PRÓXIMA HISTÓRIA <span aria-hidden="true">↗</span></a>
       </div>
     `;
 
     hero.insertAdjacentElement("afterend", section);
+    setupVideoNavigation(section);
 
     const transition = document.querySelector(
       ".dreams-section > .dreams-marquee",
