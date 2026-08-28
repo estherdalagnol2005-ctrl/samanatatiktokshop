@@ -104,7 +104,7 @@
         <div class="student-proof-video-only-row" aria-label="Depoimentos em vídeo de alunas">
           <figure class="student-proof-video-only-card student-proof-video-only-card--portrait">
             <iframe
-              src="https://drive.google.com/file/d/1iUCIhcmILabjx84IYgPwSrIVasrqiYub/preview"
+              src="https://drive.google.com/file/d/1KsVedupuF5JxMWARSQ2Q1Vg3C-DgTNpJ/preview"
               title="Primeiro depoimento em vídeo"
               allow="autoplay; fullscreen"
               allowfullscreen
@@ -114,7 +114,7 @@
 
           <figure class="student-proof-video-only-card student-proof-video-only-card--landscape">
             <iframe
-              src="https://drive.google.com/file/d/1wWRFYcWHIwq87E_BbbU53fHg6DYEK5dp/preview"
+              src="https://drive.google.com/file/d/1wO_B1Yy0ult16Mk0ic-61ClPTkS56kI8/preview"
               title="Segundo depoimento em vídeo"
               allow="autoplay; fullscreen"
               allowfullscreen
