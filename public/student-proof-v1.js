@@ -19,6 +19,16 @@
     section.dataset.videoNavigationReady = "true";
     let activeIndex = 0;
 
+    const syncRowHeight = () => {
+      const activeCard = cards[activeIndex];
+      if (!activeCard) return;
+
+      const activeHeight = activeCard.getBoundingClientRect().height;
+      if (activeHeight > 0) {
+        row.style.height = `${Math.ceil(activeHeight)}px`;
+      }
+    };
+
     const updateNavigation = () => {
       cards.forEach((card, index) => {
         const isActive = index === activeIndex;
@@ -34,6 +44,7 @@
 
       section.dataset.activeVideo = String(activeIndex);
       status.textContent = `Vídeo ${activeIndex + 1} de ${cards.length}`;
+      window.requestAnimationFrame(syncRowHeight);
     };
 
     const goToVideo = (index) => {
@@ -43,6 +54,11 @@
 
     previousButton.addEventListener("click", () => goToVideo(activeIndex - 1));
     nextButton.addEventListener("click", () => goToVideo(activeIndex + 1));
+    window.addEventListener(
+      "resize",
+      () => window.requestAnimationFrame(syncRowHeight),
+      { passive: true },
+    );
 
     updateNavigation();
   };
