@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   description:
     "Sunlix: método e comunidade para mulheres que querem construir resultados com TikTok Shop.",
   icons: {
-    icon: "/favicon.svg?sunlix=20260831",
-    shortcut: "/favicon.svg?sunlix=20260831",
+    icon: "/brand/sunlix-logo-night.svg?favicon=20260831",
+    shortcut: "/brand/sunlix-logo-night.svg?favicon=20260831",
   },
 };
 
