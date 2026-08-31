@@ -137,7 +137,7 @@
       <div class="community-shell community-uniform-shell">
         <header class="community-copy community-uniform-copy">
           <h2 id="community-title">Sua jornada <strong>não precisa ser solitária.</strong></h2>
-          <p>Eu sei que você tenta resolver tudo sozinha. Mas você não precisa continuar assim. A Sunlix existe por um propósito: transformar alunas em uma família.</p>
+          <p>A Sunlix foi criada com o propósito de unir diferentes mulheres com o mesmo objetivo: mudar a própria realidade através do TikTok Shop. Todas as mulheres dessa comunidade estão comprometidas a trilhar uma jornada juntas, até fazer dar certo!</p>
         </header>
 
         <div class="community-uniform-stage">
