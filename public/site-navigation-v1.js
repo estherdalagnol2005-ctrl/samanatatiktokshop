@@ -1,6 +1,6 @@
 (() => {
   const sectionLinks = [
-    { href: "#jornada", label: "Método" },
+    { href: "#jornada", label: "Como saber se é pra mim?" },
     { href: "#depoimentos", label: "Depoimentos" },
     { href: "#resultados", label: "Conquistas" },
   ];
