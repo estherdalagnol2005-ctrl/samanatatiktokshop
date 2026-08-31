@@ -1,0 +1,49 @@
+/* Current navigation refinements only. Superseded patch files were consolidated here. */
+@media (width >= 1180px) {
+  .site-header {
+    grid-template-columns: minmax(150px, 1fr) auto minmax(150px, 1fr) !important;
+    column-gap: clamp(24px, 3vw, 48px) !important;
+  }
+
+  .site-header .desktop-nav {
+    display: flex !important;
+    width: auto !important;
+    max-width: none !important;
+    grid-template-columns: none !important;
+    justify-content: center !important;
+    justify-items: initial !important;
+    gap: clamp(34px, 3.4vw, 54px) !important;
+    margin-inline: auto !important;
+    font-size: clamp(11px, 0.78vw, 12.5px) !important;
+    white-space: nowrap;
+  }
+
+  .site-header .desktop-nav a {
+    padding-inline: 0 !important;
+  }
+}
+
+@media (width < 1180px) {
+  .mobile-menu-toggle {
+    display: grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    translate: 0 !important;
+    scale: 1 !important;
+    will-change: auto !important;
+  }
+}
+
+@media (width <= 640px) {
+  .mobile-menu-links a:not(.mobile-menu-cta) .mobile-menu-falling-text {
+    font-size: clamp(12px, 3.15vw, 14px) !important;
+  }
+
+  .mobile-menu-cta {
+    margin-bottom: clamp(56px, 8svh, 78px) !important;
+  }
+}
