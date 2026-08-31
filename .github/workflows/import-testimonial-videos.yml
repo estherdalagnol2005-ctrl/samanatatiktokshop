@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   import-videos:
-    if: github.event.head_commit.message == 'Add one-time testimonial video importer'
+    if: github.event.head_commit.message == 'Retry one-time testimonial video importer'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,8 +23,8 @@ jobs:
       - name: Download source videos
         run: |
           mkdir -p /tmp/sunlix-video-source public/videos
-          gdown --id 1KsVedupuF5JxMWARSQ2Q1Vg3C-DgTNpJ -O /tmp/sunlix-video-source/janaina.mp4
-          gdown --id 1wO_B1Yy0ult16Mk0ic-61ClPTkS56kI8 -O /tmp/sunlix-video-source/yasmin.mp4
+          gdown 1KsVedupuF5JxMWARSQ2Q1Vg3C-DgTNpJ -O /tmp/sunlix-video-source/janaina.mp4
+          gdown 1wO_B1Yy0ult16Mk0ic-61ClPTkS56kI8 -O /tmp/sunlix-video-source/yasmin.mp4
           test $(stat -c%s /tmp/sunlix-video-source/janaina.mp4) -gt 1000000
           test $(stat -c%s /tmp/sunlix-video-source/yasmin.mp4) -gt 1000000
 
