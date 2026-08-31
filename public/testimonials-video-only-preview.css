@@ -183,8 +183,16 @@
     width: min(78vw, 320px);
   }
 
+  /* Google Drive adds its own player toolbar above landscape videos. Give the
+     iframe enough vertical room so the 16:9 video itself remains fully inside
+     the framed card once playback starts. */
   .student-proof-video-only-card--landscape {
     width: min(90vw, 520px);
+    aspect-ratio: 7 / 5;
+  }
+
+  .student-proof-video-only-card--landscape iframe {
+    overflow: hidden;
   }
 }
 
