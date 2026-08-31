@@ -46,11 +46,15 @@
       markerCenters.forEach((center, index) => {
         if (center <= focusLine) activeIndex = index;
       });
+
       const timelineRect = timeline.getBoundingClientRect();
       timeline.style.setProperty("--method-track-start", `${Math.max(0, first - timelineRect.top)}px`);
       timeline.style.setProperty("--method-track-length", `${trackLength}px`);
       timeline.style.setProperty("--method-fill-length", `${(trackLength * progress) / 100}px`);
-      timeline.style.setProperty("--method-timeline-axis", `${markerCenters[0] ? markers[0].getBoundingClientRect().left + markers[0].getBoundingClientRect().width / 2 - timelineRect.left : 0}px`);
+      timeline.style.setProperty(
+        "--method-timeline-axis",
+        `${markers[0].getBoundingClientRect().left + markers[0].getBoundingClientRect().width / 2 - timelineRect.left}px`,
+      );
       setActiveStep(section, activeIndex, progress);
 
       if (timelineRect.top < window.innerHeight && timelineRect.bottom > 0) {
@@ -67,12 +71,16 @@
     requestUpdate();
   };
 
-  const buildMethodSalesSection = () => {
-    const section = document.querySelector(".method-section");
-    if (!section || section.dataset.salesMethodReady === "true") return Boolean(section);
+  const createCurrentMethodSection = () => {
+    const existing = document.querySelector(".method-sales-section#jornada");
+    if (existing) return existing;
 
-    section.dataset.salesMethodReady = "true";
+    const anchor = document.querySelector("#depoimentos") || document.querySelector(".hero-stage");
+    if (!anchor) return null;
+
+    const section = document.createElement("section");
     section.className = "method-section method-sales-section";
+    section.id = "jornada";
     section.setAttribute("aria-labelledby", "method-sales-title");
     section.innerHTML = `
       <div class="method-sales-shell">
@@ -100,14 +108,21 @@
           <a class="method-sales-cta" href="${checkoutUrl}">QUERO FAZER PARTE DA SUNLIX <span aria-hidden="true">↗</span></a>
         </div>
       </div>`;
-    setupMethodProgress(section);
-    return true;
+
+    anchor.insertAdjacentElement("afterend", section);
+    return section;
+  };
+
+  const boot = () => {
+    const section = createCurrentMethodSection();
+    if (section) setupMethodProgress(section);
   };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", buildMethodSalesSection, { once: true });
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
   } else {
-    buildMethodSalesSection();
+    boot();
   }
-  window.addEventListener("pageshow", buildMethodSalesSection);
+
+  window.addEventListener("pageshow", boot);
 })();

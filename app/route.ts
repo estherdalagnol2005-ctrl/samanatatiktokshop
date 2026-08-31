@@ -26,10 +26,6 @@ const optimizedHtml = snapshotHtml
     "/brand/sunlix-logo-night.svg?favicon=20260831",
   )
   .replaceAll(
-    "O que transforma atenção em compra",
-    "O MÉTODO POR TRÁS DAS VENDAS",
-  )
-  .replaceAll(
     "/assets/metric-top.jpg",
     "/assets/hero-result-march-2026.webp",
   )
@@ -65,13 +61,6 @@ const optimizedHtml = snapshotHtml
     '<a class="scroll-cue" href="#resultados"',
     '<a class="scroll-cue" href="#depoimentos"',
   )
-  .replaceAll("O VÍDEO QUE VENDE", "O método que")
-  .replaceAll("COMEÇA ANTES", "escalou minhas")
-  .replaceAll("de você apertar gravar.", "vendas.")
-  .replaceAll(
-    "Antes da câmera ligar, existe um caminho. Role para acompanhar como uma ideia ganha intenção e se transforma em uma operação que pode ser repetida.",
-    "Da escolha do produto à leitura dos resultados, cada etapa tem uma função: chamar atenção, gerar desejo, conduzir a compra e repetir o que funciona.",
-  )
   .replace(
     '<div class="method-photo-frame"><img src="/assets/creator-photo.jpg" alt="Samanta no espaço TikTok Shop"/></div>',
     '<div class="method-photo-frame"><img src="/assets/samanta-hero-portrait.webp" alt="Retrato de Samanta" style="object-position:center 34%"/></div>',
@@ -82,7 +71,7 @@ const optimizedHtml = snapshotHtml
   )
   .replace(
     "</head>",
-    '<meta name="theme-color" content="#fa2095"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/><style>html:not(.site-fold-order-ready) .dreams-section{display:none!important}.method-section:not(.method-sales-section){display:none!important}</style><link rel="preload" href="/assets/samanta-hero-portrait.webp" as="image"/><link rel="stylesheet" href="/site-overrides.css"/><link rel="stylesheet" href="/density-and-gallery-v1.css"/><link rel="stylesheet" href="/student-proof-v1.css"/><link rel="stylesheet" href="/testimonials-video-only-preview.css"/><link rel="stylesheet" href="/gradient-flow-v1.css"/><link rel="stylesheet" href="/gallery-coverflow-v1.css"/><link rel="stylesheet" href="/title-hierarchy-v1.css"/><link rel="stylesheet" href="/conversion-cta-v1.css"/><link rel="stylesheet" href="/footer-v1.css"/><link rel="stylesheet" href="/header-balance-v1.css"/><link rel="stylesheet" href="/site-navigation-v1.css"/><link rel="stylesheet" href="/mobile-menu-premium-v1.css"/><link rel="stylesheet" href="/mobile-menu-glass-v1.css"/><link rel="stylesheet" href="/navigation-final.css"/><link rel="stylesheet" href="/motion-effects-v1.css"/><link rel="stylesheet" href="/community-section-v1.css"/><link rel="stylesheet" href="/method-sales-v3.css"/><link rel="stylesheet" href="/flow-polish-v1.css"/><link rel="stylesheet" href="/section-heading-alignment-v1.css"/><link rel="stylesheet" href="/exit-offer.css"/><link rel="stylesheet" href="/premium-button-effects-v1.css"/><link rel="stylesheet" href="/cta-copy-v1.css"/><link rel="stylesheet" href="/responsive-shell-v1.css"/><link rel="stylesheet" href="/community-uniform-carousel-v1.css"/></head>',
+    '<meta name="theme-color" content="#fa2095"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/><style>html:not(.site-fold-order-ready) .dreams-section{display:none!important}</style><link rel="preload" href="/assets/samanta-hero-portrait.webp" as="image"/><link rel="stylesheet" href="/site-overrides.css"/><link rel="stylesheet" href="/density-and-gallery-v1.css"/><link rel="stylesheet" href="/student-proof-v1.css"/><link rel="stylesheet" href="/testimonials-video-only-preview.css"/><link rel="stylesheet" href="/gradient-flow-v1.css"/><link rel="stylesheet" href="/gallery-coverflow-v1.css"/><link rel="stylesheet" href="/title-hierarchy-v1.css"/><link rel="stylesheet" href="/conversion-cta-v1.css"/><link rel="stylesheet" href="/footer-v1.css"/><link rel="stylesheet" href="/header-balance-v1.css"/><link rel="stylesheet" href="/site-navigation-v1.css"/><link rel="stylesheet" href="/mobile-menu-premium-v1.css"/><link rel="stylesheet" href="/mobile-menu-glass-v1.css"/><link rel="stylesheet" href="/navigation-final.css"/><link rel="stylesheet" href="/motion-effects-v1.css"/><link rel="stylesheet" href="/community-section-v1.css"/><link rel="stylesheet" href="/method-sales-v3.css"/><link rel="stylesheet" href="/flow-polish-v1.css"/><link rel="stylesheet" href="/section-heading-alignment-v1.css"/><link rel="stylesheet" href="/exit-offer.css"/><link rel="stylesheet" href="/premium-button-effects-v1.css"/><link rel="stylesheet" href="/cta-copy-v1.css"/><link rel="stylesheet" href="/responsive-shell-v1.css"/><link rel="stylesheet" href="/community-uniform-carousel-v1.css"/></head>',
   )
   .replace(
     "</body>",
