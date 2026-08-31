@@ -41,6 +41,24 @@
   margin-top: 3px !important;
 }
 
+.dreams-subtitle {
+  width: min(100%, 720px);
+  margin: 18px auto 0;
+  font-size: clamp(15px, 1.35vw, 19px);
+  font-weight: 500;
+  line-height: 1.52;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #1c171a;
+}
+
+.dreams-subtitle > strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 1.08em;
+  font-weight: 800;
+}
+
 .method-layout-v2 .method-timeline-steps h3 {
   font-size: clamp(24px, 2.25vw, 34px) !important;
   line-height: 0.94 !important;
@@ -214,6 +232,16 @@
 
   .dreams-heading {
     margin-bottom: 0 !important;
+  }
+
+  .dreams-subtitle {
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .dreams-subtitle > strong {
+    margin-top: 8px;
   }
 
   .method-layout-v2 .method-timeline-steps h3 {
