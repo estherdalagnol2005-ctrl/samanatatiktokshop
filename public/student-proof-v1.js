@@ -1,4 +1,8 @@
 (() => {
+  const markFoldOrderReady = () => {
+    document.documentElement.classList.add("site-fold-order-ready");
+  };
+
   const setupVideoNavigation = (section) => {
     if (section.dataset.videoNavigationReady === "true") return;
 
@@ -79,11 +83,12 @@
     const existingSection = document.querySelector("#depoimentos");
     if (existingSection) {
       setupVideoNavigation(existingSection);
-      return;
+      markFoldOrderReady();
+      return true;
     }
 
     const hero = document.querySelector(".hero-stage");
-    if (!hero) return;
+    if (!hero) return false;
 
     const section = document.createElement("section");
     section.className = "student-proof-section student-proof-video-only-section";
@@ -148,15 +153,24 @@
       transition.classList.add("site-gradient-marquee");
       hero.insertAdjacentElement("afterend", transition);
     }
+
+    markFoldOrderReady();
+    return true;
   };
 
-  const scheduleBuild = () => window.setTimeout(buildStudentProof, 950);
+  const boot = () => {
+    if (buildStudentProof()) return;
 
-  if (document.readyState === "complete") {
-    scheduleBuild();
-  } else {
-    window.addEventListener("load", scheduleBuild, { once: true });
-  }
+    const observer = new MutationObserver(() => {
+      if (buildStudentProof()) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    window.setTimeout(() => {
+      observer.disconnect();
+      markFoldOrderReady();
+    }, 2500);
+  };
 
-  window.addEventListener("pageshow", scheduleBuild);
+  boot();
+  window.addEventListener("pageshow", boot);
 })();
