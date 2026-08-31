@@ -66,7 +66,7 @@
       <div class="student-proof-shell">
         <header class="student-proof-heading">
           <div class="student-proof-copy">
-            <h2 id="student-proof-title">Esse é o motivo que me faz continuar todos os dias<br><strong>ajudando mulheres como você.</strong></h2>
+            <h2 id="student-proof-title">Esse é o motivo que me faz continuar todos os dias <strong>ajudando mulheres como você.</strong></h2>
             <p>São depoimentos como esses que me fazem querer compartilhar meu método e, cada vez mais, ajudar a realizar sonhos. Com meu método já vi mulheres deixando o CLT e mães dando uma condição melhor pra sua família e é por isso que eu continuo a cada dia. Você pode ser a próxima, escolha agora começar a trilhar seu próprio caminho ao meu lado e junto a essa comunidade de mulheres que evoluem a cada dia.</p>
           </div>
         </header>
