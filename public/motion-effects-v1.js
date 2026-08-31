@@ -39,7 +39,8 @@ gsap.registerPlugin(ScrollTrigger);
 
     gsap.killTweensOf(titleParts);
     gsap.set(titleParts, {
-      y: 28,
+      y: 18,
+      scale: 0.985,
       autoAlpha: 0,
       transformOrigin: "50% 100%",
     });
@@ -48,10 +49,11 @@ gsap.registerPlugin(ScrollTrigger);
 
     gsap.to(titleParts, {
       y: 0,
+      scale: 1,
       autoAlpha: 1,
-      duration: 0.52,
-      stagger: 0.07,
-      ease: "power3.out",
+      duration: 0.62,
+      stagger: 0.08,
+      ease: "power2.out",
       clearProps: "transform,opacity,visibility",
     });
 
