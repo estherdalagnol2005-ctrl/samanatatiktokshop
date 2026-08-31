@@ -2,15 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Samanta TikTok Shop",
+  title: "Sunlix | TikTok Shop",
   description:
-    "Aprenda com Samanta Vidal a transformar conteúdo em uma operação de vendas no TikTok Shop.",
-  other: {
-    "codex-preview": "development",
-  },
+    "Sunlix: método e comunidade para mulheres que querem construir resultados com TikTok Shop.",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/favicon.svg?sunlix=20260831",
+    shortcut: "/favicon.svg?sunlix=20260831",
   },
 };
 
