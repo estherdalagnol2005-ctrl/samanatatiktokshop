@@ -1,4 +1,4 @@
-/* Motion polish: preserve the display font while giving SplitText real depth. */
+/* Motion polish: preserve the display font while giving the hero title real depth. */
 #hero-title {
   perspective: 900px;
 }
@@ -8,13 +8,19 @@ html.gsap-motion:not(.hero-motion-ready) #hero-title {
 }
 
 #hero-title .hero-split-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
   padding-bottom: 0.08em;
   margin-bottom: -0.08em;
 }
 
 #hero-title .hero-split-char {
+  display: inline-block;
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 .motion-text-card {
