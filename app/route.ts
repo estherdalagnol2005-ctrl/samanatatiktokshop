@@ -1,7 +1,8 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const snapshotHtml = readFileSync(
   join(process.cwd(), "recovery", "index.html"),
@@ -13,6 +14,13 @@ const optimizedHtml = snapshotHtml
     "width=device-width, initial-scale=1",
     "width=device-width, initial-scale=1, viewport-fit=cover",
   )
+  .replaceAll("Samanta TikTok Shop", "Sunlix | TikTok Shop")
+  .replaceAll(
+    "Aprenda com Samanta Vidal a transformar conteúdo em uma operação de vendas no TikTok Shop.",
+    "Sunlix: método e comunidade para mulheres que querem construir resultados com TikTok Shop.",
+  )
+  .replaceAll('<meta name="codex-preview" content="development"/>', "")
+  .replaceAll('href="/favicon.svg"', 'href="/favicon.svg?sunlix=20260831"')
   .replaceAll(
     "O que transforma atenção em compra",
     "O MÉTODO POR TRÁS DAS VENDAS",
@@ -81,7 +89,9 @@ export function GET() {
   return new Response(optimizedHtml, {
     headers: {
       "Content-Type": "text/html; charset=utf-8",
-      "Cache-Control": "public, max-age=0, must-revalidate",
+      "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",
+      "CDN-Cache-Control": "no-store",
+      "Vercel-CDN-Cache-Control": "no-store",
     },
   });
 }
