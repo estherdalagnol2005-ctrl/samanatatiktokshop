@@ -1,0 +1,49 @@
+name: Import testimonial videos
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  import-videos:
+    if: github.event.head_commit.message == 'Add one-time testimonial video importer'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install downloader
+        run: python -m pip install --quiet gdown
+
+      - name: Download source videos
+        run: |
+          mkdir -p /tmp/sunlix-video-source public/videos
+          gdown --id 1KsVedupuF5JxMWARSQ2Q1Vg3C-DgTNpJ -O /tmp/sunlix-video-source/janaina.mp4
+          gdown --id 1wO_B1Yy0ult16Mk0ic-61ClPTkS56kI8 -O /tmp/sunlix-video-source/yasmin.mp4
+          test $(stat -c%s /tmp/sunlix-video-source/janaina.mp4) -gt 1000000
+          test $(stat -c%s /tmp/sunlix-video-source/yasmin.mp4) -gt 1000000
+
+      - name: Optimize for web
+        run: |
+          ffmpeg -y -hide_banner -loglevel error -i /tmp/sunlix-video-source/janaina.mp4 \
+            -vf 'scale=-2:1280' -c:v libx264 -preset veryfast -crf 24 \
+            -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 96k \
+            public/videos/depoimento-janaina.mp4
+          ffmpeg -y -hide_banner -loglevel error -i /tmp/sunlix-video-source/yasmin.mp4 \
+            -vf 'scale=1280:-2' -c:v libx264 -preset veryfast -crf 25 \
+            -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 96k \
+            public/videos/depoimento-yasmin.mp4
+          ls -lh public/videos/*.mp4
+
+      - name: Commit local videos
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/videos/depoimento-janaina.mp4 public/videos/depoimento-yasmin.mp4
+          git commit -m 'Add optimized local testimonial videos [skip ci]'
+          git push origin HEAD:main
