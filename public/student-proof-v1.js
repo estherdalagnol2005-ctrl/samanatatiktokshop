@@ -28,9 +28,6 @@
       const activeCard = cards[activeIndex];
       if (!activeCard) return;
 
-      // offsetHeight is intentionally used instead of getBoundingClientRect().
-      // The latter includes the visual scale transform and can leave the row
-      // with a stale height after moving portrait -> landscape -> portrait.
       const activeHeight = activeCard.offsetHeight;
       if (activeHeight > 0) {
         row.style.height = `${Math.ceil(activeHeight)}px`;
@@ -47,13 +44,14 @@
     const updateNavigation = () => {
       cards.forEach((card, index) => {
         const isActive = index === activeIndex;
-        const frame = card.querySelector("iframe");
+        const media = card.querySelector("video");
 
         card.classList.toggle("is-active", isActive);
         card.setAttribute("aria-hidden", String(!isActive));
 
-        if (frame) {
-          frame.tabIndex = isActive ? 0 : -1;
+        if (media) {
+          media.tabIndex = isActive ? 0 : -1;
+          if (!isActive && !media.paused) media.pause();
         }
       });
 
@@ -61,6 +59,14 @@
       status.textContent = `Vídeo ${activeIndex + 1} de ${cards.length}`;
       settleRowHeight();
     };
+
+    cards.forEach((card) => {
+      const media = card.querySelector("video");
+      if (!media) return;
+
+      media.addEventListener("error", () => card.classList.add("has-video-error"));
+      media.addEventListener("loadeddata", () => card.classList.remove("has-video-error"));
+    });
 
     const goToVideo = (index) => {
       activeIndex = (index + cards.length) % cards.length;
@@ -107,23 +113,25 @@
         <div class="student-proof-video-stage">
           <div class="student-proof-video-only-row" aria-label="Depoimentos em vídeo de alunas">
             <figure class="student-proof-video-only-card student-proof-video-only-card--portrait">
-              <iframe
-                src="https://drive.google.com/file/d/1KsVedupuF5JxMWARSQ2Q1Vg3C-DgTNpJ/preview"
+              <video
+                controls
+                playsinline
+                preload="metadata"
                 title="Primeiro depoimento em vídeo"
-                allow="autoplay; fullscreen"
-                allowfullscreen
-                loading="lazy"
-              ></iframe>
+                src="https://drive.google.com/uc?export=download&id=1KsVedupuF5JxMWARSQ2Q1Vg3C-DgTNpJ"
+              ></video>
+              <p class="student-proof-video-error" aria-live="polite">Este vídeo precisa estar compartilhado como “Qualquer pessoa com o link”.</p>
             </figure>
 
             <figure class="student-proof-video-only-card student-proof-video-only-card--landscape">
-              <iframe
-                src="https://drive.google.com/file/d/1wO_B1Yy0ult16Mk0ic-61ClPTkS56kI8/preview"
+              <video
+                controls
+                playsinline
+                preload="metadata"
                 title="Segundo depoimento em vídeo"
-                allow="autoplay; fullscreen"
-                allowfullscreen
-                loading="lazy"
-              ></iframe>
+                src="https://drive.google.com/uc?export=download&id=1wO_B1Yy0ult16Mk0ic-61ClPTkS56kI8"
+              ></video>
+              <p class="student-proof-video-error" aria-live="polite">Este vídeo precisa estar compartilhado como “Qualquer pessoa com o link”.</p>
             </figure>
           </div>
 
