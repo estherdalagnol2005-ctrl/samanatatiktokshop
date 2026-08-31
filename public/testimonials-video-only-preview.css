@@ -147,14 +147,22 @@
   }
 
   .student-proof-video-only-row {
-    height: min(126vw, 590px);
+    height: min(148vw, 590px);
+  }
+
+  .student-proof-video-only-card.is-active {
+    transform: perspective(1200px) translateZ(0) scale(1);
   }
 
   .student-proof-video-nav {
-    position: static;
+    position: relative;
+    z-index: 6;
+    top: auto;
+    right: auto;
+    left: auto;
     justify-content: center;
     gap: 18px;
-    margin-top: 14px;
+    margin-top: 18px;
     transform: none;
   }
 
