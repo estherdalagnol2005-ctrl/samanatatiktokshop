@@ -9,11 +9,62 @@ gsap.registerPlugin(ScrollTrigger);
   const heroState = { firstCharacter: null, timer: null, started: false };
   let revealStarted = false;
 
+  const prepareHeroCharacters = () => {
+    const title = document.querySelector("#hero-title");
+    if (!title) return [];
+
+    const existing = [...title.querySelectorAll(".hero-split-char")];
+    if (existing.length) return existing;
+
+    const textNodes = [];
+    const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT);
+    let node = walker.nextNode();
+
+    while (node) {
+      if (node.nodeValue?.trim()) textNodes.push(node);
+      node = walker.nextNode();
+    }
+
+    textNodes.forEach((textNode) => {
+      const fragment = document.createDocumentFragment();
+      const tokens = textNode.nodeValue.split(/(\s+)/);
+
+      tokens.forEach((token) => {
+        if (!token) return;
+
+        if (/^\s+$/.test(token)) {
+          fragment.appendChild(document.createTextNode(token));
+          return;
+        }
+
+        const word = document.createElement("span");
+        word.className = "hero-split-word-mask";
+        word.setAttribute("aria-hidden", "true");
+
+        [...token].forEach((character) => {
+          const char = document.createElement("span");
+          char.className = "hero-split-char";
+          char.textContent = character;
+          word.appendChild(char);
+        });
+
+        fragment.appendChild(word);
+      });
+
+      textNode.replaceWith(fragment);
+    });
+
+    return [...title.querySelectorAll(".hero-split-char")];
+  };
+
   const animateHeroCharacters = () => {
     if (heroState.started) return false;
 
-    const chars = [...document.querySelectorAll("#hero-title .hero-split-char")];
-    if (!chars.length) return false;
+    const chars = prepareHeroCharacters();
+    if (!chars.length) {
+      document.documentElement.classList.add("hero-motion-ready");
+      return false;
+    }
 
     heroState.started = true;
     heroState.firstCharacter = chars[0];
@@ -28,9 +79,9 @@ gsap.registerPlugin(ScrollTrigger);
 
     gsap.killTweensOf(chars);
     gsap.set(chars, {
-      yPercent: 138,
-      rotateX: -92,
-      rotateZ: -2,
+      yPercent: 118,
+      rotateX: -82,
+      rotateZ: -1.5,
       autoAlpha: 0,
       transformOrigin: "50% 100%",
     });
@@ -42,20 +93,20 @@ gsap.registerPlugin(ScrollTrigger);
       rotateX: 0,
       rotateZ: 0,
       autoAlpha: 1,
-      duration: 0.78,
-      stagger: { each: 0.024, from: "start" },
+      duration: 0.64,
+      stagger: { each: 0.018, from: "start" },
       ease: "power4.out",
-      delay: 0.05,
+      delay: 0.01,
       clearProps: "transform,opacity,visibility",
     });
 
     if (headerItems.length) {
       gsap.from(headerItems, {
-        y: -14,
+        y: -12,
         autoAlpha: 0,
-        duration: isDesktop ? 0.52 : 0.62,
-        stagger: isDesktop ? 0.045 : 0.07,
-        delay: isDesktop ? 0.02 : 0,
+        duration: isDesktop ? 0.42 : 0.5,
+        stagger: isDesktop ? 0.035 : 0.05,
+        delay: 0,
         ease: "power3.out",
         clearProps: "transform,opacity,visibility",
       });
@@ -257,7 +308,7 @@ gsap.registerPlugin(ScrollTrigger);
   const initialize = () => {
     const scheduleHeroAnimation = () => {
       window.clearTimeout(heroState.timer);
-      heroState.timer = window.setTimeout(animateHeroCharacters, 90);
+      heroState.timer = window.setTimeout(animateHeroCharacters, 12);
     };
 
     const observer = new MutationObserver(() => {
@@ -267,7 +318,7 @@ gsap.registerPlugin(ScrollTrigger);
     observer.observe(document.documentElement, { childList: true, subtree: true });
 
     const fontReady = document.fonts?.ready || Promise.resolve();
-    const fastStart = new Promise((resolve) => window.setTimeout(resolve, 140));
+    const fastStart = new Promise((resolve) => window.setTimeout(resolve, 55));
     Promise.race([fontReady, fastStart]).then(scheduleHeroAnimation);
 
     let attempts = 0;
@@ -280,8 +331,9 @@ gsap.registerPlugin(ScrollTrigger);
     }, 180);
 
     window.setTimeout(() => {
+      if (!heroState.started) animateHeroCharacters();
       document.documentElement.classList.add("hero-motion-ready");
-    }, 5000);
+    }, 900);
   };
 
   if (document.readyState === "loading") {
