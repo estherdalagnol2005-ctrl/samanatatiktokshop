@@ -20,7 +20,11 @@ const optimizedHtml = snapshotHtml
     "Sunlix: método e comunidade para mulheres que querem construir resultados com TikTok Shop.",
   )
   .replaceAll('<meta name="codex-preview" content="development"/>', "")
-  .replaceAll('href="/favicon.svg"', 'href="/favicon.svg?sunlix=20260831"')
+  .replaceAll("codex-preview", "sunlix-site")
+  .replaceAll(
+    "/favicon.svg",
+    "/brand/sunlix-logo-night.svg?favicon=20260831",
+  )
   .replaceAll(
     "O que transforma atenção em compra",
     "O MÉTODO POR TRÁS DAS VENDAS",
