@@ -18,15 +18,26 @@
 
     section.dataset.videoNavigationReady = "true";
     let activeIndex = 0;
+    let heightTimer = 0;
 
     const syncRowHeight = () => {
       const activeCard = cards[activeIndex];
       if (!activeCard) return;
 
-      const activeHeight = activeCard.getBoundingClientRect().height;
+      // offsetHeight is intentionally used instead of getBoundingClientRect().
+      // The latter includes the visual scale transform and can leave the row
+      // with a stale height after moving portrait -> landscape -> portrait.
+      const activeHeight = activeCard.offsetHeight;
       if (activeHeight > 0) {
         row.style.height = `${Math.ceil(activeHeight)}px`;
       }
+    };
+
+    const settleRowHeight = () => {
+      window.clearTimeout(heightTimer);
+      syncRowHeight();
+      window.requestAnimationFrame(syncRowHeight);
+      heightTimer = window.setTimeout(syncRowHeight, 460);
     };
 
     const updateNavigation = () => {
@@ -44,7 +55,7 @@
 
       section.dataset.activeVideo = String(activeIndex);
       status.textContent = `Vídeo ${activeIndex + 1} de ${cards.length}`;
-      window.requestAnimationFrame(syncRowHeight);
+      settleRowHeight();
     };
 
     const goToVideo = (index) => {
@@ -54,11 +65,12 @@
 
     previousButton.addEventListener("click", () => goToVideo(activeIndex - 1));
     nextButton.addEventListener("click", () => goToVideo(activeIndex + 1));
-    window.addEventListener(
-      "resize",
-      () => window.requestAnimationFrame(syncRowHeight),
-      { passive: true },
-    );
+
+    const resizeObserver = new ResizeObserver(() => settleRowHeight());
+    cards.forEach((card) => resizeObserver.observe(card));
+
+    window.addEventListener("resize", settleRowHeight, { passive: true });
+    window.addEventListener("orientationchange", settleRowHeight, { passive: true });
 
     updateNavigation();
   };
