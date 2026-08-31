@@ -21,7 +21,7 @@
       alt: "Bruna celebra o orgulho de fazer parte da comunidade",
     },
     {
-      src: "https://samanatatiktokshop.vercel.app/testimonials/sarah-pagamento-7714.webp",
+      src: "/testimonials/sarah-pagamento-7714.webp",
       alt: "Sarah compartilha um resultado real de pagamento",
     },
   ];
