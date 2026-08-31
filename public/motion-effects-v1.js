@@ -6,68 +6,28 @@ gsap.registerPlugin(ScrollTrigger);
 (() => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const heroState = { firstCharacter: null, timer: null, started: false };
+  const heroState = { timer: null, started: false };
   let revealStarted = false;
 
-  const prepareHeroCharacters = () => {
-    const title = document.querySelector("#hero-title");
-    if (!title) return [];
-
-    const existing = [...title.querySelectorAll(".hero-split-char")];
-    if (existing.length) return existing;
-
-    const textNodes = [];
-    const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT);
-    let node = walker.nextNode();
-
-    while (node) {
-      if (node.nodeValue?.trim()) textNodes.push(node);
-      node = walker.nextNode();
-    }
-
-    textNodes.forEach((textNode) => {
-      const fragment = document.createDocumentFragment();
-      const tokens = textNode.nodeValue.split(/(\s+)/);
-
-      tokens.forEach((token) => {
-        if (!token) return;
-
-        if (/^\s+$/.test(token)) {
-          fragment.appendChild(document.createTextNode(token));
-          return;
-        }
-
-        const word = document.createElement("span");
-        word.className = "hero-split-word-mask";
-        word.setAttribute("aria-hidden", "true");
-
-        [...token].forEach((character) => {
-          const char = document.createElement("span");
-          char.className = "hero-split-char";
-          char.textContent = character;
-          word.appendChild(char);
-        });
-
-        fragment.appendChild(word);
-      });
-
-      textNode.replaceWith(fragment);
-    });
-
-    return [...title.querySelectorAll(".hero-split-char")];
-  };
-
-  const animateHeroCharacters = () => {
+  const animateHeroTitle = () => {
     if (heroState.started) return false;
 
-    const chars = prepareHeroCharacters();
-    if (!chars.length) {
+    const title = document.querySelector("#hero-title");
+    if (!title) {
+      document.documentElement.classList.add("hero-motion-ready");
+      return false;
+    }
+
+    const titleParts = [...title.children].filter(
+      (element) => element.tagName === "SPAN" || element.tagName === "STRONG",
+    );
+
+    if (!titleParts.length) {
       document.documentElement.classList.add("hero-motion-ready");
       return false;
     }
 
     heroState.started = true;
-    heroState.firstCharacter = chars[0];
     const isDesktop = window.matchMedia("(min-width: 1180px)").matches;
     const headerItems = isDesktop
       ? [
@@ -77,34 +37,29 @@ gsap.registerPlugin(ScrollTrigger);
         ].filter(Boolean)
       : [document.querySelector(".site-header .brand")].filter(Boolean);
 
-    gsap.killTweensOf(chars);
-    gsap.set(chars, {
-      yPercent: 118,
-      rotateX: -82,
-      rotateZ: -1.5,
+    gsap.killTweensOf(titleParts);
+    gsap.set(titleParts, {
+      y: 28,
       autoAlpha: 0,
       transformOrigin: "50% 100%",
     });
 
     document.documentElement.classList.add("hero-motion-ready");
 
-    gsap.to(chars, {
-      yPercent: 0,
-      rotateX: 0,
-      rotateZ: 0,
+    gsap.to(titleParts, {
+      y: 0,
       autoAlpha: 1,
-      duration: 0.64,
-      stagger: { each: 0.018, from: "start" },
-      ease: "power4.out",
-      delay: 0.01,
+      duration: 0.52,
+      stagger: 0.07,
+      ease: "power3.out",
       clearProps: "transform,opacity,visibility",
     });
 
     if (headerItems.length) {
       gsap.from(headerItems, {
-        y: -12,
+        y: -10,
         autoAlpha: 0,
-        duration: isDesktop ? 0.42 : 0.5,
+        duration: isDesktop ? 0.4 : 0.46,
         stagger: isDesktop ? 0.035 : 0.05,
         delay: 0,
         ease: "power3.out",
@@ -308,7 +263,7 @@ gsap.registerPlugin(ScrollTrigger);
   const initialize = () => {
     const scheduleHeroAnimation = () => {
       window.clearTimeout(heroState.timer);
-      heroState.timer = window.setTimeout(animateHeroCharacters, 12);
+      heroState.timer = window.setTimeout(animateHeroTitle, 8);
     };
 
     const observer = new MutationObserver(() => {
@@ -318,7 +273,7 @@ gsap.registerPlugin(ScrollTrigger);
     observer.observe(document.documentElement, { childList: true, subtree: true });
 
     const fontReady = document.fonts?.ready || Promise.resolve();
-    const fastStart = new Promise((resolve) => window.setTimeout(resolve, 55));
+    const fastStart = new Promise((resolve) => window.setTimeout(resolve, 40));
     Promise.race([fontReady, fastStart]).then(scheduleHeroAnimation);
 
     let attempts = 0;
@@ -331,9 +286,9 @@ gsap.registerPlugin(ScrollTrigger);
     }, 180);
 
     window.setTimeout(() => {
-      if (!heroState.started) animateHeroCharacters();
+      if (!heroState.started) animateHeroTitle();
       document.documentElement.classList.add("hero-motion-ready");
-    }, 900);
+    }, 500);
   };
 
   if (document.readyState === "loading") {
