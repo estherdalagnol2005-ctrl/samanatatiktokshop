@@ -118,9 +118,9 @@
                 playsinline
                 preload="metadata"
                 title="Primeiro depoimento em vídeo"
-                src="https://drive.google.com/uc?export=download&id=1KsVedupuF5JxMWARSQ2Q1Vg3C-DgTNpJ"
+                src="/videos/depoimento-janaina.mp4"
               ></video>
-              <p class="student-proof-video-error" aria-live="polite">Este vídeo precisa estar compartilhado como “Qualquer pessoa com o link”.</p>
+              <p class="student-proof-video-error" aria-live="polite">Não foi possível carregar este vídeo. Recarregue a página.</p>
             </figure>
 
             <figure class="student-proof-video-only-card student-proof-video-only-card--landscape">
@@ -129,9 +129,9 @@
                 playsinline
                 preload="metadata"
                 title="Segundo depoimento em vídeo"
-                src="https://drive.google.com/uc?export=download&id=1wO_B1Yy0ult16Mk0ic-61ClPTkS56kI8"
+                src="/videos/depoimento-yasmin.mp4"
               ></video>
-              <p class="student-proof-video-error" aria-live="polite">Este vídeo precisa estar compartilhado como “Qualquer pessoa com o link”.</p>
+              <p class="student-proof-video-error" aria-live="polite">Não foi possível carregar este vídeo. Recarregue a página.</p>
             </figure>
           </div>
 
