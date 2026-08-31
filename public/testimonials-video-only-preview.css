@@ -28,7 +28,8 @@
 
 .student-proof-video-only-row {
   display: grid;
-  place-items: center;
+  align-items: start;
+  justify-items: center;
   width: 100%;
   height: clamp(520px, 61vw, 700px);
   perspective: 1200px;
@@ -49,7 +50,7 @@
   visibility: hidden;
   pointer-events: none;
   transform: perspective(1200px) translateZ(-80px) scale(0.92);
-  transform-origin: center;
+  transform-origin: top center;
   transition: opacity 320ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 420ms ease, visibility 0s linear 420ms;
   will-change: transform, opacity;
@@ -60,7 +61,7 @@
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: perspective(1200px) translateZ(36px) scale(1.045);
+  transform: perspective(1200px) translateZ(0) scale(1);
   box-shadow: 0 30px 76px rgb(70 23 50 / 25%);
   transition-delay: 0s;
 }
@@ -150,10 +151,6 @@
     height: min(148vw, 590px);
   }
 
-  .student-proof-video-only-card.is-active {
-    transform: perspective(1200px) translateZ(0) scale(1);
-  }
-
   .student-proof-video-nav {
     position: relative;
     z-index: 6;
@@ -162,7 +159,7 @@
     left: auto;
     justify-content: center;
     gap: 18px;
-    margin-top: 18px;
+    margin-top: 26px;
     transform: none;
   }
 
