@@ -6,14 +6,18 @@
 
 .student-proof-copy h2,
 .dreams-heading h2,
-.method-copy h2 {
+.method-copy h2,
+.method-sales-intro h2,
+.community-copy h2,
+.home-story-heading h2,
+.conversion-copy h2 {
   font-size: clamp(32px, 3.25vw, 50px) !important;
   line-height: 0.91 !important;
   letter-spacing: -0.055em !important;
 }
 
 .student-proof-copy h2 {
-  max-width: 690px;
+  max-width: 760px;
 }
 
 .student-proof-heading {
@@ -60,9 +64,18 @@
 
   .student-proof-copy h2,
   .dreams-heading h2,
-  .method-copy h2 {
-    font-size: clamp(29px, 8.6vw, 36px) !important;
-    line-height: 0.92 !important;
+  .method-copy h2,
+  .method-sales-intro h2,
+  .community-copy h2,
+  .home-story-heading h2,
+  .conversion-copy h2 {
+    font-size: clamp(26px, 7.4vw, 30px) !important;
+    line-height: 0.94 !important;
+    letter-spacing: -0.05em !important;
+  }
+
+  .student-proof-copy h2 {
+    max-width: 100% !important;
   }
 
   .student-proof-heading {
