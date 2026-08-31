@@ -1,0 +1,344 @@
+name: Final production cleanup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/final-production-cleanup.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Canonicalize current site and remove legacy scaffold
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import json
+          import re
+          import shutil
+
+          root = Path('.')
+          html_path = root / 'recovery/index.html'
+          html = html_path.read_text(encoding='utf-8')
+
+          # Keep only the actual document. Vinext/RSC payloads that lived after </html>
+          # contained obsolete sections and are not part of the current site.
+          if '</html>' in html:
+              html = html.split('</html>', 1)[0] + '</html>'
+
+          # Remove legacy client hydration/modulepreload code. The current site is the
+          # canonical HTML plus the explicit production scripts loaded below.
+          html = re.sub(r'<link\s+rel="modulepreload"[^>]*?/?>', '', html, flags=re.I)
+          html = re.sub(r'<script>self\.__VINEXT_RSC_PARAMS__=.*?</script>', '', html, flags=re.S)
+          html = re.sub(r'<script>self\.__VINEXT_RSC_NAV__=.*?</script>', '', html, flags=re.S)
+          html = re.sub(r'<script\s+id="_R_">.*?</script>', '', html, flags=re.S)
+          html = re.sub(r'\sdata-rsc-css-href="[^"]*"', '', html)
+          html = re.sub(r'\sdata-precedence="[^"]*"', '', html)
+
+          # Canonical metadata and hero content: write the current production values
+          # directly into the source instead of patching an obsolete snapshot at runtime.
+          replacements = {
+              'width=device-width, initial-scale=1': 'width=device-width, initial-scale=1, viewport-fit=cover',
+              '<title>Samanta TikTok Shop</title>': '<title>Sunlix | TikTok Shop</title>',
+              'Aprenda com Samanta Vidal a transformar conteúdo em uma operação de vendas no TikTok Shop.': 'Sunlix: método e comunidade para mulheres que querem construir resultados com TikTok Shop.',
+              '/favicon.svg': '/brand/sunlix-logo-night.svg?favicon=20260831',
+              '/assets/metric-top.jpg': '/assets/hero-result-march-2026.webp',
+              '/assets/metric-bottom.jpg': '/assets/hero-result-april-2026.webp',
+              'Painel de resultados do TikTok Shop': 'Resultado real de março de 2026 no TikTok Shop',
+              'Resumo de vendas do TikTok Shop': 'Resultado real de abril de 2026 no TikTok Shop',
+              'Um vídeo pode abrir': 'O método usado pelas top creators',
+              'uma operação de vendas.': 'e 100% validado pelas mentoradas da Sunlix.',
+              'O TikTok Shop já reúne atenção, desejo e checkout no mesmo lugar. Na mentoria, você aprende a escolher produtos com demanda, criar o motivo do clique e repetir o que funciona até transformar conteúdo em faturamento.': 'Eu já fiz R$ 150 mil em 30 dias com o TikTok Shop. Hoje, te ensino o caminho para você construir seus próprios resultados e mudar de vida.',
+          }
+          for old, new in replacements.items():
+              html = html.replace(old, new)
+
+          html = html.replace('<meta name="codex-preview" content="development"/>', '')
+          html = html.replace('<a class="hero-text-link" href="#jornada">O que faz um vídeo vender? ↓</a>', '')
+          html = html.replace('<a class="scroll-cue" href="#resultados"', '<a class="scroll-cue" href="#depoimentos"')
+          html = html.replace(
+              '<div class="method-photo-frame"><img src="/assets/creator-photo.jpg" alt="Samanta no espaço TikTok Shop"/></div>',
+              '<div class="method-photo-frame"><img src="/assets/samanta-hero-portrait.webp" alt="Retrato de Samanta" style="object-position:center 34%"/></div>',
+          )
+          html = html.replace('<link rel="preload" href="/assets/creator-photo.jpg" as="image"/>', '')
+          html = html.replace('<link rel="preload" as="image" href="/brand/icon-s.webp"/>', '')
+          html = html.replace('<link rel="preload" href="/brand/icon-cart.webp" as="image"/>', '')
+
+          # The former dreams/orbit implementation is replaced at runtime by the current
+          # coverflow. Keep only its live container so obsolete cards/assets never exist
+          # in the document at all.
+          showcase_start = html.find('<div class="dreams-showcase"')
+          showcase_next = html.find('<a class="dreams-showcase-cta"', showcase_start)
+          if showcase_start != -1 and showcase_next != -1:
+              opening_end = html.find('>', showcase_start)
+              opening = html[showcase_start:opening_end + 1]
+              html = html[:showcase_start] + opening + '</div>' + html[showcase_next:]
+
+          # The current mobile toggle is part of the initial header to avoid a flash.
+          header_button = '<a class="buy-button" href="#jornada"><span>Comprar agora</span><i aria-hidden="true">↗</i></a></header>'
+          header_with_toggle = '<a class="buy-button" href="#jornada"><span>Comprar agora</span><i aria-hidden="true">↗</i></a><button class="mobile-menu-toggle" type="button" aria-label="Abrir menu" aria-controls="mobile-site-menu" aria-expanded="false"><span aria-hidden="true"><i></i><i></i><i></i></span></button></header>'
+          html = html.replace(header_button, header_with_toggle)
+
+          css_files = [
+              'site-overrides.css',
+              'density-and-gallery-v1.css',
+              'student-proof-v1.css',
+              'testimonials-video-only-preview.css',
+              'gradient-flow-v1.css',
+              'gallery-coverflow-v1.css',
+              'title-hierarchy-v1.css',
+              'conversion-cta-v1.css',
+              'footer-v1.css',
+              'header-balance-v1.css',
+              'site-navigation-v1.css',
+              'mobile-menu-premium-v1.css',
+              'mobile-menu-glass-v1.css',
+              'navigation-final.css',
+              'motion-effects-v1.css',
+              'community-section-v1.css',
+              'method-sales-v3.css',
+              'flow-polish-v1.css',
+              'section-heading-alignment-v1.css',
+              'exit-offer.css',
+              'premium-button-effects-v1.css',
+              'cta-copy-v1.css',
+              'responsive-shell-v1.css',
+              'community-uniform-carousel-v1.css',
+          ]
+          head_extra = (
+              '<meta name="theme-color" content="#fa2095"/>'
+              '<meta name="apple-mobile-web-app-capable" content="yes"/>'
+              '<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>'
+              '<style>html:not(.site-fold-order-ready) .dreams-section{display:none!important}</style>'
+              '<link rel="preload" href="/assets/samanta-hero-portrait.webp" as="image"/>'
+              + ''.join(f'<link rel="stylesheet" href="/{name}"/>' for name in css_files)
+          )
+          if '/site-overrides.css' not in html:
+              html = html.replace('</head>', head_extra + '</head>')
+
+          js_tags = [
+              '<script src="/student-proof-v1.js"></script>',
+              '<script src="/gallery-coverflow-v1.js" defer></script>',
+              '<script src="/method-sales-v3.js" defer></script>',
+              '<script src="/community-section-v1.js" defer></script>',
+              '<script src="/conversion-cta-v1.js" defer></script>',
+              '<script src="/footer-v1.js" defer></script>',
+              '<script src="/checkout-links-v1.js" defer></script>',
+              '<script src="/site-navigation-v1.js" defer></script>',
+              '<script src="/motion-effects-v1.js" type="module"></script>',
+              '<script src="/mobile-scroll-tuning-v1.js" type="module"></script>',
+              '<script src="/exit-offer.js" defer></script>',
+              '<script src="/premium-button-effects-v1.js" defer></script>',
+              '<script src="/cta-copy-v1.js" defer></script>',
+          ]
+          if '/student-proof-v1.js' not in html:
+              html = html.replace('</body>', ''.join(js_tags) + '</body>')
+
+          forbidden = [
+              '__VINEXT_RSC_',
+              'MethodTimeline-cRmRAEXq.js',
+              'DreamsCarousel-w-hPJ9z4.js',
+              'O VÍDEO QUE VENDE',
+              'COMEÇA ANTES',
+              '/assets/creator-photo.jpg',
+              '/assets/metric-top.jpg',
+              '/assets/metric-bottom.jpg',
+          ]
+          for value in forbidden:
+              if value in html:
+                  raise SystemExit(f'Legacy value still present in canonical HTML: {value}')
+
+          html_path.write_text(html, encoding='utf-8')
+
+          # Route now serves the canonical document. No runtime string-replacement layer.
+          route = '''import { readFileSync } from "node:fs";\nimport { join } from "node:path";\n\nexport const dynamic = "force-dynamic";\nexport const revalidate = 0;\n\nconst siteHtml = readFileSync(join(process.cwd(), "recovery", "index.html"), "utf8");\n\nexport function GET() {\n  return new Response(siteHtml, {\n    headers: {\n      "Content-Type": "text/html; charset=utf-8",\n      "Cache-Control": "no-store, no-cache, max-age=0, must-revalidate",\n      "CDN-Cache-Control": "no-store",\n      "Vercel-CDN-Cache-Control": "no-store",\n    },\n  });\n}\n'''
+          Path('app/route.ts').write_text(route, encoding='utf-8')
+
+          # Remove starter/prototype infrastructure not used by the current Next.js site.
+          for directory in [
+              '.openai', 'build', 'db', 'drizzle', 'examples', 'scripts', 'tests', 'worker'
+          ]:
+              path = Path(directory)
+              if path.exists():
+                  shutil.rmtree(path)
+
+          for filename in [
+              'drizzle.config.ts', 'postcss.config.mjs', 'vite.config.ts',
+              'app/chatgpt-auth.ts', 'app/raw-html.d.ts', 'app/layout.tsx', 'app/globals.css',
+          ]:
+              path = Path(filename)
+              if path.exists():
+                  path.unlink()
+
+          # Minimal current package: Next runtime + TypeScript/ESLint tooling only.
+          package = json.loads(Path('package.json').read_text(encoding='utf-8'))
+          package['name'] = 'sunlix'
+          package['scripts'] = {
+              'dev': 'next dev',
+              'build': 'next build',
+              'start': 'next start',
+              'lint': 'eslint . --ignore-pattern .next',
+          }
+          package['dependencies'] = {
+              'next': '16.2.6',
+              'react': '19.2.6',
+              'react-dom': '19.2.6',
+          }
+          package['devDependencies'] = {
+              '@types/node': '22.19.19',
+              '@types/react': '19.2.14',
+              '@types/react-dom': '19.2.3',
+              'eslint': '9.39.4',
+              'eslint-config-next': '16.2.6',
+              'typescript': '5.9.3',
+          }
+          Path('package.json').write_text(json.dumps(package, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          Path('tsconfig.json').write_text('''{\n  "compilerOptions": {\n    "target": "ES2017",\n    "lib": ["dom", "dom.iterable", "esnext"],\n    "allowJs": true,\n    "skipLibCheck": true,\n    "strict": true,\n    "noEmit": true,\n    "esModuleInterop": true,\n    "module": "esnext",\n    "moduleResolution": "bundler",\n    "resolveJsonModule": true,\n    "isolatedModules": true,\n    "jsx": "react-jsx",\n    "incremental": true,\n    "plugins": [{ "name": "next" }],\n    "paths": { "@/*": ["./*"] }\n  },\n  "include": ["next-env.d.ts", "app/**/*.ts", "app/**/*.tsx", ".next/types/**/*.ts", ".next/dev/types/**/*.ts"],\n  "exclude": ["node_modules"]\n}\n''', encoding='utf-8')
+
+          Path('eslint.config.mjs').write_text('''import { defineConfig, globalIgnores } from "eslint/config";\nimport nextVitals from "eslint-config-next/core-web-vitals";\nimport nextTs from "eslint-config-next/typescript";\n\nexport default defineConfig([\n  ...nextVitals,\n  ...nextTs,\n  globalIgnores([".next/**", "out/**", "next-env.d.ts"]),\n]);\n''', encoding='utf-8')
+
+          Path('.gitignore').write_text('''node_modules/\n.next/\n.env\n.env.local\n*.tsbuildinfo\n''', encoding='utf-8')
+
+          Path('README.md').write_text('''# Sunlix\n\nLanding page oficial da Sunlix para TikTok Shop.\n\n## Estrutura atual\n\n- `recovery/index.html`: documento canônico da página atual.\n- `public/`: somente estilos, scripts e mídia usados pela página atual.\n- `app/route.ts`: entrega o HTML com cache desativado.\n- `app/api/exit-offer/`: endpoints do modal de oferta.\n\n## Desenvolvimento\n\n```bash\nnpm ci\nnpm run dev\n```\n\n## Produção\n\n```bash\nnpm run build\nnpm start\n```\n\nHospedagem: Vercel.\n''', encoding='utf-8')
+
+          # Reachability sweep for public/. Seed from the canonical HTML, then follow
+          # references through every CSS/JS/SVG file that the current page actually loads.
+          public = Path('public')
+          all_public_files = {p for p in public.rglob('*') if p.is_file()}
+          text_extensions = {'.html', '.css', '.js', '.mjs', '.svg', '.json', '.txt'}
+
+          def public_path_from_url(url: str):
+              url = url.split('?', 1)[0].split('#', 1)[0]
+              if not url.startswith('/') or url.startswith('//'):
+                  return None
+              candidate = public / url.lstrip('/')
+              return candidate if candidate in all_public_files else None
+
+          def extract_refs(text: str, current: Path | None = None):
+              refs = set()
+              # Public root URLs in HTML/CSS/JS.
+              patterns = [
+                  r'(?:src|href|poster)=["\'](/[^"\'?#]+)',
+                  r'url\(\s*["\']?(/[^)"\'?#]+)',
+                  r'["\'](/(?:assets|brand|videos|testimonials)/[^"\'?#)]+)',
+                  r'(?:from\s*|import\(\s*)["\'](/[^"\']+)',
+              ]
+              for pattern in patterns:
+                  for ref in re.findall(pattern, text):
+                      path = public_path_from_url(ref)
+                      if path:
+                          refs.add(path)
+
+              if current is not None:
+                  # Relative imports/urls inside reached public text files.
+                  for ref in re.findall(r'(?:from\s*|import\(\s*)["\'](\.{1,2}/[^"\']+)', text):
+                      candidate = (current.parent / ref).resolve()
+                      try:
+                          candidate.relative_to(public.resolve())
+                      except ValueError:
+                          continue
+                      if candidate in {p.resolve() for p in all_public_files}:
+                          refs.add(Path(candidate))
+                  for ref in re.findall(r'url\(\s*["\']?(\.{1,2}/[^)"\']+)', text):
+                      candidate = (current.parent / ref).resolve()
+                      try:
+                          candidate.relative_to(public.resolve())
+                      except ValueError:
+                          continue
+                      if candidate in {p.resolve() for p in all_public_files}:
+                          refs.add(Path(candidate))
+              return refs
+
+          reachable = set(extract_refs(html))
+          queue = list(reachable)
+          visited = set()
+          while queue:
+              path = queue.pop()
+              if path in visited or not path.exists():
+                  continue
+              visited.add(path)
+              if path.suffix.lower() not in text_extensions:
+                  continue
+              try:
+                  text = path.read_text(encoding='utf-8')
+              except UnicodeDecodeError:
+                  continue
+              for ref in extract_refs(text, path):
+                  # Normalize resolved relative references back to repository paths.
+                  if ref.is_absolute():
+                      ref = Path(ref).relative_to(Path.cwd())
+                  if ref not in reachable:
+                      reachable.add(ref)
+                      queue.append(ref)
+
+          # Font license accompanies the used TikTok font even though browsers do not request it.
+          font = public / 'brand/tiktok-sans-variable.ttf'
+          license_file = public / 'brand/TikTokSans-OFL.txt'
+          if font in reachable and license_file.exists():
+              reachable.add(license_file)
+
+          deleted = []
+          for path in sorted(all_public_files):
+              if path not in reachable:
+                  deleted.append(str(path))
+                  path.unlink()
+
+          # Remove empty directories left by the asset sweep.
+          for directory in sorted((p for p in public.rglob('*') if p.is_dir()), reverse=True):
+              try:
+                  directory.rmdir()
+              except OSError:
+                  pass
+
+          print(f'Reachable public files kept: {len(reachable)}')
+          print(f'Unused public files removed: {len(deleted)}')
+          for item in deleted:
+              print('  -', item)
+          PY
+
+      - name: Refresh lockfile
+        run: npm install --package-lock-only --ignore-scripts
+
+      - name: Install production tree
+        run: npm ci
+
+      - name: Validate build
+        run: npm run build
+
+      - name: Assert legacy runtime is gone
+        shell: bash
+        run: |
+          ! grep -R "__VINEXT_RSC_\|O VÍDEO QUE VENDE\|COMEÇA ANTES\|MethodTimeline-cRmRAEXq\|DreamsCarousel-w-hPJ9z4" recovery public app --exclude-dir=.next
+          test ! -e public/hero-photo-v1.js
+          test ! -e public/assets/index-CwDQwrVi.js
+          test ! -e public/assets/framework-DjPHiq1u.js
+
+      - name: Commit validated cleanup and remove this workflow
+        shell: bash
+        run: |
+          rm -f .github/workflows/final-production-cleanup.yml
+          rmdir .github/workflows 2>/dev/null || true
+          rmdir .github 2>/dev/null || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Remove all unused legacy site code [skip ci]"
+          git push origin main
