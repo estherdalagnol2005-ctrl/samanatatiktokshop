@@ -165,10 +165,16 @@
     return true;
   };
 
-  const scheduleBuild = () => window.setTimeout(buildCommunitySection, 1150);
+  const boot = () => {
+    if (buildCommunitySection()) return;
 
-  if (document.readyState === "complete") scheduleBuild();
-  else window.addEventListener("load", scheduleBuild, { once: true });
+    const observer = new MutationObserver(() => {
+      if (buildCommunitySection()) observer.disconnect();
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    window.setTimeout(() => observer.disconnect(), 2500);
+  };
 
-  window.addEventListener("pageshow", scheduleBuild);
+  boot();
+  window.addEventListener("pageshow", boot);
 })();
