@@ -7,4 +7,3 @@ node_modules/
 .preview-install*.log
 pnpm-workspace.yaml
 tsconfig.tsbuildinfo
-public/testimonial-videos/
