@@ -90,7 +90,7 @@
 .exit-offer h2 {
   max-width: 390px;
   margin: 0;
-  font-family: var(--font-display, Arial, sans-serif);
+  font-family: var(--font-body, Arial, sans-serif);
   font-size: clamp(28px, 3vw, 42px);
   font-weight: 900;
   letter-spacing: -.06em;
