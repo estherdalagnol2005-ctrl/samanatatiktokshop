@@ -247,6 +247,12 @@
   gap: clamp(12px, 1.8vw, 16px);
 }
 
+.exit-offer__success h2,
+.exit-offer__success h2 strong {
+  font-family: var(--font-body, Arial, sans-serif) !important;
+  font-style: normal !important;
+}
+
 .exit-offer__success-mark {
   display: grid;
   place-items: center;
