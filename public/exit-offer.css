@@ -103,6 +103,14 @@
   color: var(--tt-pink, #fa2095);
 }
 
+.exit-offer__claim {
+  margin: clamp(9px, 1.2vw, 12px) 0 0;
+  color: var(--tt-pink, #fa2095);
+  font-size: clamp(13px, 1.25vw, 15px);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
 .exit-offer__copy {
   max-width: 410px;
   margin: clamp(10px, 1.4vw, 13px) 0 clamp(14px, 2vw, 19px);
