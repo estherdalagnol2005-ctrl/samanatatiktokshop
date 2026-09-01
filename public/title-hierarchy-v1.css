@@ -43,7 +43,7 @@
 
 .dreams-subtitle {
   width: min(100%, 720px);
-  margin: 18px auto 0;
+  margin: 12px auto 0;
   font-size: clamp(15px, 1.35vw, 19px);
   font-weight: 500;
   line-height: 1.52;
@@ -54,7 +54,7 @@
 
 .dreams-subtitle > strong {
   display: block;
-  margin-top: 10px;
+  margin-top: 6px;
   font-size: 1.08em;
   font-weight: 800;
 }
@@ -235,13 +235,13 @@
   }
 
   .dreams-subtitle {
-    margin-top: 14px;
+    margin-top: 10px;
     font-size: 14px;
     line-height: 1.5;
   }
 
   .dreams-subtitle > strong {
-    margin-top: 8px;
+    margin-top: 6px;
   }
 
   .method-layout-v2 .method-timeline-steps h3 {
