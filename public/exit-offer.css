@@ -156,6 +156,35 @@
   box-shadow: 0 0 0 4px rgb(250 32 149 / 13%);
 }
 
+.exit-offer__consent {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: start;
+  gap: 9px;
+  margin-top: 2px;
+  color: rgb(28 23 26 / 78%);
+  cursor: pointer;
+  font-size: clamp(10px, 1vw, 11px);
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.exit-offer__consent input {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  accent-color: var(--tt-pink, #fa2095);
+  cursor: pointer;
+}
+
+.exit-offer__privacy-note {
+  margin: -3px 0 1px 27px;
+  color: rgb(28 23 26 / 55%);
+  font-size: clamp(9px, .9vw, 10px);
+  font-weight: 560;
+  line-height: 1.35;
+}
+
 .exit-offer__honeypot {
   position: absolute;
   width: 1px;

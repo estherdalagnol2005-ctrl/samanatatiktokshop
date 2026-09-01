@@ -2,21 +2,25 @@ import { getExitOfferConfig } from "./exit-offer-config";
 
 const encoder = new TextEncoder();
 const RATE_LIMITS = [
-  { maximum: 12, windowMs: 60 * 60 * 1000 }, // IP
-  { maximum: 4, windowMs: 60 * 60 * 1000 }, // e-mail
-  { maximum: 4, windowMs: 60 * 60 * 1000 }, // WhatsApp
-  { maximum: 5, windowMs: 60 * 60 * 1000 }, // sessão
-  { maximum: 3, windowMs: 60 * 60 * 1000 }, // combinação
+  { maximum: 12, windowMs: 60 * 60 * 1000 },
+  { maximum: 4, windowMs: 60 * 60 * 1000 },
+  { maximum: 4, windowMs: 60 * 60 * 1000 },
+  { maximum: 5, windowMs: 60 * 60 * 1000 },
+  { maximum: 3, windowMs: 60 * 60 * 1000 },
 ] as const;
+
+const LEAD_KEY_PREFIX = "exit-offer:lead:v1:";
+const LEAD_INDEX_KEY = "exit-offer:lead-index:v1";
 
 const ATOMIC_RECORD_ATTEMPT = `
 local now = tonumber(ARGV[1])
 local attemptId = ARGV[2]
 local encryptedLead = ARGV[3]
 local leadTtlSeconds = tonumber(ARGV[4])
+local dedupeKey = ARGV[5]
 
 for index = 1, 5 do
-  local argumentOffset = 5 + ((index - 1) * 2)
+  local argumentOffset = 6 + ((index - 1) * 2)
   local windowMs = tonumber(ARGV[argumentOffset])
   local maximum = tonumber(ARGV[argumentOffset + 1])
   redis.call("ZREMRANGEBYSCORE", KEYS[index], "-inf", now - windowMs)
@@ -26,28 +30,39 @@ for index = 1, 5 do
 end
 
 for index = 1, 5 do
-  local argumentOffset = 5 + ((index - 1) * 2)
+  local argumentOffset = 6 + ((index - 1) * 2)
   local windowMs = tonumber(ARGV[argumentOffset])
   redis.call("ZADD", KEYS[index], now, attemptId)
   redis.call("PEXPIRE", KEYS[index], windowMs)
 end
 
 redis.call("SET", KEYS[6], encryptedLead, "EX", leadTtlSeconds)
+redis.call("ZREMRANGEBYSCORE", KEYS[7], "-inf", now - (leadTtlSeconds * 1000))
+redis.call("ZADD", KEYS[7], now, dedupeKey)
 return { 1, 0 }
 `;
 
-export type SanitizedLead = { name: string; email: string; phone: string };
+export type SanitizedLead = {
+  name: string;
+  email: string;
+  phone: string;
+  marketingConsent: boolean;
+};
+
+export type StoredExitOfferLead = SanitizedLead & {
+  createdAt: number;
+  updatedAt: number;
+  consentAt: number | null;
+  source: "exit-offer";
+};
+
 export type ExitOfferSession = { issuedAt: number; nonce: string };
 
 type UpstashResponse<T> = { result?: T; error?: string };
-type UpstashStore = { command<T>(command: unknown[]): Promise<T> };
+export type UpstashStore = { command<T>(command: unknown[]): Promise<T> };
 
 export class ExitOfferStorageUnavailable extends Error {}
 
-/**
- * The Upstash REST API is a server-side Vercel-compatible Redis connection.
- * No credentials are ever sent to the browser.
- */
 export function getExitOfferStore(): UpstashStore | null {
   const config = getExitOfferConfig();
   if (!config.upstashRedisRestUrl || !config.upstashRedisRestToken) return null;
@@ -83,7 +98,8 @@ export function sanitizeLead(value: unknown): SanitizedLead | null {
   const name = sanitizeText(record.name, 2, 80);
   const email = sanitizeEmail(record.email);
   const phone = sanitizeWhatsApp(record.whatsapp);
-  return name && email && phone ? { name, email, phone } : null;
+  const marketingConsent = record.marketingConsent === true;
+  return name && email && phone ? { name, email, phone, marketingConsent } : null;
 }
 
 export function honeypotHasValue(value: unknown): boolean {
@@ -137,7 +153,7 @@ export async function verifySignedSession(value: string | undefined): Promise<Ex
   const [payload, signature, extra] = value.split(".");
   if (!payload || !signature || extra) return null;
   const expected = await hmac(payload, secret);
-  if (!constantTimeEquals(signature, expected)) return null;
+  if (!secureTextEquals(signature, expected)) return null;
   try {
     const parsed = JSON.parse(fromBase64Url(payload)) as ExitOfferSession;
     const age = Date.now() - parsed.issuedAt;
@@ -161,10 +177,9 @@ export async function recordAttemptAndLead(
     name: input.lead.name,
     email: input.lead.email,
     phone: input.lead.phone,
-    ipHash: input.ipHash,
-    emailHash: input.emailHash,
-    phoneHash: input.phoneHash,
-    sessionHash: input.sessionHash,
+    marketingConsent: input.lead.marketingConsent,
+    consentAt: input.lead.marketingConsent ? input.now : null,
+    source: "exit-offer",
     createdAt: input.now,
     updatedAt: input.now,
   }, encryptionSecret, input.dedupeKey);
@@ -172,20 +187,75 @@ export async function recordAttemptAndLead(
   const result = await store.command<unknown[]>([
     "EVAL",
     ATOMIC_RECORD_ATTEMPT,
-    6,
+    7,
     rateKey(input.ipHash),
     rateKey(input.emailHash),
     rateKey(input.phoneHash),
     rateKey(input.sessionHash),
     rateKey(combinedHash),
     leadKey(input.dedupeKey),
+    LEAD_INDEX_KEY,
     input.now,
     crypto.randomUUID(),
     encryptedLead,
     config.leadRetentionDays * 24 * 60 * 60,
+    input.dedupeKey,
     ...RATE_LIMITS.flatMap((limit) => [limit.windowMs, limit.maximum]),
   ]);
   return { limited: Number(result?.[0]) !== 1 };
+}
+
+export async function listExitOfferLeads(store: UpstashStore, limit = 1000): Promise<StoredExitOfferLead[]> {
+  const config = getExitOfferConfig();
+  const encryptionSecret = config.leadEncryptionSecret ?? config.hmacSecret;
+  if (!encryptionSecret) throw new ExitOfferStorageUnavailable();
+
+  const cappedLimit = Math.min(Math.max(Math.trunc(limit), 1), 5000);
+  const cutoff = Date.now() - config.leadRetentionDays * 86_400_000;
+  await store.command<number>(["ZREMRANGEBYSCORE", LEAD_INDEX_KEY, "-inf", cutoff]);
+
+  const indexed = await store.command<string[]>(["ZREVRANGE", LEAD_INDEX_KEY, 0, cappedLimit - 1]);
+  const ids = new Set(Array.isArray(indexed) ? indexed.filter((value) => typeof value === "string") : []);
+
+  let cursor = "0";
+  let scans = 0;
+  do {
+    const result = await store.command<unknown[]>(["SCAN", cursor, "MATCH", `${LEAD_KEY_PREFIX}*`, "COUNT", 200]);
+    cursor = Array.isArray(result) ? String(result[0] ?? "0") : "0";
+    const keys = Array.isArray(result?.[1]) ? result[1] as unknown[] : [];
+    keys.forEach((value) => {
+      if (typeof value !== "string" || !value.startsWith(LEAD_KEY_PREFIX)) return;
+      ids.add(value.slice(LEAD_KEY_PREFIX.length));
+    });
+    scans += 1;
+  } while (cursor !== "0" && ids.size < cappedLimit && scans < 50);
+
+  const selectedIds = [...ids].slice(0, cappedLimit);
+  if (!selectedIds.length) return [];
+
+  const encryptedValues = await store.command<Array<string | null>>(["MGET", ...selectedIds.map(leadKey)]);
+  const records: Array<{ id: string; lead: StoredExitOfferLead }> = [];
+
+  for (let index = 0; index < selectedIds.length; index += 1) {
+    const encrypted = Array.isArray(encryptedValues) ? encryptedValues[index] : null;
+    if (typeof encrypted !== "string") continue;
+    const lead = await decryptLead(encrypted, encryptionSecret, selectedIds[index]);
+    if (!lead || lead.updatedAt < cutoff) continue;
+    records.push({ id: selectedIds[index], lead });
+  }
+
+  if (records.length) {
+    await store.command<number>([
+      "ZADD",
+      LEAD_INDEX_KEY,
+      ...records.flatMap(({ id, lead }) => [lead.updatedAt, id]),
+    ]);
+  }
+
+  return records
+    .sort((left, right) => right.lead.updatedAt - left.lead.updatedAt)
+    .slice(0, cappedLimit)
+    .map(({ lead }) => lead);
 }
 
 export function parseCookie(request: Request, name: string): string | undefined {
@@ -206,12 +276,19 @@ export function sameOrigin(request: Request): boolean {
   }
 }
 
+export function secureTextEquals(left: string, right: string): boolean {
+  if (left.length !== right.length) return false;
+  let difference = 0;
+  for (let index = 0; index < left.length; index += 1) difference |= left.charCodeAt(index) ^ right.charCodeAt(index);
+  return difference === 0;
+}
+
 function rateKey(hash: string): string {
   return `exit-offer:rate:v1:${hash}`;
 }
 
 function leadKey(dedupeHash: string): string {
-  return `exit-offer:lead:v1:${dedupeHash}`;
+  return `${LEAD_KEY_PREFIX}${dedupeHash}`;
 }
 
 async function encryptLead(value: Record<string, unknown>, secret: string, associatedData: string): Promise<string> {
@@ -224,6 +301,42 @@ async function encryptLead(value: Record<string, unknown>, secret: string, assoc
     encoder.encode(JSON.stringify(value)),
   );
   return `${toBase64Url(iv)}.${toBase64Url(new Uint8Array(encrypted))}`;
+}
+
+async function decryptLead(value: string, secret: string, associatedData: string): Promise<StoredExitOfferLead | null> {
+  const [ivPart, encryptedPart, extra] = value.split(".");
+  if (!ivPart || !encryptedPart || extra) return null;
+
+  try {
+    const material = await crypto.subtle.digest("SHA-256", encoder.encode(secret));
+    const key = await crypto.subtle.importKey("raw", material, { name: "AES-GCM" }, false, ["decrypt"]);
+    const decrypted = await crypto.subtle.decrypt(
+      { name: "AES-GCM", iv: fromBase64UrlBytes(ivPart), additionalData: encoder.encode(associatedData) },
+      key,
+      fromBase64UrlBytes(encryptedPart),
+    );
+    const parsed = JSON.parse(new TextDecoder().decode(decrypted)) as Record<string, unknown>;
+    const name = sanitizeText(parsed.name, 2, 80);
+    const email = sanitizeEmail(parsed.email);
+    const phone = sanitizeWhatsApp(parsed.phone);
+    const createdAt = Number(parsed.createdAt);
+    const updatedAt = Number(parsed.updatedAt);
+    if (!name || !email || !phone || !Number.isFinite(createdAt) || !Number.isFinite(updatedAt)) return null;
+    const marketingConsent = parsed.marketingConsent === true;
+    const rawConsentAt = Number(parsed.consentAt);
+    return {
+      name,
+      email,
+      phone,
+      marketingConsent,
+      consentAt: marketingConsent && Number.isFinite(rawConsentAt) ? rawConsentAt : null,
+      source: "exit-offer",
+      createdAt,
+      updatedAt,
+    };
+  } catch {
+    return null;
+  }
 }
 
 async function digest(value: string): Promise<string> {
@@ -245,13 +358,10 @@ function toBase64Url(input: string | Uint8Array): string {
 }
 
 function fromBase64Url(value: string): string {
-  const padded = value.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - (value.length % 4)) % 4);
-  return new TextDecoder().decode(Uint8Array.from(atob(padded), (character) => character.charCodeAt(0)));
+  return new TextDecoder().decode(fromBase64UrlBytes(value));
 }
 
-function constantTimeEquals(left: string, right: string): boolean {
-  if (left.length !== right.length) return false;
-  let difference = 0;
-  for (let index = 0; index < left.length; index += 1) difference |= left.charCodeAt(index) ^ right.charCodeAt(index);
-  return difference === 0;
+function fromBase64UrlBytes(value: string): Uint8Array {
+  const padded = value.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - (value.length % 4)) % 4);
+  return Uint8Array.from(atob(padded), (character) => character.charCodeAt(0));
 }

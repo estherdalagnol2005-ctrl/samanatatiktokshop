@@ -60,6 +60,11 @@
             <label class="exit-offer__field">NOME<input name="name" type="text" autocomplete="name" maxlength="80" required></label>
             <label class="exit-offer__field">E-MAIL<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
             <label class="exit-offer__field">WHATSAPP<input name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" required></label>
+            <label class="exit-offer__consent">
+              <input name="marketingConsent" type="checkbox" value="yes">
+              <span>Quero receber novidades, conteúdos e mensagens da Sunlix por e-mail e WhatsApp.</span>
+            </label>
+            <p class="exit-offer__privacy-note">Essa autorização é opcional e não interfere nos seus 10% OFF.</p>
             <label class="exit-offer__honeypot" aria-hidden="true">Não preencha este campo<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
             <p class="exit-offer__error" aria-live="polite"></p>
             <button class="exit-offer__submit" type="submit" disabled>LIBERAR MEU 10% OFF</button>
@@ -128,7 +133,11 @@
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: data.get("name"), email: data.get("email"), whatsapp: data.get("whatsapp"), website: data.get("website"),
+          name: data.get("name"),
+          email: data.get("email"),
+          whatsapp: data.get("whatsapp"),
+          marketingConsent: data.get("marketingConsent") === "yes",
+          website: data.get("website"),
         }),
       });
       const result = await response.json().catch(() => ({}));

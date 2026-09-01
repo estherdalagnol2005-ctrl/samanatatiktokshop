@@ -6,6 +6,7 @@ type ExitOfferEnvironment = {
   EXIT_OFFER_LEAD_RETENTION_DAYS?: string;
   EXIT_OFFER_SUPPRESSION_DAYS?: string;
   EXIT_OFFER_RATE_LIMIT_SECRET?: string;
+  EXIT_OFFER_ADMIN_PASSWORD?: string;
   UPSTASH_REDIS_REST_TOKEN?: string;
   UPSTASH_REDIS_REST_URL?: string;
 };
@@ -20,6 +21,7 @@ export type ExitOfferConfig = {
   leadRetentionDays: number;
   rateLimitSecret?: string;
   suppressionDays: number;
+  adminPassword?: string;
   upstashRedisRestToken?: string;
   upstashRedisRestUrl?: string;
 };
@@ -34,6 +36,7 @@ export function getExitOfferConfig(): ExitOfferConfig {
     leadRetentionDays: boundedInteger(workerEnv.EXIT_OFFER_LEAD_RETENTION_DAYS, 180, 1, 365),
     rateLimitSecret: safeText(workerEnv.EXIT_OFFER_RATE_LIMIT_SECRET, 256),
     suppressionDays: boundedInteger(workerEnv.EXIT_OFFER_SUPPRESSION_DAYS, 7, 1, 90),
+    adminPassword: safeText(workerEnv.EXIT_OFFER_ADMIN_PASSWORD, 256),
     upstashRedisRestToken: safeText(workerEnv.UPSTASH_REDIS_REST_TOKEN, 4096),
     upstashRedisRestUrl: safeUpstashUrl(workerEnv.UPSTASH_REDIS_REST_URL),
   };
