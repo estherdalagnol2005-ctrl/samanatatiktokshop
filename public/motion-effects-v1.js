@@ -189,12 +189,6 @@ gsap.registerPlugin(ScrollTrigger);
         stagger: 0.16,
       },
       {
-        trigger: ".student-proof-cta",
-        targets: ".student-proof-cta",
-        y: 26,
-        scale: 0.96,
-      },
-      {
         trigger: "#resultados",
         targets: ".dreams-heading > *, .dreams-coverflow",
         y: 44,
