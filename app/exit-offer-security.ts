@@ -310,10 +310,12 @@ async function decryptLead(value: string, secret: string, associatedData: string
   try {
     const material = await crypto.subtle.digest("SHA-256", encoder.encode(secret));
     const key = await crypto.subtle.importKey("raw", material, { name: "AES-GCM" }, false, ["decrypt"]);
+    const iv = fromBase64UrlBytes(ivPart);
+    const encryptedBytes = fromBase64UrlBytes(encryptedPart);
     const decrypted = await crypto.subtle.decrypt(
-      { name: "AES-GCM", iv: fromBase64UrlBytes(ivPart), additionalData: encoder.encode(associatedData) },
+      { name: "AES-GCM", iv: iv.buffer as ArrayBuffer, additionalData: encoder.encode(associatedData) },
       key,
-      fromBase64UrlBytes(encryptedPart),
+      encryptedBytes.buffer as ArrayBuffer,
     );
     const parsed = JSON.parse(new TextDecoder().decode(decrypted)) as Record<string, unknown>;
     const name = sanitizeText(parsed.name, 2, 80);
@@ -323,7 +325,7 @@ async function decryptLead(value: string, secret: string, associatedData: string
     const updatedAt = Number(parsed.updatedAt);
     if (!name || !email || !phone || !Number.isFinite(createdAt) || !Number.isFinite(updatedAt)) return null;
     const marketingConsent = parsed.marketingConsent === true;
-    const rawConsentAt = Number(parsed.consentAt);
+    const rawConsentAt = parsed.consentAt === null || parsed.consentAt === undefined ? NaN : Number(parsed.consentAt);
     return {
       name,
       email,
