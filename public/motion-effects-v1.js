@@ -9,53 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
   const heroState = { timer: null, started: false };
   let revealStarted = false;
 
-  const prepareRollingWords = (part) => {
-    if (part.dataset.rollingLettersReady === "true") {
-      return [...part.querySelectorAll(".hero-roll-char")];
-    }
-
-    const originalText = part.textContent || "";
-    if (!originalText.trim()) return [];
-
-    part.dataset.rollingLettersReady = "true";
-    part.setAttribute("aria-label", originalText);
-    part.textContent = "";
-
-    originalText.split(/(\s+)/).forEach((token) => {
-      if (!token) return;
-
-      if (/^\s+$/.test(token)) {
-        part.appendChild(document.createTextNode(token));
-        return;
-      }
-
-      const word = document.createElement("span");
-      word.className = "hero-roll-word";
-      word.setAttribute("aria-hidden", "true");
-      Object.assign(word.style, {
-        display: "inline-block",
-        overflow: "hidden",
-        verticalAlign: "bottom",
-        whiteSpace: "nowrap",
-      });
-
-      [...token].forEach((character) => {
-        const char = document.createElement("span");
-        char.className = "hero-roll-char";
-        char.textContent = character;
-        Object.assign(char.style, {
-          display: "inline-block",
-          willChange: "transform",
-        });
-        word.appendChild(char);
-      });
-
-      part.appendChild(word);
-    });
-
-    return [...part.querySelectorAll(".hero-roll-char")];
-  };
-
   const animateHeroTitle = () => {
     if (heroState.started) return false;
 
@@ -74,15 +27,6 @@ gsap.registerPlugin(ScrollTrigger);
       return false;
     }
 
-    const rollingLines = titleParts
-      .map((part) => prepareRollingWords(part))
-      .filter((characters) => characters.length);
-
-    if (!rollingLines.length) {
-      document.documentElement.classList.add("hero-motion-ready");
-      return false;
-    }
-
     heroState.started = true;
     const isDesktop = window.matchMedia("(min-width: 1180px)").matches;
     const headerItems = isDesktop
@@ -93,28 +37,24 @@ gsap.registerPlugin(ScrollTrigger);
         ].filter(Boolean)
       : [document.querySelector(".site-header .brand")].filter(Boolean);
 
-    const allCharacters = rollingLines.flat();
-    gsap.killTweensOf(allCharacters);
-    gsap.set(allCharacters, { yPercent: -118 });
+    gsap.killTweensOf(titleParts);
+    gsap.set(titleParts, {
+      y: 18,
+      scale: 0.985,
+      autoAlpha: 0,
+      transformOrigin: "50% 100%",
+    });
 
     document.documentElement.classList.add("hero-motion-ready");
 
-    const titleTimeline = gsap.timeline();
-    rollingLines.forEach((characters, lineIndex) => {
-      titleTimeline.to(
-        characters,
-        {
-          yPercent: 0,
-          duration: 0.56,
-          stagger: {
-            each: 0.012,
-            from: "start",
-          },
-          ease: "power4.out",
-          clearProps: "transform",
-        },
-        lineIndex * 0.09,
-      );
+    gsap.to(titleParts, {
+      y: 0,
+      scale: 1,
+      autoAlpha: 1,
+      duration: 0.62,
+      stagger: 0.08,
+      ease: "power2.out",
+      clearProps: "transform,opacity,visibility",
     });
 
     if (headerItems.length) {
