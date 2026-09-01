@@ -9,6 +9,8 @@ type ExitOfferEnvironment = {
   EXIT_OFFER_ADMIN_PASSWORD?: string;
   UPSTASH_REDIS_REST_TOKEN?: string;
   UPSTASH_REDIS_REST_URL?: string;
+  UPSTASH_REDIS_REST_KV_REST_API_TOKEN?: string;
+  UPSTASH_REDIS_REST_KV_REST_API_URL?: string;
 };
 
 const workerEnv = process.env as ExitOfferEnvironment;
@@ -37,8 +39,13 @@ export function getExitOfferConfig(): ExitOfferConfig {
     rateLimitSecret: safeText(workerEnv.EXIT_OFFER_RATE_LIMIT_SECRET, 256),
     suppressionDays: boundedInteger(workerEnv.EXIT_OFFER_SUPPRESSION_DAYS, 7, 1, 90),
     adminPassword: safeText(workerEnv.EXIT_OFFER_ADMIN_PASSWORD, 256),
-    upstashRedisRestToken: safeText(workerEnv.UPSTASH_REDIS_REST_TOKEN, 4096),
-    upstashRedisRestUrl: safeUpstashUrl(workerEnv.UPSTASH_REDIS_REST_URL),
+    upstashRedisRestToken: safeText(
+      workerEnv.UPSTASH_REDIS_REST_TOKEN ?? workerEnv.UPSTASH_REDIS_REST_KV_REST_API_TOKEN,
+      4096,
+    ),
+    upstashRedisRestUrl: safeUpstashUrl(
+      workerEnv.UPSTASH_REDIS_REST_URL ?? workerEnv.UPSTASH_REDIS_REST_KV_REST_API_URL,
+    ),
   };
 }
 
