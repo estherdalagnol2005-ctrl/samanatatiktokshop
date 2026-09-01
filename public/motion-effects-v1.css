@@ -7,8 +7,33 @@ html.gsap-motion:not(.hero-motion-ready) #hero-title {
   visibility: hidden;
 }
 
-.hero-split-char {
-  display: inline-block;
+/* The original hero CSS styles every descendant span as display:block;width:100%.
+   SplitText creates spans for its generated wrappers/chars, so override only those
+   generated descendants while keeping the original two title rows untouched. */
+#hero-title > span,
+#hero-title > strong {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#hero-title > span > span,
+#hero-title > strong > span {
+  display: inline-block !important;
+  width: auto !important;
+  max-width: none !important;
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+  text-wrap: nowrap !important;
+}
+
+#hero-title .hero-split-char {
+  display: inline-block !important;
+  width: auto !important;
+  max-width: none !important;
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+  text-wrap: nowrap !important;
   backface-visibility: hidden;
   will-change: transform, opacity;
 }
@@ -38,7 +63,7 @@ html.gsap-motion:not(.hero-motion-ready) #hero-title {
     visibility: visible;
   }
 
-  .hero-split-char {
+  #hero-title .hero-split-char {
     will-change: auto;
     transform: none !important;
     opacity: 1 !important;
