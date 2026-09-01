@@ -1,4 +1,4 @@
-/* Motion polish: animate the existing hero title lines without changing markup or layout. */
+/* Motion polish: SplitText handles the hero title characters without changing the H1 layout. */
 #hero-title {
   perspective: 900px;
 }
@@ -7,9 +7,8 @@ html.gsap-motion:not(.hero-motion-ready) #hero-title {
   visibility: hidden;
 }
 
-#hero-title > span,
-#hero-title > strong {
-  transform-style: preserve-3d;
+.hero-split-char {
+  display: inline-block;
   backface-visibility: hidden;
   will-change: transform, opacity;
 }
@@ -39,8 +38,7 @@ html.gsap-motion:not(.hero-motion-ready) #hero-title {
     visibility: visible;
   }
 
-  #hero-title > span,
-  #hero-title > strong {
+  .hero-split-char {
     will-change: auto;
     transform: none !important;
     opacity: 1 !important;
