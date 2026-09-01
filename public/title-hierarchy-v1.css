@@ -44,9 +44,9 @@
 .dreams-subtitle {
   width: min(100%, 720px);
   margin: 12px auto 0;
-  font-size: clamp(15px, 1.35vw, 19px);
-  font-weight: 500;
-  line-height: 1.52;
+  font-size: clamp(13px, 1vw, 16px);
+  font-weight: 650;
+  line-height: 1.5;
   letter-spacing: -0.02em;
   text-align: center;
   color: #1c171a;
@@ -55,7 +55,7 @@
 .dreams-subtitle > strong {
   display: block;
   margin-top: 6px;
-  font-size: 1.08em;
+  font-size: inherit;
   font-weight: 800;
 }
 
@@ -236,7 +236,7 @@
 
   .dreams-subtitle {
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.5;
   }
 
