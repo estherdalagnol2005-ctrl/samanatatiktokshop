@@ -54,6 +54,7 @@
         <div class="exit-offer__content">
           <p class="exit-offer__eyebrow">CONDIÇÃO ESPECIAL</p>
           <h2 id="exit-offer-title">Você acabou de ganhar uma condição especial pra mudar sua realidade através do TikTok Shop!</h2>
+          <p class="exit-offer__claim">Garantir meus 10% off</p>
           <p class="exit-offer__copy">Preencha seus dados e libere sua condição especial.</p>
           <form class="exit-offer__form" novalidate>
             <label class="exit-offer__field">NOME<input name="name" type="text" autocomplete="name" maxlength="80" required></label>
