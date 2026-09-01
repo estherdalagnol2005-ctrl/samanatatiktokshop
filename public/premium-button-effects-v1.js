@@ -2,11 +2,9 @@
   const selectors = [
     ".buy-button",
     ".hero-primary-cta",
-    ".method-timeline-cta",
     ".student-proof-cta",
     ".dreams-showcase-cta",
     ".dreams-cta",
-    ".home-story-cta",
     ".community-cta",
     ".method-sales-cta",
     ".conversion-action > a",
