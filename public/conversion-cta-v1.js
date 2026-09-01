@@ -42,13 +42,21 @@
     return true;
   };
 
-  const scheduleBuild = () => window.setTimeout(buildConversionSection, 1050);
+  const boot = () => {
+    if (buildConversionSection()) return;
 
-  if (document.readyState === "complete") {
-    scheduleBuild();
+    const observer = new MutationObserver(() => {
+      if (buildConversionSection()) observer.disconnect();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    window.setTimeout(() => observer.disconnect(), 2500);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
   } else {
-    window.addEventListener("load", scheduleBuild, { once: true });
+    boot();
   }
 
-  window.addEventListener("pageshow", scheduleBuild);
+  window.addEventListener("pageshow", boot);
 })();

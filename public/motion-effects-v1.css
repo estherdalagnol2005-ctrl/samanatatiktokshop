@@ -1,4 +1,4 @@
-/* Motion polish: SplitText handles the hero title characters without changing the H1 layout. */
+/* Hero SplitText support only. Section reveals are handled by GSAP without persistent styling. */
 #hero-title {
   perspective: 900px;
 }
@@ -7,9 +7,7 @@ html.gsap-motion:not(.hero-motion-ready) #hero-title {
   visibility: hidden;
 }
 
-/* The original hero CSS styles every descendant span as display:block;width:100%.
-   SplitText creates spans for its generated wrappers/chars, so override only those
-   generated descendants while keeping the original two title rows untouched. */
+/* Keep the two original hero rows intact while SplitText descendants stay inline. */
 #hero-title > span,
 #hero-title > strong {
   display: block !important;
@@ -38,26 +36,6 @@ html.gsap-motion:not(.hero-motion-ready) #hero-title {
   will-change: transform, opacity;
 }
 
-.motion-text-card {
-  transform-origin: center;
-  backface-visibility: hidden;
-  transition:
-    transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 0.32s ease,
-    filter 0.32s ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .motion-text-card:hover {
-    transform: translateY(-6px) rotate(-0.35deg);
-    filter: saturate(1.04);
-  }
-
-  .motion-text-card:nth-child(even):hover {
-    transform: translateY(-6px) rotate(0.35deg);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html.gsap-motion:not(.hero-motion-ready) #hero-title {
     visibility: visible;
@@ -65,13 +43,6 @@ html.gsap-motion:not(.hero-motion-ready) #hero-title {
 
   #hero-title .hero-split-char {
     will-change: auto;
-    transform: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  .motion-text-card {
-    clip-path: none !important;
     transform: none !important;
     opacity: 1 !important;
     visibility: visible !important;
