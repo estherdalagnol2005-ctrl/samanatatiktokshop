@@ -139,6 +139,16 @@ body {
   }
 }
 
+/* On native mobile scrolling, the document tail must inherit the footer's
+   final lime instead of exposing the pink shell background below the footer. */
+@media (pointer: coarse), (width <= 800px) {
+  html.native-mobile-scroll #smooth-wrapper,
+  html.native-mobile-scroll #smooth-content,
+  html.native-mobile-scroll .page-shell {
+    background-color: #f0ff27 !important;
+  }
+}
+
 /* Very narrow devices still retain a real, symmetric page edge. */
 @media (width <= 360px) {
   :root {
