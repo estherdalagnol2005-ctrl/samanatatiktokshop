@@ -1,17 +1,16 @@
 (() => {
-  const SUPPRESSION_KEY = "samanta-exit-offer-until";
-  const SESSION_KEY = "samanta-exit-offer-seen";
+  const SUPPRESSION_KEY = "sunlix-exit-offer-until-v2";
+  const SESSION_KEY = "sunlix-exit-offer-seen-v2";
   const DEFAULT_SUPPRESSION_DAYS = 7;
-  const MOBILE_DWELL_MS = 120_000;
-  const DESKTOP_DWELL_MS = 120_000;
+  const AUTO_SHOW_MS = 100_000;
+  const DESKTOP_EXIT_INTENT_MIN_MS = 20_000;
   const startedAt = Date.now();
-  const mobileDevice = window.matchMedia("(pointer: coarse)").matches;
+  const desktopPointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   let opened = false;
-  let hasInteracted = false;
-  let farthestScroll = 0;
   let opener = null;
   let modal = null;
   let sessionReady = false;
+  let autoShowTimer = 0;
 
   const isSuppressed = () => {
     try {
@@ -36,6 +35,7 @@
 
   const close = () => {
     if (!modal || modal.hidden) return;
+    suppress();
     modal.hidden = true;
     setModalState(false);
     opener?.focus?.();
@@ -88,7 +88,7 @@
   const show = () => {
     if (opened || isSuppressed()) return;
     opened = true;
-    suppress();
+    window.clearTimeout(autoShowTimer);
     opener = document.activeElement;
     const node = createModal();
     node.hidden = false;
@@ -192,16 +192,12 @@
   };
 
   document.addEventListener("keydown", (event) => { if (event.key === "Escape") close(); });
-  document.addEventListener("pointerdown", () => { hasInteracted = true; }, { passive: true, once: true });
 
-  if (mobileDevice) {
-    window.addEventListener("scroll", () => {
-      farthestScroll = Math.max(farthestScroll, window.scrollY);
-      if (hasInteracted && farthestScroll >= 240 && window.scrollY <= 20 && Date.now() - startedAt >= MOBILE_DWELL_MS) show();
-    }, { passive: true });
-  } else {
+  autoShowTimer = window.setTimeout(show, AUTO_SHOW_MS);
+
+  if (desktopPointer) {
     document.addEventListener("mouseout", (event) => {
-      if (Date.now() - startedAt < DESKTOP_DWELL_MS || event.relatedTarget || event.clientY > 4) return;
+      if (Date.now() - startedAt < DESKTOP_EXIT_INTENT_MIN_MS || event.relatedTarget || event.clientY > 4) return;
       show();
     });
   }
