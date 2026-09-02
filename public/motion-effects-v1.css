@@ -3,9 +3,7 @@
   perspective: 900px;
 }
 
-html.gsap-motion:not(.hero-motion-ready) #hero-title {
-  visibility: hidden;
-}
+/* Legível sem JS e em falha de CDN; GSAP controla o reveal durante a animação. */
 
 /* Keep the two original hero rows intact while SplitText descendants stay inline. */
 #hero-title > span,

@@ -27,8 +27,10 @@
 
   const bootMotion = async () => {
     await loadScript(`${GSAP_CDN}/gsap.min.js`, "gsap");
-    await loadScript(`${GSAP_CDN}/ScrollTrigger.min.js`, "ScrollTrigger");
-    await loadScript(`${GSAP_CDN}/SplitText.min.js`, "SplitText");
+    await Promise.all([
+      loadScript(`${GSAP_CDN}/ScrollTrigger.min.js`, "ScrollTrigger"),
+      loadScript(`${GSAP_CDN}/SplitText.min.js`, "SplitText"),
+    ]);
 
     const { gsap, ScrollTrigger, SplitText } = window;
     if (!gsap || !ScrollTrigger || !SplitText) {
@@ -37,6 +39,7 @@
     }
 
     gsap.registerPlugin(ScrollTrigger, SplitText);
+    window.dispatchEvent(new Event("sunlix:motion-ready"));
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const heroState = { timer: null, started: false, splits: [] };

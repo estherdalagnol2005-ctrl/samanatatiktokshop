@@ -153,14 +153,14 @@
         video.muted = true;
         video.loop = true;
         video.playsInline = true;
-        video.preload = index === 0 ? "metadata" : "none";
+        video.preload = "none";
         video.setAttribute("aria-label", item.alt);
         slide.append(video);
       } else {
         const image = document.createElement("img");
         image.src = item.src;
         image.alt = item.alt;
-        image.loading = index < 4 ? "eager" : "lazy";
+        image.loading = "lazy";
         image.decoding = "async";
         image.draggable = false;
         if (item.position) image.style.objectPosition = item.position;
@@ -205,6 +205,12 @@
 
     let activeIndex = 0;
     let pointerStartX = null;
+    let inViewport = false;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const playActiveVideo = () => {
+      const video = slides[activeIndex]?.querySelector("video");
+      if (video && inViewport && !document.hidden && !reducedMotion) video.play().catch(() => {});
+    };
 
     const normalizeOffset = (index) => {
       let offset = index - activeIndex;
@@ -235,9 +241,7 @@
         .querySelectorAll(".dreams-coverflow video")
         .forEach((video) => video.pause());
 
-      const activeSlide = slides[activeIndex];
-      const activeVideo = activeSlide.querySelector("video");
-      if (activeVideo) activeVideo.play().catch(() => {});
+      playActiveVideo();
 
       status.textContent = `${media[activeIndex].label}. Item ${activeIndex + 1} de ${slides.length}.`;
       coverflow.dataset.activeType = media[activeIndex].type;
@@ -294,11 +298,16 @@
           .querySelectorAll(".dreams-coverflow video")
           .forEach((video) => video.pause());
       } else {
-        const activeVideo = slides[activeIndex]?.querySelector("video");
-        if (activeVideo) activeVideo.play().catch(() => {});
+        playActiveVideo();
       }
     });
 
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      inViewport = entry.isIntersecting;
+      if (inViewport) playActiveVideo();
+      else coverflow.querySelectorAll("video").forEach(video => video.pause());
+    }, { threshold: 0.1 });
+    visibilityObserver.observe(coverflow);
     render();
     return true;
   };

@@ -112,22 +112,26 @@
 
         <div class="student-proof-video-stage">
           <div class="student-proof-video-only-row" aria-label="Depoimentos em vídeo de alunas">
-            <figure class="student-proof-video-only-card student-proof-video-only-card--portrait">
+            <figure class="student-proof-video-only-card student-proof-video-only-card--portrait is-active" aria-hidden="false">
               <video
                 controls
                 playsinline
-                preload="metadata"
+                preload="none"
+                poster="/videos/depoimento-janaina-poster.webp"
+                width="720" height="1280"
                 title="Primeiro depoimento em vídeo"
                 src="/videos/depoimento-janaina.mp4"
               ></video>
               <p class="student-proof-video-error" aria-live="polite">Não foi possível carregar este vídeo. Recarregue a página.</p>
             </figure>
 
-            <figure class="student-proof-video-only-card student-proof-video-only-card--landscape">
+            <figure class="student-proof-video-only-card student-proof-video-only-card--landscape" aria-hidden="true">
               <video
                 controls
                 playsinline
-                preload="metadata"
+                preload="none"
+                poster="/videos/depoimento-yasmin-poster.webp"
+                width="1280" height="714"
                 title="Segundo depoimento em vídeo"
                 src="/videos/depoimento-yasmin.mp4"
               ></video>

@@ -1,0 +1,6 @@
+import { getSiteUrl } from "../site-config";
+export const dynamic = "force-static";
+export function GET() {
+  const url = getSiteUrl();
+  return new Response(`# Sunlix\n\n> Mentoria e comunidade de Samanta Vidal para mulheres que querem vender com estratégia no TikTok Shop. Site em português do Brasil.\n\n## Conteúdo público\n\n- [Página inicial](${url}/): apresentação da Sunlix e de Samanta Vidal.\n- [Depoimentos](${url}/#depoimentos): relatos em vídeo de alunas.\n- [Resultados e conquistas](${url}/#resultados): experiências e resultados apresentados por Samanta.\n- [Comunidade](${url}/#comunidade): relatos de participantes da comunidade.\n- [Para quem é a Sunlix](${url}/#jornada): perfis para os quais a mentoria é indicada.\n- [Inscrição](${url}/#inscricao): acesso ao checkout externo indicado no site.\n- [Sitemap](${url}/sitemap.xml)\n\n## Contexto\n\nOs resultados exibidos são relatos individuais, não uma garantia de desempenho futuro. Consulte o checkout para as condições vigentes. Não há endereço comercial, telefone ou horário de atendimento publicados. A área /leads e as rotas /api/ são privadas/operacionais e não são fontes de conteúdo público.\n`, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
+}

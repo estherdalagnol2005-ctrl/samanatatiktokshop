@@ -1,62 +1,23 @@
 (() => {
-  const checkoutUrl =
-    "https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O";
-
-  const commercialCtaSelector = [
-    ".buy-button",
-    ".hero-primary-cta",
-    ".student-proof-cta",
-    ".community-cta",
-    ".method-timeline-cta",
-    "#inscricao a",
-    ".site-footer-cta",
-    ".dreams-showcase-cta",
-    ".dreams-cta",
-    ".home-story-cta",
-    ".method-sales-cta",
-  ].join(",");
-
-  const applyCheckoutUrl = () => {
-    document.querySelectorAll(commercialCtaSelector).forEach((link) => {
-      if (link instanceof HTMLAnchorElement) {
-        link.setAttribute("href", checkoutUrl);
-      }
-    });
-  };
-
-  document.addEventListener(
-    "click",
-    (event) => {
-      if (!(event.target instanceof Element)) return;
-
-      const link = event.target.closest("a");
-      if (!link || !link.matches(commercialCtaSelector)) return;
-
-      link.setAttribute("href", checkoutUrl);
-    },
-    true,
-  );
-
-  const scheduleNormalization = () => {
-    window.setTimeout(() => {
-      applyCheckoutUrl();
-
-      const root = document.querySelector(".page-shell") || document.body;
-      const observer = new MutationObserver(applyCheckoutUrl);
-      observer.observe(root, { childList: true, subtree: true });
-
-      window.setTimeout(() => {
-        applyCheckoutUrl();
-        observer.disconnect();
-      }, 5000);
-    }, 3200);
-  };
-
-  if (document.readyState === "complete") {
-    scheduleNormalization();
-  } else {
-    window.addEventListener("load", scheduleNormalization, { once: true });
-  }
-
-  window.addEventListener("pageshow", scheduleNormalization);
+  const checkout = new URL("https://pay.kiwify.com.br/3U3ri1Z");
+  const entry = new URLSearchParams(window.location.search);
+  // Preservar somente UTMs desta visita; nunca reutilizar o fbclid de outra pessoa.
+  ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_id"].forEach(key => {
+    const value = entry.get(key);
+    if (value && /^[\\p{L}\\p{N}_ .-]{1,120}$/u.test(value)) checkout.searchParams.set(key, value);
+  });
+  const checkoutUrl = checkout.href;
+  const selector = ".buy-button,.hero-primary-cta,.student-proof-cta,.community-cta,.method-timeline-cta,#inscricao a,.site-footer-cta,.dreams-showcase-cta,.dreams-cta,.home-story-cta,.method-sales-cta";
+  const apply = () => document.querySelectorAll(selector).forEach(link => {
+    if (link instanceof HTMLAnchorElement && link.href !== checkoutUrl) link.href = checkoutUrl;
+  });
+  document.addEventListener("click", event => {
+    const link = event.target instanceof Element ? event.target.closest("a") : null;
+    if (link?.matches(selector)) link.href = checkoutUrl;
+  }, true);
+  apply();
+  const observer = new MutationObserver(apply);
+  observer.observe(document.body, { childList: true, subtree: true });
+  window.setTimeout(() => observer.disconnect(), 5000);
+  window.addEventListener("pageshow", apply);
 })();

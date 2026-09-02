@@ -27,12 +27,14 @@
   ];
 
   const setupCarousel = (section) => {
+    if (section.dataset.carouselReady === "true") return;
     const viewport = section.querySelector(".community-uniform-carousel");
     const cards = [...section.querySelectorAll(".community-uniform-card")];
     const dots = [...section.querySelectorAll(".community-uniform-dot")];
     const previous = section.querySelector('[data-community-direction="-1"]');
     const next = section.querySelector('[data-community-direction="1"]');
     if (!viewport || !cards.length || !previous || !next) return;
+    section.dataset.carouselReady = "true";
 
     let activeIndex = initialIndex;
     let gestureStart = null;
@@ -108,7 +110,8 @@
   };
 
   const buildCommunitySection = () => {
-    if (document.querySelector("#comunidade")) return true;
+    const existing = document.querySelector("#comunidade");
+    if (existing) { setupCarousel(existing); return true; }
 
     const methodSection = document.querySelector(".method-section");
     if (!methodSection) return false;
@@ -122,7 +125,7 @@
       .map(
         (item, index) => `
           <figure class="community-uniform-card${index === initialIndex ? " is-active" : ""}"${index === initialIndex ? ' aria-current="true"' : ""}>
-            <img src="${item.src}" alt="${item.alt}" loading="${index === initialIndex ? "eager" : "lazy"}" decoding="async" draggable="false">
+            <img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" draggable="false">
           </figure>`,
       )
       .join("");

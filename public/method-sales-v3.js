@@ -57,9 +57,7 @@
       );
       setActiveStep(section, activeIndex, progress);
 
-      if (timelineRect.top < window.innerHeight && timelineRect.bottom > 0) {
-        frameId = window.requestAnimationFrame(updateProgress);
-      }
+      // Atualizar por scroll/resize; não ocupar frames com a página parada.
     };
 
     const requestUpdate = () => {
@@ -68,6 +66,7 @@
 
     window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate, { passive: true });
+    document.fonts?.ready.then(requestUpdate);
     requestUpdate();
   };
 

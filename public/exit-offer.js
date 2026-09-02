@@ -56,7 +56,7 @@
           <h2 id="exit-offer-title">Você acabou de ganhar uma condição especial pra mudar sua realidade através do TikTok Shop!</h2>
           <p class="exit-offer__claim">Garantir meus 10% off</p>
           <p class="exit-offer__copy">Preencha seus dados e libere sua condição especial.</p>
-          <form class="exit-offer__form" novalidate>
+          <form class="exit-offer__form" data-clarity-mask="true" novalidate>
             <label class="exit-offer__field">NOME<input name="name" type="text" autocomplete="name" maxlength="80" required></label>
             <label class="exit-offer__field">E-MAIL<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
             <label class="exit-offer__field">WHATSAPP<input name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" required></label>
@@ -144,6 +144,8 @@
       if (!response.ok || !result.success) throw new Error(result.error || "Não foi possível liberar a condição agora.");
       suppress(Number.isInteger(result.suppressionDays) ? result.suppressionDays : DEFAULT_SUPPRESSION_DAYS);
       renderSuccess(result);
+      // Converter só após confirmação do backend, sem dados pessoais.
+      document.dispatchEvent(new CustomEvent("sunlix:lead-saved"));
     } catch (exception) {
       error.textContent = exception instanceof Error ? exception.message : "Não foi possível liberar a condição agora.";
       button.disabled = false;

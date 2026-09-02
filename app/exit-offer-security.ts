@@ -74,6 +74,7 @@ export function getExitOfferStore(): UpstashStore | null {
         response = await fetch(config.upstashRedisRestUrl!, {
           method: "POST",
           cache: "no-store",
+          signal: AbortSignal.timeout(8_000),
           headers: {
             Authorization: `Bearer ${config.upstashRedisRestToken}`,
             "Content-Type": "application/json",

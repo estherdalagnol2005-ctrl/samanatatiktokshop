@@ -28,7 +28,8 @@ export async function POST(request: Request) {
     return response("Solicitação inválida.", 400);
   }
 
-  if (honeypotHasValue(payload.website)) return Response.json({ success: true });
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return response("Solicitação inválida.", 400);
+  if (honeypotHasValue(payload.website)) return Response.json({ success: true }, { headers: { "Cache-Control": "no-store" } });
   const lead = sanitizeLead(payload);
   if (!lead) return response("Confira nome, e-mail e WhatsApp.", 422);
 
@@ -37,6 +38,10 @@ export async function POST(request: Request) {
 
   const store = getExitOfferStore();
   if (!store) return response("Oferta indisponível. Tente novamente mais tarde.", 503);
+  const config = getExitOfferConfig();
+  // TODO: configurar COUPON_CODE e/ou DISCOUNT_CHECKOUT_URL na Vercel.
+  // Não registrar uma conversão nem salvar o lead se não houver benefício configurado.
+  if (!config.couponCode && !config.discountCheckoutUrl) return response("Oferta indisponível. Tente novamente mais tarde.", 503);
 
   try {
     const now = Date.now();
@@ -58,7 +63,6 @@ export async function POST(request: Request) {
       return response("Muitas tentativas. Aguarde alguns minutos e tente novamente.", 429);
     }
 
-    const config = getExitOfferConfig();
     return Response.json({
       success: true,
       couponCode: config.couponCode,
@@ -66,6 +70,7 @@ export async function POST(request: Request) {
       suppressionDays: config.suppressionDays,
     }, { headers: { "Cache-Control": "no-store" } });
   } catch {
+    console.error(JSON.stringify({ event: "exit_offer_storage_error" }));
     return response("Não foi possível liberar a condição agora. Tente novamente mais tarde.", 503);
   }
 }
