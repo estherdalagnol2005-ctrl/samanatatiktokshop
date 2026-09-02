@@ -6,7 +6,8 @@
       poster: "/assets/dreams-2026/paris-torre-eiffel-poster.jpg",
       label: "Paris, França",
       caption: "A liberdade que virou memória.",
-      alt: "Samanta caminhando em Paris com a Torre Eiffel ao fundo",
+      title: "Samanta em Paris, diante da Torre Eiffel",
+      alt: "Samanta em Paris à noite, com os braços abertos diante da Torre Eiffel iluminada",
     },
     {
       type: "video",
@@ -14,6 +15,7 @@
       poster: "/assets/dreams-2026/momento-em-paris-poster.jpg",
       label: "Momentos em Paris",
       caption: "Uma conquista para guardar para sempre.",
+      title: "Samanta abrindo um presente em Paris",
       alt: "Samanta abrindo um presente em um café de Paris",
     },
     {
@@ -72,7 +74,8 @@
       poster: "/assets/dreams-2026/conquista-em-familia-poster.jpg",
       label: "Conquista em família",
       caption: "Realizar sonhos de quem sempre esteve por perto.",
-      alt: "Momento de uma conquista de Samanta com sua família",
+      title: "Comemoração em família na galeria de conquistas de Samanta",
+      alt: "Comemoração em família com entrega de um buquê de flores e presentes, na galeria de conquistas de Samanta",
     },
     {
       type: "image",
@@ -145,6 +148,13 @@
         "aria-label",
         `${item.label}. ${item.caption} Item ${index + 1} de ${media.length}.`,
       );
+      // O botão precisa de sua própria descrição: seu aria-label substitui
+      // o nome acessível das imagens e vídeos que estão dentro dele.
+      const description = document.createElement("span");
+      description.id = `dreams-media-description-${index + 1}`;
+      description.className = "media-description";
+      description.textContent = item.alt;
+      slide.setAttribute("aria-describedby", description.id);
 
       if (item.type === "video") {
         const video = document.createElement("video");
@@ -154,7 +164,10 @@
         video.loop = true;
         video.playsInline = true;
         video.preload = "none";
-        video.setAttribute("aria-label", item.alt);
+        video.title = item.title;
+        video.setAttribute("aria-label", item.title);
+        video.setAttribute("aria-describedby", description.id);
+        video.textContent = item.alt;
         slide.append(video);
       } else {
         const image = document.createElement("img");
@@ -178,7 +191,7 @@
       const caption = document.createElement("span");
       caption.className = "dreams-coverflow-caption";
       caption.innerHTML = `<span>${item.label}</span><strong>${item.caption}</strong>`;
-      slide.append(caption);
+      slide.append(caption, description);
       track.append(slide);
       return slide;
     });

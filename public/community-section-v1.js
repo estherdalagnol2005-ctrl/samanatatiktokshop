@@ -6,23 +6,23 @@
   const carouselItems = [
     {
       src: "/testimonials/2026-08/itamires-motivacao.webp",
-      alt: "Itámires conta como as mulheres da comunidade ajudam, motivam e inspiram",
+      alt: "Captura da mensagem de Itámires sobre a ajuda, motivação e inspiração das mulheres da comunidade",
     },
     {
       src: "/testimonials/2026-08/itamires-ajuda.webp",
-      alt: "Itámires compartilha como a ajuda da comunidade fez diferença na jornada",
+      alt: "Captura da mensagem de Itámires sobre a diferença que a ajuda da comunidade fez em sua jornada",
     },
     {
       src: "/testimonials/2026-08/leticia-pix-20681-original.jpg",
-      alt: "Letícia compartilha um Pix de mais de vinte mil reais recebido do TikTok Shop",
+      alt: "Captura da mensagem de Letícia sobre um Pix de mais de vinte mil reais recebido do TikTok Shop",
     },
     {
       src: "/testimonials/2026-08/bruna-comunidade.webp",
-      alt: "Bruna celebra o orgulho de fazer parte da comunidade",
+      alt: "Captura da mensagem de Bruna celebrando o orgulho de fazer parte da comunidade",
     },
     {
       src: "/testimonials/sarah-pagamento-7714.webp",
-      alt: "Sarah compartilha um resultado real de pagamento",
+      alt: "Captura da mensagem de Sarah compartilhando um resultado de pagamento",
     },
   ];
 

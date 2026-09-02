@@ -119,10 +119,13 @@
                 preload="none"
                 poster="/videos/depoimento-janaina-poster.webp"
                 width="720" height="1280"
-                title="Primeiro depoimento em vídeo"
+                title="Depoimento de Janaína — Sunlix"
+                aria-label="Depoimento de Janaína — Sunlix"
+                aria-describedby="depoimento-janaina-descricao"
                 src="/videos/depoimento-janaina.mp4"
-              ></video>
+              >Depoimento em vídeo de Janaína, aluna apresentada na mentoria Sunlix de Samanta Vidal.</video>
               <p class="student-proof-video-error" aria-live="polite">Não foi possível carregar este vídeo. Recarregue a página.</p>
+              <figcaption id="depoimento-janaina-descricao" class="media-description">Janaína fala diretamente à câmera em um depoimento de aluna apresentado na mentoria Sunlix de Samanta Vidal.</figcaption>
             </figure>
 
             <figure class="student-proof-video-only-card student-proof-video-only-card--landscape" aria-hidden="true">
@@ -132,10 +135,13 @@
                 preload="none"
                 poster="/videos/depoimento-yasmin-poster.webp"
                 width="1280" height="714"
-                title="Segundo depoimento em vídeo"
+                title="Depoimento de Yasmin — Sunlix"
+                aria-label="Depoimento de Yasmin — Sunlix"
+                aria-describedby="depoimento-yasmin-descricao"
                 src="/videos/depoimento-yasmin.mp4"
-              ></video>
+              >Depoimento em vídeo de Yasmin, aluna apresentada na mentoria Sunlix de Samanta Vidal.</video>
               <p class="student-proof-video-error" aria-live="polite">Não foi possível carregar este vídeo. Recarregue a página.</p>
+              <figcaption id="depoimento-yasmin-descricao" class="media-description">Yasmin aparece em uma gravação em ambiente interno, em um depoimento de aluna apresentado na mentoria Sunlix de Samanta Vidal.</figcaption>
             </figure>
           </div>
 

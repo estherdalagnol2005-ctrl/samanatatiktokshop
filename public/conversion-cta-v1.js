@@ -21,7 +21,7 @@
         </div>
 
         <figure class="conversion-photo">
-          <img src="/assets/samanta-cta.webp" alt="Samanta trabalhando em seu notebook" loading="lazy" decoding="async">
+          <img src="/assets/samanta-cta.webp" alt="Samanta Vidal trabalhando em seu notebook" loading="lazy" decoding="async">
           <figcaption><span>Samanta Vidal</span><strong>Estratégia aplicada.</strong></figcaption>
         </figure>
 

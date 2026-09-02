@@ -26,6 +26,8 @@
 
 ## Manutenção e validação
 
+- Imagens informativas têm texto alternativo; ornamentos e fundos duplicados continuam decorativos (`alt=""` / `aria-hidden`). Os cinco vídeos têm título e descrição acessível, sem mudar as legendas visíveis. Os botões da galeria também referenciam a descrição de cada mídia. Descrições de cenas não são transcrições nem legendas sincronizadas: não foram inventadas falas ou datas de publicação para Schema de vídeo.
+- Manter `alt` descritivo nas novas imagens e `title`/descrição nos novos vídeos da galeria. Testes cobrem mídias no HTML inicial e a criação dos 15 itens do carrossel; descrições ajudam a interpretar o conteúdo, mas não garantem posicionamento ou indexação.
 - Base anterior: commit d6450c5f9592ffd4ece40a78764c36d12d89e5d2; recursos originais mantidos para recuperação. Não editar os bundles gerados.
 - `npm run build` gera HTML e assets; testes verificam IDs/âncoras/recursos, metadados/Schema/HTTP, ícones/fontes, consentimento e respostas a payloads inválidos. Não dependem de dados de clientes.
 - Compilação local verificada com webpack (`next build --webpack`) porque o sandbox usa node_modules por symlink; a Vercel mantém seu build normal com Turbopack.

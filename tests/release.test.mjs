@@ -33,6 +33,79 @@ test("CSS/JS consolidados, recursos internos presentes e sem GSAP duplicado", ()
   }
 });
 
+test("Imagens informativas e vídeos do HTML inicial têm descrições", () => {
+  const images = [...html.matchAll(/<img\b[^>]*>/g)];
+  assert.ok(images.length >= 18);
+  for (const [tag] of images) {
+    const alt = tag.match(/\balt="([^"]*)"/);
+    assert.ok(alt, `Imagem sem alt: ${tag}`);
+    if (!alt[1].trim()) assert.ok(tag.includes('aria-hidden="true"'), `Alt vazio em imagem não decorativa: ${tag}`);
+    else assert.ok(!/^(?:imagem|foto|image|photo|\S+\.(?:webp|jpg|png))$/i.test(alt[1]), tag);
+  }
+  const videos = [...html.matchAll(/<video\b([^>]*)>([\s\S]*?)<\/video>/g)];
+  assert.equal(videos.length, 2);
+  for (const [, attrs, fallback] of videos) {
+    assert.ok(!/\balt=/.test(attrs), 'Vídeo não usa atributo alt');
+    const title = attrs.match(/\btitle="([^"]+)"/)?.[1];
+    assert.match(title || '', /Depoimento de (Janaína|Yasmin)/);
+    assert.ok(attrs.includes(`aria-label="${title}"`));
+    const id = attrs.match(/aria-describedby="([^"]+)"/)?.[1];
+    assert.ok(id);
+    const description = html.match(new RegExp(`<figcaption id="${id}" class="media-description">([^<]+)</figcaption>`));
+    assert.ok(description?.[1].length > 30, `Descrição ausente: ${id}`);
+    assert.ok(fallback.trim().length > 30);
+    assert.ok(attrs.includes('preload="none"'));
+  }
+});
+
+test("Todos os itens da galeria preservam mídia, alt e descrições associadas", () => {
+  // Executa a criação real dos elementos, parando antes de ativar os eventos.
+  const nodes = [];
+  const rendered = {};
+  const showcase = { replaceChildren: node => { rendered.node = node; throw rendered; } };
+  const document = {
+    readyState: 'complete', documentElement: {},
+    querySelector: selector => selector === '.dreams-showcase' ? showcase : null,
+    createElement: tag => {
+      const node = {tag, attrs: {}, children: [], dataset: {}, style: {}, classList: {add() {}},
+        setAttribute(name, value) { this.attrs[name] = value; },
+        append(...children) { this.children.push(...children); },
+      };
+      nodes.push(node);
+      return node;
+    },
+  };
+  assert.throws(() => runInNewContext(read('public/gallery-coverflow-v1.js'), {
+    document, MutationObserver: class { observe() {} },
+  }), error => error === rendered);
+  assert.ok(rendered.node);
+  const media = nodes.filter(node => ['img', 'video'].includes(node.tag));
+  assert.equal(media.length, 15);
+  assert.equal(media.filter(node => node.tag === 'video').length, 3);
+  const descriptions = nodes.filter(node => node.className === 'media-description');
+  assert.equal(descriptions.length, 15);
+  assert.equal(new Set(descriptions.map(node => node.id)).size, 15);
+  for (const node of media) {
+    const slide = nodes.find(parent => parent.children.includes(node));
+    const description = descriptions.find(item => item.id === slide.attrs['aria-describedby']);
+    assert.ok(description?.textContent.length > 20);
+    assert.ok(slide.children.includes(description));
+    assert.ok(existsSync(`public${node.src}`));
+    if (node.tag === 'img') {
+      assert.equal(node.alt, description.textContent);
+      assert.equal(node.loading, 'lazy');
+    } else {
+      assert.ok(node.title.length > 15);
+      assert.equal(node.attrs['aria-label'], node.title);
+      assert.equal(node.attrs['aria-describedby'], description.id);
+      assert.equal(node.textContent, description.textContent);
+      assert.equal(node.preload, 'none');
+      assert.ok(node.muted && node.loop && node.playsInline);
+      assert.ok(existsSync(`public${node.poster}`));
+    }
+  }
+});
+
 test("Favicon, OG e fontes válidos", async () => {
   assert.equal(read('public/icon.svg').trimEnd(), read('public/brand/sunlix-logo-night.svg').trimEnd(), 'O favicon deve manter o logo Sunlix completo');
   const og = await sharp('public/social/sunlix-share.jpg').metadata();
@@ -68,6 +141,8 @@ test("HTTP: SEO, robots, sitemap, área privada e payloads inválidos", {skip: !
   assert.equal((body.match(/<title>/g) || []).length, 1);
   assert.ok(body.includes('name="description"'));
   assert.ok(body.includes('property="og:image"'));
+  assert.ok(body.includes('property="og:image:alt"'));
+  assert.ok(body.includes('name="twitter:image:alt"'));
   assert.ok(!body.includes('SITE_SEO_HEAD'));
   const schema = JSON.parse(body.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   assert.equal(schema['@graph'].length, 4);
