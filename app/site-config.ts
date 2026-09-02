@@ -70,9 +70,9 @@ export function seoHead() {
 <meta name="twitter:description" content="${description}">
 <meta name="twitter:image" content="${image}">
 <meta name="twitter:image:alt" content="Sunlix — mentoria de TikTok Shop com Samanta Vidal">
-<link rel="icon" href="/favicon.ico" sizes="32x32">
-<link rel="icon" href="/icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+<link rel="shortcut icon" href="/brand/sunlix-logo-night.svg?favicon=sunlix-original-20260902" type="image/svg+xml">
+<link rel="icon" href="/brand/sunlix-logo-night.svg?favicon=sunlix-original-20260902" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?favicon=sunlix-original-20260902" sizes="180x180">
 ${verification ? `<meta name="google-site-verification" content="${escapeAttribute(verification)}">` : "<!-- TODO: GOOGLE_SITE_VERIFICATION: inserir o conteúdo da meta tag fornecida pelo Search Console, se usar verificação HTML. -->"}
 <script type="application/ld+json">${jsonForHtml(structuredData())}</script>
 <script id="sunlix-public-config" type="application/json">${jsonForHtml(publicConfig())}</script>`;

@@ -34,6 +34,7 @@ test("CSS/JS consolidados, recursos internos presentes e sem GSAP duplicado", ()
 });
 
 test("Favicon, OG e fontes válidos", async () => {
+  assert.equal(read('public/icon.svg').trimEnd(), read('public/brand/sunlix-logo-night.svg').trimEnd(), 'O favicon deve manter o logo Sunlix completo');
   const og = await sharp('public/social/sunlix-share.jpg').metadata();
   assert.equal(og.width, 1200); assert.equal(og.height, 630);
   const apple = await sharp('public/apple-touch-icon.png').metadata();
