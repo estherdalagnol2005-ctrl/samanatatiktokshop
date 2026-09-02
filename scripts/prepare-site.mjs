@@ -6,7 +6,8 @@ import { runInNewContext } from "node:vm";
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 // Compiladores já incluídos na versão fixada de Next; sem runtime extra no cliente.
-const postcss = require("postcss");
+const nextRequire = createRequire(require.resolve("next/package.json"));
+const postcss = nextRequire("postcss");
 const cssnano = require("next/dist/compiled/cssnano-simple");
 const { minify } = require("next/dist/compiled/terser");
 const read = path => readFileSync(path, "utf8");
