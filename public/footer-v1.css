@@ -25,6 +25,16 @@
   grid-area: brand;
 }
 
+/* Footer navigation and credits must never depend on a scroll-reveal trigger.
+   Override GSAP's inline hidden state, including on cached pages or fast scrolls. */
+.site-footer .site-footer-brand,
+.site-footer .site-footer-nav,
+.site-footer .site-footer-bottom {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
 .site-footer-brand a {
   display: inline-flex;
 }
