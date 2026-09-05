@@ -31,6 +31,10 @@
   text-align: center !important;
 }
 
+.community-uniform-copy > p + p {
+  margin-top: 6px !important;
+}
+
 .community-uniform-stage {
   --community-card-width: clamp(264px, 23vw, 336px);
   --community-side-offset: clamp(250px, 29vw, 430px);
