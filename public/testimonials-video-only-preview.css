@@ -18,6 +18,14 @@
   max-width: 790px;
 }
 
+.student-proof-video-only-section .student-proof-copy--after-video {
+  margin-top: clamp(24px, 2.4vw, 34px);
+}
+
+.student-proof-video-only-section .student-proof-copy--after-video p {
+  margin-top: 0 !important;
+}
+
 .student-proof-video-stage {
   position: relative;
   width: min(100%, 1080px);
