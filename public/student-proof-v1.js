@@ -106,7 +106,6 @@
         <header class="student-proof-heading">
           <div class="student-proof-copy">
             <h2 id="student-proof-title">Esse é o motivo que me faz continuar todos os dias <strong>ajudando mulheres como você.</strong></h2>
-            <p>São depoimentos como esses que me fazem querer compartilhar tudo o que aprendi e ajudar cada vez mais mulheres a saírem da mediocridade. Eu já vi mulheres deixando o trabalho CLT e mães mudando a vida de suas famílias porque confiaram na minha mentoria, e é por isso que continuo todos os dias. Meu propósito é transformar vidas, e o próximo depoimento pode ser o seu.</p>
           </div>
         </header>
 
@@ -154,6 +153,10 @@
               <span aria-hidden="true">→</span>
             </button>
           </div>
+        </div>
+
+        <div class="student-proof-copy student-proof-copy--after-video">
+          <p>São depoimentos como esses que me fazem querer compartilhar tudo o que aprendi e ajudar cada vez mais mulheres a saírem da mediocridade. Eu já vi mulheres deixando o trabalho CLT e mães mudando a vida de suas famílias porque confiaram na minha mentoria, e é por isso que continuo todos os dias. Meu propósito é transformar vidas, e o próximo depoimento pode ser o seu.</p>
         </div>
 
         <a class="student-proof-cta" href="https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O">QUERO SER A PRÓXIMA HISTÓRIA <span aria-hidden="true">↗</span></a>
