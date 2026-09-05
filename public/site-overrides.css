@@ -29,6 +29,11 @@
   display: none !important;
 }
 
+/* Remove the decorative word beside Samanta's photo to keep the hero cleaner. */
+.hero-method-visual .method-vertical-word {
+  display: none !important;
+}
+
 .hero-subcopy {
   width: min(100%, 580px);
   font-size: clamp(15px, 1.12vw, 19px);
