@@ -104,6 +104,14 @@ body {
     --site-shell-radius: clamp(27px, 8vw, 34px);
   }
 
+  .site-header .brand-logo {
+    width: clamp(76px, 20vw, 84px) !important;
+  }
+
+  .hero-content {
+    padding-top: 90px !important;
+  }
+
   .hero-stage,
   .student-proof-section,
   .dreams-section,
@@ -154,5 +162,9 @@ body {
   :root {
     --site-edge: 6px;
     --site-shell-radius: 26px;
+  }
+
+  .hero-content {
+    padding-top: 82px !important;
   }
 }
