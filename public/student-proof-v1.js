@@ -106,7 +106,7 @@
         <header class="student-proof-heading">
           <div class="student-proof-copy">
             <h2 id="student-proof-title">Esse é o motivo que me faz continuar todos os dias <strong>ajudando mulheres como você.</strong></h2>
-            <p>São depoimentos como esses que me fazem querer compartilhar meu método e, cada vez mais, ajudar a realizar sonhos. Com meu método já vi mulheres deixando o CLT e mães dando uma condição melhor pra sua família e é por isso que eu continuo a cada dia. Você pode ser a próxima, escolha agora começar a trilhar seu próprio caminho ao meu lado e junto a essa comunidade de mulheres que evoluem a cada dia.</p>
+            <p>São depoimentos como esses que me fazem querer compartilhar tudo o que aprendi e ajudar cada vez mais mulheres a saírem da mediocridade. Eu já vi mulheres deixando o trabalho CLT e mães mudando a vida de suas famílias porque confiaram na minha mentoria, e é por isso que continuo todos os dias. Meu propósito é transformar vidas, e o próximo depoimento pode ser o seu.</p>
           </div>
         </header>
 
