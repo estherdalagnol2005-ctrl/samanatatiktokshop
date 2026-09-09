@@ -105,7 +105,7 @@
       <div class="student-proof-shell">
         <header class="student-proof-heading">
           <div class="student-proof-copy">
-            <h2 id="student-proof-title">A estratégia prática que faz mulheres <strong>saírem ou largarem o CLT.</strong></h2>
+            <h2 id="student-proof-title">A estratégia prática que faz mulheres <strong>largarem o CLT.</strong></h2>
           </div>
         </header>
 
