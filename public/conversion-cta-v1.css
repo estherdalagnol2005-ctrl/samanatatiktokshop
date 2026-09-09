@@ -190,6 +190,9 @@
 
 .conversion-trigger small {
   color: rgb(28 23 26 / 67%);
+  font-size: clamp(12px, 1vw, 16px);
+  font-weight: 900;
+  letter-spacing: 0.02em;
 }
 
 .conversion-trigger strong {
