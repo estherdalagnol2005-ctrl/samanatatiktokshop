@@ -49,9 +49,13 @@ body,
 /* Yellow → orange → pink */
 .page-shell > .about-samanta-section,
 .page-shell > .dreams-section,
-.page-shell > .conversion-section,
-.page-shell > .site-footer {
+.page-shell > .conversion-section {
   background: linear-gradient(180deg, #f0ff27 0%, #ffa120 50%, #fa2095 100%) !important;
+}
+
+/* The footer continues from the pink end of the final fold into yellow. */
+.page-shell > .site-footer {
+  background: linear-gradient(180deg, #fa2095 0%, #ffa120 50%, #f0ff27 100%) !important;
 }
 
 .page-shell > .site-gradient-marquee {
