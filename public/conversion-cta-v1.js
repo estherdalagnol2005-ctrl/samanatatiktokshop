@@ -27,8 +27,8 @@
 
         <aside class="conversion-trigger">
           <small>ENQUANTO VOCÊ PROCRASTINA...</small>
-          <strong>OUTRAS MULHERES ESTÃO REALIZANDO SEUS SONHOS COM O TIKTOK SHOP.</strong>
-          <p>Você pode ser a próxima.</p>
+          <strong>OUTRAS MULHERES ESTÃO REALIZANDO SONHOS COM O TIKTOK SHOP.</strong>
+          <p>Você vai ficar só assistindo? Ou vai querer ser a próxima?</p>
         </aside>
 
         <div class="conversion-action">
