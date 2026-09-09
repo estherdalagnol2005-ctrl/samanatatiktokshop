@@ -19,6 +19,15 @@
   padding-bottom: 0 !important;
 }
 
+/* Keep Samanta's story immediately after the video testimonials. */
+.page-shell > .student-proof-section { order: 2 !important; }
+.page-shell > .about-samanta-section { order: 3 !important; }
+.page-shell > .community-section { order: 4 !important; }
+.page-shell > .dreams-section { order: 5 !important; }
+.page-shell > .method-section { order: 6 !important; }
+.page-shell > .conversion-section { order: 7 !important; }
+.page-shell > .site-footer { order: 8 !important; }
+
 
 .site-header .brand-logo {
   width: clamp(82px, 6vw, 112px);
