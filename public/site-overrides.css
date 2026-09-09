@@ -72,6 +72,7 @@ body,
   .about-samanta-shell {
     display: flex !important;
     flex-direction: column !important;
+    gap: 16px !important;
   }
 
   .about-samanta-copy {
@@ -90,6 +91,7 @@ body,
   .about-samanta-copy p {
     order: 3;
     width: 100%;
+    margin-bottom: 0 !important;
   }
 
   .about-samanta-photo {
