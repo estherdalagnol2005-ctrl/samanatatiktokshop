@@ -10,6 +10,7 @@
     var(--flow-lime, #f0ff27) 12%,
     var(--flow-orange, #ffa120) 44%,
     var(--flow-pink, #fa2095) 72%,
+    var(--flow-lime, #f0ff27) 90%,
     var(--flow-lime, #f0ff27) 100%
   );
   overflow: hidden;
