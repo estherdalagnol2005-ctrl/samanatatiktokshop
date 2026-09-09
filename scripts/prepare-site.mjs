@@ -29,6 +29,10 @@ html = html.replace(
   "Hoje eu sei o que é: poder ir ao mercado sem olhar o preço, viajar para Paris e levar minha família sem eles precisarem pagar nada, ter inúmeros hobbies, ir à academia na hora que eu quiser...",
   "Hoje eu sei o que é: poder ir ao mercado sem olhar o preço, viajar para a Europa e levar minha família sem eles precisarem pagar nada, aposentar minha sogra, ter inúmeros hobbies, ir à academia na hora que eu quiser...",
 );
+html = html.replace(
+  /<div class="dreams-results" aria-label="Resultados de Samanta">[\s\S]*?<\/div><div class="dreams-cta-wrap">/,
+  '<div class="dreams-results" aria-label="Resultados de Samanta"><div><strong>R$ 8 milhões</strong><span>faturamento total em 1 ano e pouco</span></div><div><strong>R$ 165 mil</strong><span>recebidos em comissões em um mês</span></div></div><div class="dreams-cta-wrap">',
+);
 html = html.replace(/<title>[\s\S]*?<\/title>/, "<!-- SITE_SEO_HEAD -->")
   .replace(/<meta name="description"[^>]*>/, "")
   .replace(/<link rel="(?:shortcut icon|icon)"[^>]*>/g, "")
