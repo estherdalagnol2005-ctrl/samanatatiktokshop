@@ -28,26 +28,34 @@
 .page-shell > .conversion-section { order: 7 !important; }
 .page-shell > .site-footer { order: 8 !important; }
 
-/* One continuous chromatic field runs behind every fold and white shell. */
-body {
+/* Individual fold gradients: each one owns its full-height background. */
+body,
+.page-shell {
   background: transparent !important;
 }
 
-.page-shell {
-  background: linear-gradient(
-    180deg,
-    #fa2095 0%,
-    #fa2095 16%,
-    #ffa120 43%,
-    #f0ff27 74%,
-    #d9f000 100%
-  ) !important;
+.page-shell > .hero-stage {
+  background: #fa2095 !important;
+  background-image: none !important;
 }
 
-.page-shell > section,
-.page-shell > .site-gradient-marquee,
+/* Pink → orange → yellow */
+.page-shell > .student-proof-section,
+.page-shell > .community-section,
+.page-shell > .method-section {
+  background: linear-gradient(180deg, #fa2095 0%, #ffa120 50%, #f0ff27 100%) !important;
+}
+
+/* Yellow → orange → pink */
+.page-shell > .about-samanta-section,
+.page-shell > .dreams-section,
+.page-shell > .conversion-section,
 .page-shell > .site-footer {
-  background-color: transparent !important;
+  background: linear-gradient(180deg, #f0ff27 0%, #ffa120 50%, #fa2095 100%) !important;
+}
+
+.page-shell > .site-gradient-marquee {
+  background: #fa2095 !important;
   background-image: none !important;
 }
 
