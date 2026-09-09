@@ -40,6 +40,13 @@
   font-weight: 650;
 }
 
+/* Match the hero heading to the clean typeface used by the other section titles. */
+.hero-intro h1,
+.hero-intro h1 span,
+.hero-intro h1 strong {
+  font-family: var(--font-body) !important;
+}
+
 /* Keep Samanta's hero portrait fixed while the surrounding decorative elements float. */
 .hero-method-visual .method-photo-frame {
   animation: none !important;
@@ -48,7 +55,7 @@
 /* Bring Samanta closer in the hero while keeping safe space above her head. */
 .hero-method-visual .method-photo-frame img {
   object-position: center 18% !important;
-  transform: scale(1.2);
+  transform: scale(1.3);
   transform-origin: center top;
 }
 
