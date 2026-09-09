@@ -69,6 +69,29 @@ body,
 }
 
 @media (width <= 760px) {
+  .about-samanta-shell {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .about-samanta-copy {
+    display: contents;
+  }
+
+  .about-samanta-copy h2 {
+    order: 1;
+    width: 100%;
+  }
+
+  .about-samanta-photo {
+    order: 2;
+  }
+
+  .about-samanta-copy p {
+    order: 3;
+    width: 100%;
+  }
+
   .about-samanta-photo {
     width: min(82%, 300px) !important;
   }
