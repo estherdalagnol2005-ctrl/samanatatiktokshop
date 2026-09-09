@@ -25,8 +25,8 @@
 
         <div class="about-samanta-copy">
           <h2 id="about-samanta-title">Prazer, eu sou a <strong>Samanta.</strong></h2>
-          <p>Vim de uma família simples do Rio Grande do Sul e comecei a trabalhar ainda muito nova, com 12 anos. Já trabalhei em fábrica de calçados, loja de shopping e vivi por muito tempo a rotina da CLT. Aos 20 anos, mudei de estado para transformar minha realidade. Naquela época, eu não imaginava que encontraria algo que realmente gostasse de fazer no digital.</p>
-          <p>Mas, o TikTok Shop mudou completamente a minha realidade. Hoje, trabalho com algo que faço com leveza, prazer e que me permitiu transformar não só a minha vida, mas também a da minha família. Já recebi mais de 150 mil em um mês e tive mais de 8 milhões faturados. Talvez seja justamente por saber de onde eu vim que eu acredito tanto que outras mulheres também podem mudar a própria história.</p>
+          <p>Vim de uma família simples do Rio Grande do Sul e comecei a trabalhar ainda muito nova, com <strong>12 anos</strong>. Já trabalhei em fábrica de calçados, loja de shopping e vivi por muito tempo a rotina da <strong>CLT</strong>. Aos <strong>20 anos</strong>, mudei de estado para transformar minha realidade. Naquela época, eu não imaginava que encontraria algo que realmente gostasse de fazer no digital.</p>
+          <p>Mas, o <strong>TikTok Shop</strong> mudou completamente a minha realidade. Hoje, trabalho com algo que faço com leveza, prazer e que me permitiu transformar não só a minha vida, mas também a da minha família. Já recebi mais de <strong>150 mil</strong> em um mês e tive mais de <strong>8 milhões</strong> faturados. Talvez seja justamente por saber de onde eu vim que eu acredito tanto que outras mulheres também podem mudar a própria história.</p>
         </div>
       </div>
     `;
