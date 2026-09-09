@@ -10,7 +10,7 @@
 }
 
 :root {
-  --fold-gap: clamp(18px, 1.65vw, 28px);
+  --fold-gap: clamp(42px, 4vw, 64px);
 }
 
 /* Keep the visible breathing room between every fold consistent. */
