@@ -9,6 +9,15 @@
   display: none !important;
 }
 
+:root {
+  --fold-gap: clamp(18px, 1.65vw, 28px);
+}
+
+/* Keep the visible breathing room between every fold consistent. */
+.page-shell > section:not(.hero-stage) {
+  padding-top: var(--fold-gap) !important;
+}
+
 .site-header .brand-logo {
   width: clamp(82px, 6vw, 112px);
 }
