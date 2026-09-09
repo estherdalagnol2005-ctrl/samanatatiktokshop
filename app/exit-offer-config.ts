@@ -31,7 +31,7 @@ export type ExitOfferConfig = {
 /** Server-only source of truth for the exit offer and its security settings. */
 export function getExitOfferConfig(): ExitOfferConfig {
   return {
-    couponCode: safeText(workerEnv.COUPON_CODE, 80),
+    couponCode: safeText(workerEnv.COUPON_CODE, 80) ?? "SHOP10",
     discountCheckoutUrl: safeHttpsUrl(workerEnv.DISCOUNT_CHECKOUT_URL),
     hmacSecret: safeText(workerEnv.EXIT_OFFER_HMAC_SECRET, 256),
     leadEncryptionSecret: safeText(workerEnv.EXIT_OFFER_LEAD_ENCRYPTION_SECRET, 256),
