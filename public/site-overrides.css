@@ -153,9 +153,11 @@
 }
 
 .dreams-results span {
-  font-size: clamp(12px, 1vw, 15px) !important;
-  font-weight: 800 !important;
+  font-size: clamp(10px, 0.8vw, 12px) !important;
+  font-weight: 720 !important;
   line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
 }
 
 
