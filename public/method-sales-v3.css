@@ -3,7 +3,6 @@
   --method-progress: 0%;
   position: relative;
   width: 100%;
-  margin-top: -1px;
   padding: clamp(12px, 1vw, 16px) clamp(8px, .8vw, 13px) clamp(52px, 5vw, 84px);
   overflow: hidden;
 }
