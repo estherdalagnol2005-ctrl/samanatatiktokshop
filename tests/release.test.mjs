@@ -10,7 +10,7 @@ test("HTML inicial contém conteúdo completo, um H1 e IDs únicos", () => {
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
   assert.equal(new Set(ids).size, ids.length);
-  for (const id of ["top", "depoimentos", "comunidade", "resultados", "jornada", "inscricao"]) assert.ok(ids.includes(id), id);
+  for (const id of ["top", "depoimentos", "comunidade", "resultados", "samanta", "jornada", "inscricao"]) assert.ok(ids.includes(id), id);
   for (const [, id] of html.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.includes(id), `Âncora ausente: ${id}`);
   assert.ok(html.includes('class="site-footer"'));
   assert.equal((html.match(/SITE_SEO_HEAD/g) || []).length, 1);
@@ -80,11 +80,11 @@ test("Todos os itens da galeria preservam mídia, alt e descrições associadas"
   }), error => error === rendered);
   assert.ok(rendered.node);
   const media = nodes.filter(node => ['img', 'video'].includes(node.tag));
-  assert.equal(media.length, 15);
+  assert.equal(media.length, 14);
   assert.equal(media.filter(node => node.tag === 'video').length, 3);
   const descriptions = nodes.filter(node => node.className === 'media-description');
-  assert.equal(descriptions.length, 15);
-  assert.equal(new Set(descriptions.map(node => node.id)).size, 15);
+  assert.equal(descriptions.length, 14);
+  assert.equal(new Set(descriptions.map(node => node.id)).size, 14);
   for (const node of media) {
     const slide = nodes.find(parent => parent.children.includes(node));
     const description = descriptions.find(item => item.id === slide.attrs['aria-describedby']);
