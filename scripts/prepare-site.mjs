@@ -25,6 +25,10 @@ const array = (file, name) => {
 };
 const section = (id, classes, label, body) => `<section id="${id}" class="${classes}" aria-labelledby="${label}">${body}</section>`;
 let html = read("recovery/index.html");
+html = html.replace(
+  "Hoje eu sei o que é: poder ir ao mercado sem olhar o preço, viajar para Paris e levar minha família sem eles precisarem pagar nada, ter inúmeros hobbies, ir à academia na hora que eu quiser...",
+  "Hoje eu sei o que é: poder ir ao mercado sem olhar o preço, viajar para a Europa e levar minha família sem eles precisarem pagar nada, aposentar minha sogra, ter inúmeros hobbies, ir à academia na hora que eu quiser...",
+);
 html = html.replace(/<title>[\s\S]*?<\/title>/, "<!-- SITE_SEO_HEAD -->")
   .replace(/<meta name="description"[^>]*>/, "")
   .replace(/<link rel="(?:shortcut icon|icon)"[^>]*>/g, "")
