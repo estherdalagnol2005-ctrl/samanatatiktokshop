@@ -24,11 +24,10 @@
         </figure>
 
         <div class="about-samanta-copy">
-          <span class="about-samanta-eyebrow">QUEM ESTÁ POR TRÁS DA SUNLIX</span>
           <h2 id="about-samanta-title">Prazer, eu sou a <strong>Samanta.</strong></h2>
-          <p>Eu saí do CLT e encontrei no TikTok Shop um caminho para transformar conteúdo em liberdade. O que começou como uma nova possibilidade mudou completamente a minha realidade.</p>
-          <p>Em um ano, faturei mais de R$ 6 milhões sendo eu mesma, com a minha personalidade e uma estratégia prática que realmente funciona.</p>
-          <p class="about-samanta-purpose">Hoje, meu propósito é ensinar outras mulheres a saírem da média, largarem o CLT e conquistarem sua liberdade financeira.</p>
+          <p>Vim de uma família simples do Rio Grande do Sul e comecei a trabalhar ainda muito nova, com 12 anos. Já trabalhei em fábrica de calçados, loja de shopping e vivi por muito tempo a rotina da CLT. No meu último emprego, trabalhava todos os dias da semana e passava cerca de duas horas no ônibus para ir e outras duas para voltar para casa.</p>
+          <p>Aos 20 anos, saí do Rio Grande do Sul e vim para Santa Catarina querendo mudar minha realidade. Naquela época, eu não imaginava que encontraria algo que realmente gostasse de fazer no digital.</p>
+          <p>Mas, o TikTok Shop mudou completamente a minha realidade. Hoje, trabalho com algo que faço com leveza, prazer e que me permitiu transformar não só a minha vida, mas também a da minha família. E talvez seja justamente por saber de onde eu vim que eu acredito tanto que outras mulheres também podem mudar a própria história.</p>
         </div>
       </div>
     `;
