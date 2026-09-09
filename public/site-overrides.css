@@ -28,6 +28,29 @@
 .page-shell > .conversion-section { order: 7 !important; }
 .page-shell > .site-footer { order: 8 !important; }
 
+/* One continuous chromatic field runs behind every fold and white shell. */
+body {
+  background: transparent !important;
+}
+
+.page-shell {
+  background: linear-gradient(
+    180deg,
+    #fa2095 0%,
+    #fa2095 16%,
+    #ffa120 43%,
+    #f0ff27 74%,
+    #d9f000 100%
+  ) !important;
+}
+
+.page-shell > section,
+.page-shell > .site-gradient-marquee,
+.page-shell > .site-footer {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
 /* Give the portrait more breathing room beside the story copy. */
 .about-samanta-photo {
   width: min(100%, 360px) !important;
