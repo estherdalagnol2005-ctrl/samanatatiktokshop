@@ -73,6 +73,8 @@ body,
     display: flex !important;
     flex-direction: column !important;
     gap: 16px !important;
+    padding-right: clamp(14px, 4vw, 22px) !important;
+    padding-left: clamp(14px, 4vw, 22px) !important;
   }
 
   .about-samanta-copy {
@@ -92,6 +94,12 @@ body,
     order: 3;
     width: 100%;
     margin-bottom: 0 !important;
+    line-height: 1.45 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .about-samanta-copy p strong {
+    font-weight: 850 !important;
   }
 
   .about-samanta-photo {
