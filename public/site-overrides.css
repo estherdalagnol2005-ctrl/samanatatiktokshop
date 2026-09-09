@@ -10,18 +10,15 @@
 }
 
 :root {
-  --fold-gap: clamp(42px, 4vw, 64px);
+  --fold-gap: clamp(56px, 8.5vw, 116px);
 }
 
-/* Keep the visible breathing room between every fold consistent. */
+/* Use one measured outer gap between every pair of white shells. */
 .page-shell > section:not(.hero-stage) {
   padding-top: var(--fold-gap) !important;
+  padding-bottom: 0 !important;
 }
 
-/* The first content shell also accounts for the Hero's bottom breathing room. */
-.page-shell > .student-proof-section {
-  padding-top: calc(var(--fold-gap) * 2) !important;
-}
 
 .site-header .brand-logo {
   width: clamp(82px, 6vw, 112px);
