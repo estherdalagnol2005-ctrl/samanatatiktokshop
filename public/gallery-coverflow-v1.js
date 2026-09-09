@@ -21,7 +21,7 @@
       type: "video",
       src: "/assets/dreams-2026/momento-em-paris.webm",
       poster: "/assets/dreams-2026/momento-em-paris-poster.jpg",
-      label: "Momentos em Paris",
+      label: "Recebendo um presente",
       caption: "Passando aniversário em Paris.",
       title: "Samanta abrindo um presente em Paris",
       alt: "Samanta abrindo um presente em um café de Paris",
@@ -39,13 +39,6 @@
       label: "Uma nova vista",
       caption: "A Torre Eiffel da janela do quarto.",
       alt: "Samanta no quarto diante da Torre Eiffel",
-    },
-    {
-      type: "image",
-      src: "/assets/dreams-2026/pix-na-rotina.webp",
-      label: "Pix na rotina",
-      caption: "Resultados que acompanham o dia.",
-      alt: "Samanta na academia com comprovantes de pagamentos do TikTok Shop",
     },
     {
       type: "image",

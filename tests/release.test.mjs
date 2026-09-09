@@ -80,11 +80,11 @@ test("Todos os itens da galeria preservam mídia, alt e descrições associadas"
   }), error => error === rendered);
   assert.ok(rendered.node);
   const media = nodes.filter(node => ['img', 'video'].includes(node.tag));
-  assert.equal(media.length, 14);
+  assert.equal(media.length, 13);
   assert.equal(media.filter(node => node.tag === 'video').length, 3);
   const descriptions = nodes.filter(node => node.className === 'media-description');
-  assert.equal(descriptions.length, 14);
-  assert.equal(new Set(descriptions.map(node => node.id)).size, 14);
+  assert.equal(descriptions.length, 13);
+  assert.equal(new Set(descriptions.map(node => node.id)).size, 13);
   for (const node of media) {
     const slide = nodes.find(parent => parent.children.includes(node));
     const description = descriptions.find(item => item.id === slide.attrs['aria-describedby']);
