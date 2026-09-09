@@ -36,6 +36,7 @@ const items = array("community-section-v1.js", "carouselItems");
 const cards = items.map((item, i) => `<figure class="community-uniform-card${i === 2 ? " is-active" : i === 1 || i === 3 ? " is-near" : " is-distant"}" data-slot="${i === 2 ? "active" : i === 1 ? "previous" : i === 3 ? "next" : "hidden"}"${i === 2 ? ' aria-current="true"' : ""}><img src="${item.src}" alt="${item.alt}" loading="lazy" decoding="async" draggable="false"></figure>`).join("");
 const dots = items.map((_, i) => `<button class="community-uniform-dot${i === 2 ? " is-active" : ""}" type="button" aria-label="Ver imagem ${i + 1}"${i === 2 ? ' aria-current="true"' : ""}></button>`).join("");
 const community = section("comunidade", "community-section community-uniform-section", "community-title", template("community-section-v1.js", { cards, dots }));
+const aboutSamanta = section("samanta", "about-samanta-section", "about-samanta-title", template("about-samanta-v1.js"));
 const conversion = section("inscricao", "conversion-section", "conversion-title", template("conversion-cta-v1.js"));
 const footer = `<footer class="site-footer" aria-label="Rodapé">${template("footer-v1.js", {}, "footer")}</footer>`;
 // Preservar a ordem DOM original. As regras CSS order mantêm a galeria
@@ -43,7 +44,7 @@ const footer = `<footer class="site-footer" aria-label="Rodapé">${template("foo
 const marquee = html.match(/<div class="dreams-marquee"[\s\S]*?<\/div><\/div><\/div>/)?.[0];
 if (!marquee) throw new Error("Faixa de transição não encontrada");
 html = html.replace(marquee, "");
-html = html.replace('<section class="dreams-section"', `${marquee.replace('class="dreams-marquee"', 'class="dreams-marquee site-gradient-marquee"')}${proof}${community}${method}${conversion}${footer}<section class="dreams-section"`);
+html = html.replace('<section class="dreams-section"', `${marquee.replace('class="dreams-marquee"', 'class="dreams-marquee site-gradient-marquee"')}${proof}${community}${aboutSamanta}${method}${conversion}${footer}<section class="dreams-section"`);
 // Todos os CTAs comerciais já têm destino correto mesmo sem JavaScript.
 html = html.replace(/https:\/\/pay\.kiwify\.com\.br\/3U3ri1Z[^"\s<]*/g, checkoutUrl)
   .replace(/(<a class="(?:buy-button|hero-primary-cta|dreams-showcase-cta|dreams-cta)" href=")[^"]+/g, `$1${checkoutUrl}`);
@@ -59,11 +60,13 @@ for (const [tag, src] of images) {
   if (meta.width && meta.height) html = html.replace(tag, tag.replace(/\/?>(?![\s\S])/, ` width="${meta.width}" height="${meta.height}">`));
 }
 const cssFiles = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"\/?\s*>/g)].map(m => m[1]);
+cssFiles.push("/about-samanta-v1.css");
 let css = cssFiles.map(path => read(`public${path}`)).join("\n");
 css = css.replaceAll('/brand/nagoku-black.otf', '/brand/nagoku-black.woff2').replaceAll('format("opentype")', 'format("woff2")')
   .replaceAll('/brand/tiktok-sans-variable.ttf', '/brand/tiktok-sans-variable.woff2').replaceAll('format("truetype")', 'format("woff2")');
 const compressedCss = (await postcss([cssnano({ preset: ["default", { mergeRules: false, discardDuplicates: false }] })]).process(css, { from: undefined })).css;
 const scripts = [...html.matchAll(/<script\b[^>]*src="([^"]+)"[^>]*><\/script>/g)].map(m => m[1]);
+scripts.push("/about-samanta-v1.js");
 const js = [...scripts, "/analytics.js"].map(path => read(`public${path}`).replace(/https:\/\/pay\.kiwify\.com\.br\/3U3ri1Z[^"\s<]*/g, checkoutUrl)).join("\n;\n");
 const compressedJs = (await minify(js, { compress: true, mangle: true, format: { comments: /^!/ } })).code;
 const hashed = (content, extension) => `site-${createHash("sha256").update(content).digest("hex").slice(0, 12)}.${extension}`;
