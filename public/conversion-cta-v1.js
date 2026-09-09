@@ -17,7 +17,7 @@
 
         <div class="conversion-copy">
           <span class="conversion-eyebrow">✦ A DECISÃO QUE MUDA O PRÓXIMO RESULTADO</span>
-          <h2 id="conversion-title">TE ENSINO A ESCALAR SUAS VENDAS<br><strong>COM UMA ESTRATÉGIA</strong><em>QUE NUNCA FALHA.</em></h2>
+          <h2 id="conversion-title">TE ENSINO A ESCALAR SUAS VENDAS<br><strong>COM UMA ESTRATÉGIA BÁSICA BEM FEITA.</strong></h2>
         </div>
 
         <figure class="conversion-photo">
@@ -27,13 +27,12 @@
 
         <aside class="conversion-trigger">
           <small>ENQUANTO VOCÊ PROCRASTINA...</small>
-          <strong>OUTRAS MULHERES ESTÃO REALIZANDO SEUS SONHOS COM O TIKTOK SHOP.</strong>
-          <p>Você pode ser a próxima.</p>
+          <strong>OUTRAS MULHERES ESTÃO REALIZANDO SONHOS COM O TIKTOK SHOP.</strong>
+          <p>Você vai ficar só assistindo? Ou vai querer ser a próxima?</p>
         </aside>
 
         <div class="conversion-action">
           <a href="https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O">QUERO ENTRAR PARA A MENTORIA <span aria-hidden="true">↗</span></a>
-          <small>Turmas pensadas para acompanhamento próximo. Inscrições sujeitas à disponibilidade.</small>
         </div>
       </div>
     `;

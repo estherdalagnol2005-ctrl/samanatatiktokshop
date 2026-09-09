@@ -105,7 +105,7 @@
       <div class="student-proof-shell">
         <header class="student-proof-heading">
           <div class="student-proof-copy">
-            <h2 id="student-proof-title">Esse é o motivo que me faz continuar todos os dias <strong>ajudando mulheres como você.</strong></h2>
+            <h2 id="student-proof-title">A estratégia prática que faz mulheres <strong>largarem o CLT.</strong></h2>
           </div>
         </header>
 
@@ -156,7 +156,7 @@
         </div>
 
         <div class="student-proof-copy student-proof-copy--after-video">
-          <p>São depoimentos como esses que me fazem querer compartilhar tudo o que aprendi e ajudar cada vez mais mulheres a saírem da mediocridade. Eu já vi mulheres deixando o trabalho CLT e mães mudando a vida de suas famílias porque confiaram na minha mentoria, e é por isso que continuo todos os dias.</p>
+          <p>São depoimentos como esses que me fazem querer compartilhar tudo o que aprendi e ajudar cada vez mais mulheres a saírem da mediocridade. Com uma estratégia prática, eu vejo uma mãe de três filhos fazendo mais de R$ 6 mil limpos por mês e uma mulher deixando a enfermagem e os bicos para trás para faturar R$ 10 mil por mês.</p>
         </div>
 
         <a class="student-proof-cta" href="https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaevJUkw0_uoPexeLpBD0uwAqbcykPEPqyIsY92jjdMazyQ3sDDuOGK9PuqByQ_aem_2snf6J8TOi97NbaW3-4PNw&utm_id=97760_v0_s00_e0_tv3O">QUERO SER A PRÓXIMA HISTÓRIA <span aria-hidden="true">↗</span></a>

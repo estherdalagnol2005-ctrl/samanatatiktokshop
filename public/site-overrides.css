@@ -4,6 +4,172 @@
   display: none !important;
 }
 
+/* Remove the scrolling strip directly below the hero. */
+.site-gradient-marquee {
+  display: none !important;
+}
+
+:root {
+  --fold-gap: clamp(56px, 8.5vw, 116px);
+}
+
+/* Use one measured outer gap between every pair of white shells. */
+.page-shell > section:not(.hero-stage) {
+  padding-top: var(--fold-gap) !important;
+  padding-bottom: 0 !important;
+}
+
+/* Keep Samanta's story immediately after the video testimonials. */
+.page-shell > .student-proof-section { order: 2 !important; }
+.page-shell > .about-samanta-section { order: 3 !important; }
+.page-shell > .community-section { order: 4 !important; }
+.page-shell > .dreams-section { order: 5 !important; }
+.page-shell > .method-section { order: 6 !important; }
+.page-shell > .conversion-section { order: 7 !important; }
+.page-shell > .site-footer { order: 8 !important; }
+
+/* Individual fold gradients: each one owns its full-height background. */
+body,
+.page-shell {
+  background: transparent !important;
+}
+
+.page-shell > .hero-stage {
+  background: #fa2095 !important;
+  background-image: none !important;
+}
+
+/* Pink → orange → yellow */
+.page-shell > .student-proof-section,
+.page-shell > .community-section,
+.page-shell > .method-section {
+  background: linear-gradient(180deg, #fa2095 0%, #ffa120 50%, #f0ff27 100%) !important;
+}
+
+/* Yellow → orange → pink */
+.page-shell > .about-samanta-section,
+.page-shell > .dreams-section,
+.page-shell > .conversion-section {
+  background: linear-gradient(180deg, #f0ff27 0%, #ffa120 50%, #fa2095 100%) !important;
+}
+
+/* The footer continues from the pink end of the final fold into yellow. */
+.page-shell > .site-footer {
+  background: linear-gradient(180deg, #fa2095 0%, #ffa120 50%, #f0ff27 100%) !important;
+}
+
+.page-shell > .site-gradient-marquee {
+  background: #fa2095 !important;
+  background-image: none !important;
+}
+
+/* Give the portrait more breathing room beside the story copy. */
+.about-samanta-photo {
+  width: min(100%, 360px) !important;
+}
+
+.about-samanta-read-more {
+  display: none;
+}
+
+@media (width <= 760px) {
+  .about-samanta-shell {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding-right: clamp(14px, 4vw, 22px) !important;
+    padding-left: clamp(14px, 4vw, 22px) !important;
+  }
+
+  .about-samanta-copy {
+    display: contents;
+  }
+
+  .about-samanta-copy h2 {
+    order: 1;
+    width: 100%;
+    text-align: center !important;
+  }
+
+  .about-samanta-photo {
+    order: 2;
+  }
+
+  .about-samanta-copy p {
+    order: 3;
+    width: 100%;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    margin-bottom: 0 !important;
+    text-align: center !important;
+    line-height: 1.45 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .about-samanta-collapsible {
+    position: relative;
+    order: 3;
+    width: 100%;
+    margin-inline: auto;
+    text-align: center;
+    max-height: 11.5em;
+    padding-bottom: 2.2em;
+    overflow: hidden;
+    transition: max-height 0.55s ease;
+  }
+
+  .about-samanta-collapsible::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 4.5em;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0%), #fff 88%);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .about-samanta-read-more {
+    position: absolute;
+    bottom: 0.15em;
+    left: 50%;
+    z-index: 2;
+    display: block;
+    transform: translateX(-50%);
+    padding: 0.45em 0.9em;
+    border: 0;
+    border-radius: 999px;
+    background: #1c171a;
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.1;
+    cursor: pointer;
+  }
+
+  .about-samanta-section.is-expanded .about-samanta-collapsible {
+    max-height: 80em;
+    padding-bottom: 0;
+  }
+
+  .about-samanta-section.is-expanded .about-samanta-collapsible::after,
+  .about-samanta-section.is-expanded .about-samanta-read-more {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .about-samanta-copy p strong {
+    font-weight: 850 !important;
+  }
+
+  .about-samanta-photo {
+    width: min(82%, 300px) !important;
+  }
+}
+
+
 .site-header .brand-logo {
   width: clamp(82px, 6vw, 112px);
 }
@@ -40,9 +206,23 @@
   font-weight: 650;
 }
 
+/* Match the hero heading to the clean typeface used by the other section titles. */
+.hero-intro h1,
+.hero-intro h1 span,
+.hero-intro h1 strong {
+  font-family: var(--font-body) !important;
+}
+
 /* Keep Samanta's hero portrait fixed while the surrounding decorative elements float. */
 .hero-method-visual .method-photo-frame {
   animation: none !important;
+}
+
+/* Bring Samanta closer in the hero while keeping safe space above her head. */
+.hero-method-visual .method-photo-frame img {
+  object-position: center 18% !important;
+  transform: scale(1.55);
+  transform-origin: center top;
 }
 
 .hero-method-visual .metric-card {
@@ -114,6 +294,31 @@
 
 .hero-actions .hero-text-link {
   display: none !important;
+}
+
+/* The results proof now highlights total revenue and one month's commissions. */
+.dreams-results {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  width: min(100%, 820px) !important;
+  margin-inline: auto !important;
+}
+
+.dreams-results div:nth-child(2) {
+  background: var(--tt-pink, #fa2095) !important;
+  color: #fff !important;
+}
+
+.dreams-results div:nth-child(2) strong,
+.dreams-results div:nth-child(2) span {
+  color: #fff !important;
+}
+
+.dreams-results span {
+  font-size: clamp(10px, 0.8vw, 12px) !important;
+  font-weight: 720 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
 }
 
 
