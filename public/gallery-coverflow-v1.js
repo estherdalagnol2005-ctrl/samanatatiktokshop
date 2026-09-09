@@ -107,14 +107,6 @@
       position: "center",
       fit: "contain",
     },
-    {
-      type: "image",
-      src: "/assets/dreams-2026/evento-criadores.webp",
-      label: "Novas experiências",
-      caption: "O digital levando a lugares antes distantes.",
-      alt: "Samanta sorrindo em um evento de criadores",
-      position: "center 32%",
-    },
   ];
 
   const initializeCoverflow = () => {
