@@ -139,7 +139,7 @@
     section.innerHTML = `
       <div class="community-shell community-uniform-shell">
         <header class="community-copy community-uniform-copy">
-          <h2 id="community-title">Sua jornada <strong>não precisa ser solitária.</strong></h2>
+          <h2 id="community-title">Seu processo <strong>não precisa ser solitário.</strong></h2>
           <p>Toda mulher já sonhou em ter mais tempo para si, liberdade financeira, geográfica e, acima de tudo, independência. A Sunlix foi criada para unir mulheres diferentes, mas que têm o mesmo objetivo: tornarem-se protagonistas de suas próprias histórias. Foi através do TikTok Shop que esse sonho começou a se tornar realidade.</p>
         </header>
 
