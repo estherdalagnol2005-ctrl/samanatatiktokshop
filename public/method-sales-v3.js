@@ -6,7 +6,7 @@
     { title: "Está começando do zero", text: "Você quer direção desde o primeiro produto, sem perder tempo tentando descobrir tudo sozinha." },
     { title: "Já comprou outros cursos e não conseguiu vender", text: "Você estudou, tentou aplicar, mas ainda não encontrou um processo que transforme conhecimento em resultado." },
     { title: "Já tentou de tudo, mas travou em um resultado", text: "Você consegue vender, porém não sabe o que ajustar para ultrapassar o número em que parou." },
-    { title: "Vende, porém quer aprender a escalar produtos e faturar mais", text: "Você quer repetir o que funciona, crescer com estratégia e transformar vendas em uma operação." },
+    { title: "Vende, porém quer aprender a escalar produtos e faturar mais", text: "Você quer repetir o que funciona, crescer com estratégia e transformar vendas em escala." },
   ];
 
   const setActiveStep = (section, activeIndex, progress) => {
