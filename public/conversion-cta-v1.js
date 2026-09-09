@@ -17,7 +17,7 @@
 
         <div class="conversion-copy">
           <span class="conversion-eyebrow">✦ A DECISÃO QUE MUDA O PRÓXIMO RESULTADO</span>
-          <h2 id="conversion-title">TE ENSINO A ESCALAR SUAS VENDAS<br><strong>COM UMA ESTRATÉGIA</strong><em>QUE NUNCA FALHA.</em></h2>
+          <h2 id="conversion-title">TE ENSINO A ESCALAR SUAS VENDAS<br><strong>COM UMA ESTRATÉGIA BÁSICA BEM FEITA.</strong></h2>
         </div>
 
         <figure class="conversion-photo">
