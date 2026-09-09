@@ -34,6 +34,26 @@ body,
   background: transparent !important;
 }
 
+/* Keep every fold colour strictly behind its rounded white content box. */
+.page-shell > section:not(.hero-stage) {
+  isolation: isolate;
+  position: relative;
+  z-index: 0;
+}
+
+.student-proof-shell,
+.about-samanta-shell,
+.community-shell,
+.dreams-shell,
+.home-story-shell,
+.method-shell,
+.method-sales-shell,
+.conversion-shell {
+  position: relative;
+  z-index: 1;
+  background-clip: padding-box;
+}
+
 .page-shell > .hero-stage {
   background: #fa2095 !important;
   background-image: none !important;
