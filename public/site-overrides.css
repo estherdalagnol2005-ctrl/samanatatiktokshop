@@ -28,6 +28,17 @@
 .page-shell > .conversion-section { order: 7 !important; }
 .page-shell > .site-footer { order: 8 !important; }
 
+/* Give the portrait more breathing room beside the story copy. */
+.about-samanta-photo {
+  width: min(100%, 360px) !important;
+}
+
+@media (width <= 760px) {
+  .about-samanta-photo {
+    width: min(82%, 300px) !important;
+  }
+}
+
 
 .site-header .brand-logo {
   width: clamp(82px, 6vw, 112px);
