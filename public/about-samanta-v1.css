@@ -2,7 +2,6 @@
   order: 4 !important;
   position: relative;
   width: 100%;
-  margin-top: -1px;
   padding: clamp(12px, 1vw, 16px) clamp(8px, 0.8vw, 13px)
     clamp(52px, 5.4vw, 82px);
   background: linear-gradient(
@@ -14,6 +13,29 @@
     var(--flow-lime, #f0ff27) 100%
   );
   overflow: hidden;
+}
+/* Final layer contract: coloured section backgrounds stay behind every white shell. */
+.page-shell > section:not(.hero-stage),
+.page-shell > .site-footer {
+  position: relative;
+  isolation: isolate;
+  z-index: 0;
+  margin-top: 0 !important;
+}
+
+.student-proof-shell,
+.about-samanta-shell,
+.community-shell,
+.dreams-shell,
+.home-story-shell,
+.method-shell,
+.method-sales-shell,
+.conversion-shell,
+.site-footer-shell {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  background-clip: padding-box;
 }
 
 .about-samanta-shell {
