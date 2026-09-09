@@ -18,6 +18,11 @@
   padding-top: var(--fold-gap) !important;
 }
 
+/* The first content shell also accounts for the Hero's bottom breathing room. */
+.page-shell > .student-proof-section {
+  padding-top: calc(var(--fold-gap) * 2) !important;
+}
+
 .site-header .brand-logo {
   width: clamp(82px, 6vw, 112px);
 }
