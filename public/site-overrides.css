@@ -45,6 +45,13 @@
   animation: none !important;
 }
 
+/* Bring Samanta closer in the hero while keeping safe space above her head. */
+.hero-method-visual .method-photo-frame img {
+  object-position: center 18% !important;
+  transform: scale(1.2);
+  transform-origin: center top;
+}
+
 .hero-method-visual .metric-card {
   width: clamp(132px, 37%, 238px);
   object-fit: contain;
