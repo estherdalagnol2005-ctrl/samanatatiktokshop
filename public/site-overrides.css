@@ -88,6 +88,7 @@ body,
   .about-samanta-copy h2 {
     order: 1;
     width: 100%;
+    text-align: center !important;
   }
 
   .about-samanta-photo {
@@ -97,7 +98,10 @@ body,
   .about-samanta-copy p {
     order: 3;
     width: 100%;
+    margin-right: auto !important;
+    margin-left: auto !important;
     margin-bottom: 0 !important;
+    text-align: center !important;
     line-height: 1.45 !important;
     letter-spacing: -0.02em !important;
   }
@@ -106,6 +110,8 @@ body,
     position: relative;
     order: 3;
     width: 100%;
+    margin-inline: auto;
+    text-align: center;
     max-height: 11.5em;
     padding-bottom: 2.2em;
     overflow: hidden;
