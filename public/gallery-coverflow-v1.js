@@ -10,6 +10,14 @@
       alt: "Samanta em Paris à noite, com os braços abertos diante da Torre Eiffel iluminada",
     },
     {
+      type: "image",
+      src: "/assets/dreams-2026/familia-torre-eiffel.webp",
+      label: "Torre Eiffel em família",
+      caption: "Conquistas ficam melhores quando são compartilhadas.",
+      alt: "Samanta com sua família diante da Torre Eiffel à noite",
+      position: "center 42%",
+    },
+    {
       type: "video",
       src: "/assets/dreams-2026/momento-em-paris.webm",
       poster: "/assets/dreams-2026/momento-em-paris-poster.jpg",
@@ -59,14 +67,6 @@
       label: "Quartas de Pix",
       caption: "Uma operação que continua vendendo.",
       alt: "Samanta no quarto com comprovantes de pagamentos recebidos",
-    },
-    {
-      type: "image",
-      src: "/assets/dreams-2026/familia-torre-eiffel.webp",
-      label: "Torre Eiffel em família",
-      caption: "Conquistas ficam melhores quando são compartilhadas.",
-      alt: "Samanta com sua família diante da Torre Eiffel à noite",
-      position: "center 42%",
     },
     {
       type: "video",
