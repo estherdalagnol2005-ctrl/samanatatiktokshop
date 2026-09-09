@@ -31,7 +31,7 @@ html = html.replace(
 );
 html = html.replace(
   /<div class="dreams-results" aria-label="Resultados de Samanta">[\s\S]*?<\/div><div class="dreams-cta-wrap">/,
-  '<div class="dreams-results" aria-label="Resultados de Samanta"><div><strong>R$ 8 milhões</strong><span>faturamento total em 1 ano e pouco</span></div><div><strong>R$ 165 mil</strong><span>recebidos em comissões em um mês</span></div></div><div class="dreams-cta-wrap">',
+  '<div class="dreams-results" aria-label="Resultados de Samanta"><div><strong>R$ 8 milhões</strong><span>faturamento total em 1 ano</span></div><div><strong>R$ 165 mil</strong><span>recebidos em comissões em 1 mês</span></div></div><div class="dreams-cta-wrap">',
 );
 html = html.replace(/<title>[\s\S]*?<\/title>/, "<!-- SITE_SEO_HEAD -->")
   .replace(/<meta name="description"[^>]*>/, "")
