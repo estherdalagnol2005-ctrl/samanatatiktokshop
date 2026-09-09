@@ -193,3 +193,18 @@
     transform: none;
   }
 }
+
+
+/* On touch screens, keep the colour beside and below each shell identical. */
+@media (pointer: coarse), (width <= 800px) {
+  .student-proof-shell,
+  .about-samanta-shell,
+  .community-shell,
+  .dreams-shell,
+  .home-story-shell,
+  .method-shell,
+  .method-sales-shell,
+  .conversion-shell {
+    box-shadow: 0 0 0 1px rgb(28 23 26 / 5%) !important;
+  }
+}
