@@ -261,32 +261,6 @@
   display: none !important;
 }
 
-/* The results proof now highlights total revenue and one month's commissions. */
-.dreams-results {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  width: min(100%, 820px) !important;
-  margin-inline: auto !important;
-}
-
-.dreams-results div:nth-child(2) {
-  background: var(--tt-pink, #fa2095) !important;
-  color: #fff !important;
-}
-
-.dreams-results div:nth-child(2) strong,
-.dreams-results div:nth-child(2) span {
-  color: #fff !important;
-}
-
-.dreams-results span {
-  font-size: clamp(10px, 0.8vw, 12px) !important;
-  font-weight: 720 !important;
-  line-height: 1.2 !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-}
-
-
 .scroll-cue {
   gap: 0;
 }
@@ -325,5 +299,21 @@
 @media (prefers-reduced-motion: reduce) {
   .scroll-cue span::after {
     animation: none;
+  }
+}
+
+
+/* Keep the gallery CTA fully visible and comfortably positioned on mobile. */
+@media (width <= 640px) {
+  .dreams-body {
+    margin-top: -10px !important;
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .dreams-cta {
+    margin-top: 0 !important;
+    opacity: 1 !important;
   }
 }
