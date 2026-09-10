@@ -28,62 +28,6 @@
 .page-shell > .conversion-section { order: 7 !important; }
 .page-shell > .site-footer { order: 8 !important; }
 
-/* Individual fold gradients: each one owns its full-height background. */
-body,
-.page-shell {
-  background: transparent !important;
-}
-
-/* Keep every fold colour strictly behind its rounded white content box. */
-.page-shell > section:not(.hero-stage) {
-  isolation: isolate;
-  position: relative;
-  z-index: 0;
-  margin-top: 0 !important;
-}
-
-.student-proof-shell,
-.about-samanta-shell,
-.community-shell,
-.dreams-shell,
-.home-story-shell,
-.method-shell,
-.method-sales-shell,
-.conversion-shell {
-  position: relative;
-  z-index: 1;
-  background-clip: padding-box;
-}
-
-.page-shell > .hero-stage {
-  background: #fa2095 !important;
-  background-image: none !important;
-}
-
-/* Pink → orange → yellow */
-.page-shell > .student-proof-section,
-.page-shell > .community-section,
-.page-shell > .method-section {
-  background: linear-gradient(180deg, #fa2095 0%, #ffa120 50%, #f0ff27 100%) !important;
-}
-
-/* Yellow → orange → pink */
-.page-shell > .about-samanta-section,
-.page-shell > .dreams-section,
-.page-shell > .conversion-section {
-  background: linear-gradient(180deg, #f0ff27 0%, #ffa120 50%, #fa2095 100%) !important;
-}
-
-/* The footer continues from the pink end of the final fold into yellow. */
-.page-shell > .site-footer {
-  background: linear-gradient(180deg, #fa2095 0%, #ffa120 50%, #f0ff27 100%) !important;
-}
-
-.page-shell > .site-gradient-marquee {
-  background: #fa2095 !important;
-  background-image: none !important;
-}
-
 /* Give the portrait more breathing room beside the story copy. */
 .about-samanta-photo {
   width: min(100%, 360px) !important;
