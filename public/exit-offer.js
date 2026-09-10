@@ -2,8 +2,8 @@
   const SUPPRESSION_KEY = "sunlix-exit-offer-until-v2";
   const SESSION_KEY = "sunlix-exit-offer-seen-v2";
   const DEFAULT_SUPPRESSION_DAYS = 7;
-  const AUTO_SHOW_MS = 100_000;
-  const DESKTOP_EXIT_INTENT_MIN_MS = 20_000;
+  const AUTO_SHOW_MS = 240_000;
+  const DESKTOP_EXIT_INTENT_MIN_MS = 240_000;
   const startedAt = Date.now();
   const desktopPointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   let opened = false;
@@ -153,6 +153,28 @@
     }
   }
 
+  const copyCouponToClipboard = async (couponCode) => {
+    if (navigator.clipboard?.writeText && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(couponCode);
+        return true;
+      } catch {
+        // Use the compatible fallback below.
+      }
+    }
+
+    const field = document.createElement("textarea");
+    field.value = couponCode;
+    field.setAttribute("readonly", "");
+    field.style.position = "fixed";
+    field.style.opacity = "0";
+    document.body.append(field);
+    field.select();
+    const copied = document.execCommand("copy");
+    field.remove();
+    return copied;
+  };
+
   const renderSuccess = (result) => {
     const content = modal?.querySelector(".exit-offer__content");
     if (!content) return;
@@ -167,7 +189,23 @@
       const code = document.createElement("div");
       code.className = "exit-offer__coupon";
       code.textContent = result.couponCode;
-      success.append(note, code);
+
+      const copyButton = document.createElement("button");
+      copyButton.className = "exit-offer__copy-coupon";
+      copyButton.type = "button";
+      copyButton.textContent = "COPIAR CUPOM";
+
+      const copyStatus = document.createElement("p");
+      copyStatus.className = "exit-offer__copy-status";
+      copyStatus.setAttribute("aria-live", "polite");
+
+      copyButton.addEventListener("click", async () => {
+        const copied = await copyCouponToClipboard(result.couponCode);
+        copyButton.textContent = copied ? "CUPOM COPIADO ✓" : "TENTAR COPIAR NOVAMENTE";
+        copyStatus.textContent = copied ? "O código SHOP10 foi copiado." : "Não foi possível copiar automaticamente.";
+      });
+
+      success.append(note, code, copyButton, copyStatus);
     }
     const continueCta = createContinueCta(result);
     if (continueCta) success.append(continueCta);
