@@ -1,6 +1,6 @@
 // Gera HTML completo e um par CSS/JS versionado, sem alterar a ordem da cascata.
 // Os templates dos componentes existentes continuam sendo a fonte única do texto.
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { runInNewContext } from "node:vm";
 import { createRequire } from "node:module";
@@ -79,6 +79,11 @@ const js = [...scripts, "/analytics.js"].map(path => read(`public${path}`).repla
 const compressedJs = (await minify(js, { compress: true, mangle: true, format: { comments: /^!/ } })).code;
 const hashed = (content, extension) => `site-${createHash("sha256").update(content).digest("hex").slice(0, 12)}.${extension}`;
 mkdirSync("public/static", { recursive: true });
+// Cada build gera apenas o par de arquivos referenciado pelo HTML atual.
+// Isso impede que versões antigas de CSS ou JS fiquem acumuladas no deploy.
+for (const file of readdirSync("public/static")) {
+  if (/^site-[a-f0-9]{12}\.(?:css|js)$/.test(file)) unlinkSync(`public/static/${file}`);
+}
 const cssFile = hashed(compressedCss, "css");
 const jsFile = hashed(compressedJs, "js");
 writeFileSync(`public/static/${cssFile}`, compressedCss);

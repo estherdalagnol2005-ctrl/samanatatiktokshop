@@ -33,6 +33,41 @@ test("CSS/JS consolidados, recursos internos presentes e sem GSAP duplicado", ()
   }
 });
 
+test("Mídias publicadas têm referência e descrições no site", () => {
+  const walk = directory => readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+    const path = `${directory}/${entry.name}`;
+    return entry.isDirectory() ? walk(path) : [path];
+  });
+  const media = ["public/assets", "public/testimonials", "public/videos"]
+    .flatMap(walk)
+    .filter(path => /\.(?:avif|webp|png|jpe?g|mp4|webm)$/i.test(path));
+  const source = [html, ...readdirSync("public").filter(name => name.endsWith(".js")).map(name => read(`public/${name}`))].join("\n");
+
+  for (const path of media) {
+    const publicPath = `/${path.slice("public/".length)}`;
+    assert.ok(source.includes(publicPath), `Mídia sem uso: ${publicPath}`);
+  }
+});
+
+test("Modal de oferta preserva interação e adaptação em desktop e mobile", () => {
+  const script = read("public/exit-offer.js");
+  const css = read("public/exit-offer.css");
+
+  assert.match(script, /const AUTO_SHOW_MS = 100_000/);
+  assert.match(script, /\(hover: hover\) and \(pointer: fine\)/);
+  assert.match(script, /event\.key === "Escape"/);
+  assert.match(script, /data-exit-offer-close/);
+  assert.match(script, /aria-modal="true"/);
+
+  assert.match(css, /position: fixed/);
+  assert.match(css, /min-height: 100dvh/);
+  assert.match(css, /max-height: calc\(100dvh - 64px\)/);
+  assert.match(css, /overflow-y: auto/);
+  assert.match(css, /@media \(max-width: 600px\)/);
+  assert.match(css, /max-width: 350px/);
+  assert.match(css, /@media \(max-height: 700px\)/);
+});
+
 test("Imagens informativas e vídeos do HTML inicial têm descrições", () => {
   const images = [...html.matchAll(/<img\b[^>]*>/g)];
   assert.ok(images.length >= 18);

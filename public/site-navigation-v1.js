@@ -1,8 +1,9 @@
 (() => {
   const sectionLinks = [
-    { href: "#jornada", label: "Como saber se é pra mim?" },
     { href: "#depoimentos", label: "Depoimentos" },
-    { href: "#resultados", label: "Conquistas" },
+    { href: "#comunidade", label: "Resultados de alunas" },
+    { href: "#samanta", label: "Minha história" },
+    { href: "#jornada", label: "Como saber se é para mim?" },
   ];
 
   const fallingLabelMarkup = (label) =>
@@ -48,9 +49,10 @@
         return link;
       }),
     );
-    desktopNav.style.gridTemplateColumns = `repeat(${sectionLinks.length}, minmax(0, 1fr))`;
-    desktopNav.style.width = "min(100%, 640px)";
-    desktopNav.style.gap = "0";
+    desktopNav.dataset.itemCount = String(sectionLinks.length);
+    desktopNav.style.removeProperty("grid-template-columns");
+    desktopNav.style.removeProperty("width");
+    desktopNav.style.removeProperty("gap");
 
     if (buyButton) buyButton.href = "#inscricao";
 
