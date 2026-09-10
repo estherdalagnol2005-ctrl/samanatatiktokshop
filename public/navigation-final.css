@@ -47,11 +47,3 @@
     margin-bottom: clamp(56px, 8svh, 78px) !important;
   }
 }
-
-/* Five navigation links remain legible without competing with the purchase CTA. */
-@media (width >= 1180px) {
-  .site-header .desktop-nav[data-item-count="5"] {
-    gap: clamp(16px, 1.8vw, 30px) !important;
-    font-size: clamp(10px, 0.7vw, 11.5px) !important;
-  }
-}
