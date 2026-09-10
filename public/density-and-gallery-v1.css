@@ -266,15 +266,6 @@
     margin-inline: auto;
   }
 
-  .dreams-results {
-    width: 100%;
-    margin-top: 0;
-  }
-
-  .dreams-results div {
-    padding: 12px 10px;
-  }
-
   .dreams-cta-wrap {
     flex-direction: row;
     justify-content: center;
