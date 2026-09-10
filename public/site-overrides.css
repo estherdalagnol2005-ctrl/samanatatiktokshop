@@ -15,7 +15,7 @@
 
 /* Use one measured outer gap between every pair of white shells. */
 .page-shell > section:not(.hero-stage) {
-  padding-top: calc(var(--fold-gap) + 2px) !important;
+  padding-top: calc(var(--fold-gap) + 5px) !important;
   padding-bottom: 0 !important;
 }
 

@@ -10,6 +10,7 @@
     var(--flow-lime, #f0ff27) 12%,
     var(--flow-orange, #ffa120) 44%,
     var(--flow-pink, #fa2095) 72%,
+    var(--flow-lime, #f0ff27) 90%,
     var(--flow-lime, #f0ff27) 100%
   );
   overflow: hidden;
@@ -192,4 +193,17 @@
   .about-samanta-photo {
     transform: none;
   }
+}
+
+
+/* Keep the colour around each shell identical to the section background. */
+.student-proof-shell,
+.about-samanta-shell,
+.community-shell,
+.dreams-shell,
+.home-story-shell,
+.method-shell,
+.method-sales-shell,
+.conversion-shell {
+  box-shadow: 0 0 0 1px rgb(28 23 26 / 5%) !important;
 }
