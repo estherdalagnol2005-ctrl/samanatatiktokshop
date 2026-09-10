@@ -3,8 +3,7 @@
     { href: "#depoimentos", label: "Depoimentos" },
     { href: "#comunidade", label: "Resultados de alunas" },
     { href: "#samanta", label: "Minha história" },
-    { href: "#jornada", label: "É pra mim?" },
-    { href: "#inscricao", label: "Mentoria" },
+    { href: "#jornada", label: "Como saber se é para mim?" },
   ];
 
   const fallingLabelMarkup = (label) =>
