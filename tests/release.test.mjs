@@ -33,6 +33,22 @@ test("CSS/JS consolidados, recursos internos presentes e sem GSAP duplicado", ()
   }
 });
 
+test("Mídias publicadas têm referência e descrições no site", () => {
+  const walk = directory => readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
+    const path = `${directory}/${entry.name}`;
+    return entry.isDirectory() ? walk(path) : [path];
+  });
+  const media = ["public/assets", "public/testimonials", "public/videos"]
+    .flatMap(walk)
+    .filter(path => /\.(?:avif|webp|png|jpe?g|mp4|webm)$/i.test(path));
+  const source = [html, ...readdirSync("public").filter(name => name.endsWith(".js")).map(name => read(`public/${name}`))].join("\n");
+
+  for (const path of media) {
+    const publicPath = `/${path.slice("public/".length)}`;
+    assert.ok(source.includes(publicPath), `Mídia sem uso: ${publicPath}`);
+  }
+});
+
 test("Imagens informativas e vídeos do HTML inicial têm descrições", () => {
   const images = [...html.matchAll(/<img\b[^>]*>/g)];
   assert.ok(images.length >= 18);
