@@ -301,3 +301,19 @@
     animation: none;
   }
 }
+
+
+/* Keep the gallery CTA fully visible and comfortably positioned on mobile. */
+@media (width <= 640px) {
+  .dreams-body {
+    margin-top: -10px !important;
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .dreams-cta {
+    margin-top: 0 !important;
+    opacity: 1 !important;
+  }
+}
