@@ -53,7 +53,7 @@ test("Modal de oferta preserva interação e adaptação em desktop e mobile", (
   const script = read("public/exit-offer.js");
   const css = read("public/exit-offer.css");
 
-  assert.match(script, /const AUTO_SHOW_MS = 100_000/);
+  assert.match(script, /const AUTO_SHOW_MS = 240_000/);
   assert.match(script, /\(hover: hover\) and \(pointer: fine\)/);
   assert.match(script, /event\.key === "Escape"/);
   assert.match(script, /data-exit-offer-close/);
