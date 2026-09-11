@@ -11,7 +11,8 @@ const postcss = nextRequire("postcss");
 const cssnano = require("next/dist/compiled/cssnano-simple");
 const { minify } = require("next/dist/compiled/terser");
 const read = path => readFileSync(path, "utf8");
-const checkoutUrl = "https://pay.kiwify.com.br/3U3ri1Z";
+// Link de comissão aprovado para todos os CTAs de compra.
+const checkoutUrl = "https://pay.kiwify.com.br/3U3ri1Z?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAacd89aDLn4qOInS32fIABU3kjqrZi-sUM5-fUFupbYdOS2cKdewNj2cHiQrZQ_aem_qRaPwRGPnxeBssD3yOSmSw&utm_id=97760_v0_s00_e0_tv3";
 const template = (file, context = {}, target = "section") => {
   const code = read(`public/${file}`);
   const literal = code.match(new RegExp(`${target}\\.innerHTML = (\\x60[\\s\\S]*?\\x60);`))?.[1];
